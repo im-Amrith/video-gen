@@ -12,7 +12,7 @@ _Updated by every session. Newest first._
 
 ## Next
 1. **Wait for the owner's approval of the pilot** (approval gate). Apply feedback to the pilot + SERIES_LOOK.md.
-2. While waiting: reference study (`Shorts/`) and Gemini remix packs (`gemini-refs/`) once the owner pushes videos (`git pull origin main`).
+2. While waiting: reference study (`Shorts/` is still empty) and Gemini remix packs. Done: armor/igexport-Dc5zCC7IoCI, space/igexport-DdNDNt0PxMb. Waiting: armor/igexport-Dc4sSw1jF-D and 11 reels in `gemini-refs/real world/` (new series; no SERIES_NOTES yet).
 3. After approval: ep. 2 `earth-stops-spinning` reusing `projects/tunnel-through-earth/` (engine.js, mix.py, build.sh pattern).
 4. Then the History batch.
 
