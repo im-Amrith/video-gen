@@ -29,6 +29,7 @@ Engine change for all: drifting low clouds, bird flocks and dust motes in day/go
 painted tuft cards / rocks / posts / brass casings / icebergs / mountains (src/videos/toon/dress.ts).
 Episodes changed (re-render only these; audio unchanged unless noted):
 - [x] History 03 emu-war (wheat tufts, brass casings, painted fence, hills + mountains + trees)
+- [x] History 04 1904-marathon (corn tufts, painted fences, rocks, trees + hill ring)
 
 ## How it's built
 - **Engine** `src/videos/toon/`: the bridge short's look modules (ink, lens blur, grade, two-tone shading, card shading,

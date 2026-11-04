@@ -5,6 +5,8 @@ import { Batch, boxGeo, V, lam, house, prop } from "../toon/build";
 import { ctex, rep, planksHD, stoneHD, grassHD } from "../toon/paint";
 import { Particles, Glow } from "../toon/fx";
 import { ground } from "../toon/kit";
+import { corn, post, tuft, dressLand, rock } from "../toon/dress";
+import { beamHD } from "../toon/paint";
 import { BuildCtx, PoseCtx, SetHandle, hh } from "../toon/core";
 import { WELL, ORCH, FIN, carAt, dustAt } from "./story";
 
@@ -17,10 +19,11 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const road = new THREE.PlaneGeometry(900, 7).rotateX(-Math.PI / 2); const ruv = road.attributes.uv as THREE.BufferAttribute; for (let i = 0; i < ruv.count; i++) ruv.setXY(i, ruv.getX(i) * 130, ruv.getY(i));
   b.add(road, lam("dirtRoad", () => ({ map: dirtTex() })), new THREE.Matrix4().makeTranslation(0, 0.02, 0));
   // fences + cornfields both sides
-  for (let i = 0; i < 90; i++) for (const s of [-1, 1]) b.add(new THREE.CylinderGeometry(0.07, 0.07, 1.1).translate(0, 0.55, 0), lam("fenceP", () => ({ color: "#8a6a4a" })), new THREE.Matrix4().makeTranslation(-300 + i * 7, 0, s * 4.6));
-  for (const s of [-1, 1]) b.add(boxGeo(V(-300, 0.85, s * 4.6 - 0.04), V(330, 0.95, s * 4.6 + 0.04)), lam("fenceR", () => ({ color: "#9a7a5a" })));
-  const corn = lam("corn", () => ({ color: "#7aa83c" }));
-  for (let i = 0; i < 380; i++) { const x = -260 + hh(i, 1) * 520, z = (hh(i, 2) > 0.5 ? 1 : -1) * (7 + hh(i, 3) * 18); if (Math.abs(x - ORCH[0]) < 14 && z < 0) continue; const h = 1.6 + hh(i, 4) * 0.8, g = new THREE.CylinderGeometry(0.05, 0.12, h, 5).translate(0, h / 2, 0); b.add(g, corn, new THREE.Matrix4().makeTranslation(x, 0, z)); }
+  for (let i = 0; i < 90; i++) for (const s of [-1, 1]) post(b, -300 + i * 7, s * 4.6, 1.1);
+  for (const s of [-1, 1]) for (const hy of [0.5, 0.9]) b.add(boxGeo(V(-300, hy - 0.05, s * 4.6 - 0.04), V(330, hy + 0.05, s * 4.6 + 0.04)), lam("woodPainted", () => ({ map: beamHD() })));
+  for (let i = 0; i < 700; i++) { const x = -260 + hh(i, 11) * 520, z = (hh(i, 12) > 0.5 ? 1 : -1) * (3.7 + hh(i, 13) * 1.6); tuft(b, x, 0, z, hh(i, 14) > 0.6 ? "dry" : "grass", 0.7 + 0.5 * hh(i, 15), i); }
+  for (let i = 0; i < 60; i++) rock(b, -250 + hh(i, 16) * 500, 0, (hh(i, 17) > 0.5 ? 1 : -1) * (5.2 + hh(i, 18) * 2), 0.15 + 0.3 * hh(i, 19), i);
+  for (let i = 0; i < 520; i++) { const x = -260 + hh(i, 1) * 520, z = (hh(i, 2) > 0.5 ? 1 : -1) * (7 + hh(i, 3) * 18); if (Math.abs(x - ORCH[0]) < 14 && z < 0) continue; corn(b, x, z, 1.7 + hh(i, 4) * 0.7, i); }
   // orchard: round trees with red apples
   const apple = lam("apple", () => ({ color: "#d23b3b" }));
   for (let k = 0; k < 8; k++) {
@@ -38,6 +41,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   b.add(new THREE.PlaneGeometry(7.6, 0.8).translate(0, 4.6, 0).rotateY(Math.PI / 2), lam("finBunt", () => ({ map: rep(bunting(), 2, 1), side: THREE.DoubleSide, transparent: true })), new THREE.Matrix4().makeTranslation(FIN[0], 0, 0));
   for (let r = 0; r < 4; r++) for (const s of [-1, 1]) b.add(boxGeo(V(FIN[0] - 16, r * 0.5, s * (6 + r * 0.9)), V(FIN[0] + 16, r * 0.5 + 0.5, s * (6 + r * 0.9) + s * 0.9)), lam("stands", () => ({ map: planksHD() })));
   for (let i = 0; i < 6; i++) house(b, -200 + i * 70, -34, 0, 8, 6, 5, i, 0);
+  dressLand(b, { cx: 0, cz: 0, r0: 30, r1: 160, keep: (x, z) => Math.abs(z) < 28, bushes: 40, trees: 60, rocks: 30, hillR: 230, hillN: 18, hillH: 24, seed: 7 });
   b.build(root);
   // the car
   const car = new THREE.Group();
