@@ -12,6 +12,14 @@ npm install
 $env:REMOTION_TMP = "D:\remotion-tmp"   # Remotion bundles are big; keep them off C:
 ```
 
+## Render everything in one go
+
+```powershell
+git pull
+npm install
+.\scripts\render_all.ps1                      # all ten, or:  .\scripts\render_all.ps1 WhatIf01Tunnel
+```
+
 ## Render one short
 
 ```powershell
@@ -35,6 +43,7 @@ Optional QA: `python scripts/short_qa.py deliveries/<series>/<NN>_<slug>.mp4 out
 | history | 02 | leaning-tower | History02LeaningTower | yes (`projects/leaning-tower/audio/mix.wav`, 63.07 s) | no |
 | history | 03 | emu-war | History03EmuWar | yes (`projects/emu-war/audio/mix.wav`, 60.73 s) | no |
 | history | 04 | 1904-marathon | History04Marathon1904 | yes (`projects/1904-marathon/audio/mix.wav`, 65.53 s) | no |
+| history | 05 | war-of-the-bucket | History05WarOfTheBucket | yes (`projects/war-of-the-bucket/audio/mix.wav`, 57.43 s) | no |
 
 ### Exact commands per short
 
@@ -91,4 +100,10 @@ ffmpeg -y -i out/emu/video.mp4 -i projects/emu-war/audio/mix.wav -map 0:v:0 -map
 ```powershell
 npx remotion render src/index.ts History04Marathon1904 out/marathon/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
 ffmpeg -y -i out/marathon/video.mp4 -i projects/1904-marathon/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/04_1904-marathon.mp4
+```
+
+**history 05 — war-of-the-bucket** (1723 frames, 57.43 s)
+```powershell
+npx remotion render src/index.ts History05WarOfTheBucket out/bucket/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+ffmpeg -y -i out/bucket/video.mp4 -i projects/war-of-the-bucket/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/05_war-of-the-bucket.mp4
 ```

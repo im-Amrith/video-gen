@@ -2,31 +2,50 @@
 
 _Updated by every session. Newest first._
 
-## Status (2026-11-04)
-- **What If batch started.** 5 fact-checked briefs in `briefs/what-if/` (01 tunnel-through-earth = pilot, 02 earth-stops-spinning,
-  03 all-ice-melts, 04 sun-vanishes, 05 moon-disappears).
-- **Pilot ep. 1 `tunnel-through-earth`**: Lemo-Opuscar iso-infographic (Canvas 2D), rendered in the cloud (~0.1 s/frame).
-  Project: `projects/tunnel-through-earth/` (SCRIPT.md with sources, TREATMENT.md, DECISIONS.md, build.sh).
-  Delivery: `deliveries/what-if/01_tunnel-through-earth.mp4` (+ `_sheet.jpg`, `.md`). Brief status `review`.
-  Locked look: `briefs/what-if/SERIES_LOOK.md`.
+## Status (2026-11-04, ~18:10 UTC)
+Owner's plan: **build all, render on the owner's PC**. Both series switched to the 3D cartoon look (cartoon-3d-short:
+Remotion + three.js). The cloud builds everything up to the render; only 3-6+ check stills per video at --scale 0.5.
+
+**All 10 shorts are built and render-ready** (registered compositions, `npx tsc --noEmit` clean for every new folder,
+mix.wav, SCRIPT.md with sources, words.json, story.ts shot plan, sets, cast, stills sheet, RENDER_LOCALLY row):
+
+| Series | NN | Slug | Composition | Length |
+|---|---|---|---|---|
+| What If | 01 | tunnel-through-earth | WhatIf01Tunnel | 65.3 s |
+| What If | 02 | earth-stops-spinning | WhatIf02Spin | 61.8 s |
+| What If | 03 | all-ice-melts | WhatIf03Ice | 55.4 s |
+| What If | 04 | sun-vanishes | WhatIf04Sun | 58.4 s |
+| What If | 05 | moon-disappears | WhatIf05Moon | 55.2 s |
+| History | 01 | shortest-war | History01ShortestWar | 62.1 s |
+| History | 02 | leaning-tower | History02LeaningTower | 63.1 s |
+| History | 03 | emu-war | History03EmuWar | 60.7 s |
+| History | 04 | 1904-marathon | History04Marathon1904 | 65.5 s |
+| History | 05 | war-of-the-bucket | History05WarOfTheBucket | 57.4 s |
+
+Render all on the PC: `.\scripts\render_all.ps1` (RENDER_LOCALLY.md). Stills sheets: `deliveries/<series>/<NN>_<slug>_stills.jpg`.
+
+## How it's built
+- **Engine** `src/videos/toon/`: the bridge short's look modules (ink, lens blur, grade, two-tone shading, card shading,
+  toon characters, painted textures) + generic world (light presets day/golden/night/space/magma, stars, clouds, camera-relative
+  sun per shot), cast pool, effects (glows, particles, effect cards), `kit.ts` (Pip, pictograms, globe shader, sea),
+  `animals.ts` (bear, penguin, fish, shrimp, crab, cat, gull, emu, hourglass, spirit level), `Short.tsx` (post chain).
+  New hats in toon.ts: turban, hardhat, pith, hood, boater.
+- **Episode** `src/videos/<name>/`: `timeline.json` (from scripts/toon_voice.py), `story.ts` (shots, cameras, kicks, DOF, cast),
+  `set.ts` (places built once, posed per frame), `<Name>.tsx`. Registered in `src/Root.tsx`.
+- **Voice**: Kokoro (Lemo-Opuscar library at ~/lemo-opuscar), What If = `am_michael`, History = `bm_george`.
+  `scripts/toon_voice.py projects/<slug> src/videos/<name>` lays lines out + writes voice.wav, words.json, timeline.json.
+- **Sound**: `audio/toon_audio.py` (bridge DSP + instruments) driven by `projects/<slug>/sound.py` → `projects/<slug>/audio/mix.wav`
+  (-14 LUFS, ≤ -1.5 dBTP; music +3 dB standard, SFX -6 dB). Stems are git-ignored (rebuilt by sound.py).
+- **Paperwork**: `scripts/toon_paper.py` writes SCRIPT.md, the delivery .md and the RENDER_LOCALLY row.
 
 ## Next
-1. **Wait for the owner's approval of the pilot** (approval gate). Apply feedback to the pilot + SERIES_LOOK.md.
-2. While waiting: reference study (`Shorts/` is still empty) and Gemini remix packs. Done: armor/igexport-Dc5zCC7IoCI, space/igexport-DdNDNt0PxMb. Waiting: armor/igexport-Dc4sSw1jF-D and 11 reels in `gemini-refs/real world/` (new series; no SERIES_NOTES yet).
-3. After approval: ep. 2 `earth-stops-spinning` reusing `projects/tunnel-through-earth/` (engine.js, mix.py, build.sh pattern).
-4. Then the History batch.
-
-## How to rebuild the pilot
-```bash
-sh .claude/skills/lemo-opuscar/scripts/setup.sh && sh .claude/skills/lemo-opuscar/scripts/setup.sh deps voice
-sh projects/tunnel-through-earth/build.sh      # picture + mix + master → projects/tunnel-through-earth/out/
-```
+1. Owner renders ep. 1 (tonight) and gives feedback → apply to all, re-run stills.
+2. Gemini remix packs at the gates (12 reels waiting: armor/igexport-Dc4sSw1jF-D + 11 in gemini-refs/real world/).
+3. Reference study when the owner adds Shorts/.
 
 ## Problems / notes
-- **Whisper model blocked:** huggingface.co, hf-mirror.com and GitHub releases are blocked here, so faster-whisper can't download a model
-  and the speech-to-text check didn't run. Word timings (`voice/words.json`) are estimated from the audio. To fix: allow huggingface.co
-  in the environment's network settings, or commit a faster-whisper `base.en` model folder.
-- WebFetch can't reach arxiv.org / livescience.com (network policy); fact checks used web search results.
-- Lemo-Opuscar library lives in `~/lemo-opuscar` (re-fetched by its setup script each session; not in the repo).
-- Measured 2026-11-04: the 3D bridge short renders at ~40-77 s per frame (half size) in the cloud. The final renders for 3D shorts go to RENDER_LOCALLY.md.
-- Kenney GLB props are not in the repo (optional; kenney.nl may be blocked).
+- Whisper model download blocked (huggingface.co / GitHub releases) → no speech-to-text check; words.json estimated from audio.
+- WebFetch blocked for most sites; facts checked via web search results (sources in each SCRIPT.md).
+- Cloud stills take ~35-50 s each (software GL); full renders are for the owner's GPU.
+- `src/videos/bridge/` has 6 pre-existing tsc errors (nullable JSX children in Bridge.tsx); the new folders are clean.
+- iso-infographic v1 of ep. 1 is kept in `projects/tunnel-through-earth/iso_v1/` and `deliveries/what-if/01_tunnel-through-earth_iso_v1.mp4`.
