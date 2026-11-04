@@ -3,7 +3,7 @@ import TL from "./timeline.json";
 import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, zoom, pushK, smooth, seg, q, hh, lerp } from "../toon/core";
 import { Stage, CamInfo, card } from "../toon/cast";
 import { fxBang, fxWhat, fxSweat, fxSparkle, fxHeat } from "../toon/fx";
-import { fxStars, fxPuff, Outfit } from "../toon/toon";
+import { fxStars, fxPuff, Outfit, Pen } from "../toon/toon";
 import { put, exprAt, FOLK } from "../toon/kit";
 import { buildSet } from "./set";
 
@@ -32,10 +32,10 @@ const OFFICIAL: Outfit = { jacket: "#2f3542", pants: "#2f3542", boots: "#2b2b33"
 
 export const SHOTS: ShotDef[] = [
   { id: 1, a: 0, b: 235, light: "day", sunAz: 130, sunEl: 55 },
-  { id: 2, a: 235, b: 465, light: "day", sunAz: 140, sunEl: 60 },
+  { id: 2, a: 235, b: 465, light: "golden", sunAz: 140, sunEl: 50 },
   { id: 3, a: 465, b: 715, light: "day", sunAz: 120, sunEl: 50 },
   { id: 4, a: 715, b: 795, light: "day", sunAz: 120, sunEl: 50 },
-  { id: 5, a: 795, b: 1050, light: "day", sunAz: 130, sunEl: 55 },
+  { id: 5, a: 795, b: 1050, light: "golden", sunAz: 130, sunEl: 32 },
   { id: 6, a: 1050, b: 1275, light: "day", sunAz: 120, sunEl: 45 },
   { id: 7, a: 1275, b: 1375, light: "golden", sunAz: 40, sunEl: 15 },
   { id: 8, a: 1375, b: 1590, light: "golden", sunAz: 40, sunEl: 15 },
@@ -47,36 +47,41 @@ export const FLASH_AT = [Math.round(tl("L01", 5.4) * FPS)];
 const KICKS: [number, number][] = [[BREAK, 0.9], [tl("L04", 0.2), 0.5], [tl("L05", 4.5), 0.5], [tl("L07", 0.3), 0.6], [tl("L07", 1.4), 0.5], [tl("L10", 3.0), 0.6]];
 
 const runX = (t: number, t0: number, x0: number, v: number) => x0 + (t - t0) * v;
+/** owner rule #4 (every shot moves): swing the camera around its look point by `yaw` rad/frame, raise it `rise` m/frame */
+const arc = (pos: V3, look: V3, f: number, f0: number, yaw: number, rise = 0): V3 => {
+  const a = yaw * (f - f0), dx = pos[0] - look[0], dz = pos[2] - look[2];
+  return [look[0] + dx * Math.cos(a) - dz * Math.sin(a), pos[1] + rise * (f - f0), look[2] + dx * Math.sin(a) + dz * Math.cos(a)];
+};
 export const CAMS: Record<number, Key[]> = {
   1: [
     { f: 0, s: (f) => { const x = carAt(1, f / FPS).x; return dolly([x + 2.5, 1.9, 2.6], [x - 0.6, 1.7, -1.6], 1, { fov: 42, roll: 0.03 }); } }, // Lorz waving from a car
     { f: 110, cut: true, s: (f) => { const x = carAt(1, f / FPS).x; return dolly([x - 22, 2.6, 6], [x - 6, 1.4, 0], 1, { fov: 46 }); } }, // runners behind, eating dust
   ],
   2: [
-    { f: 235, s: (f) => zoom([-40, 3.0, 10], [-80, 1.4, 0], 46, pushK(f, 235, 0.002)) }, // hot, dusty road
-    { f: 350, cut: true, s: (f) => dolly([WELL[0] + 3, 1.7, WELL[2] + 7], [WELL[0], 1.2, WELL[2]], pushK(f, 350, 0.003), { fov: 42, roll: -0.04 }) }, // one water station
+    { f: 235, s: (f) => zoom(arc([-40, 3.0, 10], [-80, 1.4, 0], f, 235, 0.0018, 0.03), [-80, 1.4, 0], 46, pushK(f, 235, 0.002)) }, // hot, dusty road
+    { f: 350, cut: true, s: (f) => dolly(arc([WELL[0] + 3, 1.7, WELL[2] + 7], [WELL[0], 1.2, WELL[2]], f, 350, -0.0035), [WELL[0], 1.2, WELL[2]], pushK(f, 350, 0.003), { fov: 42, roll: -0.04 }) }, // one water station
   ],
   3: [
     { f: 465, s: (f) => { const x = carAt(3, f / FPS).x; return dolly([x + 6, 1.6, 7], [x, 1.2, -1.6], 1, { fov: 44 }); } }, // car breaks down
-    { f: 600, cut: true, s: (f) => dolly([FIN[0] + 10, 2.0, 2.5], [FIN[0], 1.6, 0], pushK(f, 600, 0.003), { fov: 46 }) }, // cheered at the finish
+    { f: 600, cut: true, s: (f) => dolly(arc([FIN[0] + 10, 2.0, 2.5], [FIN[0], 1.6, 0], f, 600, 0.004, 0.01), [FIN[0], 1.6, 0], pushK(f, 600, 0.003), { fov: 46 }) }, // cheered at the finish
   ],
-  4: [{ f: 715, s: (f) => dolly([FIN[0] + 4.5, 1.6, 2.6], [FIN[0] + 2, 1.6, 0.4], pushK(f, 715, 0.004, 0.009, 24), { fov: 40, roll: 0.05 }) }], // "it was a joke"
+  4: [{ f: 715, s: (f) => dolly(arc([FIN[0] + 4.5, 1.6, 2.6], [FIN[0] + 2, 1.6, 0.4], f, 715, -0.004), [FIN[0] + 2, 1.6, 0.4], pushK(f, 715, 0.004, 0.009, 24), { fov: 40, roll: 0.05 }) }], // "it was a joke"
   5: [
-    { f: 795, s: (f) => { const x = runX(f / FPS, tl("L05", 0), 0, 1.5); return dolly([x + 3, 1.6, 6], [x, 1.5, 0], 1, { fov: 44 }); } }, // Hicks + his pit crew
+    { f: 795, s: (f) => { const x = runX(f / FPS, tl("L05", 0), 0, 1.5); return dolly(arc([x + 3, 1.6, 6], [x, 1.5, 0], f, 795, 0.003), [x, 1.5, 0], 1, { fov: 44 }); } }, // Hicks + his pit crew
     { f: 930, cut: true, s: (f) => { const x = runX(f / FPS, tl("L05", 0), 0, 1.5); return dolly([x + 1.6, 1.9, 2.8], [x, 1.9, 0], 1, { fov: 40, roll: 0.12 * Math.sin(f / 9) }); } }, // eyes spinning, world wobbling
   ],
   6: [
-    { f: 1050, s: (f) => { const x = runX(f / FPS, tl("L06", 0), ORCH[0] - 14, 1.6); return dolly([x + 4, 1.4, 6], [x, 1.3, 0], 1, { fov: 44 }); } }, // Carvajal in cut-off trousers
-    { f: 1180, cut: true, s: (f) => dolly([ORCH[0] - 2, 2.0, -2], [ORCH[0] - 4, 2.4, -10], pushK(f, 1180, 0.003), { fov: 44 }) }, // the orchard
+    { f: 1050, s: (f) => { const x = runX(f / FPS, tl("L06", 0), ORCH[0] - 14, 1.6); return dolly(arc([x + 4, 1.4, 6], [x, 1.3, 0], f, 1050, -0.003), [x, 1.3, 0], 1, { fov: 44 }); } }, // Carvajal in cut-off trousers
+    { f: 1180, cut: true, s: (f) => dolly(arc([ORCH[0] - 2, 2.0, -2], [ORCH[0] - 4, 2.4, -10], f, 1180, 0.004, 0.01), [ORCH[0] - 4, 2.4, -10], pushK(f, 1180, 0.003), { fov: 44 }) }, // the orchard
   ],
-  7: [{ f: 1275, s: (f) => dolly([ORCH[0] - 3, 1.2, -3.6], [ORCH[0] - 4, 0.9, -8], pushK(f, 1275, 0.004, 0.008, 30), { fov: 40, roll: -0.04 }) }], // bad apple, nap
+  7: [{ f: 1275, s: (f) => dolly(arc([ORCH[0] - 3, 1.2, -3.6], [ORCH[0] - 4, 0.9, -8], f, 1275, -0.004, 0.006), [ORCH[0] - 4, 0.9, -8], pushK(f, 1275, 0.004, 0.008, 30), { fov: 40, roll: -0.04 }) }], // bad apple, nap
   8: [
-    { f: 1375, s: (f) => dolly([FIN[0] + 9, 2.2, 6], [FIN[0], 1.4, 0], pushK(f, 1375, 0.0025), { fov: 46 }) }, // half carried over the line
-    { f: 1490, cut: true, s: (f) => dolly([FIN[0] + 3.0, 1.6, 2.4], [FIN[0], 1.6, 0], pushK(f, 1490, 0.004), { fov: 40 }) },
+    { f: 1375, s: (f) => dolly(arc([FIN[0] + 9, 2.2, 6], [FIN[0], 1.4, 0], f, 1375, 0.0035, 0.015), [FIN[0], 1.4, 0], pushK(f, 1375, 0.0025), { fov: 46 }) }, // half carried over the line
+    { f: 1490, cut: true, s: (f) => dolly(arc([FIN[0] + 3.0, 1.6, 2.4], [FIN[0], 1.6, 0], f, 1490, -0.004), [FIN[0], 1.6, 0], pushK(f, 1490, 0.004), { fov: 40 }) },
   ],
-  9: [{ f: 1590, s: (f) => dolly([FIN[0] + 6, 1.4, 4], [FIN[0] - 2, 1.4, 0], pushK(f, 1590, 0.003), { fov: 44, roll: 0.04 }) }], // Carvajal, fourth
+  9: [{ f: 1590, s: (f) => dolly(arc([FIN[0] + 6, 1.4, 4], [FIN[0] - 2, 1.4, 0], f, 1590, 0.0035, 0.01), [FIN[0] - 2, 1.4, 0], pushK(f, 1590, 0.003), { fov: 44, roll: 0.04 }) }], // Carvajal, fourth
   10: [
-    { f: 1695, s: (f) => dolly([FIN[0] + 2.4, 1.8, 2.4], [FIN[0], 1.9, 0], pushK(f, 1695, 0.003), { fov: 40 }) }, // Hicks's gold
+    { f: 1695, s: (f) => dolly(arc([FIN[0] + 2.4, 1.8, 2.4], [FIN[0], 1.9, 0], f, 1695, -0.004), [FIN[0], 1.9, 0], pushK(f, 1695, 0.003), { fov: 40 }) }, // Hicks's gold
     { f: 1800, cut: true, s: (f) => { const x = runX(f / FPS, tl("L10", 3.0), FIN[0] - 34, 2.4); return dolly([x + 5, 1.5, 5], [x - 2, 1.4, -1.0], 1, { fov: 44, roll: 0.04 }); } }, // Lorz runs past his broken car, on foot
   ],
 };
@@ -93,7 +98,18 @@ const crowd = (cam: CamInfo, out: Stage, t: number, cheer: boolean) => CROWD.for
 });
 const appleCard = (bitten: boolean) => (p: import("../toon/toon").Pen) => { p.ell(100, 110, 70, 64, "#d23b3b", 9); p.stroke([[100, 50], [108, 20]], 7, "#5a3b2a"); if (bitten) p.ell(160, 100, 26, 30, "#fff3d6", 6); };
 
-const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
+// owner rule #5: places say who they are (unlit painted cards, drawn with fillText)
+const txt = (p: Pen, s: string, x: number, y: number, px: number, col: string) => { const g = p.g; g.textAlign = "center"; g.textBaseline = "middle"; g.fillStyle = col; g.font = `bold ${px}px sans-serif`; g.fillText(s, x, y); };
+const board = (p: Pen, lines: [string, number, string][], bg = "#f4e3bf") => { p.poly([[275, 380], [325, 380], [325, 760], [275, 760]], "#8a5a32", 10); p.poly([[20, 30], [580, 30], [580, 400], [20, 400]], bg, 12); lines.forEach(([s, px, col], k) => txt(p, s, 300, 30 + (370 * (k + 0.5)) / lines.length, px, col)); };
+const stlSign = (p: Pen) => board(p, [["ST. LOUIS", 92, "#c0353a"], ["OLYMPIC", 58, "#2a3f6a"], ["MARATHON 1904", 52, "#2a3f6a"]]);
+const waterSign = (p: Pen) => board(p, [["WATER", 110, "#2a6ab0"], ["(the only one)", 46, "#3a2f28"]]);
+const bostonSign = (p: Pen) => board(p, [["BOSTON", 104, "#c0353a"], ["MARATHON", 72, "#2a3f6a"], ["1905", 64, "#3a2f28"]]);
+const finishSign = (p: Pen) => { p.poly([[20, 20], [980, 20], [980, 220], [20, 220]], "#fff8e8", 12); txt(p, "FINISH", 500, 125, 150, "#c0353a"); };
+
+const stage = (id: number, t: number, cam: CamInfo, out: Stage, f: number) => {
+  if (id === 2) { card(out, "stlSign", stlSign, WELL[0] - 2.4, 1.3, WELL[2] + 0.4, 2.0, 2.53, { cw: 600, ch: 760 }); card(out, "waterSign", waterSign, WELL[0] + 1.6, 0.72, WELL[2] + 1.2, 1.1, 1.4, { cw: 600, ch: 760 }); }
+  if ((id === 3 && f >= 600) || id === 4 || id === 8 || id === 9 || (id === 10 && f < 1800)) card(out, "finishSign", finishSign, FIN[0], 3.75, 0, 3.4, 0.75, { cw: 1000, ch: 240 });
+  if (id === 10 && f >= 1800) card(out, "bostonSign", bostonSign, FIN[0] - 37, 1.3, -4.0, 2.0, 2.53, { cw: 600, ch: 760 });
   if (id === 1) {
     const x = carAt(1, t).x;
     put(cam, out, { i: 300, o: LORZ, okey: "lorz" }, t, x - 0.6, 1.5, -1.6, exprAt(t, [[0, "grin"], [tl("L01", 4.0), "smile_closed"]]), { mode: "sit", wave: q(Math.sin(t * 8), 20), noBlob: true });
