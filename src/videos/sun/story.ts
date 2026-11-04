@@ -61,32 +61,32 @@ export const CAMS: Record<number, Key[]> = {
     { f: 170, s: (f) => orbit(SPACE, 70, 0.5 + 0.003 * (f - 170), 22, { fov: 50 }) }, // the Sun pops; the darkness front spreads
     { f: 260, dur: 36, s: (f) => orbit(SPACE, 58, 0.9 + 0.003 * (f - 260), 8, { fov: 48, roll: 0.05 }) },
   ],
-  3: [{ f: 336, s: (f) => earthCam(f, 14, 3, 6, -0.05) }], // Earth still circling nothing
+  3: [{ f: 336, s: (f) => earthCam(f, 14, 3 + 0.01 * (f - 336), 6 - 0.08 * (f - 336), -0.05) }], // Earth still circling nothing
   4: [
-    { f: 466, s: (f) => dolly([1.4, 1.4, 5.0], [0.2, 1.4, -0.5], pushK(f, 466, 0.003), { fov: 44 }) },
-    { f: 530, cut: true, s: (f) => dolly([0.4, 1.3, 2.6], [0, 1.25, 0.2], pushK(f, 530, 0.004, 0.009, 24), { fov: 38, roll: -0.05 }) }, // the moon goes dark
+    { f: 466, s: (f) => dolly([1.4 - 0.025 * (f - 466), 1.4, 5.0], [0.2, 1.4, -0.5], pushK(f, 466, 0.003), { fov: 44 }) },
+    { f: 530, cut: true, s: (f) => dolly([0.5 - 0.012 * (f - 530), 1.35, 2.7], [0.1, 1.3, 0.2], pushK(f, 530, 0.004, 0.009, 24), { fov: 38, roll: -0.05 }) }, // the moon goes dark
   ],
   5: [
-    { f: 604, s: (f) => earthCam(f, 16, 4, -8, 0.04) },
+    { f: 604, s: (f) => earthCam(f, 16, 4 - 0.02 * (f - 604), -8 + 0.06 * (f - 604), 0.04) },
     { f: 690, dur: 30, s: (f) => earthCam(f, 26, 10, 10, -0.06) }, // pull out: straight line, off the circle
   ],
-  6: [{ f: 786, s: (f) => earthCam(f, 18, 2, 4, 0.05) }], // the Moon tags along
+  6: [{ f: 786, s: (f) => earthCam(f, 18 - 0.03 * (f - 786), 2 + 0.03 * (f - 786), 4 + 0.08 * (f - 786), 0.05) }], // the Moon tags along
   7: [
-    { f: 904, s: (f) => dolly(C(SNOW, [1.5, 1.6, 9]), C(SNOW, [0, 1.4, 1]), pushK(f, 904, 0.0025), { fov: 44 }) },
-    { f: 1000, dur: 30, s: (f) => dolly(C(SNOW, [0.8, 1.3, 4.5]), C(SNOW, [0, 1.4, 1]), pushK(f, 1000, 0.003), { fov: 40, roll: 0.04 }) },
+    { f: 904, s: (f) => dolly(C(SNOW, [1.5 - 0.03 * (f - 904), 1.6 + 0.008 * (f - 904), 9]), C(SNOW, [0, 1.4, 1]), pushK(f, 904, 0.0025), { fov: 44 }) },
+    { f: 1000, dur: 30, s: (f) => dolly(C(SNOW, [0.8 + 0.012 * (f - 1000), 1.3, 4.5]), C(SNOW, [0, 1.5, 1]), pushK(f, 1000, 0.003), { fov: 40, roll: 0.04 }) },
   ],
-  8: [{ f: 1090, s: (f) => dolly(C(SNOW, [-3, 2.5, 11]), C(SNOW, [0, 2, -4]), pushK(f, 1090, 0.004, 0.008, 30), { fov: 46 }) }], // frozen town
+  8: [{ f: 1090, s: (f) => dolly(C(SNOW, [-3 + 0.04 * (f - 1090), 2.5 + 0.03 * (f - 1090), 11]), C(SNOW, [0, 2, -4]), pushK(f, 1090, 0.004, 0.008, 30), { fov: 46 }) }], // frozen town
   9: [
-    { f: 1182, s: (f) => dolly(C(CUT, [0, -3, 26]), C(CUT, [0, -4.5, 0]), pushK(f, 1182, 0.0025), { fov: 46 }) }, // the cutaway
-    { f: 1300, dur: 34, s: (f) => dolly(C(CUT, [3, -5, 12]), C(CUT, [0, -6, 0]), pushK(f, 1300, 0.003), { fov: 42, roll: 0.04 }) },
+    { f: 1182, s: (f) => dolly(C(CUT, [-0.03 * (f - 1182), 1.0 - 0.035 * (f - 1182), 26]), C(CUT, [0, -4.5, 0]), pushK(f, 1182, 0.0025), { fov: 46 }) }, // the cutaway
+    { f: 1300, dur: 34, s: (f) => dolly(C(CUT, [3 - 0.04 * (f - 1300), -5, 12]), C(CUT, [0, -6, 0]), pushK(f, 1300, 0.003), { fov: 42, roll: 0.04 }) },
   ],
   10: [
-    { f: 1410, s: (f) => dolly(C(VENT, [3, 4, 14]), C(VENT, [0, 2.5, -4]), pushK(f, 1410, 0.0025), { fov: 46 }) }, // vents
-    { f: 1500, dur: 30, s: (f) => dolly(C(VENT, [1.0, 1.4, 8.5]), C(VENT, [0.2, 1.0, 2.9]), pushK(f, 1500, 0.003), { fov: 42, roll: -0.04 }) },
+    { f: 1410, s: (f) => dolly(C(VENT, [3 - 0.03 * (f - 1410), 6 - 0.03 * (f - 1410), 14]), C(VENT, [0, 2.5, -4]), pushK(f, 1410, 0.0025), { fov: 46 }) }, // vents
+    { f: 1500, dur: 30, s: (f) => dolly(C(VENT, [1.0 + 0.02 * (f - 1500), 1.4, 8.5]), C(VENT, [0.2, 1.0, 2.9]), pushK(f, 1500, 0.003), { fov: 42, roll: -0.04 }) },
   ],
   11: [
     { f: 1592, s: (f) => dolly(C(VENT, [0.5, 1.2, 7.4]), C(VENT, [0.2, 1.0, 2.9]), pushK(f, 1592, 0.004, 0.009, 30), { fov: 40 }) }, // the shrimp, in shades
-    { f: 1660, dur: 36, s: (f) => dolly(C(VENT, [2, 3, 10]), C(VENT, [0, 2, -2]), pushK(f, 1660, 0.002), { fov: 46, roll: 0.03 }) },
+    { f: 1660, dur: 36, s: (f) => dolly(C(VENT, [2 - 0.02 * (f - 1660), 3 + 0.03 * (f - 1660), 10]), C(VENT, [0, 2, -2]), pushK(f, 1660, 0.002), { fov: 46, roll: 0.03 }) },
   ],
 };
 export const DOF: Dof[] = [

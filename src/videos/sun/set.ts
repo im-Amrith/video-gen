@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { Batch, boxGeo, V, lam, house, prop } from "../toon/build";
 import { ctex, rep, grassHD, cobbleHD } from "../toon/paint";
 import { NOINK } from "../toon/ink";
+import { tuft, rock, mountain, dressLand } from "../toon/dress";
 import { Particles, Glow, glowMat } from "../toon/fx";
 import { ground, globe, bumps } from "../toon/kit";
 import { BuildCtx, PoseCtx, SetHandle, hh, smooth, seg, lerp } from "../toon/core";
@@ -16,6 +17,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   // PARK
   ground(b, lam("grassSun", () => ({ map: grassHD() })), 0, 0, 400, 100);
   for (let i = 0; i < 16; i++) prop(b, {}, ["tree_oak", "tree_fat", "plant_bushLarge"][i % 3], -40 + i * 5.5 + hh(i) * 2, 0, -14 - hh(i, 2) * 10, i % 3 === 2 ? 1.5 : 6 + hh(i, 3) * 3);
+  dressLand(b, { cx: 0, cz: 0, r0: 4, r1: 34, keep: (x, z) => z > -3 && Math.abs(x) < 6, tufts: "grass", nTufts: 110, rocks: 14, bushes: 16, trees: 14, hillR: 110, hillN: 16, hillH: 18, seed: 9 });
   // deck chair: frame + striped canvas
   const stripeT = ctex("chairStripe", 64, 256, (g) => { for (let i = 0; i < 8; i++) { g.fillStyle = i % 2 ? "#ffffff" : "#e2453c"; g.fillRect(0, i * 32, 64, 32); } });
   b.add(new THREE.BoxGeometry(0.9, 0.05, 1.5).rotateX(0.6).translate(0, 0.65, 0), lam("chairCanvas", () => ({ map: stripeT, side: THREE.DoubleSide })), new THREE.Matrix4().makeTranslation(0, 0, 0.2));
@@ -28,15 +30,20 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   ground(b, lam("snowSun", () => ({ map: snowTex() })), SNOW[0], SNOW[2], 300, 60);
   for (let i = 0; i < 8; i++) house(b, SNOW[0] - 30 + i * 9, SNOW[2] - 9, 0, 7.5, 6.5, 6 + (i % 3), i + 2, 0);
   for (let i = 0; i < 30; i++) { const g = new THREE.SphereGeometry(1, 14, 8); g.scale(1.6 + hh(i) * 2, 0.6, 1.2); b.add(g, lam("drift", () => ({ color: "#f4f8fc" })), new THREE.Matrix4().makeTranslation(SNOW[0] - 30 + hh(i, 1) * 60, 0, SNOW[2] - 4 + hh(i, 2) * 10)); }
+  for (let i = 0; i < 80; i++) { const x = SNOW[0] - 30 + hh(i, 41) * 60, z = SNOW[2] - 4 + hh(i, 42) * 12; if (Math.abs(x - SNOW[0]) < 2.5 && z > SNOW[2] - 1) continue; tuft(b, x, 0, z, "snow", 1.0 + 0.5 * hh(i, 43), i + 300); }
+  for (let k = 0; k < 7; k++) mountain(b, SNOW[0] - 150 + k * 50, SNOW[2] - 120 - (k % 2) * 30, 40 + (k % 3) * 16, 45, k + 30, true, ["#7d8db0", "#6d7da0", "#8d9dc0", "#5d6d90"]);
   for (let i = 0; i < 20; i++) b.add(new THREE.ConeGeometry(0.12, 0.8 + hh(i) * 0.6, 6).rotateX(Math.PI).translate(0, -0.4, 0), lam("icicle", () => ({ color: "#cfe9ff" })), new THREE.Matrix4().makeTranslation(SNOW[0] - 30 + (i % 8) * 9 + hh(i, 3) * 6 - 3, 5.8 + (i % 3), SNOW[2] - 5.7));
   // CUT: aquarium-style section of the sea: ice lid, water body, sand floor
   b.add(boxGeo(V(CUT[0] - 10, -0.2, CUT[2] - 3), V(CUT[0] + 10, 0.6, CUT[2] + 3)), lam("iceLid", () => ({ color: "#e7f4ff" })));
   b.add(boxGeo(V(CUT[0] - 10, -12.2, CUT[2] - 3), V(CUT[0] + 10, -11.6, CUT[2] + 3)), lam("seaSand", () => ({ color: "#c9b48a" })));
-  bumps(b, 16, CUT[0], CUT[2], 8, "#7a7066", 6, 0.3, 0.8);
+  for (let i = 0; i < 16; i++) rock(b, CUT[0] - 9 + hh(i, 51) * 18, -11.7, CUT[2] - 2.5 + hh(i, 52) * 3, 0.3 + 0.5 * hh(i, 53), i + 60);
+  for (let i = 0; i < 26; i++) tuft(b, CUT[0] - 9.5 + hh(i, 54) * 19, -11.6, CUT[2] - 2.6 + hh(i, 55) * 4, "reed", 1.4 + 1.2 * hh(i, 56), i + 340);
   // VENT: dark seabed, black smokers, tube worms
   ground(b, lam("ventFloor", () => ({ map: rep(cobbleHD(), 1, 1), color: "#5a5262" })), VENT[0], VENT[2], 200, 40);
   const chim = lam("smoker", () => ({ color: "#3a3440" }));
-  for (let k = 0; k < 5; k++) { const h = 3 + hh(k) * 4; b.add(new THREE.CylinderGeometry(0.4, 1.1, h, 10).translate(0, h / 2, 0), chim, new THREE.Matrix4().makeTranslation(VENT[0] - 6 + k * 3.2, 0, VENT[2] - 4 - hh(k, 2) * 4)); }
+  for (let k = 0; k < 5; k++) { const h = 3 + hh(k) * 4; mountain(b, VENT[0] - 6 + k * 3.2, VENT[2] - 4 - hh(k, 2) * 4, h + 0.5, 1.2, k + 80, false, ["#4a3f4e", "#3a3240", "#5a4c5c", "#2e2834"]); }
+  for (let i = 0; i < 30; i++) rock(b, VENT[0] - 14 + hh(i, 57) * 28, 0, VENT[2] - 10 + hh(i, 58) * 12, 0.3 + 0.8 * hh(i, 59), i + 90, lam("ventRock", () => ({ color: "#5a4e5e" })));
+  void chim;
   for (let k = 0; k < 40; k++) {
     const x = VENT[0] - 5 + hh(k, 1) * 10, z = VENT[2] - 2 + hh(k, 2) * 4, h = 0.6 + hh(k, 3) * 0.8;
     b.add(new THREE.CylinderGeometry(0.06, 0.06, h).translate(0, h / 2, 0), lam("tube", () => ({ color: "#f0ece4" })), new THREE.Matrix4().makeTranslation(x, 0, z));
@@ -60,6 +67,22 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const ventGlow = [0, 1, 2, 3, 4].map(() => new Glow(root, "#ff8a3a", 2.4));
   const smoke = new Particles(root, 240, "#2a2430", 1.2, "dot", 1.0);
   const marine = new Particles(root, 300, "#a8c8e8", 0.06, "soft", 0.8);
+  // owner #3: no dark empty shots. Space: bright star field + nebulae; the dark Earth shows its city lights.
+  const starsBig = new Particles(root, 420, "#ffffff", 2.4, "soft", 1.6), starsCol = new Particles(root, 160, "#9fc4ff", 3.6, "soft", 1.4);
+  const nebA = new Glow(root, "#7a46c8", 0.55), nebB = new Glow(root, "#2a7ad8", 0.5), nebC = new Glow(root, "#d0508a", 0.35);
+  const cities = new Particles(root, 260, "#ffcf6a", 0.16, "soft", 2.6);
+  // night lamps (park + snow town) and warm window spill; the cutaway glows with plankton and a lantern fish shoal
+  const LAMPS: [number, number, number][] = [[-2.6, 0, -2.4], [3.4, 0, -3.2], [SNOW[0] - 3.2, 0, SNOW[2] - 2.6], [SNOW[0] + 3.8, 0, SNOW[2] - 3.0], [SNOW[0] - 11, 0, SNOW[2] - 3.0], [SNOW[0] + 12, 0, SNOW[2] - 2.6]];
+  const poleM = lam("lampPoleS", () => ({ color: "#2e3442" })), headOn = glowMat("#ffd27a", 2.2);
+  const halos = LAMPS.map(([x, y, z]) => {
+    const pole = new THREE.Mesh(new THREE.BoxGeometry(0.14, 3.6, 0.14), poleM); pole.position.set(x, y + 1.8, z);
+    const head = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.32, 0.5, 6), headOn); head.position.set(x, y + 3.3, z); head.layers.set(NOINK);
+    const cap = new THREE.Mesh(new THREE.ConeGeometry(0.4, 0.3, 6), poleM); cap.position.set(x, y + 3.7, z);
+    root.add(pole, head, cap); return new Glow(root, "#ffcf7a", 1.6);
+  });
+  const windows = Array.from({ length: 16 }, () => new Glow(root, "#ffb860", 1.3));
+  const plankton = new Particles(root, 260, "#6affd8", 0.12, "soft", 2.2);
+  const lantern = new Glow(root, "#8ff0ff", 1.2);
 
   const pose = ({ id, t }: PoseCtx) => {
     const sp = [2, 3, 5, 6].includes(id);
@@ -83,6 +106,19 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     ventGlow.forEach((g, k) => g.set(VENT[0] - 6 + k * 3.2, 3 + hh(k) * 4 + 0.3, VENT[2] - 4 - hh(k, 2) * 4, 2.2 + 0.4 * Math.sin(t * 3 + k), 0.9, v));
     smoke.pose((i, o) => { const k = i % 5, u = (t * 0.25 + hh(i, 1)) % 1; o.set(VENT[0] - 6 + k * 3.2 + u * 1.5 + (hh(i, 2) - 0.5) * u * 2, 3 + hh(k) * 4 + u * 9, VENT[2] - 4 - hh(k, 2) * 4); return true; }, v);
     marine.pose((i, o) => { const u = (t * 0.05 + hh(i, 1)) % 1; o.set(VENT[0] - 15 + hh(i, 2) * 30, 12 - u * 12, VENT[2] - 10 + hh(i, 3) * 20); return true; }, v);
+    // space backdrop (all space shots)
+    const shell = (i: number, o: THREE.Vector3, k: number) => { const u = hh(i, k) * 2 - 1, a = hh(i, k + 1) * Math.PI * 2, r = 300 + 80 * hh(i, k + 2), c = Math.sqrt(1 - u * u); o.set(ep[0] + Math.cos(a) * c * r, ep[1] + u * r, ep[2] + Math.sin(a) * c * r); return true; };
+    starsBig.pose((i, o) => shell(i, o, 11), sp); starsCol.pose((i, o) => shell(i, o, 21), sp);
+    nebA.set(ep[0] - 300, 100, ep[2] - 340, 460, 1, sp); nebB.set(ep[0] + 340, -60, ep[2] - 220, 420, 1, sp); nebC.set(ep[0] - 220, -120, ep[2] + 320, 400, 1, sp);
+    // city lights on the Earth's night side (turn with the globe: world = inverse of the shader's spin)
+    const sc = Math.cos(t * 0.4), ss = Math.sin(t * 0.4);
+    cities.pose((i, o) => { const y = (hh(i, 31) * 2 - 1) * 0.75, a = hh(i, 32) * Math.PI * 2, c = Math.sqrt(1 - y * y), px = Math.cos(a) * c, pz = Math.sin(a) * c; o.set(ep[0] + (sc * px - ss * pz) * 4.03, ep[1] + y * 4.03, ep[2] + (ss * px + sc * pz) * 4.03); return true; }, sp && !lit);
+    if (!lit) E.U.uNight.value = 0.32;
+    const night = id === 4 || id === 7 || id === 8;
+    halos.forEach((g, k) => g.set(LAMPS[k][0], 3.3, LAMPS[k][2], 3.6, 0.9 + 0.08 * Math.sin(t * 5 + k), night));
+    windows.forEach((g, k) => g.set(SNOW[0] - 30 + (k >> 1) * 9 + (k % 2 ? 1.6 : -1.6), 1.6 + (k % 3) * 1.3, SNOW[2] - 5.4, 1.6, 0.7 + 0.1 * Math.sin(t * 2 + k), id === 7 || id === 8));
+    plankton.pose((i, o) => { const u = (t * 0.04 + hh(i, 61)) % 1; o.set(CUT[0] - 9.5 + hh(i, 62) * 19, -11.4 + hh(i, 63) * 11 + 0.4 * Math.sin(t + i), CUT[2] - 2.6 + hh(i, 64) * 5 + u * 0.3); return true; }, id === 9);
+    lantern.set(CUT[0] - 2, -1.2, CUT[2] + 1, 7, 0.8, id === 9);
     void smooth; void seg; void lerp;
   };
   return { pose };
