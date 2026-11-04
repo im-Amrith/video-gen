@@ -5,6 +5,7 @@ import { Batch, boxGeo, V, lam, prop } from "../toon/build";
 import { ctex, rep, grassHD, stoneHD } from "../toon/paint";
 import { Particles, Glow } from "../toon/fx";
 import { ground } from "../toon/kit";
+import { dressLand } from "../toon/dress";
 import { BuildCtx, PoseCtx, SetHandle, hh, smooth, seg } from "../toon/core";
 import { SEC, FH, FR, floorsAt, leanAt, bendAt, bellsAt, leadAt, drillAt, fenceOn, lapseAt } from "./story";
 
@@ -57,7 +58,14 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   b.add(new THREE.SphereGeometry(8.6, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2).translate(-80, 13, -24), lam("pisaDome", () => ({ color: "#d9c9a8" })));
   b.add(boxGeo(V(-140, 0, -90), V(140, 7, -86)), lam("pisaWall", () => ({ map: stoneHD("pisaWallS") })));
   for (let i = 0; i < 14; i++) prop(b, {}, i % 2 ? "tree_cone" : "tree_default", -120 + i * 18 + hh(i) * 4, 0, -80 + hh(i, 2) * 4, 8 + hh(i, 3) * 3);
-  // SECTION diorama: strata slab with a clean cut face, sky backdrop
+  // owner feedback #2: fill the lawn in 3 depth layers (grass tufts + rocks near, bushes/trees mid, Tuscan hills behind)
+  const busy = (x: number, z: number) => Math.hypot(x, z) < 12 || (z > 2 && z < 14 && x > -12 && x < 30) || (x < -20 && x > -95 && z < -15 && z > -60) || (x > 12 && x < 30 && z > -6 && z < 18);
+  dressLand(b, { cx: 0, cz: 0, r0: 12, r1: 75, keep: busy, tufts: "grass", nTufts: 300, rocks: 30, bushes: 26, seed: 7 });
+  dressLand(b, { cx: 0, cz: -20, r0: 60, r1: 130, keep: (x, z) => z > 0 || busy(x, z), bushes: 30, trees: 26, treeKinds: ["tree_cone", "tree_default", "tree-high-round", "tree_fat"], hillR: 200, hillCol: "#8aa850", hillN: 16, hillH: 26, seed: 8 });
+  // the SECTION diorama sits in the same landscape (lawn behind the cut, hills), not in an empty sky
+  b.add(new THREE.PlaneGeometry(400, 200).rotateX(-Math.PI / 2), lam("pisaLawn", () => ({ map: grassHD() })), new THREE.Matrix4().makeTranslation(SEC[0], 0, SEC[2] - 106));
+  dressLand(b, { cx: SEC[0], cz: SEC[2] - 30, r0: 8, r1: 70, keep: (x, z) => z > SEC[2] - 8, tufts: "grass", nTufts: 60, bushes: 12, trees: 14, treeKinds: ["tree_cone", "tree_default", "tree-high-round"], hillR: 130, hillCol: "#8aa850", hillN: 14, hillH: 22, seed: 9 });
+  // SECTION diorama: strata slab with a clean cut face
   b.add(boxGeo(V(SEC[0] - 16, -12, SEC[2] - 6), V(SEC[0] + 16, 0, SEC[2] + 0.5)), lam("pisaStrata", () => ({ map: strataTex() })));
   b.build(root);
   const T = makeTower(root);

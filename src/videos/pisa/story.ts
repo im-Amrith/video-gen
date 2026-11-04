@@ -7,6 +7,7 @@ import { fxStars, fxNote, Outfit } from "../toon/toon";
 import { put, exprAt, FOLK, calendarCard, arrowCard } from "../toon/kit";
 import { cat, gull, levelCard } from "../toon/animals";
 import { buildSet } from "./set";
+import { Pen } from "../toon/toon";
 
 export const TOTAL = TL.total;
 const L = TL.lines as Record<string, { t0: number; t1: number }>;
@@ -66,39 +67,39 @@ const C = (base: V3, d: V3): V3 => [base[0] + d[0], base[1] + d[1], base[2] + d[
 const TOP = (n: number): V3 => [0, n * FH, 0];
 export const CAMS: Record<number, Key[]> = {
   1: [
-    { f: 0, s: (f) => dolly([3.0, 6.8, 9.5], [0.4, 6.6, 1.8], pushK(f, 0, 0.003), { fov: 40, roll: -0.04 }) }, // a builder on the stub with a spirit level
-    { f: 96, dur: 30, s: (f) => dolly([12, 4, 26], [0, 4, 0], pushK(f, 96, 0.002), { fov: 42 }) }, // pull back: the stub already tilts
+    { f: 0, s: (f) => dolly([3.0 + 0.015 * f, 6.8, 9.5], [0.4, 6.6, 1.8], pushK(f, 0, 0.003), { fov: 40, roll: -0.04 }) }, // a builder on the stub with a spirit level
+    { f: 96, dur: 30, s: (f) => dolly([12, 4 + 0.03 * (f - 96), 26], [0, 4, 0], pushK(f, 96, 0.002), { fov: 42 }) }, // pull back: the stub already tilts
   ],
   2: [
     { f: 175, s: (f) => orbit([0, 6, 0], 40, 0.3 + 0.002 * (f - 175), 14, { fov: 44 }) }, // Pisa, 1173: building it
-    { f: 320, cut: true, s: (f) => dolly(C(SEC, [2, 3, 40]), C(SEC, [0, 0, 0]), pushK(f, 320, 0.0025), { fov: 44 }) }, // the soil, the shallow foundation
+    { f: 320, cut: true, s: (f) => dolly(C(SEC, [4 - 0.05 * (f - 320), 3, 40]), C(SEC, [0, 0, 0]), pushK(f, 320, 0.0025), { fov: 44 }) }, // the soil, the shallow foundation
   ],
-  3: [{ f: 420, s: (f) => dolly(C(SEC, [3, 2, 32]), C(SEC, [0, 0.5, 0]), pushK(f, 420, 0.004, 0.008, 24), { fov: 42, roll: 0.05 }) }], // sinking
+  3: [{ f: 420, s: (f) => dolly(C(SEC, [3 + 0.04 * (f - 420), 2, 32]), C(SEC, [0, 0.5, 0]), pushK(f, 420, 0.004, 0.008, 24), { fov: 42, roll: 0.05 }) }], // sinking
   4: [
-    { f: 510, s: (f) => dolly([-14, 2.0, 22], [8, 2.2, 6], pushK(f, 510, 0.0025), { fov: 46 }) }, // off to war
-    { f: 600, cut: true, s: (f) => zoom([10, 3, 34], [0, 5, 0], 44, pushK(f, 600, 0.002)) }, // ...the years fly by
+    { f: 510, s: (f) => dolly([-14 + 0.06 * (f - 510), 2.0, 22], [8, 2.2, 6], pushK(f, 510, 0.0025), { fov: 46 }) }, // off to war
+    { f: 600, cut: true, s: (f) => orbit([0, 5, 0], 35.4, 0.29 - 0.004 * (f - 600), -2 + 0.04 * (f - 600), { fov: 44 }) }, // ...the years fly by
   ],
-  5: [{ f: 668, s: (f) => dolly([3.6, 12.6, 8.5], [0.2, 10.7, 1.8], pushK(f, 668, 0.003), { fov: 40 }) }], // a cat asleep on the stub
+  5: [{ f: 668, s: (f) => orbit([0.2, 10.7, 1.8], 7.5 - 0.008 * (f - 668), 0.47 - 0.005 * (f - 668), 1.9, { fov: 40 }) }], // a cat asleep on the stub
   6: [
     { f: 806, s: (f) => orbit([0, 10, 0], 34, 0.6 + 0.003 * (f - 806), 6, { fov: 46 }) }, // the builders are back
-    { f: 930, cut: true, s: (f) => dolly([10, 26, 22], [0, 22, 0], pushK(f, 930, 0.003), { fov: 44, roll: -0.05 }) }, // the banana + a gull
+    { f: 930, cut: true, s: (f) => dolly([10, 24 + 0.04 * (f - 930), 22], [0, 22, 0], pushK(f, 930, 0.003), { fov: 44, roll: -0.05 }) }, // the banana + a gull
   ],
-  7: [{ f: 1008, s: (f) => dolly([8, 30, 20], [0, 28, 0], pushK(f, 1008, 0.003, 0.006, 30), { fov: 44 }) }], // bells on top
+  7: [{ f: 1008, s: (f) => orbit([-1.5, 28, 0], 21.5 - 0.02 * (f - 1008), 0.38 - 0.005 * (f - 1008), 2, { fov: 44 }) }], // bells on top
   8: [
-    { f: 1146, s: (f) => zoom([24, 6, 56], [0, 14, 0], 46, pushK(f, 1146, 0.002)) }, // 1990, closed
-    { f: 1220, cut: true, s: (f) => dolly([3, 1.6, 15], [0, 1.6, 7], pushK(f, 1220, 0.003), { fov: 40 }) },
+    { f: 1146, s: (f) => dolly([24 - 0.06 * (f - 1146), 6, 56], [0, 14, 0], pushK(f, 1146, 0.002), { fov: 46 }) }, // 1990, closed
+    { f: 1220, cut: true, s: (f) => dolly([3 - 0.03 * (f - 1220), 1.6, 15], [0, 1.6, 7], pushK(f, 1220, 0.003), { fov: 40 }) },
   ],
   9: [
-    { f: 1297, s: (f) => dolly([16, 3, 12], [FR, 1.5, 0], pushK(f, 1297, 0.003), { fov: 44 }) }, // lead blocks
-    { f: 1400, cut: true, s: (f) => dolly(C(SEC, [4, 3, 40]), C(SEC, [2, 2, 0]), pushK(f, 1400, 0.003), { fov: 42 }) }, // drilling underneath
+    { f: 1297, s: (f) => dolly([16, 3 + 0.02 * (f - 1297), 12 - 0.03 * (f - 1297)], [FR, 1.5, 0], pushK(f, 1297, 0.003), { fov: 44 }) }, // lead blocks
+    { f: 1400, cut: true, s: (f) => dolly(C(SEC, [6 - 0.05 * (f - 1400), 3, 40]), C(SEC, [2, 2, 0]), pushK(f, 1400, 0.003), { fov: 42 }) }, // drilling underneath
   ],
   10: [
-    { f: 1487, s: (f) => zoom([22, 5, 50], [0, 14, 0], 46, pushK(f, 1487, 0.002)) }, // it comes back a little
-    { f: 1580, cut: true, s: (f) => dolly([2, 30, 14], [-1, 29, 0], pushK(f, 1580, 0.003), { fov: 40, roll: 0.05 }) }, // the top: 40 cm
+    { f: 1487, s: (f) => dolly([22 - 0.07 * (f - 1487), 5 + 0.03 * (f - 1487), 50], [0, 14, 0], pushK(f, 1487, 0.002), { fov: 46 }) }, // it comes back a little
+    { f: 1580, cut: true, s: (f) => orbit([-1, 29, 0], 14.3, 0.21 - 0.004 * (f - 1580), 1, { fov: 40, roll: 0.05 }) }, // the top: 40 cm
   ],
   11: [
-    { f: 1715, s: (f) => dolly([-6, 1.6, 22], [0, 6, 0], pushK(f, 1715, 0.002), { fov: 46 }) }, // tourists holding it up
-    { f: 1780, dur: 40, s: (f) => zoom([-14, 3, 48], [0, 14, 0], 44, pushK(f, 1780, 0.0015)) },
+    { f: 1715, s: (f) => dolly([-6 + 0.04 * (f - 1715), 1.6 + 0.02 * (f - 1715), 22], [0, 6, 0], pushK(f, 1715, 0.002), { fov: 46 }) }, // tourists holding it up
+    { f: 1780, dur: 40, s: (f) => dolly([-14 + 0.03 * (f - 1780), 3 + 0.05 * (f - 1780), 48 + 0.04 * (f - 1780)], [0, 14, 0], 1, { fov: 44 }) },
   ],
 };
 export const DOF: Dof[] = [
@@ -107,6 +108,15 @@ export const DOF: Dof[] = [
   { f: 1580, cInf: 8 }, { f: 1715, cInf: 6 }, { f: 1780, dur: 40, cInf: 0 },
 ];
 
+/** a painted sign on a post (640 x 900): unlit card, reads instantly */
+const signPost = (p: Pen, l1: string, l2: string, c1 = "#c0353a") => {
+  const g = p.g;
+  p.poly([[295, 330], [345, 330], [345, 900], [295, 900]], "#8a5a32", 10);
+  p.poly([[20, 30], [620, 30], [620, 340], [20, 340]], "#f4e3bf", 14);
+  g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillStyle = c1; g.font = "bold 120px sans-serif"; g.fillText(l1, 320, 135);
+  g.fillStyle = "#2a3f6a"; g.font = "bold 80px sans-serif"; g.fillText(l2, 320, 265);
+};
 const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   const lean = leanAt(t);
   const topOf = (n: number): V3 => [-Math.sin(lean) * n * FH, Math.cos(lean) * n * FH, 0];
@@ -117,6 +127,9 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     card(out, `lvl${q(u, 20)}`, (p) => levelCard(p, u), s[0] - 0.4, s[1] + 0.55, 2.3, 1.4, 0.42, { cw: 400, ch: 120, rot: lean });
     if (t > 1.4 && t < 2.2) card(out, "bang1", (p) => fxBang(p), s[0] + 0.7, s[1] + 2.5, 2.0, 0.4, 0.6, { cw: 200, ch: 300 });
   }
+  // payoff places say themselves: PISA 1173 on the lawn, CLOSED 1990 at the fence
+  if (id === 2) card(out, "signPisa", (p) => signPost(p, "PISA", "1173"), 9, 2.4, 11, 3.4, 4.8, { cw: 640, ch: 900 });
+  if (id === 8 && fenceOn(t)) card(out, "signClosed", (p) => signPost(p, "CLOSED", "1990", "#e2453c"), -1.5, 2.3, 6.0, 1.8, 2.53, { cw: 640, ch: 900 });
   if (id === 2 || id === 6) {
     const old = id === 6;
     [[-6, 6], [7, 5], [-2, 8]].forEach(([x, z], k) => {
