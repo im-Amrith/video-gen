@@ -64,7 +64,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   for (const [c, m] of [[MOD, fMod], [BOL, fBol]] as const) { const f = new THREE.Mesh(new THREE.PlaneGeometry(3, 2).translate(1.5, 0, 0), m); f.position.set(c[0], 27.2, c[2] - 1.5); root.add(f); }
   // the bucket (one mesh, moves: well → soldier's shoulder → museum cushion)
   const bucket = new THREE.Group();
-  const tub = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.34, 0.7, 20, 1, true), lam("bucketWood", () => ({ map: planksHD(), color: "#a8703a", side: THREE.DoubleSide }))); bucket.add(tub);
+  const tub = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.34, 0.7, 20, 1, true), lam("bucketWood", () => ({ map: planksHD(), color: "#d89048", side: THREE.DoubleSide }))); bucket.add(tub);
   for (const y of [-0.22, 0.22]) { const band = new THREE.Mesh(new THREE.TorusGeometry(y > 0 ? 0.41 : 0.36, 0.03, 6, 24).rotateX(Math.PI / 2), lam("bucketBand", () => ({ color: "#3a3440" }))); band.position.y = y; bucket.add(band); }
   const handle = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.025, 6, 24, Math.PI), lam("bucketBand", () => ({ color: "#3a3440" }))); handle.position.y = 0.33; bucket.add(handle);
   const bottom = new THREE.Mesh(new THREE.CircleGeometry(0.34, 20).rotateX(-Math.PI / 2), lam("bucketWood2", () => ({ color: "#7a4a2a" }))); bottom.position.y = -0.34; bucket.add(bottom);

@@ -1,5 +1,5 @@
 ---
-status: todo
+status: review
 series: history
 episode: 5
 slug: war-of-the-bucket
