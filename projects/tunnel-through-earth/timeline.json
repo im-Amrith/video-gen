@@ -1,0 +1,80 @@
+{
+ "DUR": 67.41,
+ "L": {
+  "L01": {
+   "t0": 0.45,
+   "t1": 5.627,
+   "text": "If you jumped into a hole straight through the Earth, you'd come out the other side in thirty-eight minutes."
+  },
+  "L02": {
+   "t0": 6.097,
+   "t1": 9.585,
+   "text": "The deepest hole we've ever actually dug is twelve kilometers."
+  },
+  "L03": {
+   "t0": 9.805,
+   "t1": 12.139,
+   "text": "That's about a tenth of one percent of the way through."
+  },
+  "L04": {
+   "t0": 12.559,
+   "t1": 17.061,
+   "text": "So let's cheat. One tunnel, pole to pole, with all the air pumped out. Jump!"
+  },
+  "L05": {
+   "t0": 18.131,
+   "t1": 22.049,
+   "text": "Down through the crust, then almost three thousand kilometers of hot rock."
+  },
+  "L06": {
+   "t0": 22.269,
+   "t1": 25.965,
+   "text": "Weirdly, gravity gets stronger as you fall, all the way to the core."
+  },
+  "L07": {
+   "t0": 26.185,
+   "t1": 29.601,
+   "text": "Thirteen minutes in, you plunge into an ocean of liquid iron."
+  },
+  "L08": {
+   "t0": 29.821,
+   "t1": 34.29,
+   "text": "Near the center it's about six thousand degrees. As hot as the surface of the Sun."
+  },
+  "L09": {
+   "t0": 35.56,
+   "t1": 40.738,
+   "text": "At the center, you're doing over twenty-eight thousand kilometers an hour, and you weigh nothing at all."
+  },
+  "L10": {
+   "t0": 41.308,
+   "t1": 44.685,
+   "text": "Now gravity pulls you back. You slow down, and down, and down."
+  },
+  "L11": {
+   "t0": 44.905,
+   "t1": 48.505,
+   "text": "Thirty-eight minutes after you jumped, you stop, right at the far side."
+  },
+  "L12": {
+   "t0": 48.875,
+   "t1": 52.141,
+   "text": "Grab the edge. Miss it, and you fall all the way back. Forever."
+  },
+  "L13": {
+   "t0": 52.861,
+   "t1": 57.779,
+   "text": "Unless you leave the air in. Then drag holds you to about two hundred kilometers an hour."
+  },
+  "L14": {
+   "t0": 57.999,
+   "t1": 63.038,
+   "text": "After more than a day of falling, you'd end up floating at the center of the Earth. Weightless. Stuck."
+  },
+  "L15": {
+   "t0": 63.708,
+   "t1": 65.107,
+   "text": "Maybe just take the plane."
+  }
+ }
+}
