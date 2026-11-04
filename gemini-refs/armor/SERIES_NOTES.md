@@ -12,3 +12,9 @@ dive/POV into the vortex; ends in a white-out flash. No hard cuts (the source is
 **Do:** one hero, nature does the action; lightning as key light; B&W; a continuous camera; end on a flash/white-out.
 **Don't:** colour grade, multiple characters, readable text, gore, modern objects, real brand marks.
 Owner notes: (none yet)
+
+**Second reel (igexport-Dc4sSw1jF-D, 720x960, ~16 s):** a variant of the concept: a lone human, seen over the shoulder,
+faces a colossal horned armoured giant (arrival → weapon drawn and glowing → strike at the hero → hero's calm face lit by it).
+Four slow hard-cut shots of ~4 s (not one take); grade is cold desaturated blue-grey with one glowing pale-blue weapon.
+Rule taken into the series: B&W stays the base grade, but **one glowing weapon may be the only colour**; over-the-shoulder
+hero-vs-giant framing and a slow 4-shot structure are both allowed. The reel's human looks like a real actor: always use our own cast.

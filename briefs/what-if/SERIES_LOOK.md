@@ -31,3 +31,10 @@ Status: **superseded look (iso-infographic) — see the owner feedback below; th
 - **SFX for every action** (every fall, hit, glow, pop, whoosh, step).
 - Every short ships: SCRIPT.md with sources, voice + words.json, story.ts shot plan, world, cast, mix.wav, a registered composition,
   `npx tsc --noEmit` clean, and a RENDER_LOCALLY.md row with exact render + mux commands.
+
+## Owner feedback — 2026-11-04 #2 (from the check stills; applies to ALL episodes)
+- **No placeholder props**: no plain cones or cylinders. Grass/wheat = clustered tufts with an ink outline; bullet casings = brass
+  casings with a rim and a highlight; rocks, fences and bushes with painted texture (src/videos/toon/dress.ts).
+- **Fill empty landscapes: 3 depth layers** — foreground props, midground set dressing, background hills or skyline; varied trees;
+  small life (birds, dust, drifting clouds — built into the engine world).
+- Keep: the close-ups, expressions, glow and effects.
