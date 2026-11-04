@@ -35,7 +35,7 @@ export const SHOTS: ShotDef[] = [
   { id: 1, a: 0, b: 188, light: "golden", sunAz: 40, sunEl: 14 },
   { id: 2, a: 188, b: 444, light: "day", sunAz: 120, sunEl: 40 },
   { id: 3, a: 444, b: 658, light: "golden", sunAz: 160, sunEl: 12 },
-  { id: 4, a: 658, b: 752, light: "day", sunAz: 110, sunEl: 35 },
+  { id: 4, a: 658, b: 752, light: "night", sunAz: 60, sunEl: 35 }, // the night before: torches, lit windows (look progression)
   { id: 5, a: 752, b: 856, light: "day", sunAz: 110, sunEl: 35 },
   { id: 6, a: 856, b: 1042, light: "day", sunAz: 120, sunEl: 30 },
   { id: 7, a: 1042, b: 1172, light: "day", sunAz: 120, sunEl: 30 },
@@ -52,39 +52,39 @@ const C = (base: V3, d: V3): V3 => [base[0] + d[0], base[1] + d[1], base[2] + d[
 const OFF: V3 = [14, 0.6, -5.2], BAL: V3 = [PAL[0] - 3, 8.1 + 0.25, PAL[2] + 7.0];
 export const CAMS: Record<number, Key[]> = {
   1: [
-    { f: 0, s: (f) => zoom([8, 6, 60], [0, 12, -10], 46, pushK(f, 0, 0.002)) }, // the harbour, the palace, a giant watch in the sky
+    { f: 0, s: (f) => dolly([8 - 0.04 * f, 4 + 0.03 * f, 60], [0, 12, -10], pushK(f, 0, 0.002), { fov: 46 }) }, // the harbour, the palace, a giant watch in the sky
     { f: 96, cut: true, s: (f) => dolly(C(OFF, [1.0, 1.7, 3.6]), C(OFF, [0, 1.7, 0]), pushK(f, 96, 0.004, 0.008, 30), { fov: 38, roll: 0.04 }) }, // the officer's watch
   ],
   2: [
     { f: 188, s: (f) => orbit(C(PAL, [0, 8, 6]), 34, -0.25 + 0.002 * (f - 188), 6, { fov: 46 }) }, // the palace
-    { f: 330, cut: true, s: (f) => dolly(C(BAL, [1.2, 0.6, 5.0]), C(BAL, [0, 1.6, 0]), pushK(f, 330, 0.003), { fov: 40, roll: -0.04 }) }, // Khalid on the balcony
+    { f: 330, cut: true, s: (f) => orbit(C(BAL, [0, 1.6, 0]), 5.1 - 0.006 * (f - 330), 0.24 - 0.004 * (f - 330), -1.0 + 0.004 * (f - 330), { fov: 40, roll: -0.04 }) }, // Khalid on the balcony
   ],
   3: [
-    { f: 444, s: (f) => dolly([-6, 4, -2], [10, 3, 50], pushK(f, 444, 0.002), { fov: 48 }) }, // warships glide in
-    { f: 560, cut: true, s: (f) => dolly(C(OFF, [0.9, 1.5, 3.0]), C(OFF, [0, 1.4, 0]), pushK(f, 560, 0.004), { fov: 38 }) }, // the note
+    { f: 444, s: (f) => dolly([-6 + 0.035 * (f - 444), 4 + 0.01 * (f - 444), -2], [10, 3, 50], pushK(f, 444, 0.002), { fov: 48 }) }, // warships glide in
+    { f: 560, cut: true, s: (f) => orbit(C(OFF, [0, 1.45, 0]), 3.2 - 0.004 * (f - 560), 0.29 - 0.004 * (f - 560), 0.1, { fov: 38 }) }, // the note
   ],
-  4: [{ f: 658, s: (f) => dolly(C(PAL, [3, 3, 18]), C(PAL, [0, 3.5, 6]), pushK(f, 658, 0.004, 0.008, 24), { fov: 42 }) }], // barricade
+  4: [{ f: 658, s: (f) => dolly(C(PAL, [3.5 - 0.035 * (f - 658), 4, 27]), C(PAL, [0, 4.5, 6]), pushK(f, 658, 0.003, 0.006, 24), { fov: 44 }) }], // barricade
   5: [
     { f: 752, s: (f) => dolly([0, 18, 26], [0, 22, -20], pushK(f, 752, 0.004, 0.01, 30), { fov: 40 }) }, // the watch hits nine
     { f: Math.round(FIRE * FPS) - 2, cut: true, s: (f) => dolly([-30, 3, 20], [2, 3, 50], pushK(f, Math.round(FIRE * FPS), 0.003), { fov: 46, roll: 0.06 }) }, // the guns
   ],
   6: [
-    { f: 856, s: (f) => zoom([10, 5, 50], [0, 10, -18], 46, pushK(f, 856, 0.002)) }, // palace burning
-    { f: 940, cut: true, s: (f) => dolly(C(YACHT, [6, 2.5, 16]), C(YACHT, [1, 0.5, 0]), pushK(f, 940, 0.003), { fov: 44, roll: -0.05 }) }, // the yacht settles
+    { f: 856, s: (f) => dolly([10 - 0.05 * (f - 856), 5 + 0.02 * (f - 856), 50], [0, 10, -18], pushK(f, 856, 0.002), { fov: 46 }) }, // palace burning
+    { f: 940, cut: true, s: (f) => dolly(C(YACHT, [6 - 0.04 * (f - 940), 2.5, 16]), C(YACHT, [1, 0.5, 0]), pushK(f, 940, 0.003), { fov: 44, roll: -0.05 }) }, // the yacht settles
   ],
-  7: [{ f: 1042, s: (f) => dolly(C(PAL, [22, 2.0, 12]), C(PAL, [22, 1.6, 2]), pushK(f, 1042, 0.003), { fov: 44 }) }], // Khalid slips out the back
+  7: [{ f: 1042, s: (f) => { const u = smooth(seg(f / FPS, tl("L07", 0.3), tl("L07", 3.6))); return dolly(C(PAL, [20.5 + 8 * u, 1.9, 9]), C(PAL, [19.5 + 8 * u, 2.2, 2]), pushK(f, 1042, 0.002), { fov: 46 }); } }], // Khalid slips out the back
   8: [
     { f: 1172, s: (f) => dolly([0, 18, 26], [0, 22, -20], pushK(f, 1172, 0.003), { fov: 40 }) }, // 9:40
-    { f: 1240, cut: true, s: (f) => dolly(C(BAL, [1.4, 0.5, 6]), C(BAL, [0, 1.6, 0]), pushK(f, 1240, 0.003), { fov: 40, roll: 0.04 }) }, // the new sultan
+    { f: 1240, cut: true, s: (f) => orbit(C(BAL, [0, 1.6, 0]), 6.0 - 0.006 * (f - 1240), -0.23 + 0.004 * (f - 1240), -1.1 + 0.004 * (f - 1240), { fov: 40, roll: 0.04 }) }, // the new sultan
   ],
-  9: [{ f: 1350, s: (f) => zoom([-14, 4, 46], [0, 10, -20], 44, pushK(f, 1350, 0.0015)) }], // quiet: the smoking palace
+  9: [{ f: 1350, s: (f) => dolly([-14 + 0.04 * (f - 1350), 4 + 0.05 * (f - 1350), 46], [0, 10, -20], pushK(f, 1350, 0.0015), { fov: 44 }) }], // quiet: the smoking palace
   10: [
-    { f: 1475, s: (f) => dolly(C(PAL, [1.5, 1.6, 12]), C(PAL, [0, 1.6, 7.5]), pushK(f, 1475, 0.003), { fov: 40 }) }, // the bill slides under the door
-    { f: 1580, cut: true, s: (f) => dolly(C(PAL, [0.8, 1.7, 10]), C(PAL, [0, 1.7, 7.6]), pushK(f, 1580, 0.004, 0.009, 24), { fov: 36, roll: -0.05 }) },
+    { f: 1475, s: (f) => dolly(C(PAL, [1.8 - 0.03 * (f - 1475), 1.6, 12]), C(PAL, [0, 1.6, 7.5]), pushK(f, 1475, 0.003), { fov: 40 }) }, // the bill slides under the door
+    { f: 1580, cut: true, s: (f) => dolly(C(PAL, [0.9 - 0.014 * (f - 1580), 1.7, 10]), C(PAL, [0, 1.7, 7.6]), pushK(f, 1580, 0.004, 0.009, 24), { fov: 36, roll: -0.05 }) },
   ],
   11: [
     { f: 1690, s: (f) => dolly(C(OFF, [0.9, 1.7, 3.2]), C(OFF, [0, 1.7, 0]), pushK(f, 1690, 0.003), { fov: 38 }) }, // snap the watch shut
-    { f: 1760, dur: 40, s: (f) => zoom([8, 6, 60], [0, 12, -10], 46, pushK(f, 1760, 0.0015)) },
+    { f: 1760, dur: 40, s: (f) => dolly([8 - 0.03 * (f - 1760), 6 + 0.04 * (f - 1760), 60 + 0.05 * (f - 1760)], [0, 12, -10], 1, { fov: 46 }) },
   ],
 };
 export const DOF: Dof[] = [
@@ -100,6 +100,14 @@ const billCard = (p: Pen) => {
   p.poly([[80, 80], [120, 80], [120, 150], [100, 170], [80, 150]], "#8a8f9a", 8);
   for (let k = 0; k < 4; k++) p.ell(190, 160 - k * 18, 36, 12, "#e8c45a", 7);
   for (let k = 0; k < 3; k++) p.stroke([[60, 200 + k * 22], [230, 204 + k * 22]], 6);
+};
+/** painted wooden signs (unlit cards, read instantly) */
+const sign = (p: Pen, l1: string, l2: string, c1 = "#c0353a") => {
+  const g = p.g;
+  p.poly([[20, 30], [620, 30], [620, 330], [20, 330]], "#f4e3bf", 14);
+  g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillStyle = c1; g.font = "bold 110px sans-serif"; g.fillText(l1, 320, 130);
+  g.fillStyle = "#2a3f6a"; g.font = "bold 72px sans-serif"; g.fillText(l2, 320, 250);
 };
 const flame = (p: Pen, k: number) => { const w = 1 + 0.1 * Math.sin(k); p.poly([[150, 380], [60 * w, 250], [110, 120], [150, 20], [190, 130], [240 / w, 250]], "#ff8a2a", 10); p.poly([[150, 360], [100, 270], [150, 150], [200, 270]], "#ffd25a", 0); };
 
@@ -118,6 +126,10 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     if (id === 4) for (let k = 0; k < 2; k++) put(cam, out, { i: 42 + k, o: GUARD, okey: "gd" }, t, PAL[0] - 3 + k * 6, 0.6, PAL[2] + 7.5, "stern", { scale: 1.05 });
     if (id === 4) for (let k = 0; k < 6; k++) if (t > tl("L04", 0.2 + k * 0.25)) card(out, "crate", (p) => { p.poly([[30, 30], [270, 30], [270, 270], [30, 270]], "#b0703f", 10); p.stroke([[30, 30], [270, 270]], 8); p.stroke([[270, 30], [30, 270]], 8); }, PAL[0] - 1.6 + (k % 3) * 1.1, 1.15 + Math.floor(k / 3) * 1.05, PAL[2] + 7.0, 1.0, 1.0, { cw: 300, ch: 300 });
   }
+  // payoff places say themselves: the harbour sign, torches on the night of the barricade, the German consulate
+  if (id === 2) card(out, "signZ", (p) => sign(p, "ZANZIBAR", "AUGUST 1896"), 13, 3.0, -3.2, 3.4, 1.8, { cw: 640, ch: 360 });
+  if (id === 4) for (const dx of [-2.6, 2.6]) card(out, `torch${dx}${q(Math.sin(t * 11 + dx), 4)}`, (p) => flame(p, t * 11 + dx), PAL[0] + dx, 3.9, PAL[2] + 6.7, 0.5, 0.7, { cw: 300, ch: 400 });
+  if (id === 7) card(out, "signDE", (p) => sign(p, "GERMAN", "CONSULATE", "#1a1a1a"), CONS[0] - 1.5, 4.6, CONS[2] + 3.15, 3.6, 1.9, { cw: 640, ch: 360 });
   if (id === 5 && t > FIRE) {
     SHIPS.forEach(([x, z], k) => { for (const d of [0, 0.6, 1.1]) { const u = q(seg(t, FIRE + d + k * 0.12, FIRE + d + k * 0.12 + 0.35), 20); if (u > 0 && u < 1) card(out, `gun${u}`, (p) => fxBurst(p, u, "#fff3b0"), x - 8.8, 2.6, z, 4, 4, { cw: 500, ch: 500, soft: true }); } });
     for (const d of [0.4, 0.9, 1.4]) { const u = q(seg(t, FIRE + d, FIRE + d + 1.0), 30); if (u > 0 && u < 1) card(out, `spl${u}`, (p) => fxSplash(p, u), -6 + d * 10, 1.0, 4, 8, 8, { cw: 800, ch: 800 }); }

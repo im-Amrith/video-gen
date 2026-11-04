@@ -3,7 +3,9 @@
 import * as THREE from "three";
 import { Batch, boxGeo, V, lam, prop } from "../toon/build";
 import { ctex, rep, stoneHD, planksHD } from "../toon/paint";
-import { Particles } from "../toon/fx";
+import { Particles, Glow, glowMat } from "../toon/fx";
+import { NOINK } from "../toon/ink";
+import { dressLand, mountain, tuft, rock } from "../toon/dress";
 import { ground, sea, clockCard } from "../toon/kit";
 import { Pen } from "../toon/toon";
 import { BuildCtx, PoseCtx, SetHandle, hh, smooth, seg } from "../toon/core";
@@ -59,7 +61,32 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   b.add(new THREE.PlaneGeometry(2.2, 1.4).translate(CONS[0] + 4.1, 11.2, CONS[2] + 2.5), lam("flagDE", () => ({ map: flagTri(), side: THREE.DoubleSide })));
   b.add(new THREE.CylinderGeometry(0.08, 0.08, 8).translate(PAL[0] - 11, 19, PAL[2]), lam("pole", () => ({ color: "#e0e0e0" })));
   for (let i = 0; i < 16; i++) prop(b, {}, i % 3 ? "tree_cone" : "tree_default", -50 + i * 6.5 + hh(i) * 2, 0, -22 - hh(i, 2) * 14, 7 + hh(i, 3) * 4);
+  // owner feedback #2: 3 depth layers behind the harbour (dry grass, rocks, bushes, trees, then green hills), palms on the quay
+  const busy = (x: number, z: number) => z > -12 || (Math.abs(x - PAL[0]) < 19 && z > PAL[2] - 12) || (Math.abs(x - CONS[0]) < 9 && Math.abs(z - CONS[2]) < 8);
+  dressLand(b, { cx: 0, cz: -40, r0: 14, r1: 90, keep: busy, tufts: "dry", nTufts: 110, rocks: 24, bushes: 26, trees: 22, treeKinds: ["tree_default", "tree_fat", "tree-high-round", "tree_oak"], seed: 5 });
+  for (let i = 0; i < 10; i++) mountain(b, -150 + i * 34 + hh(i, 7) * 10, -125 - hh(i, 8) * 30, 26 + hh(i, 9) * 18, 30, i, false, ["#6f8a50", "#5f7a44", "#7f9a5c", "#566e3c"]);
+  const bark = lam("palmBark", () => ({ map: rep(planksHD(), 1, 3), color: "#9a7448" }));
+  for (const [px, pz] of [[-48, -7], [-38, -9], [-27, -6.5], [20, -7], [24, -10], [40, -6.5], [50, -9], [58, -7], [-58, -10]]) {
+    const H = 7 + hh(px, 1) * 3, lean = (hh(px, 2) - 0.5) * 0.5;
+    for (let k = 0; k < 6; k++) { const u = k / 6, h = H / 6; b.add(new THREE.CylinderGeometry(0.22 - 0.02 * k, 0.28 - 0.02 * k, h * 1.02, 9).translate(lean * H * u * u, 0.6 + h * (k + 0.5), 0), bark, new THREE.Matrix4().makeTranslation(px, 0, pz)); }
+    tuft(b, px + lean * H, 0.6 + H - 0.4, pz, "grass", 5.0, Math.round(px * 7));
+    tuft(b, px + lean * H, 0.6 + H - 0.2, pz, "grass", 3.6, Math.round(px * 7) + 1);
+    rock(b, px + 1.2, 0.6, pz + 0.8, 0.35, Math.round(px));
+  }
   b.build(root);
+  // night (the barricade, "and waits"): the palace windows glow and torches burn at the gate
+  const winT = ctex("palaceWinGlow", 1024, 512, (g) => {
+    g.clearRect(0, 0, 1024, 512);
+    for (let fl = 0; fl < 3; fl++) for (let i = 0; i < 9; i++) {
+      if ((fl * 9 + i) % 4 === 3) continue;
+      const x = 50 + i * 108, y = 70 + fl * 150;
+      g.fillStyle = "#ffc860"; g.beginPath(); g.moveTo(x + 4, y + 88); g.lineTo(x + 4, y + 28); g.arc(x + 25, y + 28, 21, Math.PI, 0); g.lineTo(x + 46, y + 88); g.fill();
+    }
+  });
+  const wins = new THREE.Mesh(new THREE.PlaneGeometry(28, 14.4), new THREE.MeshBasicMaterial({ map: winT, color: new THREE.Color(1.8, 1.5, 1.1), transparent: true, depthWrite: false, fog: false }));
+  wins.position.set(PAL[0], 7.8, PAL[2] + 6.03); wins.layers.set(NOINK); root.add(wins);
+  const torchM = glowMat("#ffb040", 2.4);
+  const torches = [-2.6, 2.6].map((dx) => { const m = new THREE.Mesh(new THREE.SphereGeometry(0.22, 10, 8), torchM); m.position.set(PAL[0] + dx, 3.4, PAL[2] + 6.6); m.layers.set(NOINK); root.add(m); return { m, g: new Glow(root, "#ff9a40", 1.8), x: PAL[0] + dx }; });
   const flag = new THREE.Mesh(new THREE.PlaneGeometry(3, 1.9), lam("flagZ", () => ({ map: flagRed(), side: THREE.DoubleSide }))); flag.position.set(PAL[0] - 9.5, 22, PAL[2]); root.add(flag);
   const bay = sea(root, 0, 196, 200, "#1fa3b8"); bay.position.y = -0.6;
   // warships
@@ -90,7 +117,10 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const gunSmoke = new Particles(root, 150, "#e6e2da", 4.0, "dot", 1.0);
   const embers = new Particles(root, 160, "#ffb050", 0.25, "soft", 2.4);
 
-  const pose = ({ t }: PoseCtx) => {
+  const pose = ({ t, light }: PoseCtx) => {
+    const nt = light === "night";
+    wins.visible = nt;
+    torches.forEach((o, k) => { o.m.visible = nt; o.g.set(o.x, 3.5, PAL[2] + 6.7, 3.4 + 0.4 * Math.sin(t * 11 + k * 2), 0.9, nt); });
     const u = shipIn(t);
     ships.forEach((g, k) => { const [x, z] = SHIPS[k]; g.position.set(x + (1 - u) * (60 + k * 20), -0.6 + 0.08 * Math.sin(t * 1.2 + k), z); g.rotation.set(0, Math.PI, 0.01 * Math.sin(t + k)); });
     const ys = yachtSink(t);
