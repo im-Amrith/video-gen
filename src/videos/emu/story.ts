@@ -70,7 +70,7 @@ export const CAMS: Record<number, Key[]> = {
   ],
   4: [
     { f: 655, s: (f) => dolly(C(DAM, [-16, 1.2, 14]), C(DAM, [0, 1.0, 0]), pushK(f, 655, 0.0025), { fov: 46 }) }, // ambush at the dam
-    { f: 745, cut: true, s: (f) => dolly(C(DAM, [-10.5, 1.6, 12.4]), C(DAM, [-12, 1.2, 10]), pushK(f, 745, 0.004, 0.009, 24), { fov: 38, roll: -0.06 }) }, // ...click.
+    { f: 745, cut: true, s: (f) => dolly(C(DAM, [-10.4, 1.9, 14.6]), C(DAM, [-12.6, 1.5, 10.8]), pushK(f, 745, 0.004, 0.009, 24), { fov: 40, roll: -0.06 }) }, // ...click.
     { f: 790, cut: true, s: (f) => dolly(C(DAM, [-6, 2.5, 16]), C(DAM, [2, 1.0, -4]), pushK(f, 790, 0.003), { fov: 46 }) }, // emus scatter
   ],
   5: [
@@ -142,7 +142,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   if (id === 8) {
     if (t < tl("L08", 3.0)) put(cam, out, { i: 103, o: MAJOR, okey: "maj" }, t, FARM[0] + 6.5, 0, 6.0, "smile", { scale: 1.15 });
     else {
-      for (let k = 0; k < 70; k++) { const x = -40 + hh(k, 1) * 60, z = -58 - hh(k, 2) * 14, y = 12 * Math.sqrt(Math.max(0, 1 - ((x + 10) / 40) ** 2 - ((z + 70) / 22) ** 2)); emuCard(out, "hill", x, z, 1.4, -1, false, false, hh(k, 3) > 0.5 ? 1 : -1, y - 0.2); }
+      for (let k = 0; k < 70; k++) { const x = -40 + hh(k, 1) * 60, z = -58 - hh(k, 2) * 14, y = 12 * Math.sqrt(Math.max(0, 1 - ((x + 10) / 40) ** 2 - ((z + 70) / 22) ** 2)); emuCard(out, "hill", x, z, 2.2, -1, false, false, hh(k, 3) > 0.5 ? 1 : -1, y - 0.3); }
     }
   }
   if (id === 9) {

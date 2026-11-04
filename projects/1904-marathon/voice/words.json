@@ -1,0 +1,1043 @@
+{
+"note": "estimated from voiced audio + character counts (Whisper blocked in the cloud)",
+"words": [
+{
+"line": "L01",
+"word": "The",
+"start": 0.32,
+"end": 0.5
+},
+{
+"line": "L01",
+"word": "man",
+"start": 0.48,
+"end": 0.66
+},
+{
+"line": "L01",
+"word": "who",
+"start": 0.64,
+"end": 0.82
+},
+{
+"line": "L01",
+"word": "crossed",
+"start": 0.8,
+"end": 1.28
+},
+{
+"line": "L01",
+"word": "the",
+"start": 1.26,
+"end": 1.44
+},
+{
+"line": "L01",
+"word": "finish",
+"start": 1.42,
+"end": 1.76
+},
+{
+"line": "L01",
+"word": "line",
+"start": 1.74,
+"end": 2.06
+},
+{
+"line": "L01",
+"word": "first",
+"start": 2.04,
+"end": 2.66
+},
+{
+"line": "L01",
+"word": "at",
+"start": 2.64,
+"end": 2.76
+},
+{
+"line": "L01",
+"word": "the",
+"start": 2.74,
+"end": 2.92
+},
+{
+"line": "L01",
+"word": "nineteen-oh-four",
+"start": 2.9,
+"end": 3.82
+},
+{
+"line": "L01",
+"word": "Olympic",
+"start": 3.8,
+"end": 4.26
+},
+{
+"line": "L01",
+"word": "marathon",
+"start": 4.24,
+"end": 5.1
+},
+{
+"line": "L01",
+"word": "had",
+"start": 5.08,
+"end": 5.3
+},
+{
+"line": "L01",
+"word": "spent",
+"start": 5.28,
+"end": 5.56
+},
+{
+"line": "L01",
+"word": "about",
+"start": 5.54,
+"end": 5.82
+},
+{
+"line": "L01",
+"word": "eleven",
+"start": 5.8,
+"end": 6.14
+},
+{
+"line": "L01",
+"word": "miles",
+"start": 6.12,
+"end": 6.4
+},
+{
+"line": "L01",
+"word": "of",
+"start": 6.38,
+"end": 6.5
+},
+{
+"line": "L01",
+"word": "it",
+"start": 6.48,
+"end": 6.82
+},
+{
+"line": "L01",
+"word": "in",
+"start": 6.8,
+"end": 6.98
+},
+{
+"line": "L01",
+"word": "a",
+"start": 6.96,
+"end": 7.02
+},
+{
+"line": "L01",
+"word": "car.",
+"start": 7.0,
+"end": 7.24
+},
+{
+"line": "L02",
+"word": "Saint",
+"start": 8.028,
+"end": 8.308
+},
+{
+"line": "L02",
+"word": "Louis,",
+"start": 8.288,
+"end": 8.708
+},
+{
+"line": "L02",
+"word": "August",
+"start": 8.688,
+"end": 9.148
+},
+{
+"line": "L02",
+"word": "nineteen-oh-four.",
+"start": 9.128,
+"end": 10.528
+},
+{
+"line": "L02",
+"word": "Over",
+"start": 10.508,
+"end": 10.808
+},
+{
+"line": "L02",
+"word": "thirty",
+"start": 10.788,
+"end": 11.128
+},
+{
+"line": "L02",
+"word": "degrees,",
+"start": 11.108,
+"end": 11.788
+},
+{
+"line": "L02",
+"word": "dusty",
+"start": 11.768,
+"end": 12.108
+},
+{
+"line": "L02",
+"word": "dirt",
+"start": 12.088,
+"end": 12.368
+},
+{
+"line": "L02",
+"word": "roads,",
+"start": 12.348,
+"end": 13.008
+},
+{
+"line": "L02",
+"word": "and",
+"start": 12.988,
+"end": 13.168
+},
+{
+"line": "L02",
+"word": "just",
+"start": 13.148,
+"end": 13.428
+},
+{
+"line": "L02",
+"word": "one",
+"start": 13.408,
+"end": 13.588
+},
+{
+"line": "L02",
+"word": "water",
+"start": 13.568,
+"end": 13.868
+},
+{
+"line": "L02",
+"word": "station",
+"start": 13.848,
+"end": 14.268
+},
+{
+"line": "L02",
+"word": "on",
+"start": 14.248,
+"end": 14.428
+},
+{
+"line": "L02",
+"word": "the",
+"start": 14.408,
+"end": 14.588
+},
+{
+"line": "L02",
+"word": "whole",
+"start": 14.568,
+"end": 14.908
+},
+{
+"line": "L02",
+"word": "course.",
+"start": 14.888,
+"end": 15.288
+},
+{
+"line": "L03",
+"word": "Fred",
+"start": 15.652,
+"end": 15.892
+},
+{
+"line": "L03",
+"word": "Lorz",
+"start": 15.872,
+"end": 16.132
+},
+{
+"line": "L03",
+"word": "drops",
+"start": 16.112,
+"end": 16.472
+},
+{
+"line": "L03",
+"word": "out",
+"start": 16.452,
+"end": 16.652
+},
+{
+"line": "L03",
+"word": "after",
+"start": 16.632,
+"end": 16.992
+},
+{
+"line": "L03",
+"word": "nine",
+"start": 16.972,
+"end": 17.212
+},
+{
+"line": "L03",
+"word": "miles,",
+"start": 17.192,
+"end": 17.552
+},
+{
+"line": "L03",
+"word": "and",
+"start": 17.532,
+"end": 17.732
+},
+{
+"line": "L03",
+"word": "hops",
+"start": 17.712,
+"end": 18.152
+},
+{
+"line": "L03",
+"word": "in",
+"start": 18.132,
+"end": 18.272
+},
+{
+"line": "L03",
+"word": "a",
+"start": 18.252,
+"end": 18.312
+},
+{
+"line": "L03",
+"word": "car.",
+"start": 18.292,
+"end": 18.592
+},
+{
+"line": "L03",
+"word": "When",
+"start": 18.572,
+"end": 18.872
+},
+{
+"line": "L03",
+"word": "it",
+"start": 18.852,
+"end": 18.992
+},
+{
+"line": "L03",
+"word": "breaks",
+"start": 18.972,
+"end": 19.832
+},
+{
+"line": "L03",
+"word": "down,",
+"start": 19.812,
+"end": 20.172
+},
+{
+"line": "L03",
+"word": "he",
+"start": 20.152,
+"end": 20.292
+},
+{
+"line": "L03",
+"word": "jogs",
+"start": 20.272,
+"end": 20.732
+},
+{
+"line": "L03",
+"word": "to",
+"start": 20.712,
+"end": 20.852
+},
+{
+"line": "L03",
+"word": "the",
+"start": 20.832,
+"end": 21.012
+},
+{
+"line": "L03",
+"word": "finish,",
+"start": 20.992,
+"end": 21.432
+},
+{
+"line": "L03",
+"word": "and",
+"start": 21.412,
+"end": 21.612
+},
+{
+"line": "L03",
+"word": "the",
+"start": 21.592,
+"end": 22.052
+},
+{
+"line": "L03",
+"word": "crowd",
+"start": 22.032,
+"end": 22.372
+},
+{
+"line": "L03",
+"word": "cheers",
+"start": 22.352,
+"end": 22.752
+},
+{
+"line": "L03",
+"word": "the",
+"start": 22.732,
+"end": 22.912
+},
+{
+"line": "L03",
+"word": "winner.",
+"start": 22.892,
+"end": 23.372
+},
+{
+"line": "L04",
+"word": "He's",
+"start": 24.067,
+"end": 24.347
+},
+{
+"line": "L04",
+"word": "caught.",
+"start": 24.327,
+"end": 24.927
+},
+{
+"line": "L04",
+"word": "He",
+"start": 24.907,
+"end": 25.027
+},
+{
+"line": "L04",
+"word": "says",
+"start": 25.007,
+"end": 25.247
+},
+{
+"line": "L04",
+"word": "it",
+"start": 25.227,
+"end": 25.367
+},
+{
+"line": "L04",
+"word": "was",
+"start": 25.347,
+"end": 25.527
+},
+{
+"line": "L04",
+"word": "a",
+"start": 25.507,
+"end": 25.587
+},
+{
+"line": "L04",
+"word": "joke.",
+"start": 25.567,
+"end": 25.867
+},
+{
+"line": "L05",
+"word": "The",
+"start": 26.783,
+"end": 26.963
+},
+{
+"line": "L05",
+"word": "real",
+"start": 26.943,
+"end": 27.183
+},
+{
+"line": "L05",
+"word": "leader,",
+"start": 27.163,
+"end": 27.663
+},
+{
+"line": "L05",
+"word": "Thomas",
+"start": 27.643,
+"end": 27.983
+},
+{
+"line": "L05",
+"word": "Hicks,",
+"start": 27.963,
+"end": 28.623
+},
+{
+"line": "L05",
+"word": "is",
+"start": 28.603,
+"end": 28.743
+},
+{
+"line": "L05",
+"word": "kept",
+"start": 28.723,
+"end": 29.103
+},
+{
+"line": "L05",
+"word": "going",
+"start": 29.083,
+"end": 29.363
+},
+{
+"line": "L05",
+"word": "by",
+"start": 29.343,
+"end": 29.463
+},
+{
+"line": "L05",
+"word": "his",
+"start": 29.443,
+"end": 29.663
+},
+{
+"line": "L05",
+"word": "trainers",
+"start": 29.643,
+"end": 30.123
+},
+{
+"line": "L05",
+"word": "with",
+"start": 30.103,
+"end": 30.403
+},
+{
+"line": "L05",
+"word": "egg",
+"start": 30.383,
+"end": 30.563
+},
+{
+"line": "L05",
+"word": "whites,",
+"start": 30.543,
+"end": 31.163
+},
+{
+"line": "L05",
+"word": "brandy,",
+"start": 31.143,
+"end": 31.523
+},
+{
+"line": "L05",
+"word": "and",
+"start": 31.503,
+"end": 31.723
+},
+{
+"line": "L05",
+"word": "strychnine.",
+"start": 31.703,
+"end": 32.903
+},
+{
+"line": "L05",
+"word": "A",
+"start": 32.883,
+"end": 32.963
+},
+{
+"line": "L05",
+"word": "terrible",
+"start": 32.943,
+"end": 33.383
+},
+{
+"line": "L05",
+"word": "nineteen-oh-four",
+"start": 33.363,
+"end": 34.303
+},
+{
+"line": "L05",
+"word": "idea.",
+"start": 34.283,
+"end": 34.563
+},
+{
+"line": "L06",
+"word": "Meanwhile,",
+"start": 35.291,
+"end": 36.011
+},
+{
+"line": "L06",
+"word": "Cuban",
+"start": 35.991,
+"end": 36.291
+},
+{
+"line": "L06",
+"word": "mail",
+"start": 36.271,
+"end": 36.511
+},
+{
+"line": "L06",
+"word": "carrier",
+"start": 36.491,
+"end": 36.931
+},
+{
+"line": "L06",
+"word": "Andarin",
+"start": 36.911,
+"end": 37.391
+},
+{
+"line": "L06",
+"word": "Carvajal",
+"start": 37.371,
+"end": 37.871
+},
+{
+"line": "L06",
+"word": "hasn't",
+"start": 37.851,
+"end": 38.511
+},
+{
+"line": "L06",
+"word": "eaten",
+"start": 38.491,
+"end": 38.951
+},
+{
+"line": "L06",
+"word": "in",
+"start": 38.931,
+"end": 39.071
+},
+{
+"line": "L06",
+"word": "about",
+"start": 39.051,
+"end": 39.471
+},
+{
+"line": "L06",
+"word": "forty",
+"start": 39.451,
+"end": 39.791
+},
+{
+"line": "L06",
+"word": "hours,",
+"start": 39.771,
+"end": 40.131
+},
+{
+"line": "L06",
+"word": "so",
+"start": 40.111,
+"end": 40.571
+},
+{
+"line": "L06",
+"word": "he",
+"start": 40.551,
+"end": 40.671
+},
+{
+"line": "L06",
+"word": "grabs",
+"start": 40.651,
+"end": 40.951
+},
+{
+"line": "L06",
+"word": "apples",
+"start": 40.931,
+"end": 41.431
+},
+{
+"line": "L06",
+"word": "from",
+"start": 41.411,
+"end": 41.671
+},
+{
+"line": "L06",
+"word": "an",
+"start": 41.651,
+"end": 41.791
+},
+{
+"line": "L06",
+"word": "orchard.",
+"start": 41.771,
+"end": 42.251
+},
+{
+"line": "L07",
+"word": "Bad",
+"start": 42.66,
+"end": 42.86
+},
+{
+"line": "L07",
+"word": "apples.",
+"start": 42.84,
+"end": 43.48
+},
+{
+"line": "L07",
+"word": "Cramps.",
+"start": 43.46,
+"end": 44.16
+},
+{
+"line": "L07",
+"word": "He",
+"start": 44.14,
+"end": 44.3
+},
+{
+"line": "L07",
+"word": "lies",
+"start": 44.28,
+"end": 44.54
+},
+{
+"line": "L07",
+"word": "down",
+"start": 44.52,
+"end": 44.8
+},
+{
+"line": "L07",
+"word": "for",
+"start": 44.78,
+"end": 44.98
+},
+{
+"line": "L07",
+"word": "a",
+"start": 44.96,
+"end": 45.04
+},
+{
+"line": "L07",
+"word": "nap.",
+"start": 45.02,
+"end": 45.3
+},
+{
+"line": "L08",
+"word": "Hicks",
+"start": 46.146,
+"end": 46.506
+},
+{
+"line": "L08",
+"word": "crosses",
+"start": 46.486,
+"end": 46.866
+},
+{
+"line": "L08",
+"word": "the",
+"start": 46.846,
+"end": 47.006
+},
+{
+"line": "L08",
+"word": "line",
+"start": 46.986,
+"end": 47.226
+},
+{
+"line": "L08",
+"word": "half",
+"start": 47.206,
+"end": 47.526
+},
+{
+"line": "L08",
+"word": "carried",
+"start": 47.506,
+"end": 47.986
+},
+{
+"line": "L08",
+"word": "and",
+"start": 47.966,
+"end": 48.146
+},
+{
+"line": "L08",
+"word": "hallucinating,",
+"start": 48.126,
+"end": 49.166
+},
+{
+"line": "L08",
+"word": "in",
+"start": 49.146,
+"end": 49.266
+},
+{
+"line": "L08",
+"word": "about",
+"start": 49.246,
+"end": 49.666
+},
+{
+"line": "L08",
+"word": "three",
+"start": 49.646,
+"end": 49.906
+},
+{
+"line": "L08",
+"word": "and",
+"start": 49.886,
+"end": 50.106
+},
+{
+"line": "L08",
+"word": "a",
+"start": 50.086,
+"end": 50.166
+},
+{
+"line": "L08",
+"word": "half",
+"start": 50.146,
+"end": 50.366
+},
+{
+"line": "L08",
+"word": "hours.",
+"start": 50.346,
+"end": 51.026
+},
+{
+"line": "L08",
+"word": "Only",
+"start": 51.006,
+"end": 51.326
+},
+{
+"line": "L08",
+"word": "fourteen",
+"start": 51.306,
+"end": 51.746
+},
+{
+"line": "L08",
+"word": "runners",
+"start": 51.726,
+"end": 52.106
+},
+{
+"line": "L08",
+"word": "finish.",
+"start": 52.086,
+"end": 52.546
+},
+{
+"line": "L09",
+"word": "Carvajal,",
+"start": 53.232,
+"end": 53.772
+},
+{
+"line": "L09",
+"word": "after",
+"start": 53.752,
+"end": 54.212
+},
+{
+"line": "L09",
+"word": "his",
+"start": 54.192,
+"end": 54.372
+},
+{
+"line": "L09",
+"word": "nap,",
+"start": 54.352,
+"end": 54.612
+},
+{
+"line": "L09",
+"word": "still",
+"start": 54.592,
+"end": 55.152
+},
+{
+"line": "L09",
+"word": "comes",
+"start": 55.132,
+"end": 55.432
+},
+{
+"line": "L09",
+"word": "fourth.",
+"start": 55.412,
+"end": 55.872
+},
+{
+"line": "L10",
+"word": "Luckily,",
+"start": 56.699,
+"end": 57.179
+},
+{
+"line": "L10",
+"word": "Hicks",
+"start": 57.159,
+"end": 57.579
+},
+{
+"line": "L10",
+"word": "got",
+"start": 57.559,
+"end": 57.739
+},
+{
+"line": "L10",
+"word": "his",
+"start": 57.719,
+"end": 57.939
+},
+{
+"line": "L10",
+"word": "gold.",
+"start": 57.919,
+"end": 58.539
+},
+{
+"line": "L10",
+"word": "Unluckily,",
+"start": 58.519,
+"end": 59.359
+},
+{
+"line": "L10",
+"word": "the",
+"start": 59.339,
+"end": 59.539
+},
+{
+"line": "L10",
+"word": "man",
+"start": 59.519,
+"end": 59.719
+},
+{
+"line": "L10",
+"word": "who",
+"start": 59.699,
+"end": 59.879
+},
+{
+"line": "L10",
+"word": "took",
+"start": 59.859,
+"end": 60.179
+},
+{
+"line": "L10",
+"word": "a",
+"start": 60.159,
+"end": 60.239
+},
+{
+"line": "L10",
+"word": "car",
+"start": 60.219,
+"end": 60.399
+},
+{
+"line": "L10",
+"word": "won",
+"start": 60.379,
+"end": 60.579
+},
+{
+"line": "L10",
+"word": "the",
+"start": 60.559,
+"end": 60.759
+},
+{
+"line": "L10",
+"word": "Boston",
+"start": 60.739,
+"end": 61.139
+},
+{
+"line": "L10",
+"word": "Marathon",
+"start": 61.119,
+"end": 61.599
+},
+{
+"line": "L10",
+"word": "the",
+"start": 61.579,
+"end": 61.779
+},
+{
+"line": "L10",
+"word": "next",
+"start": 61.759,
+"end": 62.059
+},
+{
+"line": "L10",
+"word": "year.",
+"start": 62.039,
+"end": 62.779
+},
+{
+"line": "L10",
+"word": "On",
+"start": 62.759,
+"end": 62.899
+},
+{
+"line": "L10",
+"word": "foot.",
+"start": 62.879,
+"end": 63.259
+}
+]
+}

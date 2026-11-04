@@ -1,5 +1,5 @@
 ---
-status: todo
+status: review
 series: history
 episode: 3
 slug: emu-war

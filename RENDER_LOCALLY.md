@@ -33,6 +33,7 @@ Optional QA: `python scripts/short_qa.py deliveries/<series>/<NN>_<slug>.mp4 out
 | what-if | 05 | moon-disappears | WhatIf05Moon | yes (`projects/moon-disappears/audio/mix.wav`, 55.23 s) | no |
 | history | 01 | shortest-war | History01ShortestWar | yes (`projects/shortest-war/audio/mix.wav`, 62.13 s) | no |
 | history | 02 | leaning-tower | History02LeaningTower | yes (`projects/leaning-tower/audio/mix.wav`, 63.07 s) | no |
+| history | 03 | emu-war | History03EmuWar | yes (`projects/emu-war/audio/mix.wav`, 60.73 s) | no |
 
 ### Exact commands per short
 
@@ -77,4 +78,10 @@ ffmpeg -y -i out/zanzibar/video.mp4 -i projects/shortest-war/audio/mix.wav -map 
 ```powershell
 npx remotion render src/index.ts History02LeaningTower out/pisa/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
 ffmpeg -y -i out/pisa/video.mp4 -i projects/leaning-tower/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/02_leaning-tower.mp4
+```
+
+**history 03 — emu-war** (1822 frames, 60.73 s)
+```powershell
+npx remotion render src/index.ts History03EmuWar out/emu/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+ffmpeg -y -i out/emu/video.mp4 -i projects/emu-war/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/03_emu-war.mp4
 ```

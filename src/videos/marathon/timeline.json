@@ -1,0 +1,57 @@
+{
+ "fps": 30,
+ "total": 1966,
+ "dur": 65.533,
+ "lines": {
+  "L01": {
+   "t0": 0.3,
+   "t1": 7.358,
+   "text": "The man who crossed the finish line first at the nineteen-oh-four Olympic marathon had spent about eleven miles of it in a car."
+  },
+  "L02": {
+   "t0": 8.008,
+   "t1": 15.362,
+   "text": "Saint Louis, August nineteen-oh-four. Over thirty degrees, dusty dirt roads, and just one water station on the whole course."
+  },
+  "L03": {
+   "t0": 15.612,
+   "t1": 23.497,
+   "text": "Fred Lorz drops out after nine miles, and hops in a car. When it breaks down, he jogs to the finish, and the crowd cheers the winner."
+  },
+  "L04": {
+   "t0": 24.047,
+   "t1": 26.063,
+   "text": "He's caught. He says it was a joke."
+  },
+  "L05": {
+   "t0": 26.763,
+   "t1": 34.671,
+   "text": "The real leader, Thomas Hicks, is kept going by his trainers with egg whites, brandy, and strychnine. A terrible nineteen-oh-four idea."
+  },
+  "L06": {
+   "t0": 35.271,
+   "t1": 42.39,
+   "text": "Meanwhile, Cuban mail carrier Andarin Carvajal hasn't eaten in about forty hours, so he grabs apples from an orchard."
+  },
+  "L07": {
+   "t0": 42.64,
+   "t1": 45.476,
+   "text": "Bad apples. Cramps. He lies down for a nap."
+  },
+  "L08": {
+   "t0": 46.126,
+   "t1": 52.642,
+   "text": "Hicks crosses the line half carried and hallucinating, in about three and a half hours. Only fourteen runners finish."
+  },
+  "L09": {
+   "t0": 53.192,
+   "t1": 55.979,
+   "text": "Carvajal, after his nap, still comes fourth."
+  },
+  "L10": {
+   "t0": 56.679,
+   "t1": 63.34,
+   "text": "Luckily, Hicks got his gold. Unluckily, the man who took a car won the Boston Marathon the next year. On foot."
+  }
+ }
+}
