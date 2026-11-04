@@ -272,3 +272,12 @@ action, vehicle/prop or setting (Cleopatra racing a car → flying a jet over th
 clips you generate (`gemini-clips/<slug>/`) into `deliveries/reels/`.
 
 **When:** at the approval gate after every What If / History video, or any time you ask.
+
+---
+
+## 13. MeiGen (remote MCP, `.mcp.json`)
+
+**What it is:** an AI image/video service with a public prompt gallery, reached over remote MCP with OAuth sign-in
+(`https://www.meigen.ai/api/mcp`, Streamable HTTP). **Here it's only for research:** `search_gallery` and
+`get_inspiration` for prompt patterns, and `list_skills` / `list_models` for capabilities and prices. These are free.
+Generating, uploading or anything else that costs credits needs your explicit OK in chat each time.

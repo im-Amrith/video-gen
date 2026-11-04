@@ -71,6 +71,11 @@ Write the **shot list** at the top of the pack: `#, start-end s, what we see, ca
 shots into the 10 s windows. Make one 2 fps sheet per window to check the grouping:
 `ffmpeg -v error -ss <start> -t 10 -i "$R" -vf "fps=2,scale=180:-2,tile=5x4" -frames:v 1 "$W/win<k>.jpg"`
 
+**Optional, if MeiGen tools are available:** run 1-3 `search_gallery` queries for the reel's concept
+(e.g. "pharaoh sports car neon city") and `get_inspiration` on the best hits. Borrow *prompt structure and wording
+patterns* (lighting terms, camera language), not whole prompts. These calls are free; never call MeiGen's generate
+or upload tools (CLAUDE.md, "MeiGen").
+
 ## Step 2: Series notes
 
 Create or update `gemini-refs/<series>/SERIES_NOTES.md` (≤ 50 lines): the concept in one line, the look (palette,

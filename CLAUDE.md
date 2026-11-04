@@ -64,6 +64,20 @@ The owner downloads Shorts they want our videos to look like into `Shorts/` (by 
 6. Use the references for **look and craft only**: our stories, characters, scripts and voice stay our own (hard rule 3).
    Commit and push.
 
+## MeiGen (prompt research only)
+
+`.mcp.json` declares the MeiGen remote MCP server (`https://www.meigen.ai/api/mcp`, HTTP + OAuth). The owner signs in
+and approves its permissions in their own browser. Never approve consent for them, never ask for API keys, and never
+put credentials in the repo or the chat.
+
+- **Allowed (free):** `list_skills`, `list_models`, `search_gallery`, `get_inspiration`. Use them to find strong
+  prompt patterns for the Gemini remix packs and to get visual ideas for our shorts. `search_gallery` uses the
+  account's daily search allowance, so keep it to a few searches per pack.
+- **Not allowed without the owner's explicit OK in chat for that specific call:** anything that generates, uploads or
+  spends credits (`generate_*`, `render_video_draft`, `upload_*`, `remove_background`, `upscale_image`, and so on).
+- If the MeiGen tools aren't in your tool list (not signed in, or sign-in isn't possible in this session), skip them
+  and carry on. Don't stall on it.
+
 ## Rendering speed: measured, read this before choosing a style
 
 The cloud container has **no GPU**. Measured on 2026-11-04 (2-core cloud container, software GL): the 3D bridge
