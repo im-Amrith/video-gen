@@ -30,6 +30,8 @@ Optional QA: `python scripts/short_qa.py deliveries/<series>/<NN>_<slug>.mp4 out
 | what-if | 02 | earth-stops-spinning | WhatIf02Spin | yes (`projects/earth-stops-spinning/audio/mix.wav`, 61.77 s) | no |
 | what-if | 03 | all-ice-melts | WhatIf03Ice | yes (`projects/all-ice-melts/audio/mix.wav`, 55.43 s) | no |
 | what-if | 04 | sun-vanishes | WhatIf04Sun | yes (`projects/sun-vanishes/audio/mix.wav`, 58.43 s) | no |
+| what-if | 05 | moon-disappears | WhatIf05Moon | yes (`projects/moon-disappears/audio/mix.wav`, 55.23 s) | no |
+| history | 01 | shortest-war | History01ShortestWar | yes (`projects/shortest-war/audio/mix.wav`, 62.13 s) | no |
 
 ### Exact commands per short
 
@@ -56,4 +58,16 @@ ffmpeg -y -i out/ice/video.mp4 -i projects/all-ice-melts/audio/mix.wav -map 0:v:
 ```powershell
 npx remotion render src/index.ts WhatIf04Sun out/sun/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
 ffmpeg -y -i out/sun/video.mp4 -i projects/sun-vanishes/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/what-if/04_sun-vanishes.mp4
+```
+
+**what-if 05 — moon-disappears** (1657 frames, 55.23 s)
+```powershell
+npx remotion render src/index.ts WhatIf05Moon out/moon/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+ffmpeg -y -i out/moon/video.mp4 -i projects/moon-disappears/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/what-if/05_moon-disappears.mp4
+```
+
+**history 01 — shortest-war** (1864 frames, 62.13 s)
+```powershell
+npx remotion render src/index.ts History01ShortestWar out/zanzibar/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+ffmpeg -y -i out/zanzibar/video.mp4 -i projects/shortest-war/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/01_shortest-war.mp4
 ```

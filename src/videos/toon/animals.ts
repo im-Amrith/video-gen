@@ -71,3 +71,31 @@ export const crab = (p: Pen, sad = false, k = 0) => {
   for (const s of [-1, 1]) { p.stroke([[200 + s * 30, 140], [200 + s * 36, 95]], 7); p.ell(200 + s * 36, 88, 16, 16, "#ffffff", 6); p.dot(200 + s * 36, sad ? 94 : 88, 7); }
   if (sad) p.arc(200, 235, 30, 14, 200, 340, 7); else p.arc(200, 215, 30, 16, 20, 160, 7);
 };
+/** sleeping cat curled up (400 x 260) */
+export const cat = (p: Pen, col = "#e8964a", zz = 0) => {
+  p.ell(200, 170, 150, 75, col, 10);
+  p.poly([[60, 170], [20, 120], [40, 200]], col, 9);
+  p.ell(300, 140, 62, 52, col, 10);
+  p.poly([[262, 105], [270, 60], [295, 98]], col, 8); p.poly([[318, 98], [340, 60], [348, 108]], col, 8);
+  p.arc(285, 145, 12, 6, 20, 160, 5); p.arc(320, 145, 12, 6, 20, 160, 5);
+  for (let i = 0; i < 3; i++) p.stroke([[120 + i * 40, 120], [130 + i * 40, 150]], 6, "#b8682a");
+  if (zz > 0) p.stroke([[350, 60 - zz * 20], [380, 60 - zz * 20], [350, 90 - zz * 20], [380, 90 - zz * 20]], 6);
+};
+/** seagull (400 x 260), side view; slip = 0..1 tilting */
+export const gull = (p: Pen, slip = 0) => {
+  p.g.save(); p.g.translate(200, 200); p.g.rotate(-slip * 0.6); p.g.translate(-200, -200);
+  p.ell(200, 160, 110, 60, "#ffffff", 10);
+  p.poly([[180, 140], [60, 60 + slip * 60], [230, 130]], "#d9dde6", 9);
+  p.ell(300, 120, 40, 36, "#ffffff", 9);
+  p.poly([[335, 118], [385, 128], [335, 135]], "#f2c230", 7);
+  p.dot(310, 112, 7);
+  p.stroke([[190, 215], [185, 250]], 6, "#f2a03a"); p.stroke([[225, 215], [230, 250]], 6, "#f2a03a");
+  p.g.restore();
+};
+/** spirit level (400 x 120) with the bubble at u (0 = centre, ±1 = ends) */
+export const levelCard = (p: Pen, u: number) => {
+  p.poly([[10, 20], [390, 20], [390, 100], [10, 100]], "#f2c230", 10);
+  p.poly([[140, 40], [260, 40], [260, 80], [140, 80]], "#bff0a8", 8);
+  p.stroke([[185, 40], [185, 80]], 4); p.stroke([[215, 40], [215, 80]], 4);
+  p.ell(200 + 50 * Math.max(-1.6, Math.min(1.6, u)), 60, 16, 12, "#ffffff", 5);
+};

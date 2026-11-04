@@ -1,0 +1,869 @@
+{
+"note": "estimated from voiced audio + character counts (Whisper blocked in the cloud)",
+"words": [
+{
+"line": "L01",
+"word": "The",
+"start": 0.32,
+"end": 0.5
+},
+{
+"line": "L01",
+"word": "shortest",
+"start": 0.48,
+"end": 0.98
+},
+{
+"line": "L01",
+"word": "war",
+"start": 0.96,
+"end": 1.14
+},
+{
+"line": "L01",
+"word": "in",
+"start": 1.12,
+"end": 1.24
+},
+{
+"line": "L01",
+"word": "history",
+"start": 1.22,
+"end": 1.64
+},
+{
+"line": "L01",
+"word": "lasted",
+"start": 1.62,
+"end": 2.22
+},
+{
+"line": "L01",
+"word": "about",
+"start": 2.2,
+"end": 2.48
+},
+{
+"line": "L01",
+"word": "thirty-eight",
+"start": 2.46,
+"end": 3.34
+},
+{
+"line": "L01",
+"word": "minutes.",
+"start": 3.32,
+"end": 4.14
+},
+{
+"line": "L01",
+"word": "You've",
+"start": 4.12,
+"end": 4.44
+},
+{
+"line": "L01",
+"word": "had",
+"start": 4.42,
+"end": 4.6
+},
+{
+"line": "L01",
+"word": "longer",
+"start": 4.58,
+"end": 5.02
+},
+{
+"line": "L01",
+"word": "phone",
+"start": 5.0,
+"end": 5.28
+},
+{
+"line": "L01",
+"word": "calls.",
+"start": 5.26,
+"end": 5.58
+},
+{
+"line": "L02",
+"word": "Zanzibar,",
+"start": 6.367,
+"end": 6.907
+},
+{
+"line": "L02",
+"word": "August",
+"start": 6.887,
+"end": 7.427
+},
+{
+"line": "L02",
+"word": "eighteen",
+"start": 7.407,
+"end": 8.027
+},
+{
+"line": "L02",
+"word": "ninety-six.",
+"start": 8.007,
+"end": 8.647
+},
+{
+"line": "L02",
+"word": "The",
+"start": 8.627,
+"end": 9.367
+},
+{
+"line": "L02",
+"word": "sultan",
+"start": 9.347,
+"end": 9.727
+},
+{
+"line": "L02",
+"word": "dies,",
+"start": 9.707,
+"end": 10.007
+},
+{
+"line": "L02",
+"word": "and",
+"start": 9.987,
+"end": 10.187
+},
+{
+"line": "L02",
+"word": "his",
+"start": 10.167,
+"end": 10.667
+},
+{
+"line": "L02",
+"word": "cousin",
+"start": 10.647,
+"end": 11.067
+},
+{
+"line": "L02",
+"word": "Khalid",
+"start": 11.047,
+"end": 11.427
+},
+{
+"line": "L02",
+"word": "moves",
+"start": 11.407,
+"end": 11.707
+},
+{
+"line": "L02",
+"word": "into",
+"start": 11.687,
+"end": 11.947
+},
+{
+"line": "L02",
+"word": "the",
+"start": 11.927,
+"end": 12.107
+},
+{
+"line": "L02",
+"word": "palace",
+"start": 12.087,
+"end": 12.507
+},
+{
+"line": "L02",
+"word": "without",
+"start": 12.487,
+"end": 13.207
+},
+{
+"line": "L02",
+"word": "asking",
+"start": 13.187,
+"end": 13.607
+},
+{
+"line": "L02",
+"word": "Britain",
+"start": 13.587,
+"end": 14.047
+},
+{
+"line": "L02",
+"word": "first.",
+"start": 14.027,
+"end": 14.447
+},
+{
+"line": "L03",
+"word": "Britain",
+"start": 14.87,
+"end": 15.29
+},
+{
+"line": "L03",
+"word": "disagrees.",
+"start": 15.27,
+"end": 15.85
+},
+{
+"line": "L03",
+"word": "It",
+"start": 15.83,
+"end": 16.29
+},
+{
+"line": "L03",
+"word": "parks",
+"start": 16.27,
+"end": 16.63
+},
+{
+"line": "L03",
+"word": "warships",
+"start": 16.61,
+"end": 17.13
+},
+{
+"line": "L03",
+"word": "in",
+"start": 17.11,
+"end": 17.25
+},
+{
+"line": "L03",
+"word": "the",
+"start": 17.23,
+"end": 17.43
+},
+{
+"line": "L03",
+"word": "harbour,",
+"start": 17.41,
+"end": 18.07
+},
+{
+"line": "L03",
+"word": "and",
+"start": 18.05,
+"end": 18.25
+},
+{
+"line": "L03",
+"word": "sends",
+"start": 18.23,
+"end": 18.53
+},
+{
+"line": "L03",
+"word": "a",
+"start": 18.51,
+"end": 18.59
+},
+{
+"line": "L03",
+"word": "note:",
+"start": 18.57,
+"end": 19.27
+},
+{
+"line": "L03",
+"word": "leave",
+"start": 19.25,
+"end": 19.55
+},
+{
+"line": "L03",
+"word": "by",
+"start": 19.53,
+"end": 19.71
+},
+{
+"line": "L03",
+"word": "nine",
+"start": 19.69,
+"end": 19.93
+},
+{
+"line": "L03",
+"word": "o'clock",
+"start": 19.91,
+"end": 20.37
+},
+{
+"line": "L03",
+"word": "tomorrow",
+"start": 20.35,
+"end": 20.91
+},
+{
+"line": "L03",
+"word": "morning.",
+"start": 20.89,
+"end": 21.37
+},
+{
+"line": "L04",
+"word": "Khalid",
+"start": 22.055,
+"end": 22.435
+},
+{
+"line": "L04",
+"word": "barricades",
+"start": 22.415,
+"end": 23.015
+},
+{
+"line": "L04",
+"word": "the",
+"start": 22.995,
+"end": 23.235
+},
+{
+"line": "L04",
+"word": "palace,",
+"start": 23.215,
+"end": 23.875
+},
+{
+"line": "L04",
+"word": "and",
+"start": 23.855,
+"end": 24.035
+},
+{
+"line": "L04",
+"word": "waits.",
+"start": 24.015,
+"end": 24.455
+},
+{
+"line": "L05",
+"word": "Nine",
+"start": 25.225,
+"end": 25.505
+},
+{
+"line": "L05",
+"word": "o'clock",
+"start": 25.485,
+"end": 26.005
+},
+{
+"line": "L05",
+"word": "arrives.",
+"start": 25.985,
+"end": 26.525
+},
+{
+"line": "L05",
+"word": "The",
+"start": 26.505,
+"end": 26.945
+},
+{
+"line": "L05",
+"word": "ships",
+"start": 26.925,
+"end": 27.305
+},
+{
+"line": "L05",
+"word": "open",
+"start": 27.285,
+"end": 27.625
+},
+{
+"line": "L05",
+"word": "fire.",
+"start": 27.605,
+"end": 27.945
+},
+{
+"line": "L06",
+"word": "The",
+"start": 28.615,
+"end": 28.835
+},
+{
+"line": "L06",
+"word": "palace",
+"start": 28.815,
+"end": 29.255
+},
+{
+"line": "L06",
+"word": "catches",
+"start": 29.235,
+"end": 29.775
+},
+{
+"line": "L06",
+"word": "fire.",
+"start": 29.755,
+"end": 30.515
+},
+{
+"line": "L06",
+"word": "And",
+"start": 30.495,
+"end": 30.695
+},
+{
+"line": "L06",
+"word": "the",
+"start": 30.675,
+"end": 30.895
+},
+{
+"line": "L06",
+"word": "sultan's",
+"start": 30.875,
+"end": 31.375
+},
+{
+"line": "L06",
+"word": "entire",
+"start": 31.355,
+"end": 31.735
+},
+{
+"line": "L06",
+"word": "navy,",
+"start": 31.715,
+"end": 32.035
+},
+{
+"line": "L06",
+"word": "one",
+"start": 32.015,
+"end": 32.455
+},
+{
+"line": "L06",
+"word": "royal",
+"start": 32.435,
+"end": 32.755
+},
+{
+"line": "L06",
+"word": "yacht,",
+"start": 32.735,
+"end": 33.135
+},
+{
+"line": "L06",
+"word": "sinks",
+"start": 33.115,
+"end": 33.675
+},
+{
+"line": "L06",
+"word": "in",
+"start": 33.655,
+"end": 33.795
+},
+{
+"line": "L06",
+"word": "the",
+"start": 33.775,
+"end": 33.975
+},
+{
+"line": "L06",
+"word": "harbour.",
+"start": 33.955,
+"end": 34.455
+},
+{
+"line": "L07",
+"word": "Khalid?",
+"start": 34.847,
+"end": 35.267
+},
+{
+"line": "L07",
+"word": "He",
+"start": 35.247,
+"end": 35.487
+},
+{
+"line": "L07",
+"word": "slips",
+"start": 35.467,
+"end": 35.767
+},
+{
+"line": "L07",
+"word": "out",
+"start": 35.747,
+"end": 35.947
+},
+{
+"line": "L07",
+"word": "the",
+"start": 35.927,
+"end": 36.107
+},
+{
+"line": "L07",
+"word": "back,",
+"start": 36.087,
+"end": 36.767
+},
+{
+"line": "L07",
+"word": "and",
+"start": 36.747,
+"end": 36.947
+},
+{
+"line": "L07",
+"word": "hides",
+"start": 36.927,
+"end": 37.267
+},
+{
+"line": "L07",
+"word": "in",
+"start": 37.247,
+"end": 37.387
+},
+{
+"line": "L07",
+"word": "the",
+"start": 37.367,
+"end": 37.547
+},
+{
+"line": "L07",
+"word": "German",
+"start": 37.527,
+"end": 37.887
+},
+{
+"line": "L07",
+"word": "consulate.",
+"start": 37.867,
+"end": 38.487
+},
+{
+"line": "L08",
+"word": "By",
+"start": 39.148,
+"end": 39.308
+},
+{
+"line": "L08",
+"word": "about",
+"start": 39.288,
+"end": 39.688
+},
+{
+"line": "L08",
+"word": "nine",
+"start": 39.668,
+"end": 40.028
+},
+{
+"line": "L08",
+"word": "forty,",
+"start": 40.008,
+"end": 40.648
+},
+{
+"line": "L08",
+"word": "the",
+"start": 40.628,
+"end": 40.848
+},
+{
+"line": "L08",
+"word": "guns",
+"start": 40.828,
+"end": 41.108
+},
+{
+"line": "L08",
+"word": "stop.",
+"start": 41.088,
+"end": 41.928
+},
+{
+"line": "L08",
+"word": "A",
+"start": 41.908,
+"end": 41.988
+},
+{
+"line": "L08",
+"word": "new",
+"start": 41.968,
+"end": 42.188
+},
+{
+"line": "L08",
+"word": "sultan",
+"start": 42.168,
+"end": 42.588
+},
+{
+"line": "L08",
+"word": "is",
+"start": 42.568,
+"end": 42.708
+},
+{
+"line": "L08",
+"word": "in",
+"start": 42.688,
+"end": 42.848
+},
+{
+"line": "L08",
+"word": "charge",
+"start": 42.828,
+"end": 43.248
+},
+{
+"line": "L08",
+"word": "before",
+"start": 43.228,
+"end": 43.768
+},
+{
+"line": "L08",
+"word": "lunch.",
+"start": 43.748,
+"end": 44.208
+},
+{
+"line": "L09",
+"word": "Short,",
+"start": 45.19,
+"end": 45.59
+},
+{
+"line": "L09",
+"word": "but",
+"start": 45.57,
+"end": 45.75
+},
+{
+"line": "L09",
+"word": "not",
+"start": 45.73,
+"end": 45.89
+},
+{
+"line": "L09",
+"word": "painless.",
+"start": 45.87,
+"end": 46.49
+},
+{
+"line": "L09",
+"word": "Hundreds",
+"start": 46.47,
+"end": 47.23
+},
+{
+"line": "L09",
+"word": "were",
+"start": 47.21,
+"end": 47.43
+},
+{
+"line": "L09",
+"word": "hurt",
+"start": 47.41,
+"end": 47.69
+},
+{
+"line": "L09",
+"word": "in",
+"start": 47.67,
+"end": 47.79
+},
+{
+"line": "L09",
+"word": "the",
+"start": 47.77,
+"end": 47.99
+},
+{
+"line": "L09",
+"word": "palace.",
+"start": 47.97,
+"end": 48.35
+},
+{
+"line": "L10",
+"word": "Luckily,",
+"start": 49.304,
+"end": 49.804
+},
+{
+"line": "L10",
+"word": "it",
+"start": 49.784,
+"end": 49.984
+},
+{
+"line": "L10",
+"word": "was",
+"start": 49.964,
+"end": 50.144
+},
+{
+"line": "L10",
+"word": "over",
+"start": 50.124,
+"end": 50.384
+},
+{
+"line": "L10",
+"word": "before",
+"start": 50.364,
+"end": 50.744
+},
+{
+"line": "L10",
+"word": "breakfast",
+"start": 50.724,
+"end": 51.484
+},
+{
+"line": "L10",
+"word": "went",
+"start": 51.464,
+"end": 51.824
+},
+{
+"line": "L10",
+"word": "cold.",
+"start": 51.804,
+"end": 52.604
+},
+{
+"line": "L10",
+"word": "Unluckily,",
+"start": 52.584,
+"end": 53.184
+},
+{
+"line": "L10",
+"word": "the",
+"start": 53.164,
+"end": 53.664
+},
+{
+"line": "L10",
+"word": "losing",
+"start": 53.644,
+"end": 54.004
+},
+{
+"line": "L10",
+"word": "side",
+"start": 53.984,
+"end": 54.244
+},
+{
+"line": "L10",
+"word": "was",
+"start": 54.224,
+"end": 54.404
+},
+{
+"line": "L10",
+"word": "sent",
+"start": 54.384,
+"end": 54.644
+},
+{
+"line": "L10",
+"word": "the",
+"start": 54.624,
+"end": 54.804
+},
+{
+"line": "L10",
+"word": "bill",
+"start": 54.784,
+"end": 55.044
+},
+{
+"line": "L10",
+"word": "for",
+"start": 55.024,
+"end": 55.204
+},
+{
+"line": "L10",
+"word": "the",
+"start": 55.184,
+"end": 55.384
+},
+{
+"line": "L10",
+"word": "shells.",
+"start": 55.364,
+"end": 55.784
+},
+{
+"line": "L11",
+"word": "Thirty-eight",
+"start": 56.5,
+"end": 57.2
+},
+{
+"line": "L11",
+"word": "minutes.",
+"start": 57.18,
+"end": 57.94
+},
+{
+"line": "L11",
+"word": "Still",
+"start": 57.92,
+"end": 58.2
+},
+{
+"line": "L11",
+"word": "the",
+"start": 58.18,
+"end": 58.36
+},
+{
+"line": "L11",
+"word": "shortest",
+"start": 58.34,
+"end": 58.86
+},
+{
+"line": "L11",
+"word": "war",
+"start": 58.84,
+"end": 59.12
+},
+{
+"line": "L11",
+"word": "ever",
+"start": 59.1,
+"end": 59.32
+},
+{
+"line": "L11",
+"word": "recorded.",
+"start": 59.3,
+"end": 59.82
+}
+]
+}

@@ -1,5 +1,5 @@
 ---
-status: todo
+status: review
 series: history
 episode: 1
 slug: shortest-war

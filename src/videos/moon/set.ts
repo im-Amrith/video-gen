@@ -29,10 +29,10 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     else { const g = new THREE.ConeGeometry(0.35, 1.2 + hh(i, 4), 7, 1, true); g.translate(0, 0.6, 0); b.add(g, m, new THREE.Matrix4().makeTranslation(x, 0, z)); }
   }
   b.build(root);
-  const bsea = sea(root, 0, 140, 200, "#2a7fb8");
+  const bsea = sea(root, 0, 214, 200, "#2a7fb8");
   const pools = [0, 1, 2, 3].map((k) => { const m = new THREE.Mesh(new THREE.CircleGeometry(1, 24).rotateX(-Math.PI / 2), lam("poolW", () => ({ color: "#4aa8d8" }))); m.position.set(-3 + k * 2.6, 0.03, 6 + (k % 2) * 1.8); root.add(m); return m; });
   // the Moon in the beach sky
-  const skyMoon = new THREE.Mesh(new THREE.SphereGeometry(16, 40, 24), glowMat("#f6f0d6", 1.4)); skyMoon.position.set(-30, 150, -380); skyMoon.layers.set(NOINK); root.add(skyMoon);
+  const skyMoon = new THREE.Mesh(new THREE.SphereGeometry(16, 40, 24), glowMat("#f6f0d6", 1.4)); skyMoon.position.set(40, 140, 420); skyMoon.layers.set(NOINK); root.add(skyMoon);
   const skyHalo = new Glow(root, "#dfe8ff", 1.0);
   // SPACE
   const G = globe(root, GR); G.mesh.position.set(...SPACE);
@@ -54,7 +54,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     pools.forEach((m, k) => { const s = poolAt(id, t) * (0.7 + 0.2 * k); m.visible = beach && s > 0.02; m.scale.setScalar(Math.max(0.02, s)); });
     const mo = moonOn(t);
     skyMoon.visible = (id === 1 || id === 9) && mo > 0.01; skyMoon.scale.setScalar(Math.max(0.01, mo));
-    skyHalo.set(-30, 150, -380, 120 * mo, 0.5 * mo, id === 1 || id === 9);
+    skyHalo.set(40, 140, 420, 120 * mo, 0.5 * mo, id === 1 || id === 9);
     G.mesh.visible = tide.visible = axis.visible = sp; axis.visible = id === 6 || id === 7;
     G.U.uSpin.value = t * 0.8; G.U.uSun.value.set(0.8, 0.3, 0.5).normalize();
     const ma = 0.3 + t * 0.15; moon.visible = sp && mo > 0.01; moon.scale.setScalar(Math.max(0.01, mo));

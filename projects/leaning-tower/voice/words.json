@@ -1,0 +1,1049 @@
+{
+"note": "estimated from voiced audio + character counts (Whisper blocked in the cloud)",
+"words": [
+{
+"line": "L01",
+"word": "The",
+"start": 0.32,
+"end": 0.5
+},
+{
+"line": "L01",
+"word": "Leaning",
+"start": 0.48,
+"end": 0.9
+},
+{
+"line": "L01",
+"word": "Tower",
+"start": 0.88,
+"end": 1.28
+},
+{
+"line": "L01",
+"word": "of",
+"start": 1.26,
+"end": 1.4
+},
+{
+"line": "L01",
+"word": "Pisa",
+"start": 1.38,
+"end": 1.62
+},
+{
+"line": "L01",
+"word": "started",
+"start": 1.6,
+"end": 2.06
+},
+{
+"line": "L01",
+"word": "tipping",
+"start": 2.04,
+"end": 2.5
+},
+{
+"line": "L01",
+"word": "over",
+"start": 2.48,
+"end": 2.74
+},
+{
+"line": "L01",
+"word": "when",
+"start": 2.72,
+"end": 3.3
+},
+{
+"line": "L01",
+"word": "it",
+"start": 3.28,
+"end": 3.4
+},
+{
+"line": "L01",
+"word": "was",
+"start": 3.38,
+"end": 3.6
+},
+{
+"line": "L01",
+"word": "only",
+"start": 3.58,
+"end": 3.84
+},
+{
+"line": "L01",
+"word": "two",
+"start": 3.82,
+"end": 4.0
+},
+{
+"line": "L01",
+"word": "or",
+"start": 3.98,
+"end": 4.12
+},
+{
+"line": "L01",
+"word": "three",
+"start": 4.1,
+"end": 4.42
+},
+{
+"line": "L01",
+"word": "floors",
+"start": 4.4,
+"end": 4.82
+},
+{
+"line": "L01",
+"word": "tall.",
+"start": 4.8,
+"end": 5.16
+},
+{
+"line": "L02",
+"word": "Pisa,",
+"start": 5.952,
+"end": 6.272
+},
+{
+"line": "L02",
+"word": "eleven",
+"start": 6.252,
+"end": 6.692
+},
+{
+"line": "L02",
+"word": "seventy-three.",
+"start": 6.672,
+"end": 7.972
+},
+{
+"line": "L02",
+"word": "A",
+"start": 7.952,
+"end": 8.032
+},
+{
+"line": "L02",
+"word": "heavy",
+"start": 8.012,
+"end": 8.332
+},
+{
+"line": "L02",
+"word": "marble",
+"start": 8.312,
+"end": 8.692
+},
+{
+"line": "L02",
+"word": "bell",
+"start": 8.672,
+"end": 8.912
+},
+{
+"line": "L02",
+"word": "tower,",
+"start": 8.892,
+"end": 9.292
+},
+{
+"line": "L02",
+"word": "on",
+"start": 9.272,
+"end": 9.692
+},
+{
+"line": "L02",
+"word": "soft",
+"start": 9.672,
+"end": 9.932
+},
+{
+"line": "L02",
+"word": "clay",
+"start": 9.912,
+"end": 10.272
+},
+{
+"line": "L02",
+"word": "and",
+"start": 10.252,
+"end": 10.452
+},
+{
+"line": "L02",
+"word": "sand,",
+"start": 10.432,
+"end": 10.752
+},
+{
+"line": "L02",
+"word": "with",
+"start": 10.732,
+"end": 10.972
+},
+{
+"line": "L02",
+"word": "a",
+"start": 10.952,
+"end": 11.032
+},
+{
+"line": "L02",
+"word": "foundation",
+"start": 11.012,
+"end": 11.972
+},
+{
+"line": "L02",
+"word": "only",
+"start": 11.952,
+"end": 12.292
+},
+{
+"line": "L02",
+"word": "about",
+"start": 12.272,
+"end": 12.592
+},
+{
+"line": "L02",
+"word": "three",
+"start": 12.572,
+"end": 12.992
+},
+{
+"line": "L02",
+"word": "meters",
+"start": 12.972,
+"end": 13.352
+},
+{
+"line": "L02",
+"word": "deep.",
+"start": 13.332,
+"end": 13.732
+},
+{
+"line": "L03",
+"word": "Within",
+"start": 14.089,
+"end": 14.469
+},
+{
+"line": "L03",
+"word": "a",
+"start": 14.449,
+"end": 14.529
+},
+{
+"line": "L03",
+"word": "few",
+"start": 14.509,
+"end": 14.709
+},
+{
+"line": "L03",
+"word": "years,",
+"start": 14.689,
+"end": 15.309
+},
+{
+"line": "L03",
+"word": "one",
+"start": 15.289,
+"end": 15.509
+},
+{
+"line": "L03",
+"word": "side",
+"start": 15.489,
+"end": 15.749
+},
+{
+"line": "L03",
+"word": "was",
+"start": 15.729,
+"end": 15.929
+},
+{
+"line": "L03",
+"word": "sinking.",
+"start": 15.909,
+"end": 16.409
+},
+{
+"line": "L04",
+"word": "Then",
+"start": 17.08,
+"end": 17.34
+},
+{
+"line": "L04",
+"word": "Pisa",
+"start": 17.32,
+"end": 17.54
+},
+{
+"line": "L04",
+"word": "went",
+"start": 17.52,
+"end": 17.86
+},
+{
+"line": "L04",
+"word": "to",
+"start": 17.84,
+"end": 17.98
+},
+{
+"line": "L04",
+"word": "war",
+"start": 17.96,
+"end": 18.14
+},
+{
+"line": "L04",
+"word": "with",
+"start": 18.12,
+"end": 18.36
+},
+{
+"line": "L04",
+"word": "its",
+"start": 18.34,
+"end": 18.52
+},
+{
+"line": "L04",
+"word": "neighbours,",
+"start": 18.5,
+"end": 19.14
+},
+{
+"line": "L04",
+"word": "and",
+"start": 19.12,
+"end": 19.66
+},
+{
+"line": "L04",
+"word": "building",
+"start": 19.64,
+"end": 20.08
+},
+{
+"line": "L04",
+"word": "stopped",
+"start": 20.06,
+"end": 20.66
+},
+{
+"line": "L04",
+"word": "for",
+"start": 20.64,
+"end": 20.82
+},
+{
+"line": "L04",
+"word": "almost",
+"start": 20.8,
+"end": 21.18
+},
+{
+"line": "L04",
+"word": "a",
+"start": 21.16,
+"end": 21.22
+},
+{
+"line": "L04",
+"word": "hundred",
+"start": 21.2,
+"end": 21.6
+},
+{
+"line": "L04",
+"word": "years.",
+"start": 21.58,
+"end": 21.94
+},
+{
+"line": "L05",
+"word": "Which,",
+"start": 22.299,
+"end": 22.799
+},
+{
+"line": "L05",
+"word": "by",
+"start": 22.779,
+"end": 22.919
+},
+{
+"line": "L05",
+"word": "accident,",
+"start": 22.899,
+"end": 23.499
+},
+{
+"line": "L05",
+"word": "saved",
+"start": 23.479,
+"end": 23.799
+},
+{
+"line": "L05",
+"word": "it.",
+"start": 23.779,
+"end": 24.419
+},
+{
+"line": "L05",
+"word": "The",
+"start": 24.399,
+"end": 24.599
+},
+{
+"line": "L05",
+"word": "soil",
+"start": 24.579,
+"end": 24.819
+},
+{
+"line": "L05",
+"word": "had",
+"start": 24.799,
+"end": 24.999
+},
+{
+"line": "L05",
+"word": "time",
+"start": 24.979,
+"end": 25.239
+},
+{
+"line": "L05",
+"word": "to",
+"start": 25.219,
+"end": 25.359
+},
+{
+"line": "L05",
+"word": "settle",
+"start": 25.339,
+"end": 25.719
+},
+{
+"line": "L05",
+"word": "and",
+"start": 25.699,
+"end": 25.879
+},
+{
+"line": "L05",
+"word": "firm",
+"start": 25.859,
+"end": 26.159
+},
+{
+"line": "L05",
+"word": "up.",
+"start": 26.139,
+"end": 26.339
+},
+{
+"line": "L06",
+"word": "When",
+"start": 26.99,
+"end": 27.23
+},
+{
+"line": "L06",
+"word": "the",
+"start": 27.21,
+"end": 27.39
+},
+{
+"line": "L06",
+"word": "builders",
+"start": 27.37,
+"end": 27.87
+},
+{
+"line": "L06",
+"word": "came",
+"start": 27.85,
+"end": 28.09
+},
+{
+"line": "L06",
+"word": "back,",
+"start": 28.07,
+"end": 28.69
+},
+{
+"line": "L06",
+"word": "they",
+"start": 28.67,
+"end": 28.89
+},
+{
+"line": "L06",
+"word": "made",
+"start": 28.87,
+"end": 29.13
+},
+{
+"line": "L06",
+"word": "the",
+"start": 29.11,
+"end": 29.29
+},
+{
+"line": "L06",
+"word": "new",
+"start": 29.27,
+"end": 29.51
+},
+{
+"line": "L06",
+"word": "floors",
+"start": 29.49,
+"end": 29.83
+},
+{
+"line": "L06",
+"word": "taller",
+"start": 29.81,
+"end": 30.17
+},
+{
+"line": "L06",
+"word": "on",
+"start": 30.15,
+"end": 30.27
+},
+{
+"line": "L06",
+"word": "the",
+"start": 30.25,
+"end": 30.47
+},
+{
+"line": "L06",
+"word": "short",
+"start": 30.45,
+"end": 30.73
+},
+{
+"line": "L06",
+"word": "side.",
+"start": 30.71,
+"end": 31.43
+},
+{
+"line": "L06",
+"word": "So",
+"start": 31.41,
+"end": 31.53
+},
+{
+"line": "L06",
+"word": "the",
+"start": 31.51,
+"end": 31.69
+},
+{
+"line": "L06",
+"word": "tower",
+"start": 31.67,
+"end": 32.03
+},
+{
+"line": "L06",
+"word": "curves,",
+"start": 32.01,
+"end": 32.63
+},
+{
+"line": "L06",
+"word": "like",
+"start": 32.61,
+"end": 32.87
+},
+{
+"line": "L06",
+"word": "a",
+"start": 32.85,
+"end": 32.93
+},
+{
+"line": "L06",
+"word": "banana.",
+"start": 32.91,
+"end": 33.31
+},
+{
+"line": "L07",
+"word": "The",
+"start": 33.699,
+"end": 33.879
+},
+{
+"line": "L07",
+"word": "bells",
+"start": 33.859,
+"end": 34.179
+},
+{
+"line": "L07",
+"word": "went",
+"start": 34.159,
+"end": 34.399
+},
+{
+"line": "L07",
+"word": "on",
+"start": 34.379,
+"end": 34.519
+},
+{
+"line": "L07",
+"word": "top",
+"start": 34.499,
+"end": 34.679
+},
+{
+"line": "L07",
+"word": "in",
+"start": 34.659,
+"end": 34.799
+},
+{
+"line": "L07",
+"word": "thirteen",
+"start": 34.779,
+"end": 35.399
+},
+{
+"line": "L07",
+"word": "seventy-two.",
+"start": 35.379,
+"end": 36.099
+},
+{
+"line": "L07",
+"word": "And",
+"start": 36.079,
+"end": 36.279
+},
+{
+"line": "L07",
+"word": "it",
+"start": 36.259,
+"end": 36.699
+},
+{
+"line": "L07",
+"word": "kept",
+"start": 36.679,
+"end": 36.979
+},
+{
+"line": "L07",
+"word": "on",
+"start": 36.959,
+"end": 37.139
+},
+{
+"line": "L07",
+"word": "leaning.",
+"start": 37.119,
+"end": 37.599
+},
+{
+"line": "L08",
+"word": "By",
+"start": 38.294,
+"end": 38.414
+},
+{
+"line": "L08",
+"word": "nineteen",
+"start": 38.394,
+"end": 38.854
+},
+{
+"line": "L08",
+"word": "ninety,",
+"start": 38.834,
+"end": 39.234
+},
+{
+"line": "L08",
+"word": "it",
+"start": 39.214,
+"end": 39.574
+},
+{
+"line": "L08",
+"word": "leaned",
+"start": 39.554,
+"end": 39.894
+},
+{
+"line": "L08",
+"word": "about",
+"start": 39.874,
+"end": 40.174
+},
+{
+"line": "L08",
+"word": "five",
+"start": 40.154,
+"end": 40.454
+},
+{
+"line": "L08",
+"word": "and",
+"start": 40.434,
+"end": 40.614
+},
+{
+"line": "L08",
+"word": "a",
+"start": 40.594,
+"end": 40.674
+},
+{
+"line": "L08",
+"word": "half",
+"start": 40.654,
+"end": 40.894
+},
+{
+"line": "L08",
+"word": "degrees,",
+"start": 40.874,
+"end": 41.374
+},
+{
+"line": "L08",
+"word": "and",
+"start": 41.354,
+"end": 41.554
+},
+{
+"line": "L08",
+"word": "they",
+"start": 41.534,
+"end": 42.054
+},
+{
+"line": "L08",
+"word": "closed",
+"start": 42.034,
+"end": 42.434
+},
+{
+"line": "L08",
+"word": "it.",
+"start": 42.414,
+"end": 42.654
+},
+{
+"line": "L09",
+"word": "Engineers",
+"start": 43.326,
+"end": 43.826
+},
+{
+"line": "L09",
+"word": "stacked",
+"start": 43.806,
+"end": 44.486
+},
+{
+"line": "L09",
+"word": "hundreds",
+"start": 44.466,
+"end": 44.926
+},
+{
+"line": "L09",
+"word": "of",
+"start": 44.906,
+"end": 45.086
+},
+{
+"line": "L09",
+"word": "tonnes",
+"start": 45.066,
+"end": 45.406
+},
+{
+"line": "L09",
+"word": "of",
+"start": 45.386,
+"end": 45.526
+},
+{
+"line": "L09",
+"word": "lead",
+"start": 45.506,
+"end": 45.726
+},
+{
+"line": "L09",
+"word": "on",
+"start": 45.706,
+"end": 45.846
+},
+{
+"line": "L09",
+"word": "the",
+"start": 45.826,
+"end": 46.006
+},
+{
+"line": "L09",
+"word": "high",
+"start": 45.986,
+"end": 46.226
+},
+{
+"line": "L09",
+"word": "side,",
+"start": 46.206,
+"end": 46.486
+},
+{
+"line": "L09",
+"word": "then",
+"start": 46.466,
+"end": 47.126
+},
+{
+"line": "L09",
+"word": "gently",
+"start": 47.106,
+"end": 47.446
+},
+{
+"line": "L09",
+"word": "drilled",
+"start": 47.426,
+"end": 47.866
+},
+{
+"line": "L09",
+"word": "soil",
+"start": 47.846,
+"end": 48.086
+},
+{
+"line": "L09",
+"word": "out",
+"start": 48.066,
+"end": 48.246
+},
+{
+"line": "L09",
+"word": "from",
+"start": 48.226,
+"end": 48.446
+},
+{
+"line": "L09",
+"word": "underneath.",
+"start": 48.426,
+"end": 49.186
+},
+{
+"line": "L10",
+"word": "Luckily,",
+"start": 49.651,
+"end": 50.111
+},
+{
+"line": "L10",
+"word": "it",
+"start": 50.091,
+"end": 50.231
+},
+{
+"line": "L10",
+"word": "worked.",
+"start": 50.211,
+"end": 51.091
+},
+{
+"line": "L10",
+"word": "The",
+"start": 51.071,
+"end": 51.251
+},
+{
+"line": "L10",
+"word": "top",
+"start": 51.231,
+"end": 51.491
+},
+{
+"line": "L10",
+"word": "came",
+"start": 51.471,
+"end": 51.691
+},
+{
+"line": "L10",
+"word": "back",
+"start": 51.671,
+"end": 51.951
+},
+{
+"line": "L10",
+"word": "about",
+"start": 51.931,
+"end": 52.311
+},
+{
+"line": "L10",
+"word": "forty",
+"start": 52.291,
+"end": 52.571
+},
+{
+"line": "L10",
+"word": "centimeters.",
+"start": 52.551,
+"end": 53.491
+},
+{
+"line": "L10",
+"word": "Unluckily,",
+"start": 53.471,
+"end": 54.091
+},
+{
+"line": "L10",
+"word": "it's",
+"start": 54.071,
+"end": 54.311
+},
+{
+"line": "L10",
+"word": "still",
+"start": 54.291,
+"end": 54.611
+},
+{
+"line": "L10",
+"word": "leaning.",
+"start": 54.591,
+"end": 55.311
+},
+{
+"line": "L10",
+"word": "On",
+"start": 55.291,
+"end": 55.411
+},
+{
+"line": "L10",
+"word": "purpose,",
+"start": 55.391,
+"end": 55.971
+},
+{
+"line": "L10",
+"word": "this",
+"start": 55.951,
+"end": 56.231
+},
+{
+"line": "L10",
+"word": "time.",
+"start": 56.211,
+"end": 56.491
+},
+{
+"line": "L11",
+"word": "Tourists",
+"start": 57.258,
+"end": 57.658
+},
+{
+"line": "L11",
+"word": "still",
+"start": 57.638,
+"end": 57.938
+},
+{
+"line": "L11",
+"word": "line",
+"start": 57.918,
+"end": 58.118
+},
+{
+"line": "L11",
+"word": "up",
+"start": 58.098,
+"end": 58.218
+},
+{
+"line": "L11",
+"word": "to",
+"start": 58.198,
+"end": 58.398
+},
+{
+"line": "L11",
+"word": "hold",
+"start": 58.378,
+"end": 58.578
+},
+{
+"line": "L11",
+"word": "it",
+"start": 58.558,
+"end": 58.678
+},
+{
+"line": "L11",
+"word": "up.",
+"start": 58.658,
+"end": 58.818
+},
+{
+"line": "L11",
+"word": "Technically,",
+"start": 58.798,
+"end": 59.878
+},
+{
+"line": "L11",
+"word": "they're",
+"start": 59.858,
+"end": 60.398
+},
+{
+"line": "L11",
+"word": "not",
+"start": 60.378,
+"end": 60.538
+},
+{
+"line": "L11",
+"word": "helping.",
+"start": 60.518,
+"end": 60.958
+}
+]
+}

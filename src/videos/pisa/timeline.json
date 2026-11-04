@@ -1,0 +1,62 @@
+{
+ "fps": 30,
+ "total": 1892,
+ "dur": 63.067,
+ "lines": {
+  "L01": {
+   "t0": 0.3,
+   "t1": 5.262,
+   "text": "The Leaning Tower of Pisa started tipping over when it was only two or three floors tall."
+  },
+  "L02": {
+   "t0": 5.912,
+   "t1": 13.819,
+   "text": "Pisa, eleven seventy-three. A heavy marble bell tower, on soft clay and sand, with a foundation only about three meters deep."
+  },
+  "L03": {
+   "t0": 14.069,
+   "t1": 16.51,
+   "text": "Within a few years, one side was sinking."
+  },
+  "L04": {
+   "t0": 17.06,
+   "t1": 22.029,
+   "text": "Then Pisa went to war with its neighbours, and building stopped for almost a hundred years."
+  },
+  "L05": {
+   "t0": 22.279,
+   "t1": 26.42,
+   "text": "Which, by accident, saved it. The soil had time to settle and firm up."
+  },
+  "L06": {
+   "t0": 26.97,
+   "t1": 33.429,
+   "text": "When the builders came back, they made the new floors taller on the short side. So the tower curves, like a banana."
+  },
+  "L07": {
+   "t0": 33.679,
+   "t1": 37.724,
+   "text": "The bells went on top in thirteen seventy-two. And it kept on leaning."
+  },
+  "L08": {
+   "t0": 38.274,
+   "t1": 42.756,
+   "text": "By nineteen ninety, it leaned about five and a half degrees, and they closed it."
+  },
+  "L09": {
+   "t0": 43.306,
+   "t1": 49.381,
+   "text": "Engineers stacked hundreds of tonnes of lead on the high side, then gently drilled soil out from underneath."
+  },
+  "L10": {
+   "t0": 49.631,
+   "t1": 56.588,
+   "text": "Luckily, it worked. The top came back about forty centimeters. Unluckily, it's still leaning. On purpose, this time."
+  },
+  "L11": {
+   "t0": 57.238,
+   "t1": 61.058,
+   "text": "Tourists still line up to hold it up. Technically, they're not helping."
+  }
+ }
+}

@@ -49,8 +49,8 @@ const C = (base: V3, d: V3): V3 => [base[0] + d[0], base[1] + d[1], base[2] + d[
 const PB: V3 = [0.5, 0, 9.5];
 export const CAMS: Record<number, Key[]> = {
   1: [
-    { f: 0, s: (f) => dolly([2.0, 1.4, 16], [-0.5, 3.2, 0], pushK(f, 0, 0.0025), { fov: 46 }) }, // Pip, the sea, the big Moon
-    { f: 70, cut: true, s: (f) => dolly([1.2, 1.2, 13.2], [0.5, 1.3, 9.5], pushK(f, 70, 0.004, 0.008, 30), { fov: 40, roll: -0.04 }) }, // the tide slips away
+    { f: 0, s: (f) => dolly([0.9, 1.5, 3.6], [0.2, 3.6, 30], pushK(f, 0, 0.0025), { fov: 48 }) }, // Pip, the sea, the big Moon
+    { f: 70, cut: true, s: (f) => dolly([-0.4, 1.3, 6.4], [0.6, 1.2, 12], pushK(f, 70, 0.004, 0.008, 30), { fov: 44, roll: -0.04 }) }, // the tide slips away
     { f: 118, dur: 30, s: (f) => dolly([-1, 0.6, 15], [2, 0.2, 30], pushK(f, 118, 0.002), { fov: 44 }) }, // look at the sea
   ],
   2: [
@@ -64,7 +64,7 @@ export const CAMS: Record<number, Key[]> = {
   ],
   5: [
     { f: 625, s: (f) => dolly(C(REEF, [2, 2.5, 12]), C(REEF, [0, 1.2, -1]), pushK(f, 625, 0.0025), { fov: 46 }) },
-    { f: 720, dur: 34, s: (f) => dolly(C(REEF, [0.6, 1.2, 5.5]), C(REEF, [0, 0.9, 0.6]), pushK(f, 720, 0.003), { fov: 40, roll: -0.04 }) },
+    { f: 720, dur: 34, s: (f) => dolly(C(REEF, [0.5, 2.4, 8.5]), C(REEF, [0, 1.0, 0]), pushK(f, 720, 0.003), { fov: 42, roll: -0.04 }) },
   ],
   6: [
     { f: 811, s: (f) => dolly(C(SPACE, [6, 3, 28]), C(SPACE, [0, 0, 0]), pushK(f, 811, 0.002), { fov: 44 }) }, // the tilted axis, steady
@@ -79,14 +79,14 @@ export const CAMS: Record<number, Key[]> = {
     { f: 1320, cut: true, s: (f) => dolly([0.8, 1.2, 12.6], [0.5, 1.2, 9.5], pushK(f, 1320, 0.004), { fov: 38, roll: 0.06 }) }, // bonkers
   ],
   9: [
-    { f: 1417, s: (f) => dolly([1.4, 1.0, 14.5], [-0.5, 2.8, 0], pushK(f, 1417, 0.002), { fov: 46 }) }, // thanks, Moon
-    { f: 1530, dur: 40, s: (f) => dolly([3, 0.8, 18], [-0.5, 6, -10], pushK(f, 1530, 0.0015), { fov: 48, roll: 0.03 }) },
+    { f: 1417, s: (f) => dolly([0.9, 1.5, 3.6], [0.2, 3.6, 30], pushK(f, 1417, 0.002), { fov: 48 }) }, // thanks, Moon
+    { f: 1530, dur: 40, s: (f) => dolly([1.2, 1.0, 1.4], [0.3, 7, 40], pushK(f, 1530, 0.0015), { fov: 50, roll: 0.03 }) },
   ],
 };
 export const DOF: Dof[] = [
   { f: 0, cInf: 6 }, { f: 70, cInf: 12 }, { f: 118, dur: 30, cInf: 4 }, { f: 162, cInf: 0 },
   { f: 516, cInf: 8 }, { f: 570, cInf: 13 }, { f: 625, cInf: 4 }, { f: 720, dur: 34, cInf: 10 },
-  { f: 811, cInf: 0 }, { f: 1219, cInf: 10 }, { f: 1320, cInf: 13 }, { f: 1417, cInf: 6 }, { f: 1530, dur: 40, cInf: 2 },
+  { f: 811, cInf: 0 }, { f: 1219, cInf: 10 }, { f: 1320, cInf: 13 }, { f: 1417, cInf: 6, focus: () => [0.5, 1.6, 9.5] }, { f: 1530, dur: 40, cInf: 2, focus: () => [0.5, 1.6, 9.5] },
 ];
 
 const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
@@ -96,7 +96,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     if (id === 8) e = t < BONK ? "smile_closed" : (Math.floor(t / 0.4) % 2 === 0 ? "pained" : "shock");
     if (id === 9) e = exprAt(t, [[0, "smile"], [tl("L09", 1.6), "grin"]]);
     pip(cam, out, t, PB[0], 0, PB[2], e, { mode: id === 8 && t < BONK ? "sit" : "stand", wave: id === 9 && t > tl("L09", 0.8) ? q(Math.sin(t * 8), 20) : undefined, look: id === 1 ? -1 : 0 });
-    if (id === 1 && t > POP1 && t < POP1 + 0.6) { const u = q(seg(t, POP1, POP1 + 0.6), 20); card(out, `puff1${u}`, (p) => fxPuff(p, u), -30, 150, -380, 70, 70, { soft: true }); }
+    if (id === 1 && t > POP1 && t < POP1 + 0.6) { const u = q(seg(t, POP1, POP1 + 0.6), 20); card(out, `puff1${u}`, (p) => fxPuff(p, u), 40, 140, 420, 70, 70, { soft: true }); }
     if (id === 1 && t > POP1 && t < POP1 + 0.9) card(out, "bang1", (p) => fxBang(p), PB[0] + 0.2, 2.6, PB[2], 0.4, 0.6, { cw: 200, ch: 300 });
     if (id === 4) card(out, `crab${t > tl("L04", 1.0) ? 1 : 0}${q(Math.sin(t * 6), 4)}`, (p) => crab(p, t > tl("L04", 1.0), t * 6), -1.6, 0.3, 6.5, 0.8, 0.6, { cw: 400, ch: 300 });
     if (id === 8 && t < BONK) card(out, `hg8${q(seg(t, tl("L08", 0.3), BONK), 10)}`, (p) => hourglass(p, seg(t, tl("L08", 0.3), BONK)), PB[0] + 1.2, 1.4, PB[2] + 0.2, 0.6, 0.8, { cw: 300, ch: 400 });

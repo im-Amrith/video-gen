@@ -8,6 +8,8 @@ import { SpinShort, SPIN_FRAMES } from "./videos/spin/Spin";
 import { IceShort, ICE_FRAMES } from "./videos/ice/Ice";
 import { SunShort, SUN_FRAMES } from "./videos/sun/Sun";
 import { MoonShort, MOON_FRAMES } from "./videos/moon/Moon";
+import { ZanzibarShort, ZANZIBAR_FRAMES } from "./videos/zanzibar/Zanzibar";
+import { PisaShort, PISA_FRAMES } from "./videos/pisa/Pisa";
 
 export const Root: React.FC = () => (
   <>
@@ -18,5 +20,8 @@ export const Root: React.FC = () => (
     <Composition id="WhatIf03Ice" component={IceShort} durationInFrames={ICE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="WhatIf04Sun" component={SunShort} durationInFrames={SUN_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="WhatIf05Moon" component={MoonShort} durationInFrames={MOON_FRAMES} fps={30} width={1080} height={1920} />
+    {/* History */}
+    <Composition id="History01ShortestWar" component={ZanzibarShort} durationInFrames={ZANZIBAR_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="History02LeaningTower" component={PisaShort} durationInFrames={PISA_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );

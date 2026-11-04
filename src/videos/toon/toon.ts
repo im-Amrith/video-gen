@@ -418,6 +418,36 @@ const hatOn = (p: Pen, o: Outfit, hp: P2[], H: Blob, cx: number, hc: number, lig
     p.arc(bx, by, 0.5 * W + 3.5 * u, 0.2 * HH + 3.5 * u, 200, 340, 1.2 * u);
     const cy = hc + H.b * 0.98;
     p.stroke([[cx - 14 * u, cy - 4 * u], [cx, cy + 2 * u], [cx + 14 * u, cy - 4 * u]], 2 * u, BONNET_BRIM);
+  } else if (o.hat === "turban") {
+    const col = o.cap ?? "#f1efe6", yb = crown + 0.3 * HH;
+    for (let k = 0; k < 3; k++) {
+      const [bx, by] = R([[cx, yb - k * 0.13 * HH]])[0];
+      p.ell(bx, by, (0.55 - k * 0.08) * W, (0.13 + 0.01 * k) * HH, k % 2 ? shade(col, 0.9) : col, ow, 0, 360, (a * 180) / Math.PI);
+    }
+    const [tx, ty] = R([[cx, yb - 0.42 * HH]])[0];
+    p.ell(tx, ty, 0.2 * W, 0.1 * HH, col, ow);
+    if (o.sash) { const [jx, jy] = R([[cx, yb - 0.05 * HH]])[0]; p.ell(jx, jy, 0.07 * W, 0.07 * W, o.sash, ow * 0.7); }
+  } else if (o.hat === "hardhat" || o.hat === "pith") {
+    const col = o.cap ?? (o.hat === "pith" ? "#e6d3a0" : "#f2c230"), yb = crown + 0.28 * HH, hw = 0.5 * W;
+    const dome: P2[] = []; for (let i = 0; i <= 20; i++) { const th = Math.PI + (i / 20) * Math.PI; dome.push([cx + hw * Math.cos(th), yb + 0.42 * HH * Math.sin(th)]); }
+    const D = R(dome);
+    p.shadedFill(D, col, mul(col, SH_FELT), light, hw, 0.35); p.poly(D, null, ow);
+    const [bx, by] = R([[cx, yb]])[0];
+    p.ell(bx, by, (o.hat === "pith" ? 0.72 : 0.62) * W, 0.06 * HH, shade(col, 0.85), ow, 0, 360, (a * 180) / Math.PI);
+    if (o.hat === "hardhat") p.band(R([[cx, yb - 0.4 * HH], [cx, yb - 0.02 * HH]]), shade(col, 0.88), 0.07 * W, 0.6 * u);
+  } else if (o.hat === "hood") {
+    const col = o.cap ?? "#7a4a2a";
+    const cut = crown + 0.36 * HH, n = hp.length;
+    const arc = hp.filter(([, y]) => y < cut).map(([x, y]) => [cx + (x - cx) * 1.08, hc + (y - hc) * 1.08] as P2);
+    if (arc.length > 2) { arc.push([cx + 0.6 * W, cut + 0.15 * HH], [cx - 0.6 * W, cut + 0.15 * HH]); p.shadedFill(arc, col, mul(col, SH_FELT), light, H.a, 0.35); p.poly(arc, null, ow); }
+    void n;
+  } else if (o.hat === "boater") {
+    const col = o.cap ?? "#e9cf7a", yb = crown + 0.24 * HH, wt = 0.36 * W;
+    const body = R([[cx - wt, yb], [cx - wt, yb - 0.3 * HH], [cx + wt, yb - 0.3 * HH], [cx + wt, yb]]);
+    p.shadedFill(body, col, mul(col, SH_FELT), light, wt, 0.4); p.poly(body, null, ow);
+    p.clip(body, () => p.band(R([[cx - wt, yb - 0.1 * HH], [cx + wt, yb - 0.1 * HH]]), o.sash ?? "#2b2f6a", 0.09 * HH, 0.6 * u));
+    const [bx, by] = R([[cx, yb]])[0];
+    p.ell(bx, by, 0.6 * W, 0.06 * HH, shade(col, 0.9), ow, 0, 360, (a * 180) / Math.PI);
   }
 };
 

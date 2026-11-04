@@ -1,5 +1,5 @@
 ---
-status: todo
+status: review
 series: what-if
 episode: 5
 slug: moon-disappears

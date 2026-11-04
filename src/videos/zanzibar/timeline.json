@@ -1,0 +1,62 @@
+{
+ "fps": 30,
+ "total": 1864,
+ "dur": 62.133,
+ "lines": {
+  "L01": {
+   "t0": 0.3,
+   "t1": 5.677,
+   "text": "The shortest war in history lasted about thirty-eight minutes. You've had longer phone calls."
+  },
+  "L02": {
+   "t0": 6.327,
+   "t1": 14.6,
+   "text": "Zanzibar, August eighteen ninety-six. The sultan dies, and his cousin Khalid moves into the palace without asking Britain first."
+  },
+  "L03": {
+   "t0": 14.85,
+   "t1": 21.485,
+   "text": "Britain disagrees. It parks warships in the harbour, and sends a note: leave by nine o'clock tomorrow morning."
+  },
+  "L04": {
+   "t0": 22.035,
+   "t1": 24.555,
+   "text": "Khalid barricades the palace, and waits."
+  },
+  "L05": {
+   "t0": 25.205,
+   "t1": 28.045,
+   "text": "Nine o'clock arrives. The ships open fire."
+  },
+  "L06": {
+   "t0": 28.595,
+   "t1": 34.557,
+   "text": "The palace catches fire. And the sultan's entire navy, one royal yacht, sinks in the harbour."
+  },
+  "L07": {
+   "t0": 34.807,
+   "t1": 38.578,
+   "text": "Khalid? He slips out the back, and hides in the German consulate."
+  },
+  "L08": {
+   "t0": 39.128,
+   "t1": 44.3,
+   "text": "By about nine forty, the guns stop. A new sultan is in charge before lunch."
+  },
+  "L09": {
+   "t0": 45.15,
+   "t1": 48.434,
+   "text": "Short, but not painless. Hundreds were hurt in the palace."
+  },
+  "L10": {
+   "t0": 49.284,
+   "t1": 55.86,
+   "text": "Luckily, it was over before breakfast went cold. Unluckily, the losing side was sent the bill for the shells."
+  },
+  "L11": {
+   "t0": 56.46,
+   "t1": 59.94,
+   "text": "Thirty-eight minutes. Still the shortest war ever recorded."
+  }
+ }
+}
