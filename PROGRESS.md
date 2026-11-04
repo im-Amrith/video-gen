@@ -31,9 +31,9 @@ Episodes changed (re-render only these; audio unchanged unless noted):
 - [x] History 03 emu-war (wheat tufts, brass casings, painted fence, hills + mountains + trees)
 - [x] History 04 1904-marathon (corn tufts, painted fences, rocks, trees + hill ring)
 
-## Feedback #3 pass (no dark/empty > 1.5 s, visual progression, faces in frame, every shot moves, payoffs read) — IN PROGRESS
+## Feedback #3 pass (no dark/empty > 1.5 s, visual progression, faces in frame, every shot moves, payoffs read) — DONE: ALL 10 READY TO RE-RENDER
 Engine change for all: every camera key arcs slowly around its look point (core.ts `DRIFT`), so all 10 need a re-render.
-When every box below is ticked, ALL 10 are ready to re-render in one go (`.\scripts\render_all.ps1 -Force -Concurrency 2`).
+All 10 are ticked (2026-11-04): re-render all 10 in one go (`.\scripts\render_all.ps1 -Force -Concurrency 2`).
 - [x] What If 01 tunnel: glowing hole (no black interior), distinct layer looks (grey crust -> dark red -> magma with embers ->
       liquid iron -> white-hot core with glints -> cooling back), CUs re-aimed at the face, Kola rig orbit crane, South Pole
       payoff with research-station crew in parkas (replaced the penguins: none live at the Pole) + SOUTH POLE sign + a bright crane shot (replaces the 3 s down-the-hole shot), Pip pops higher.
@@ -43,6 +43,9 @@ When every box below is ticked, ALL 10 are ready to re-render in one go (`.\scri
 - [x] History 03 emu-war: held keys now orbit/crane; dam ambush at golden dawn (breaks the long day stretch); CAMPION, WESTERN AUSTRALIA 1932 sign + ROUNDS 9,860 / EMUS 986 tally board.
 - [x] History 04 1904-marathon: held keys now orbit/crane; day/golden alternate by beat (shots 2, 5 golden); ST. LOUIS 1904, WATER (the only one), FINISH, BOSTON MARATHON 1905 signs.
 - [x] History 05 war-of-the-bucket: feedback #2 dressing (inked tufts in 3 layers, painted rocks at the ford/banks, fences, well posts, bushes/trees, hill ring); town hall relit (brick + marble, arched windows, red carpet, sun in front instead of the washed-out purple backlight); PALAZZO COMUNALE MODENA banner, THE STOLEN BUCKET placard, MODENA/BOLOGNA signpost, BOLOGNA gate sign, well sign "BUCKET MISSING SINCE 1325"; every key orbits/cranes.
+- [x] What If 05 moon-disappears: night beach lit (jetty lanterns, striped lighthouse, lantern boat, moon glitter); sand slopes so the tide visibly runs out; painted rocks, dune grass, hill line; reef with coral rocks, sea grass, fish; per-section nebula colours in space; Pip + Moon both in frame at open/end; held keys move.
+- [x] History 01 shortest-war: barricade beat at night (lit windows, gate torches); harbour dressed (palms, grass, rocks, trees, hills); ZANZIBAR 1896 + GERMAN CONSULATE signs; camera tracks Khalid to the consulate; held keys move.
+- [x] History 02 leaning-tower: lawn in 3 depth layers; soil cross-section set in a landscape; PISA 1173 + CLOSED 1990 signs; every held key moves.
 
 ## How it's built
 - **Engine** `src/videos/toon/`: the bridge short's look modules (ink, lens blur, grade, two-tone shading, card shading,
