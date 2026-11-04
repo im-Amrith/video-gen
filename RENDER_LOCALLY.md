@@ -27,6 +27,7 @@ Optional QA: `python scripts/short_qa.py deliveries/<series>/<NN>_<slug>.mp4 out
 | Series | NN | Slug | CompositionId | Audio ready | Rendered |
 |---|---|---|---|---|---|
 | what-if | 01 | tunnel-through-earth | WhatIf01Tunnel | yes (`projects/tunnel-through-earth/audio/mix.wav`, 65.33 s) | no |
+| what-if | 02 | earth-stops-spinning | WhatIf02Spin | yes (`projects/earth-stops-spinning/audio/mix.wav`, 61.77 s) | no |
 
 ### Exact commands per short
 
@@ -36,3 +37,9 @@ npx remotion render src/index.ts WhatIf01Tunnel out/tunnel/video.mp4 --codec h26
 ffmpeg -y -i out/tunnel/video.mp4 -i projects/tunnel-through-earth/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/what-if/01_tunnel-through-earth.mp4
 ```
 Optional 2K: add `--scale 1.3333` to the render (1440x2560).
+
+**what-if 02 — earth-stops-spinning** (1853 frames, 61.77 s)
+```powershell
+npx remotion render src/index.ts WhatIf02Spin out/spin/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+ffmpeg -y -i out/spin/video.mp4 -i projects/earth-stops-spinning/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/what-if/02_earth-stops-spinning.mp4
+```

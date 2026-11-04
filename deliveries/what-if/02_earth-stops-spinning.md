@@ -1,0 +1,16 @@
+# What If the Earth Stopped Spinning?
+
+**Title:** What If the Earth Stopped Spinning? 🌍🛑
+
+**Description:** Right now you're spinning at up to 1,670 km/h. Stop the Earth gently and the oceans slide to the poles, a giant supercontinent wraps the equator, and one day lasts a whole year. And the twist: Earth really is slowing down.
+
+**Hashtags:** #whatif #earth #science #space #shorts
+
+**Sources**
+- Equatorial rotation speed ≈ 40,075 km ÷ 23.93 h ≈ 1,670 km/h (calendar-uk.co.uk, almanac.com; circumference per NASA).
+- A sudden stop would fling everything not fixed to bedrock eastward (NASA via Space.com "What would happen if Earth stopped spinning?"; Sky at Night Magazine; ScienceABC). Physically impossible to stop it fast (angular momentum; IFLScience).
+- Equatorial radius 6,378 km vs polar 6,357 km → ~21 km bulge, caused by the spin (NASA Earth fact sheet; Esri ArcUser).
+- Slow stop: oceans migrate toward the poles, an equatorial megacontinent emerges, much of Europe and Russia under the northern ocean: W. Fraczek, Esri ArcUser (2010) "If the Earth Stood Still" (esri.com/news/arcuser/0610/nospin.html); Big Think "The Day the Earth Stood Still".
+- No spin → one solar day = one orbit ≈ one year (orbital mechanics).
+- Earth's spin is slowing because of the Moon's tides; the Moon recedes ~3.8 cm/year: Meyers & Malinverno, PNAS (2018); ScienceDaily 2018-06-04; Columbia Climate School.
+- 1.4 billion years ago a day lasted ~18.68 hours ("just over eighteen hours"): Meyers & Malinverno (2018).

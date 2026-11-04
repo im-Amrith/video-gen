@@ -1,0 +1,62 @@
+{
+ "fps": 30,
+ "total": 1663,
+ "dur": 55.433,
+ "lines": {
+  "L01": {
+   "t0": 0.3,
+   "t1": 5.963,
+   "text": "If all the ice on Earth melted, the sea would rise about seventy meters. That's a twenty-storey building."
+  },
+  "L02": {
+   "t0": 6.563,
+   "t1": 13.151,
+   "text": "Almost all of that ice sits in two places. Antarctica holds about ninety-one percent. Greenland, about eight."
+  },
+  "L03": {
+   "t0": 13.401,
+   "t1": 16.4,
+   "text": "Every mountain glacier on the planet? Just one percent."
+  },
+  "L04": {
+   "t0": 16.95,
+   "t1": 20.547,
+   "text": "Melt it, and the sea comes up the beach, over the boardwalk, and into town."
+  },
+  "L05": {
+   "t0": 20.797,
+   "t1": 25.49,
+   "text": "First floor, gone. Fifth floor, gone. By the tenth floor, the fish are window shopping."
+  },
+  "L06": {
+   "t0": 26.04,
+   "t1": 29.743,
+   "text": "Low countries vanish, and every coastline on the map gets redrawn."
+  },
+  "L07": {
+   "t0": 30.293,
+   "t1": 35.432,
+   "text": "But here's the twist. The ice floating at the North Pole? Melt all of it, and the sea barely moves."
+  },
+  "L08": {
+   "t0": 35.682,
+   "t1": 41.258,
+   "text": "Floating ice already pushes aside its own weight in water, just like an ice cube melting in a glass."
+  },
+  "L09": {
+   "t0": 41.508,
+   "t1": 43.953,
+   "text": "It's the ice sitting on land that does the damage."
+  },
+  "L10": {
+   "t0": 44.503,
+   "t1": 49.982,
+   "text": "Luckily, melting all of it would take thousands of years. Unluckily, the sea is already rising."
+  },
+  "L11": {
+   "t0": 50.582,
+   "t1": 53.536,
+   "text": "So maybe skip the beach house, and buy the one on the hill."
+  }
+ }
+}

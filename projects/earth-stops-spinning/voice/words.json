@@ -1,0 +1,1061 @@
+{
+"note": "estimated from voiced audio + character counts (Whisper blocked in the cloud)",
+"words": [
+{
+"line": "L01",
+"word": "Right",
+"start": 0.32,
+"end": 0.58
+},
+{
+"line": "L01",
+"word": "now,",
+"start": 0.56,
+"end": 0.76
+},
+{
+"line": "L01",
+"word": "you're",
+"start": 0.74,
+"end": 1.1
+},
+{
+"line": "L01",
+"word": "spinning",
+"start": 1.08,
+"end": 1.52
+},
+{
+"line": "L01",
+"word": "around",
+"start": 1.5,
+"end": 1.8
+},
+{
+"line": "L01",
+"word": "with",
+"start": 1.78,
+"end": 2.12
+},
+{
+"line": "L01",
+"word": "the",
+"start": 2.1,
+"end": 2.26
+},
+{
+"line": "L01",
+"word": "Earth",
+"start": 2.24,
+"end": 2.64
+},
+{
+"line": "L01",
+"word": "at",
+"start": 2.62,
+"end": 2.74
+},
+{
+"line": "L01",
+"word": "up",
+"start": 2.72,
+"end": 2.82
+},
+{
+"line": "L01",
+"word": "to",
+"start": 2.8,
+"end": 2.96
+},
+{
+"line": "L01",
+"word": "sixteen",
+"start": 2.94,
+"end": 3.34
+},
+{
+"line": "L01",
+"word": "hundred",
+"start": 3.32,
+"end": 3.66
+},
+{
+"line": "L01",
+"word": "and",
+"start": 3.64,
+"end": 3.8
+},
+{
+"line": "L01",
+"word": "seventy",
+"start": 3.78,
+"end": 4.18
+},
+{
+"line": "L01",
+"word": "kilometers",
+"start": 4.16,
+"end": 4.64
+},
+{
+"line": "L01",
+"word": "an",
+"start": 4.62,
+"end": 4.72
+},
+{
+"line": "L01",
+"word": "hour.",
+"start": 4.7,
+"end": 4.96
+},
+{
+"line": "L01",
+"word": "So",
+"start": 4.94,
+"end": 5.06
+},
+{
+"line": "L01",
+"word": "what",
+"start": 5.04,
+"end": 5.78
+},
+{
+"line": "L01",
+"word": "if",
+"start": 5.76,
+"end": 5.88
+},
+{
+"line": "L01",
+"word": "it",
+"start": 5.86,
+"end": 5.96
+},
+{
+"line": "L01",
+"word": "just",
+"start": 5.94,
+"end": 6.16
+},
+{
+"line": "L01",
+"word": "stopped?",
+"start": 6.14,
+"end": 6.58
+},
+{
+"line": "L02",
+"word": "Stop",
+"start": 7.493,
+"end": 7.773
+},
+{
+"line": "L02",
+"word": "it",
+"start": 7.753,
+"end": 7.893
+},
+{
+"line": "L02",
+"word": "suddenly,",
+"start": 7.873,
+"end": 8.353
+},
+{
+"line": "L02",
+"word": "and",
+"start": 8.333,
+"end": 8.713
+},
+{
+"line": "L02",
+"word": "everything",
+"start": 8.693,
+"end": 9.233
+},
+{
+"line": "L02",
+"word": "not",
+"start": 9.213,
+"end": 9.373
+},
+{
+"line": "L02",
+"word": "bolted",
+"start": 9.353,
+"end": 9.713
+},
+{
+"line": "L02",
+"word": "to",
+"start": 9.693,
+"end": 9.813
+},
+{
+"line": "L02",
+"word": "the",
+"start": 9.793,
+"end": 9.973
+},
+{
+"line": "L02",
+"word": "bedrock",
+"start": 9.953,
+"end": 10.433
+},
+{
+"line": "L02",
+"word": "keeps",
+"start": 10.413,
+"end": 10.813
+},
+{
+"line": "L02",
+"word": "going",
+"start": 10.793,
+"end": 11.133
+},
+{
+"line": "L02",
+"word": "east.",
+"start": 11.113,
+"end": 11.913
+},
+{
+"line": "L02",
+"word": "You,",
+"start": 11.893,
+"end": 12.133
+},
+{
+"line": "L02",
+"word": "your",
+"start": 12.113,
+"end": 12.473
+},
+{
+"line": "L02",
+"word": "house,",
+"start": 12.453,
+"end": 12.773
+},
+{
+"line": "L02",
+"word": "and",
+"start": 12.753,
+"end": 12.913
+},
+{
+"line": "L02",
+"word": "the",
+"start": 12.893,
+"end": 13.073
+},
+{
+"line": "L02",
+"word": "ocean.",
+"start": 13.053,
+"end": 13.373
+},
+{
+"line": "L03",
+"word": "Luckily,",
+"start": 14.052,
+"end": 14.492
+},
+{
+"line": "L03",
+"word": "nothing",
+"start": 14.472,
+"end": 14.832
+},
+{
+"line": "L03",
+"word": "can",
+"start": 14.812,
+"end": 14.992
+},
+{
+"line": "L03",
+"word": "stop",
+"start": 14.972,
+"end": 15.272
+},
+{
+"line": "L03",
+"word": "a",
+"start": 15.252,
+"end": 15.312
+},
+{
+"line": "L03",
+"word": "planet",
+"start": 15.292,
+"end": 15.752
+},
+{
+"line": "L03",
+"word": "that",
+"start": 15.732,
+"end": 15.932
+},
+{
+"line": "L03",
+"word": "fast.",
+"start": 15.912,
+"end": 16.712
+},
+{
+"line": "L03",
+"word": "Unluckily,",
+"start": 16.692,
+"end": 17.532
+},
+{
+"line": "L03",
+"word": "let's",
+"start": 17.512,
+"end": 17.792
+},
+{
+"line": "L03",
+"word": "slow",
+"start": 17.772,
+"end": 17.992
+},
+{
+"line": "L03",
+"word": "it",
+"start": 17.972,
+"end": 18.092
+},
+{
+"line": "L03",
+"word": "down",
+"start": 18.072,
+"end": 18.272
+},
+{
+"line": "L03",
+"word": "gently",
+"start": 18.252,
+"end": 18.612
+},
+{
+"line": "L03",
+"word": "instead.",
+"start": 18.592,
+"end": 19.032
+},
+{
+"line": "L04",
+"word": "Spinning",
+"start": 19.735,
+"end": 20.195
+},
+{
+"line": "L04",
+"word": "is",
+"start": 20.175,
+"end": 20.275
+},
+{
+"line": "L04",
+"word": "why",
+"start": 20.255,
+"end": 20.415
+},
+{
+"line": "L04",
+"word": "Earth",
+"start": 20.395,
+"end": 20.735
+},
+{
+"line": "L04",
+"word": "bulges",
+"start": 20.715,
+"end": 21.055
+},
+{
+"line": "L04",
+"word": "in",
+"start": 21.035,
+"end": 21.135
+},
+{
+"line": "L04",
+"word": "the",
+"start": 21.115,
+"end": 21.275
+},
+{
+"line": "L04",
+"word": "middle.",
+"start": 21.255,
+"end": 21.615
+},
+{
+"line": "L04",
+"word": "It's",
+"start": 21.595,
+"end": 21.795
+},
+{
+"line": "L04",
+"word": "about",
+"start": 21.775,
+"end": 22.535
+},
+{
+"line": "L04",
+"word": "twenty-one",
+"start": 22.515,
+"end": 23.195
+},
+{
+"line": "L04",
+"word": "kilometers",
+"start": 23.175,
+"end": 23.675
+},
+{
+"line": "L04",
+"word": "fatter",
+"start": 23.655,
+"end": 23.975
+},
+{
+"line": "L04",
+"word": "at",
+"start": 23.955,
+"end": 24.055
+},
+{
+"line": "L04",
+"word": "the",
+"start": 24.035,
+"end": 24.195
+},
+{
+"line": "L04",
+"word": "equator.",
+"start": 24.175,
+"end": 24.715
+},
+{
+"line": "L05",
+"word": "Stop",
+"start": 25.223,
+"end": 25.503
+},
+{
+"line": "L05",
+"word": "the",
+"start": 25.483,
+"end": 25.723
+},
+{
+"line": "L05",
+"word": "spin,",
+"start": 25.703,
+"end": 25.943
+},
+{
+"line": "L05",
+"word": "and",
+"start": 25.923,
+"end": 26.103
+},
+{
+"line": "L05",
+"word": "that",
+"start": 26.083,
+"end": 26.283
+},
+{
+"line": "L05",
+"word": "bulge",
+"start": 26.263,
+"end": 26.523
+},
+{
+"line": "L05",
+"word": "sinks.",
+"start": 26.503,
+"end": 27.303
+},
+{
+"line": "L05",
+"word": "The",
+"start": 27.283,
+"end": 27.443
+},
+{
+"line": "L05",
+"word": "oceans",
+"start": 27.423,
+"end": 27.723
+},
+{
+"line": "L05",
+"word": "slide",
+"start": 27.703,
+"end": 27.983
+},
+{
+"line": "L05",
+"word": "downhill,",
+"start": 27.963,
+"end": 28.403
+},
+{
+"line": "L05",
+"word": "toward",
+"start": 28.383,
+"end": 28.783
+},
+{
+"line": "L05",
+"word": "the",
+"start": 28.763,
+"end": 28.923
+},
+{
+"line": "L05",
+"word": "poles.",
+"start": 28.903,
+"end": 29.263
+},
+{
+"line": "L06",
+"word": "Two",
+"start": 29.796,
+"end": 29.976
+},
+{
+"line": "L06",
+"word": "giant",
+"start": 29.956,
+"end": 30.256
+},
+{
+"line": "L06",
+"word": "polar",
+"start": 30.236,
+"end": 30.616
+},
+{
+"line": "L06",
+"word": "oceans.",
+"start": 30.596,
+"end": 30.996
+},
+{
+"line": "L06",
+"word": "Most",
+"start": 30.976,
+"end": 31.736
+},
+{
+"line": "L06",
+"word": "of",
+"start": 31.716,
+"end": 31.836
+},
+{
+"line": "L06",
+"word": "Europe",
+"start": 31.816,
+"end": 32.216
+},
+{
+"line": "L06",
+"word": "and",
+"start": 32.196,
+"end": 32.436
+},
+{
+"line": "L06",
+"word": "Russia,",
+"start": 32.416,
+"end": 32.816
+},
+{
+"line": "L06",
+"word": "underwater.",
+"start": 32.796,
+"end": 33.576
+},
+{
+"line": "L07",
+"word": "And",
+"start": 33.96,
+"end": 34.12
+},
+{
+"line": "L07",
+"word": "around",
+"start": 34.1,
+"end": 34.38
+},
+{
+"line": "L07",
+"word": "the",
+"start": 34.36,
+"end": 34.5
+},
+{
+"line": "L07",
+"word": "middle,",
+"start": 34.48,
+"end": 35.1
+},
+{
+"line": "L07",
+"word": "one",
+"start": 35.08,
+"end": 35.24
+},
+{
+"line": "L07",
+"word": "brand",
+"start": 35.22,
+"end": 35.46
+},
+{
+"line": "L07",
+"word": "new",
+"start": 35.44,
+"end": 35.58
+},
+{
+"line": "L07",
+"word": "supercontinent,",
+"start": 35.56,
+"end": 36.32
+},
+{
+"line": "L07",
+"word": "wrapped",
+"start": 36.3,
+"end": 37.04
+},
+{
+"line": "L07",
+"word": "around",
+"start": 37.02,
+"end": 37.36
+},
+{
+"line": "L07",
+"word": "the",
+"start": 37.34,
+"end": 37.5
+},
+{
+"line": "L07",
+"word": "whole",
+"start": 37.48,
+"end": 37.72
+},
+{
+"line": "L07",
+"word": "planet.",
+"start": 37.7,
+"end": 38.06
+},
+{
+"line": "L08",
+"word": "Then",
+"start": 38.795,
+"end": 39.015
+},
+{
+"line": "L08",
+"word": "there's",
+"start": 38.995,
+"end": 39.415
+},
+{
+"line": "L08",
+"word": "the",
+"start": 39.395,
+"end": 40.055
+},
+{
+"line": "L08",
+"word": "Sun.",
+"start": 40.035,
+"end": 40.255
+},
+{
+"line": "L08",
+"word": "With",
+"start": 40.235,
+"end": 40.455
+},
+{
+"line": "L08",
+"word": "no",
+"start": 40.435,
+"end": 40.635
+},
+{
+"line": "L08",
+"word": "spin,",
+"start": 40.615,
+"end": 40.875
+},
+{
+"line": "L08",
+"word": "one",
+"start": 40.855,
+"end": 41.035
+},
+{
+"line": "L08",
+"word": "day",
+"start": 41.015,
+"end": 41.175
+},
+{
+"line": "L08",
+"word": "lasts",
+"start": 41.155,
+"end": 41.435
+},
+{
+"line": "L08",
+"word": "a",
+"start": 41.415,
+"end": 41.475
+},
+{
+"line": "L08",
+"word": "whole",
+"start": 41.455,
+"end": 41.735
+},
+{
+"line": "L08",
+"word": "year.",
+"start": 41.715,
+"end": 41.995
+},
+{
+"line": "L08",
+"word": "Six",
+"start": 41.975,
+"end": 42.135
+},
+{
+"line": "L08",
+"word": "months",
+"start": 42.115,
+"end": 42.855
+},
+{
+"line": "L08",
+"word": "of",
+"start": 42.835,
+"end": 42.955
+},
+{
+"line": "L08",
+"word": "daylight,",
+"start": 42.935,
+"end": 43.435
+},
+{
+"line": "L08",
+"word": "then",
+"start": 43.415,
+"end": 43.735
+},
+{
+"line": "L08",
+"word": "six",
+"start": 43.715,
+"end": 43.875
+},
+{
+"line": "L08",
+"word": "months",
+"start": 43.855,
+"end": 44.255
+},
+{
+"line": "L08",
+"word": "of",
+"start": 44.235,
+"end": 44.375
+},
+{
+"line": "L08",
+"word": "night.",
+"start": 44.355,
+"end": 44.675
+},
+{
+"line": "L09",
+"word": "Your",
+"start": 45.282,
+"end": 45.502
+},
+{
+"line": "L09",
+"word": "alarm",
+"start": 45.482,
+"end": 45.762
+},
+{
+"line": "L09",
+"word": "clock",
+"start": 45.742,
+"end": 46.022
+},
+{
+"line": "L09",
+"word": "would",
+"start": 46.002,
+"end": 46.362
+},
+{
+"line": "L09",
+"word": "be",
+"start": 46.342,
+"end": 46.462
+},
+{
+"line": "L09",
+"word": "very",
+"start": 46.442,
+"end": 46.682
+},
+{
+"line": "L09",
+"word": "confused.",
+"start": 46.662,
+"end": 47.242
+},
+{
+"line": "L10",
+"word": "Here's",
+"start": 48.08,
+"end": 48.36
+},
+{
+"line": "L10",
+"word": "the",
+"start": 48.34,
+"end": 48.5
+},
+{
+"line": "L10",
+"word": "thing:",
+"start": 48.48,
+"end": 49.02
+},
+{
+"line": "L10",
+"word": "Earth",
+"start": 49.0,
+"end": 49.28
+},
+{
+"line": "L10",
+"word": "really",
+"start": 49.26,
+"end": 49.56
+},
+{
+"line": "L10",
+"word": "is",
+"start": 49.54,
+"end": 49.66
+},
+{
+"line": "L10",
+"word": "slowing",
+"start": 49.64,
+"end": 49.98
+},
+{
+"line": "L10",
+"word": "down.",
+"start": 49.96,
+"end": 50.68
+},
+{
+"line": "L10",
+"word": "The",
+"start": 50.66,
+"end": 50.8
+},
+{
+"line": "L10",
+"word": "Moon's",
+"start": 50.78,
+"end": 51.1
+},
+{
+"line": "L10",
+"word": "tides",
+"start": 51.08,
+"end": 51.32
+},
+{
+"line": "L10",
+"word": "work",
+"start": 51.3,
+"end": 51.5
+},
+{
+"line": "L10",
+"word": "like",
+"start": 51.48,
+"end": 51.72
+},
+{
+"line": "L10",
+"word": "a",
+"start": 51.7,
+"end": 51.82
+},
+{
+"line": "L10",
+"word": "brake.",
+"start": 51.8,
+"end": 52.08
+},
+{
+"line": "L11",
+"word": "One",
+"start": 52.552,
+"end": 52.732
+},
+{
+"line": "L11",
+"word": "point",
+"start": 52.712,
+"end": 53.052
+},
+{
+"line": "L11",
+"word": "four",
+"start": 53.032,
+"end": 53.292
+},
+{
+"line": "L11",
+"word": "billion",
+"start": 53.272,
+"end": 53.672
+},
+{
+"line": "L11",
+"word": "years",
+"start": 53.652,
+"end": 53.952
+},
+{
+"line": "L11",
+"word": "ago,",
+"start": 53.932,
+"end": 54.172
+},
+{
+"line": "L11",
+"word": "a",
+"start": 54.152,
+"end": 54.652
+},
+{
+"line": "L11",
+"word": "day",
+"start": 54.632,
+"end": 54.812
+},
+{
+"line": "L11",
+"word": "lasted",
+"start": 54.792,
+"end": 55.152
+},
+{
+"line": "L11",
+"word": "just",
+"start": 55.132,
+"end": 55.452
+},
+{
+"line": "L11",
+"word": "over",
+"start": 55.432,
+"end": 55.712
+},
+{
+"line": "L11",
+"word": "eighteen",
+"start": 55.692,
+"end": 56.252
+},
+{
+"line": "L11",
+"word": "hours.",
+"start": 56.232,
+"end": 56.792
+},
+{
+"line": "L12",
+"word": "So",
+"start": 57.461,
+"end": 57.581
+},
+{
+"line": "L12",
+"word": "if",
+"start": 57.561,
+"end": 57.721
+},
+{
+"line": "L12",
+"word": "today",
+"start": 57.701,
+"end": 57.981
+},
+{
+"line": "L12",
+"word": "felt",
+"start": 57.961,
+"end": 58.201
+},
+{
+"line": "L12",
+"word": "long,",
+"start": 58.181,
+"end": 58.461
+},
+{
+"line": "L12",
+"word": "technically,",
+"start": 58.441,
+"end": 59.401
+},
+{
+"line": "L12",
+"word": "it",
+"start": 59.381,
+"end": 59.501
+},
+{
+"line": "L12",
+"word": "was.",
+"start": 59.481,
+"end": 59.781
+}
+]
+}

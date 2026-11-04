@@ -1,0 +1,67 @@
+{
+ "fps": 30,
+ "total": 1853,
+ "dur": 61.767,
+ "lines": {
+  "L01": {
+   "t0": 0.3,
+   "t1": 6.853,
+   "text": "Right now, you're spinning around with the Earth at up to sixteen hundred and seventy kilometers an hour. So what if it just stopped?"
+  },
+  "L02": {
+   "t0": 7.453,
+   "t1": 13.482,
+   "text": "Stop it suddenly, and everything not bolted to the bedrock keeps going east. You, your house, and the ocean."
+  },
+  "L03": {
+   "t0": 14.032,
+   "t1": 19.145,
+   "text": "Luckily, nothing can stop a planet that fast. Unluckily, let's slow it down gently instead."
+  },
+  "L04": {
+   "t0": 19.695,
+   "t1": 24.893,
+   "text": "Spinning is why Earth bulges in the middle. It's about twenty-one kilometers fatter at the equator."
+  },
+  "L05": {
+   "t0": 25.143,
+   "t1": 29.526,
+   "text": "Stop the spin, and that bulge sinks. The oceans slide downhill, toward the poles."
+  },
+  "L06": {
+   "t0": 29.776,
+   "t1": 33.69,
+   "text": "Two giant polar oceans. Most of Europe and Russia, underwater."
+  },
+  "L07": {
+   "t0": 33.94,
+   "t1": 38.205,
+   "text": "And around the middle, one brand new supercontinent, wrapped around the whole planet."
+  },
+  "L08": {
+   "t0": 38.755,
+   "t1": 44.812,
+   "text": "Then there's the Sun. With no spin, one day lasts a whole year. Six months of daylight, then six months of night."
+  },
+  "L09": {
+   "t0": 45.262,
+   "t1": 47.36,
+   "text": "Your alarm clock would be very confused."
+  },
+  "L10": {
+   "t0": 48.06,
+   "t1": 52.282,
+   "text": "Here's the thing: Earth really is slowing down. The Moon's tides work like a brake."
+  },
+  "L11": {
+   "t0": 52.532,
+   "t1": 56.871,
+   "text": "One point four billion years ago, a day lasted just over eighteen hours."
+  },
+  "L12": {
+   "t0": 57.421,
+   "t1": 59.872,
+   "text": "So if today felt long, technically, it was."
+  }
+ }
+}

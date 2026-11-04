@@ -1,5 +1,5 @@
 ---
-status: todo
+status: review
 series: what-if
 episode: 2
 slug: earth-stops-spinning
