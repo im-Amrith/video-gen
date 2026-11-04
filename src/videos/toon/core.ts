@@ -41,12 +41,22 @@ const mixCam = (a: Cam, b: Cam, k: number): Cam => ({
   fov: a.fov + (b.fov - a.fov) * k, roll: a.roll + (b.roll - a.roll) * k,
 });
 const full = (c: Shot): Cam => ({ fov: 40, roll: 0, ...c });
+/** owner rule: every shot moves. Each key's camera also arcs slowly around its look point (direction alternates per key),
+ *  ~2 deg/s, capped at 7 deg, so even a plain push-in has parallax and never reads as a static hold. */
+export const DRIFT = { rate: 0.001, max: 0.12 };
+const drift = (c: Cam, i: number, x: number): Cam => {
+  const a = (i % 2 ? -1 : 1) * Math.min(DRIFT.max, DRIFT.rate * Math.max(0, x));
+  if (!a) return c;
+  const dx = c.pos[0] - c.look[0], dz = c.pos[2] - c.look[2], cs = Math.cos(a), sn = Math.sin(a);
+  return { ...c, pos: [c.look[0] + dx * cs - dz * sn, c.pos[1], c.look[2] + dx * sn + dz * cs] };
+};
 export const runKeys = (keys: Key[], f: number) => {
-  let cur = full(keys[0].s(f));
+  let cur = drift(full(keys[0].s(f)), 0, f - keys[0].f);
   for (let i = 1; i < keys.length; i++) {
     const k = keys[i];
     if (f < k.f) break;
-    cur = k.cut ? full(k.s(f)) : mixCam(cur, full(k.s(f)), glide((f - k.f) / (k.dur ?? 24)));
+    const c = drift(full(k.s(f)), i, f - k.f);
+    cur = k.cut ? c : mixCam(cur, c, glide((f - k.f) / (k.dur ?? 24)));
   }
   return cur;
 };

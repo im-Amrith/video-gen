@@ -23,3 +23,14 @@ Engine: `cartoon-3d-short` 3D cartoon look (same engine as What If, `src/videos/
 - **Fill empty landscapes: 3 depth layers** — foreground props, midground set dressing, background hills or skyline; varied trees;
   small life (birds, dust, drifting clouds — built into the engine world).
 - Keep: the close-ups, expressions, glow and effects.
+
+## Owner feedback — 2026-11-04 #3 (after the local render of What If 01; applies to ALL episodes)
+Keep the gags, close-ups and expressions. Rules for every shot:
+1. **No dark or empty shot longer than 1.5 s** (a black hole interior is not a shot). Holes/shafts glow toward their bottom.
+2. **Long sections need visual progression**: a distinct colour/look per stage (tunnel: dark red rock -> glowing magma ->
+   liquid iron -> white-hot core -> cooling back). Never 20+ s of the same background.
+3. **Faces stay inside the frame in close-ups**: aim CUs at the face (look ~1.75 m for Pip), head-top margin >= 5 %.
+4. **Every shot moves**: no static camera longer than 2 s. Engine: every camera key also arcs ~2 deg/s around its look
+   point (`DRIFT` in src/videos/toon/core.ts, direction alternates per key); long holds also orbit/crane.
+5. **Payoff locations read instantly**: say the place with props (South Pole = ice, penguins, a SOUTH POLE sign).
+Local render: concurrency 2 works on the owner's PC (0.53 s/frame).

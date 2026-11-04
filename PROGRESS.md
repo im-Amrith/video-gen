@@ -31,6 +31,13 @@ Episodes changed (re-render only these; audio unchanged unless noted):
 - [x] History 03 emu-war (wheat tufts, brass casings, painted fence, hills + mountains + trees)
 - [x] History 04 1904-marathon (corn tufts, painted fences, rocks, trees + hill ring)
 
+## Feedback #3 pass (no dark/empty > 1.5 s, visual progression, faces in frame, every shot moves, payoffs read) — IN PROGRESS
+Engine change for all: every camera key arcs slowly around its look point (core.ts `DRIFT`), so all 10 need a re-render.
+When every box below is ticked, ALL 10 are ready to re-render in one go (`.\scripts\render_all.ps1 -Force -Concurrency 2`).
+- [x] What If 01 tunnel: glowing hole (no black interior), distinct layer looks (grey crust -> dark red -> magma with embers ->
+      liquid iron -> white-hot core with glints -> cooling back), CUs re-aimed at the face, Kola rig orbit crane, South Pole
+      payoff with penguins + SOUTH POLE sign + a bright crane shot (replaces the 3 s down-the-hole shot), Pip pops higher.
+
 ## How it's built
 - **Engine** `src/videos/toon/`: the bridge short's look modules (ink, lens blur, grade, two-tone shading, card shading,
   toon characters, painted textures) + generic world (light presets day/golden/night/space/magma, stars, clouds, camera-relative

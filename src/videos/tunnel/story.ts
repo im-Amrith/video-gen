@@ -8,6 +8,7 @@ import { Stage, CamInfo, person, blob, card, lidAt, light2D, spinAbout, Who, Exp
 import { Pen, INK, fxBurst, fxPuff, fxStars } from "../toon/toon";
 import { fxSpeed, fxSweat, fxHeat, fxImpact, fxBang, fxWhat, fxSparkle } from "../toon/fx";
 import { swingKid } from "../toon/toon";
+import { penguin } from "../toon/animals";
 import { SU_SWING } from "../toon/cast";
 import { buildSet } from "./set";
 
@@ -67,6 +68,7 @@ const KICKS: [number, number][] = [[DRILL_HOT, 1.2], [TJ + 0.05, 0.6], [tl("L07"
 const T = (f: number) => f / FPS;
 const tu = (y: number): V3 => [TUN[0], y, TUN[2]];
 const C = (base: V3, d: V3): V3 => [base[0] + d[0], base[1] + d[1], base[2] + d[2]];
+const PENG: [number, number][] = [[-2.9, -0.4], [-3.5, 1.0], [2.9, -1.0], [-1.1, -3.2], [1.4, -3.4]];
 const HERO_NP: V3 = [-3.0, 0, 0.7], BEAR: V3 = [-7.4, 0, -2.6], SCI: V3 = [SP[0] + 3.2, 0, SP[2] - 1.4];
 const KW: V3[] = [[KOLA[0] - 1.25, 0.4, KOLA[2] + 2.2], [KOLA[0] + 1.3, 0.4, KOLA[2] + 2.4]];
 export const CAMS: Record<number, Key[]> = {
@@ -76,7 +78,7 @@ export const CAMS: Record<number, Key[]> = {
     { f: 112, cut: true, s: (f) => dolly([-6.0, 1.6, 0.6], [-7.4, 1.45, -2.6], pushK(f, 112, 0.004, 0.008, 30), { fov: 36 }) }, // the bear's double take
   ],
   2: [
-    { f: 178, s: (f) => zoom(C(KOLA, [9, 5.5, 18]), C(KOLA, [0, 6, 0]), 44, pushK(f, 178, 0.0022)) }, // the rig
+    { f: 178, s: (f) => orbit(C(KOLA, [0, 6, 0]), 20.5 - 0.035 * (f - 178), 0.42 + 0.0065 * (f - 178), -0.6 + 0.03 * (f - 178), { fov: 44 }) }, // the rig: rising orbit crane (no static hold)
     { f: 262, cut: true, s: (f) => dolly(C(KOLA, [0.6, 1.9, 6.0]), C(KOLA, [0, 1.2, 2.2]), pushK(f, 262, 0.003), { fov: 40, roll: 0.03 }) }, // workers peer in
     { f: 330, cut: true, s: (f) => dolly(C(KOLA, [0.4, 2.3, 10.5]), C(KOLA, [0, 1.5, 1.2]), pushK(f, 330, 0.004, 0.009, 24), { fov: 40, roll: -0.05 }) }, // red-hot pipe, thermometer, workers
   ],
@@ -92,19 +94,19 @@ export const CAMS: Record<number, Key[]> = {
     { f: 598, dur: 28, s: (f) => dolly(C(TUN, [2.2, -0.4, 1.0]), C(TUN, [-1.0, 0.5, -0.6]), pushK(f, 598, 0.003), { fov: 56, roll: -0.05 }) }, // sees the Kola bit go by
   ],
   6: [
-    { f: 651, s: (f) => dolly(C(TUN, [2.3, 0.9, 0.9]), C(TUN, [0, 0.75, 0]), pushK(f, 651, 0.003), { fov: 50 }) },
+    { f: 651, s: (f) => dolly(C(TUN, [2.6, 1.5, 1.1]), C(TUN, [0, 1.35, 0]), pushK(f, 651, 0.003), { fov: 52 }) },
     { f: 712, cut: true, s: (f) => dolly(C(TUN, [0.5, 4.2, 0.6]), C(TUN, [0, -40, 0]), pushK(f, 712, 0.0025), { fov: 62, roll: 0.0 }) }, // down past Pip at the far glow
-    { f: 765, cut: true, s: (f) => dolly(C(TUN, [1.0, 0.95, 1.6]), C(TUN, [0, 0.95, 0]), pushK(f, 765, 0.004, 0.008, 24), { fov: 38, roll: 0.07 }) }, // CU: heavier!
+    { f: 765, cut: true, s: (f) => dolly(C(TUN, [1.2, 1.85, 1.9]), C(TUN, [0, 1.75, 0]), pushK(f, 765, 0.003, 0.006, 24), { fov: 42, roll: 0.07 }) }, // CU: heavier!
   ],
   7: [
-    { f: 809, s: (f) => orbit(C(TUN, [0, 0.6, 0]), 2.5, 0.6 + 0.012 * (f - 809), -0.6, { fov: 58 }) }, // into the liquid iron: orbit
-    { f: 880, cut: true, s: (f) => dolly(C(TUN, [0.9, 1.0, 1.3]), C(TUN, [0, 1.05, 0]), pushK(f, 880, 0.004), { fov: 36, roll: -0.05 }) }, // sweaty CU
-    { f: 930, dur: 22, s: (f) => orbit(C(TUN, [0, 0.6, 0]), 2.6, 2.6 + 0.01 * (f - 930), 1.1, { fov: 56, roll: 0.06 }) },
+    { f: 809, s: (f) => orbit(C(TUN, [0, 1.25, 0]), 2.7, 0.6 + 0.012 * (f - 809), -0.6, { fov: 58 }) }, // into the liquid iron: orbit
+    { f: 880, cut: true, s: (f) => dolly(C(TUN, [1.1, 1.85, 1.6]), C(TUN, [0, 1.75, 0]), pushK(f, 880, 0.003), { fov: 42, roll: -0.05 }) }, // sweaty CU
+    { f: 930, dur: 22, s: (f) => orbit(C(TUN, [0, 1.25, 0]), 2.8, 2.6 + 0.01 * (f - 930), 1.1, { fov: 56, roll: 0.06 }) },
   ],
   8: [
-    { f: 981, s: (f) => dolly(C(TUN, [0.8, -1.6, 1.4]), C(TUN, [0, 0.8, 0]), pushK(f, 981, 0.004, 0.01, 30), { fov: 64, roll: 0.1 }) }, // max speed
-    { f: 1062, cut: true, s: (f) => orbit(C(TUN, [0, 0.9, 0]), 2.6, -0.6 + 0.006 * (f - 1062), 0.2, { fov: 48 }) }, // weightless: slow orbit
-    { f: 1110, dur: 40, s: (f) => orbit(C(TUN, [0, 0.9, 0]), 1.9, -0.25 + 0.004 * (f - 1110), 0.1, { fov: 42 }) },
+    { f: 981, s: (f) => dolly(C(TUN, [0.9, -1.2, 1.6]), C(TUN, [0, 1.25, 0]), pushK(f, 981, 0.004, 0.01, 30), { fov: 64, roll: 0.1 }) }, // max speed
+    { f: 1062, cut: true, s: (f) => orbit(C(TUN, [0, 1.25, 0]), 2.8, -0.6 + 0.006 * (f - 1062), 0.2, { fov: 48 }) }, // weightless: slow orbit
+    { f: 1110, dur: 40, s: (f) => orbit(C(TUN, [0, 1.3, 0]), 2.3, -0.25 + 0.004 * (f - 1110), 0.1, { fov: 42 }) },
   ],
   9: [
     { f: 1157, s: (f) => dolly(C(TUN, [1.2, 3.6, 1.2]), C(TUN, [0, 1.3, 0]), pushK(f, 1157, 0.003), { fov: 54, roll: -0.05 }) }, // flipped, slowing
@@ -112,17 +114,17 @@ export const CAMS: Record<number, Key[]> = {
   ],
   10: [
     { f: 1245, s: (f) => zoom(C(SP, [10, 4.2, 14]), C(SP, [0, 0.8, -2]), 44, pushK(f, 1245, 0.002)) }, // South Pole: the hut, the pole, a scientist
-    { f: 1300, cut: true, s: (f) => dolly(C(SP, [0.6, 0.55, 4.0]), C(SP, [0, 0.6, 0.6]), pushK(f, 1300, 0.003, 0.007, 30), { fov: 40, roll: 0.03 }) }, // rim level: up pops Pip
-    { f: 1362, cut: true, s: (f) => dolly(C(SP, [0.4, 6.0, 1.4]), C(SP, [0, -6, 0]), pushK(f, 1362, 0.003), { fov: 48, roll: -0.06 }) }, // down the hole: away he goes
+    { f: 1300, cut: true, s: (f) => dolly(C(SP, [0.7, 1.0, 5.2]), C(SP, [0, 1.15, 0.2]), pushK(f, 1300, 0.003, 0.006, 30), { fov: 44, roll: 0.03 }) }, // rim level: up pops Pip
+    { f: 1362, cut: true, s: (f) => dolly(C(SP, [6.5, 3.4 + 0.02 * (f - 1362), 9.5]), C(SP, [-0.9, 0.7, -1.2]), pushK(f, 1362, 0.0025), { fov: 42, roll: -0.04 }) }, // crane up: penguins, sign, scientist wave him off (no dark hole shot)
   ],
   11: [
     { f: 1450, s: (f) => dolly(C(PG, [0.2, 1.6, 6.4]), C(PG, [0, 1.3, 0]), pushK(f, 1450, 0.0025), { fov: 30 }) },
     { f: 1512, dur: 28, s: (f) => dolly(C(PG, [1.0, 1.3, 5.6]), C(PG, [0, 1.2, 0]), pushK(f, 1512, 0.0025), { fov: 30, roll: 0.04 }) },
   ],
   12: [
-    { f: 1571, s: (f) => dolly(C(TUN, [1.8, -0.2, 1.4]), C(TUN, [0, 0.9, 0]), pushK(f, 1571, 0.0025), { fov: 50 }) }, // drifting through dusty air
-    { f: 1650, dur: 30, s: (f) => dolly(C(TUN, [-1.2, 1.4, 1.8]), C(TUN, [0, 0.9, 0]), pushK(f, 1650, 0.0025), { fov: 46, roll: -0.04 }) },
-    { f: 1735, cut: true, s: (f) => dolly(C(TUN, [0.8, 1.0, 1.6]), C(TUN, [0, 1.0, 0]), pushK(f, 1735, 0.003), { fov: 38 }) }, // the centre: stuck
+    { f: 1571, s: (f) => dolly(C(TUN, [2.0, 0.4, 1.5]), C(TUN, [0, 1.25, 0]), pushK(f, 1571, 0.0025), { fov: 50 }) }, // drifting through dusty air
+    { f: 1650, dur: 30, s: (f) => dolly(C(TUN, [-1.4, 1.7, 2.0]), C(TUN, [0, 1.25, 0]), pushK(f, 1650, 0.0025), { fov: 46, roll: -0.04 }) },
+    { f: 1735, cut: true, s: (f) => dolly(C(TUN, [1.0, 1.8, 1.9]), C(TUN, [0, 1.65, 0]), pushK(f, 1735, 0.003), { fov: 42 }) }, // the centre: stuck
     { f: 1790, dur: 40, s: (f) => dolly(C(TUN, [0.6, 6.0, 0.8]), C(TUN, [0, 0.4, 0]), pushK(f, 1790, 0.0015), { fov: 54, roll: 0.05 }) }, // "Forever": crane up the shaft
   ],
   13: [
@@ -178,6 +180,15 @@ const thermo = (p: Pen, u: number) => {
   p.ell(150, 480, 62, 62, "#e2453c", 12);
   p.poly([[134, 430 - 360 * u], [166, 430 - 360 * u], [166, 450], [134, 450]], "#e2453c", 0);
   for (let k = 0; k < 6; k++) p.stroke([[180, 100 + k * 60], [200, 100 + k * 60]], 6);
+};
+/** the SOUTH POLE sign on its post (640 x 1000), with the joke distance straight down */
+const spSign = (p: Pen) => {
+  const g = p.g;
+  p.poly([[295, 520], [345, 520], [345, 1000], [295, 1000]], "#8a5a32", 10);
+  p.poly([[20, 40], [620, 40], [620, 560], [20, 560]], "#f4e3bf", 14);
+  g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillStyle = "#c9302c"; g.font = "bold 150px sans-serif"; g.fillText("SOUTH", 320, 180); g.fillText("POLE", 320, 330);
+  g.fillStyle = "#2a3f6a"; g.font = "bold 36px sans-serif"; g.fillText("NORTH POLE: 12,714 km DOWN", 320, 470);
 };
 /** a clock pictogram (300 x 300) with hands at angle a */
 const clock = (p: Pen, a: number) => {
@@ -256,12 +267,22 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage, f: number) => {
     const tau = t - TA, hang = 0.62;
     let y: number;
     if (tau < 0) y = -0.5 * 9.8 * tau * tau; else if (tau < hang) y = 0; else y = -0.5 * 9.8 * (tau - hang) ** 2;
-    const hy = y - 0.85 * PIP_S; // Pip's waist level reaches the rim at the apex
+    const hy = y - 0.3 * PIP_S; // owner: pops out to the knees at the apex, face well clear of the rim
     const e = exprAt(t, [[0, "smile"], [TA - 0.3, "grin"], [TA + 0.25, "nervous"], [TA + hang, "shock"], [TA + hang + 0.25, "pained"]]);
     if (hy > -3.5) pip(cam, out, t, SP[0], hy, SP[2] + 0.1, e, { mode: "fall", swaps: [TA - 0.3, TA + 0.25, TA + hang] });
     const se: Expr = t < TA - 0.4 ? "neutral" : t < TA + hang + 0.2 ? "shock" : "nervous";
     out.places.push(person(cam, { i: 20, o: SCIENTIST, okey: "sci" }, SCI[0], 0, SCI[2], { side: false, mirror: false }, { mode: "stand", expr: se, blink: lidAt(t, 20, [TA - 0.4]), look: -1, wave: t > TA && t < TA + hang ? q(Math.sin(t * 12), 20) : undefined }, {}, 1.05));
     blob(cam, out, SCI[0], 0, SCI[2], 1.05);
+    // penguins: the instant "this is the South Pole" read (shocked + flapping when Pip pops up)
+    PENG.forEach(([dx, dz], k) => {
+      const sh = t > TA - 0.3 + k * 0.06, lid = lidAt(t, 30 + k, [TA - 0.3]), fl = sh ? q(Math.abs(Math.sin(t * 9 + k)), 6) : 0;
+      out.places.push({ key: `peng${k}|${sh ? 1 : 0}|${lid}|${fl}`, x: SP[0] + dx, y: 0, z: SP[2] + dz, scale: 0.92 + 0.1 * (k % 2), size: [600, 1000, 1], draw: (p) => penguin(p, sh, lid, fl) });
+      blob(cam, out, SP[0] + dx, 0, SP[2] + dz, 0.9);
+    });
+    // the SOUTH POLE sign: a painted billboard (always faces the lens, unlit so it reads instantly), placed per camera
+    const sg: V3 | null = f < 1300 ? [SP[0] + 2.3, 0, SP[2] + 3.2] : f >= 1362 ? [SP[0] + 0.2, 0, SP[2] + 1.0] : null;
+    if (sg) card(out, "spSign", spSign, sg[0], 1.25, sg[2], 1.6, 2.5, { cw: 640, ch: 1000 });
+    if (t > TA + hang && t < TA + hang + 0.6) { const u = q(seg(t, TA + hang, TA + hang + 0.6), 20); card(out, `spPuff${u}`, (p) => fxPuff(p, u), SP[0], 0.5, SP[2] + 0.2, 2.6, 2.0, { soft: true }); }
     if (t > TA - 0.35 && t < TA + 0.5) card(out, `what`, (p) => fxWhat(p), SCI[0] + 0.2, 2.75, SCI[2], 0.4, 0.6, { cw: 200, ch: 300 });
   }
   if (id === 11) {

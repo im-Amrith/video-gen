@@ -81,13 +81,21 @@ const hole = (b: Batch, root: THREE.Object3D, cx: number, cz: number) => {
   b.add(band, lam("hazardBand", () => ({ map: rep(hazard(), 6, 1) })), new THREE.Matrix4().makeTranslation(cx, 0.16, cz));
   const top = new THREE.RingGeometry(HOLE_R + 0.5, HOLE_R + 0.55, 48); top.rotateX(-Math.PI / 2);
   // shaft: inner wall fading to black (unlit, gradient down)
-  const shaftT = ctex("shaftFade", 64, 256, (g) => { const gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, "#5c5f70"); gr.addColorStop(0.25, "#2b2a36"); gr.addColorStop(1, "#000000"); g.fillStyle = gr; g.fillRect(0, 0, 64, 256); });
+  const shaftT = ctex("shaftFade", 64, 256, (g) => { const gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, "#5c5f70"); gr.addColorStop(0.2, "#3a2a36"); gr.addColorStop(0.55, "#6a2216"); gr.addColorStop(0.85, "#d8581e"); gr.addColorStop(1, "#ffb347"); g.fillStyle = gr; g.fillRect(0, 0, 64, 256); });
   const sh = new THREE.Mesh(new THREE.CylinderGeometry(HOLE_R, HOLE_R, 40, 40, 1, true), new THREE.MeshBasicMaterial({ map: shaftT, side: THREE.BackSide, fog: false }));
   sh.position.set(cx, -20, cz); root.add(sh);
-  const voidT = ctex("holeVoid", 256, 256, (g) => { const gr = g.createRadialGradient(128, 128, 0, 128, 128, 128); gr.addColorStop(0, "#000000"); gr.addColorStop(0.62, "#05040a"); gr.addColorStop(0.9, "#2b2a36"); gr.addColorStop(1, "#4a4c5c"); g.fillStyle = gr; g.fillRect(0, 0, 256, 256); });
+  const voidT = ctex("holeVoid2", 512, 512, (g) => {
+    // looking down the shaft: rings recede toward a glowing core (reads as "deep and hot", never a black disc)
+    const gr = g.createRadialGradient(256, 256, 0, 256, 256, 256);
+    gr.addColorStop(0, "#fff0b8"); gr.addColorStop(0.1, "#ffb347"); gr.addColorStop(0.24, "#e0602a"); gr.addColorStop(0.42, "#7a2418");
+    gr.addColorStop(0.62, "#3a1a24"); gr.addColorStop(0.85, "#3a3646"); gr.addColorStop(1, "#5a5c6c");
+    g.fillStyle = gr; g.fillRect(0, 0, 512, 512);
+    for (let k = 1; k <= 9; k++) { const r = 256 * Math.pow(k / 9, 1.6); g.strokeStyle = `rgba(20,8,16,${0.25 + 0.4 * (k / 9)})`; g.lineWidth = 2 + 5 * (k / 9); g.beginPath(); g.arc(256, 256, r, 0, Math.PI * 2); g.stroke(); }
+    for (let k = 0; k < 24; k++) { const a = (k / 24) * Math.PI * 2; g.strokeStyle = "rgba(20,8,16,.18)"; g.lineWidth = 2; g.beginPath(); g.moveTo(256 + Math.cos(a) * 30, 256 + Math.sin(a) * 30); g.lineTo(256 + Math.cos(a) * 256, 256 + Math.sin(a) * 256); g.stroke(); }
+  });
   const vd = new THREE.Mesh(new THREE.CircleGeometry(HOLE_R + 0.05, 48), new THREE.MeshBasicMaterial({ map: voidT, fog: false }));
   vd.rotation.x = -Math.PI / 2; vd.position.set(cx, 0.025, cz); root.add(vd);
-  const cap = new THREE.Mesh(new THREE.CircleGeometry(HOLE_R, 40), new THREE.MeshBasicMaterial({ color: "#000000" }));
+  const cap = new THREE.Mesh(new THREE.CircleGeometry(HOLE_R, 40), new THREE.MeshBasicMaterial({ color: "#ffb347" }));
   cap.rotation.x = -Math.PI / 2; cap.position.set(cx, -39.9, cz); root.add(cap);
 };
 /** low ice ridges / bergs on the horizon */
@@ -208,6 +216,8 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const dust = new Particles(root, 260, "#fff1d6", 0.09, "soft", 1.4);
   const bubbles = new Particles(root, 140, "#ffd27a", 0.5, "soft", 2.2);
   const coreGlow = new Glow(root, "#ffcf7a", 3.0);
+  const embers = new Particles(root, 220, "#ffa040", 0.16, "soft", 2.4);
+  const glints = new Particles(root, 160, "#ffffff", 0.12, "soft", 2.6);
   const kolaBit = new THREE.Mesh(new THREE.ConeGeometry(0.35, 1.4, 12).rotateZ(-Math.PI / 2), twoTone(new THREE.MeshPhongMaterial({ color: "#8d96a6", specular: "#ffffff", shininess: 60 }), 0.15));
   root.add(kolaBit);
   // NP / KOLA atmosphere
@@ -249,31 +259,37 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     // tunnel
     const inT = id >= 5 && id <= 9 || id === 12;
     wall.visible = lamps.visible = ribs.visible = inT;
-    dust.pts.visible = bubbles.pts.visible = false; coreGlow.sprite.visible = false; kolaBit.visible = false;
+    dust.pts.visible = bubbles.pts.visible = embers.pts.visible = glints.pts.visible = false; coreGlow.sprite.visible = false; kolaBit.visible = false;
     if (!inT) return;
     const sc = scrollAt(t), D = depthAt(t), air = airOn(id);
     U.uScroll.value = sc;
-    // colour by depth (km): crust brown -> mantle red-orange (cracks glow) -> outer core liquid iron -> inner core white-gold
+    // owner: a distinct look per layer, never 20 s of the same background. Depth below the nearest surface (km):
+    // crust grey stone + lamps -> dark red rock -> glowing magma (black crust, bright cracks) -> liquid iron orange ->
+    // white-hot inner core; symmetric, so it cools back through the same layers on the way out.
     const r = Math.abs(D - 6371);
-    const Dd = 6371 - r; // depth below the nearest surface
-    const k1 = smooth((Dd - 20) / 300), k2 = smooth((Dd - 2700) / 300), k3 = smooth((Dd - 5000) / 300);
-    const base = new THREE.Color("#7a5a44").lerp(new THREE.Color("#a8442a"), k1).lerp(new THREE.Color("#ff9a2a"), k2).lerp(new THREE.Color("#ffc860"), k3);
-    const band = new THREE.Color("#5a4234").lerp(new THREE.Color("#6a2014"), k1).lerp(new THREE.Color("#ffd060"), k2);
-    const glow = new THREE.Color("#ff6a1a").lerp(new THREE.Color("#ffe08a"), k2);
-    U.uBase.value.copy(base).multiplyScalar(1 + 0.35 * k2); U.uBand.value.copy(band);
-    U.uGlow.value.copy(glow); U.uGlowK.value = 0.15 + 1.4 * k1 + 1.2 * k2;
-    U.uFog.value.copy(new THREE.Color("#1a1420").lerp(new THREE.Color("#5a1a0c"), k1).lerp(new THREE.Color("#d8681e"), k2).lerp(new THREE.Color("#f0a040"), k3));
-    U.uFogD.value = lerp(140, 70, k2); U.uAir.value = air;
+    const Dd = 6371 - r;
+    const k1 = smooth((Dd - 30) / 120), k2 = smooth((Dd - 700) / 450), k3 = smooth((Dd - 2891) / 160), k4 = smooth((Dd - 5150) / 220);
+    const C_ = (h: string) => new THREE.Color(h);
+    const base = C_("#8a7a68").lerp(C_("#7a2418"), k1).lerp(C_("#3a1612"), k2).lerp(C_("#ff7a1a"), k3).lerp(C_("#fff0cc"), k4);
+    const band = C_("#5a4a3c").lerp(C_("#3a0c0a"), k1).lerp(C_("#1a0806"), k2).lerp(C_("#ffd060"), k3).lerp(C_("#ffffff"), k4);
+    const glow = C_("#ff6a1a").lerp(C_("#ff9a2a"), k2).lerp(C_("#ff3a08"), k3).lerp(C_("#ffd27a"), k4);
+    U.uBase.value.copy(base).multiplyScalar(1 + 0.25 * k3); U.uBand.value.copy(band);
+    U.uGlow.value.copy(glow); U.uGlowK.value = 0.1 + 0.45 * k1 + 1.9 * k2 * (1 - k3) + 0.6 * k3 * (1 - k4) + 0.2 * k4;
+    U.uFog.value.copy(C_("#1a1420").lerp(C_("#2a0a08"), k1).lerp(C_("#4a140a"), k2).lerp(C_("#d8681e"), k3).lerp(C_("#ffe6b0"), k4));
+    U.uFogD.value = lerp(140, 70, k3); U.uAir.value = air;
     void r;
     const per = 25;
     for (let k = 0; k < 16; k++) { const y = ((((k * per + sc) % 400) + 400) % 400) - 200; lamps.setMatrixAt(k, m4.compose(p4.set(TUN[0], y, TUN[2]), q4, s1)); }
     for (let k = 0; k < 32; k++) { const y = ((((k * per + 12.5 + sc) % 400) + 400) % 400) - 200; ribs.setMatrixAt(k, m4.compose(p4.set(TUN[0], y, TUN[2]), q4, s1)); }
     lamps.instanceMatrix.needsUpdate = true; ribs.instanceMatrix.needsUpdate = true;
-    lampM.color.set("#ffe9b8").multiplyScalar(1.8 * (1 - 0.5 * k2));
+    lampM.color.set("#ffe9b8").multiplyScalar(1.8 * (1 - 0.85 * k2)); ribs.visible = k3 < 0.5;
     // dust streaks up past the faller (air run: slow drifting dust)
     dust.pose((i, o) => { const y = (((hh(i, 1) * 120 + sc * (air ? 1 : 0.5)) % 120) + 120) % 120 - 60, a = hh(i, 2) * Math.PI * 2, rr = 0.6 + hh(i, 3) * 2.4; o.set(TUN[0] + Math.cos(a) * rr, y, TUN[2] + Math.sin(a) * rr); return true; });
-    bubbles.pose((i, o) => { const y = (((hh(i, 1) * 80 + sc * 0.7 + t * 2) % 80) + 80) % 80 - 40, a = hh(i, 2) * Math.PI * 2, rr = 2.6 + hh(i, 3) * 0.5; o.set(TUN[0] + Math.cos(a) * rr, y, TUN[2] + Math.sin(a) * rr); return true; }, k2 > 0.05);
-    coreGlow.set(TUN[0], -60, TUN[2], 24, 0.5 * k2 + 0.3 * k3, true);
+    bubbles.pose((i, o) => { const y = (((hh(i, 1) * 80 + sc * 0.7 + t * 2) % 80) + 80) % 80 - 40, a = hh(i, 2) * Math.PI * 2, rr = 2.6 + hh(i, 3) * 0.5; o.set(TUN[0] + Math.cos(a) * rr, y, TUN[2] + Math.sin(a) * rr); return true; }, k3 > 0.05 && k4 < 0.7);
+    // magma layer: embers streaking up; inner core: white glints
+    embers.pose((i, o) => { const y = (((hh(i, 4) * 100 + sc * 0.9 + t * 3) % 100) + 100) % 100 - 50, a = hh(i, 5) * Math.PI * 2, rr = 1.4 + hh(i, 6) * 1.7; o.set(TUN[0] + Math.cos(a) * rr, y, TUN[2] + Math.sin(a) * rr); return true; }, k2 > 0.2 && k3 < 0.6);
+    glints.pose((i, o) => { const y = (((hh(i, 7) * 60 + sc * 0.6) % 60) + 60) % 60 - 30, a = hh(i, 8) * Math.PI * 2 + t * 0.5, rr = 1.0 + hh(i, 9) * 2.0; o.set(TUN[0] + Math.cos(a) * rr, y, TUN[2] + Math.sin(a) * rr); return true; }, k4 > 0.3);
+    coreGlow.set(TUN[0], -60, TUN[2], 24, 0.25 * k2 + 0.3 * k3 + 0.3 * k4, true);
     // the Kola drill bit stuck in the wall, passing at 12 km
     const yb = (12.26 - D) * 1000 * F.SCROLL_PER_M;
     kolaBit.visible = Math.abs(yb) < 120;
