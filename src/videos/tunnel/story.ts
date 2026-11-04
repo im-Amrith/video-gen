@@ -8,7 +8,6 @@ import { Stage, CamInfo, person, blob, card, lidAt, light2D, spinAbout, Who, Exp
 import { Pen, INK, fxBurst, fxPuff, fxStars } from "../toon/toon";
 import { fxSpeed, fxSweat, fxHeat, fxImpact, fxBang, fxWhat, fxSparkle } from "../toon/fx";
 import { swingKid } from "../toon/toon";
-import { penguin } from "../toon/animals";
 import { SU_SWING } from "../toon/cast";
 import { buildSet } from "./set";
 
@@ -153,6 +152,8 @@ export const DOF: Dof[] = [
 const PIP: Outfit = { jacket: "#f2b531", pants: "#3b5b9a", boots: "#e2453c", hat: "cap", cap: "#e2453c", build: "kid" };
 const WORKER: Outfit = { jacket: "#e07a2a", pants: "#3d4a5c", boots: "#4a3426", hat: "cap", cap: "#f2c230", skin: "#f5c9a0" };
 const WORKER2: Outfit = { ...WORKER, skin: "#ecd0b6", moustache: "#4a3426", build: "stout" };
+const PARKA: Outfit = { jacket: "#e2453c", pants: "#2f3542", boots: "#2b2b33", hat: "hood", skin: "#f1c9a5" };
+const PARKA_COLS = ["#e2453c", "#f08a2c", "#3f6fb5", "#d23b3b", "#2f8a4f"];
 const SCIENTIST: Outfit = { jacket: "#d23b3b", pants: "#2f3542", boots: "#2b2b33", hat: "hair", hair: "#3a2a20", skin: "#c99067" };
 const W_PIP: Who = { i: 1, o: PIP, okey: "pip" };
 const PIP_S = 1.25; // Pip is drawn big: kid build at 1.25
@@ -273,11 +274,12 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage, f: number) => {
     const se: Expr = t < TA - 0.4 ? "neutral" : t < TA + hang + 0.2 ? "shock" : "nervous";
     out.places.push(person(cam, { i: 20, o: SCIENTIST, okey: "sci" }, SCI[0], 0, SCI[2], { side: false, mirror: false }, { mode: "stand", expr: se, blink: lidAt(t, 20, [TA - 0.4]), look: -1, wave: t > TA && t < TA + hang ? q(Math.sin(t * 12), 20) : undefined }, {}, 1.05));
     blob(cam, out, SCI[0], 0, SCI[2], 1.05);
-    // penguins: the instant "this is the South Pole" read (shocked + flapping when Pip pops up)
+    // research-station crew in parkas: the instant "this is the South Pole" read (they jump in shock when Pip pops up)
     PENG.forEach(([dx, dz], k) => {
-      const sh = t > TA - 0.3 + k * 0.06, lid = lidAt(t, 30 + k, [TA - 0.3]), fl = sh ? q(Math.abs(Math.sin(t * 9 + k)), 6) : 0;
-      out.places.push({ key: `peng${k}|${sh ? 1 : 0}|${lid}|${fl}`, x: SP[0] + dx, y: 0, z: SP[2] + dz, scale: 0.92 + 0.1 * (k % 2), size: [600, 1000, 1], draw: (p) => penguin(p, sh, lid, fl) });
-      blob(cam, out, SP[0] + dx, 0, SP[2] + dz, 0.9);
+      const sh = t > TA - 0.3 + k * 0.06, o: Outfit = { ...PARKA, jacket: PARKA_COLS[k % PARKA_COLS.length] };
+      out.places.push(person(cam, { i: 30 + k, o, okey: `crew${k}` }, SP[0] + dx, 0, SP[2] + dz, { side: false, mirror: false },
+        { mode: "stand", expr: sh ? (k % 2 ? "shock" : "nervous") : "neutral", blink: lidAt(t, 30 + k, [TA - 0.3]), look: dx > 0 ? -1 : 1, wave: sh && k % 2 === 0 ? q(Math.sin(t * 11 + k), 20) : undefined }, {}, 1.0));
+      blob(cam, out, SP[0] + dx, 0, SP[2] + dz, 1.0);
     });
     // the SOUTH POLE sign: a painted billboard (always faces the lens, unlit so it reads instantly), placed per camera
     const sg: V3 | null = f < 1300 ? [SP[0] + 2.3, 0, SP[2] + 3.2] : f >= 1362 ? [SP[0] + 0.2, 0, SP[2] + 1.0] : null;

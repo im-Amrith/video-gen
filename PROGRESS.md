@@ -36,7 +36,7 @@ Engine change for all: every camera key arcs slowly around its look point (core.
 When every box below is ticked, ALL 10 are ready to re-render in one go (`.\scripts\render_all.ps1 -Force -Concurrency 2`).
 - [x] What If 01 tunnel: glowing hole (no black interior), distinct layer looks (grey crust -> dark red -> magma with embers ->
       liquid iron -> white-hot core with glints -> cooling back), CUs re-aimed at the face, Kola rig orbit crane, South Pole
-      payoff with penguins + SOUTH POLE sign + a bright crane shot (replaces the 3 s down-the-hole shot), Pip pops higher.
+      payoff with research-station crew in parkas (replaced the penguins: none live at the Pole) + SOUTH POLE sign + a bright crane shot (replaces the 3 s down-the-hole shot), Pip pops higher.
 
 ## How it's built
 - **Engine** `src/videos/toon/`: the bridge short's look modules (ink, lens blur, grade, two-tone shading, card shading,
