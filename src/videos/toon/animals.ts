@@ -46,3 +46,16 @@ export const hourglass = (p: Pen, u: number) => {
   p.poly([[80 + (top - 60) * 0.43, top], [220 - (top - 60) * 0.43, top], [160, 195], [140, 195]], "#f2c230", 0);
   p.poly([[80, 340], [220, 340], [220 - (340 - bot) * 0.0, bot], [80, bot]], "#f2c230", 0);
 };
+/** shrimp (400 x 300), facing right; shades = party sunglasses; k = wiggle phase */
+export const shrimp = (p: Pen, shades = false, k = 0) => {
+  const segs = 6;
+  for (let i = segs - 1; i >= 0; i--) {
+    const a = Math.PI * 0.95 - (i / segs) * Math.PI * 0.85, r = 110, x = 200 + r * Math.cos(a) * 0.9, y = 170 - r * Math.sin(a) * 0.7 + Math.sin(k + i) * 4;
+    p.ell(x, y, 34 - i * 2.5, 30 - i * 2, "#f28a7a", 8);
+  }
+  p.poly([[60, 175], [20, 140 + Math.sin(k) * 10], [30, 205]], "#f28a7a", 8);
+  for (let i = 0; i < 4; i++) p.stroke([[150 + i * 25, 215], [140 + i * 25, 255]], 6);
+  p.stroke([[300, 110], [370, 40 + Math.sin(k) * 10]], 5); p.stroke([[300, 115], [380, 70 + Math.sin(k + 1) * 10]], 5);
+  if (shades) { p.poly([[258, 100], [318, 100], [312, 125], [262, 125]], "#1d1a24", 6); p.stroke([[250, 104], [326, 104]], 6); }
+  else { p.ell(290, 108, 13, 13, "#ffffff", 6); p.dot(292, 108, 7); }
+};

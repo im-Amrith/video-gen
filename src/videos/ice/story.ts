@@ -48,15 +48,15 @@ const ROOF: V3 = [TOWER[0], FLOORS * FLOORH + 1.0, TOWER[2]];
 const PIP4: V3 = [2, 1.0, 4.2];
 export const CAMS: Record<number, Key[]> = {
   1: [
-    { f: 0, s: (f) => dolly(C(ROOF, [2.2, 1.2, 5.4]), C(ROOF, [0.4, 1.3, 2.5]), pushK(f, 0, 0.003), { fov: 42, roll: -0.05 }) }, // Pip on the last dry roof
+    { f: 0, s: (f) => dolly(C(ROOF, [2.6, 3.4, 10.5]), C(ROOF, [0.3, -2.0, 3.0]), pushK(f, 0, 0.003), { fov: 42, roll: -0.05 }) }, // Pip on the roof edge, the drowned tower through the water
     { f: 70, dur: 40, s: (f) => dolly(C(ROOF, [14, 9, 30]), C(ROOF, [0, 0, 0]), pushK(f, 70, 0.002), { fov: 46, roll: 0.04 }) }, // crane out: nothing but sea
-    { f: 140, cut: true, s: (f) => dolly(C(ROOF, [1.4, 0.4, 4.4]), C(ROOF, [0.4, 1.0, 2.5]), pushK(f, 140, 0.004, 0.008, 30), { fov: 38 }) }, // "twenty-storey building"
+    { f: 140, cut: true, s: (f) => dolly(C(ROOF, [1.2, 0.6, 6.6]), C(ROOF, [0.4, 1.0, 2.5]), pushK(f, 140, 0.004, 0.008, 30), { fov: 38 }) }, // "twenty-storey building"
   ],
   2: [
     { f: 197, s: (f) => dolly(C(ICE, [-6, 3.2, 9]), C(ICE, [-6, 1.6, -2]), pushK(f, 197, 0.0025), { fov: 44 }) }, // the big pile (91 %)
     { f: 320, dur: 30, s: (f) => dolly(C(ICE, [2.0, 2.0, 7.5]), C(ICE, [1.9, 0.9, 1.3]), pushK(f, 320, 0.0025), { fov: 42, roll: 0.04 }) }, // Greenland pile (8 %)
   ],
-  3: [{ f: 402, s: (f) => dolly(C(ICE, [5.6, 0.7, 5.4]), C(ICE, [4.6, 0.5, 2.6]), pushK(f, 402, 0.004, 0.008, 30), { fov: 38, roll: -0.05 }) }], // one tiny cube
+  3: [{ f: 402, s: (f) => dolly(C(ICE, [6.6, 1.5, 8.2]), C(ICE, [4.2, 0.8, 2.8]), pushK(f, 402, 0.004, 0.008, 30), { fov: 40, roll: -0.05 }) }], // one tiny cube
   4: [
     { f: 508, s: (f) => dolly([5, 1.2, 16], [1, 1.2, 3], pushK(f, 508, 0.003), { fov: 46 }) }, // the beach, the boardwalk
     { f: 570, dur: 26, s: (f) => dolly([4, 1.6, 9.5], [2, 1.6, 4], pushK(f, 570, 0.003), { fov: 42, roll: 0.05 }) },
@@ -65,7 +65,7 @@ export const CAMS: Record<number, Key[]> = {
     { f: 624, s: (f) => { const y = seaAt(5, f / FPS); return dolly(C(TOWER, [9, y + 2.5, 22]), C(TOWER, [0, y + 1.5, 0]), 1, { fov: 44 }); } }, // the waterline climbs the tower
     { f: 712, cut: true, s: (f) => dolly(C(TOWER, [1.5, 11 * FLOORH + 1.4, 12]), C(TOWER, [0, 10 * FLOORH + 1.6, 6]), pushK(f, 712, 0.004), { fov: 40, roll: -0.04 }) }, // window shopping
   ],
-  6: [{ f: 781, s: (f) => zoom([30, 140, 90], [-20, 0, -40], 46, pushK(f, 781, 0.002)) }], // drowned coast from above
+  6: [{ f: 781, s: (f) => zoom([10, 48, 30], [-28, 14, -52], 50, pushK(f, 781, 0.002)) }], // drowned town: only the hill and the tower top
   7: [
     { f: 909, s: (f) => orbit(C(FLOE, [0, 1.4, 1.5]), 11, 0.4 + 0.004 * (f - 909), 3.0, { fov: 44 }) }, // bear on the floe, gauge steady
     { f: 1000, dur: 30, s: (f) => dolly(C(FLOE, [5.6, 1.6, 9]), C(FLOE, [4.5, 1.6, 4]), pushK(f, 1000, 0.003), { fov: 40 }) }, // the gauge: barely moves
@@ -77,7 +77,7 @@ export const CAMS: Record<number, Key[]> = {
   9: [{ f: 1245, s: (f) => zoom(C(GREEN, [10, 8, 60]), C(GREEN, [-10, 10, -60]), 46, pushK(f, 1245, 0.003, 0.007, 30), { roll: -0.04 }) }],
   10: [
     { f: 1335, s: (f) => dolly([3.5, 1.2, 9.5], [2, 1.0, 5.5], pushK(f, 1335, 0.0025), { fov: 42 }) }, // deck chair
-    { f: 1440, cut: true, s: (f) => dolly([2.8, 0.5, 7.2], [2, 0.4, 5.6], pushK(f, 1440, 0.004, 0.009, 24), { fov: 40, roll: 0.06 }) }, // the toes get wet
+    { f: 1440, cut: true, s: (f) => dolly([3.6, 1.0, 9.8], [2, 0.8, 5.5], pushK(f, 1440, 0.004, 0.009, 24), { fov: 40, roll: 0.06 }) }, // the toes get wet
   ],
   11: [
     { f: 1517, s: (f) => dolly(C(HILL, [24, 10, 46]), C(HILL, [6, 14, 14]), pushK(f, 1517, 0.002), { fov: 44 }) }, // up the hill
@@ -96,7 +96,7 @@ export const DOF: Dof[] = [
 
 const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   if (id === 1) {
-    pip(cam, out, t, ROOF[0] + 0.4, ROOF[1], ROOF[2] + 2.5, exprAt(t, [[0, "nervous"], [tl("L01", 3.0), "shock"], [tl("L01", 4.6), "dazed"]]), { mode: "sit" });
+    pip(cam, out, t, ROOF[0] + 0.4, ROOF[1], ROOF[2] + 5.4, exprAt(t, [[0, "nervous"], [tl("L01", 3.0), "shock"], [tl("L01", 4.6), "dazed"]]), { mode: "sit" });
     const jump = ((t * 0.7) % 1); if (jump < 0.5) card(out, `fishj${q(jump, 20)}`, (p) => fish(p, "#f08a2c", Math.sin(t * 20)), ROOF[0] + 3.5 - jump * 2, ROOF[1] - 1.2 + Math.sin(jump * Math.PI * 2) * 1.6, ROOF[2] + 4, 0.8, 0.48, { cw: 400, ch: 240, rot: -0.6 + jump * 1.2 });
     if (t > tl("L01", 4.3) && t < tl("L01", 5.2)) card(out, "bang1", (p) => fxBang(p), ROOF[0] + 0.6, ROOF[1] + 2.4, ROOF[2] + 2.5, 0.4, 0.6, { cw: 200, ch: 300 });
   }
@@ -134,7 +134,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     pip(cam, out, t, 2, 0, 5.5, exprAt(t, [[0, "smile_closed"], [tl("L10", 2.4), "smile"], [WET, "shock"]]), { mode: wet ? "stand" : "sit", swaps: [WET] });
     if (!wet) card(out, `hg${q(seg(t, tl("L10", 0.4), tl("L10", 3.2)), 10)}`, (p) => hourglass(p, seg(t, tl("L10", 0.4), tl("L10", 3.2))), 3.1, 1.3, 5.6, 0.6, 0.8, { cw: 300, ch: 400 });
     if (wet && t < WET + 0.8) card(out, "bang10", (p) => fxBang(p), 2.2, 2.9, 5.5, 0.4, 0.6, { cw: 200, ch: 300 });
-    if (wet) card(out, `imp10${q(seg(t, WET, WET + 0.4), 12)}`, (p) => fxImpact(p, seg(t, WET, WET + 0.4), "#e8f8ff", "#7fc8f0"), 2.3, 0.3, 5.9, 1.4, 1.4, { cw: 500, ch: 500, soft: true });
+    if (wet) if (t < WET + 0.45) card(out, `imp10${q(seg(t, WET, WET + 0.4), 12)}`, (p) => fxImpact(p, seg(t, WET, WET + 0.4), "#e8f8ff", "#7fc8f0"), 2.4, 0.15, 5.6, 0.7, 0.7, { cw: 500, ch: 500, soft: true });
   }
   if (id === 11) {
     const u = seg(t, tl("L11", -0.5), tl("L11", 2.6)), x = HILL[0] + lerp(14, 6, u), z = HILL[2] + lerp(26, 18, u), y = 22 * Math.sqrt(Math.max(0, 1 - ((x - HILL[0]) / 42) ** 2 - ((z - HILL[2]) / 34) ** 2));

@@ -1,0 +1,62 @@
+{
+ "fps": 30,
+ "total": 1753,
+ "dur": 58.433,
+ "lines": {
+  "L01": {
+   "t0": 0.3,
+   "t1": 5.162,
+   "text": "If the Sun vanished right now, you wouldn't even notice for eight minutes and twenty seconds."
+  },
+  "L02": {
+   "t0": 5.812,
+   "t1": 11.077,
+   "text": "That's how long sunlight takes to reach us. And gravity travels at exactly the same speed."
+  },
+  "L03": {
+   "t0": 11.327,
+   "t1": 15.131,
+   "text": "So for eight minutes, Earth keeps happily circling a Sun that isn't there."
+  },
+  "L04": {
+   "t0": 15.831,
+   "t1": 19.829,
+   "text": "Then, lights out. Even the Moon goes dark. It was only ever a mirror."
+  },
+  "L05": {
+   "t0": 20.379,
+   "t1": 25.846,
+   "text": "With nothing to orbit, Earth flies off in a straight line, at thirty kilometers every second."
+  },
+  "L05b": {
+   "t0": 26.396,
+   "t1": 30.029,
+   "text": "The Moon tags along for the ride, still orbiting us, in the dark."
+  },
+  "L06": {
+   "t0": 30.279,
+   "t1": 36.223,
+   "text": "Luckily, you won't freeze instantly. Unluckily, the first days each get about twenty degrees colder."
+  },
+  "L07": {
+   "t0": 36.473,
+   "t1": 39.049,
+   "text": "Within a week, the whole planet is below freezing."
+  },
+  "L08": {
+   "t0": 39.599,
+   "t1": 46.862,
+   "text": "The oceans freeze on top, but that ice works like a blanket. Underneath, the water stays liquid for thousands of years."
+  },
+  "L09": {
+   "t0": 47.112,
+   "t1": 52.615,
+   "text": "And down by the volcanic vents, tube worms and shrimp that never needed sunlight just carry on."
+  },
+  "L10": {
+   "t0": 53.315,
+   "t1": 56.422,
+   "text": "So the real survivors of the apocalypse? The shrimp."
+  }
+ }
+}

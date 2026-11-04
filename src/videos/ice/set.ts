@@ -28,8 +28,9 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const tw = 12, td = 12, th = FLOORS * FLOORH;
   const tm = lam("towerFace", () => ({ map: facadeHD("towerFace", tw, th, { wall: "#d9c9a8", shutter: "#2f5f6a" }) }));
   b.add(boxGeo(V(TOWER[0] - tw / 2, 0.4, TOWER[2] - td / 2), V(TOWER[0] + tw / 2, 0.4 + th, TOWER[2] + td / 2)), tm);
-  b.add(boxGeo(V(TOWER[0] - tw / 2 - 0.3, th + 0.4, TOWER[2] - td / 2 - 0.3), V(TOWER[0] + tw / 2 + 0.3, th + 1.0, TOWER[2] + td / 2 + 0.3)), lam("towerCap", () => ({ color: "#b7a68a" })));
-  b.add(boxGeo(V(TOWER[0] - 1.5, th + 1.0, TOWER[2] - 1.5), V(TOWER[0] + 1.5, th + 3.0, TOWER[2] + 1.5)), lam("towerHut", () => ({ color: "#c94a3a" })));
+  b.add(boxGeo(V(TOWER[0] - tw / 2 - 0.3, th + 0.4, TOWER[2] - td / 2 - 0.3), V(TOWER[0] + tw / 2 + 0.3, th + 1.0, TOWER[2] + td / 2 + 0.3)), lam("towerCap", () => ({ color: "#9aa0aa" })));
+  for (let k = 0; k < 24; k++) { const a = (k / 24) * Math.PI * 2, rx = TOWER[0] + Math.max(-1, Math.min(1, 1.25 * Math.cos(a))) * (tw / 2), rz = TOWER[2] + Math.max(-1, Math.min(1, 1.25 * Math.sin(a))) * (td / 2); b.add(new THREE.CylinderGeometry(0.05, 0.05, 1.1).translate(0, 0.55, 0), lam("rail", () => ({ color: "#e2453c" })), new THREE.Matrix4().makeTranslation(rx, th + 1.0, rz)); }
+  b.add(new THREE.CylinderGeometry(1.2, 1.2, 2.4, 20).translate(0, 1.2, 0), lam("waterTank", () => ({ color: "#5d8fb8" })), new THREE.Matrix4().makeTranslation(TOWER[0] - 3.5, th + 1.0, TOWER[2] - 3.5));
   // the hill with its house (safe)
   const hg = new THREE.SphereGeometry(1, 40, 24, 0, Math.PI * 2, 0, Math.PI / 2); hg.scale(42, 22, 34);
   b.add(hg, lam("hillGrass", () => ({ map: rep(grassHD(), 6, 6) })), new THREE.Matrix4().makeTranslation(HILL[0], 0, HILL[2]));
@@ -85,6 +86,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     const town = [1, 4, 5, 6, 10, 11].includes(id);
     townSea.visible = town; floeSea.visible = id === 7; greenSea.visible = id === 9;
     townSea.position.y = seaAt(id, t);
+    const tm = townSea.material as THREE.MeshLambertMaterial; tm.transparent = id === 1; tm.opacity = id === 1 ? 0.62 : 1; tm.depthWrite = id !== 1;
     floeSea.position.y = 0.02 + 0.03 * Math.sin(t * 1.3);
     greenSea.position.y = smooth(seg(t, 41.5, 44)) * 3;
     const u = cubeAt(t);

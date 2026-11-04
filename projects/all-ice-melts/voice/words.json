@@ -1,0 +1,983 @@
+{
+"note": "estimated from voiced audio + character counts (Whisper blocked in the cloud)",
+"words": [
+{
+"line": "L01",
+"word": "If",
+"start": 0.34,
+"end": 0.46
+},
+{
+"line": "L01",
+"word": "all",
+"start": 0.44,
+"end": 0.6
+},
+{
+"line": "L01",
+"word": "the",
+"start": 0.58,
+"end": 0.74
+},
+{
+"line": "L01",
+"word": "ice",
+"start": 0.72,
+"end": 0.88
+},
+{
+"line": "L01",
+"word": "on",
+"start": 0.86,
+"end": 0.98
+},
+{
+"line": "L01",
+"word": "Earth",
+"start": 0.96,
+"end": 1.28
+},
+{
+"line": "L01",
+"word": "melted,",
+"start": 1.26,
+"end": 1.66
+},
+{
+"line": "L01",
+"word": "the",
+"start": 1.64,
+"end": 1.86
+},
+{
+"line": "L01",
+"word": "sea",
+"start": 1.84,
+"end": 2.32
+},
+{
+"line": "L01",
+"word": "would",
+"start": 2.3,
+"end": 2.56
+},
+{
+"line": "L01",
+"word": "rise",
+"start": 2.54,
+"end": 2.76
+},
+{
+"line": "L01",
+"word": "about",
+"start": 2.74,
+"end": 3.0
+},
+{
+"line": "L01",
+"word": "seventy",
+"start": 2.98,
+"end": 3.38
+},
+{
+"line": "L01",
+"word": "meters.",
+"start": 3.36,
+"end": 3.7
+},
+{
+"line": "L01",
+"word": "That's",
+"start": 3.68,
+"end": 4.0
+},
+{
+"line": "L01",
+"word": "a",
+"start": 3.98,
+"end": 4.2
+},
+{
+"line": "L01",
+"word": "twenty-storey",
+"start": 4.18,
+"end": 5.36
+},
+{
+"line": "L01",
+"word": "building.",
+"start": 5.34,
+"end": 5.84
+},
+{
+"line": "L02",
+"word": "Almost",
+"start": 6.583,
+"end": 6.923
+},
+{
+"line": "L02",
+"word": "all",
+"start": 6.903,
+"end": 7.103
+},
+{
+"line": "L02",
+"word": "of",
+"start": 7.083,
+"end": 7.203
+},
+{
+"line": "L02",
+"word": "that",
+"start": 7.183,
+"end": 7.423
+},
+{
+"line": "L02",
+"word": "ice",
+"start": 7.403,
+"end": 7.583
+},
+{
+"line": "L02",
+"word": "sits",
+"start": 7.563,
+"end": 7.783
+},
+{
+"line": "L02",
+"word": "in",
+"start": 7.763,
+"end": 7.943
+},
+{
+"line": "L02",
+"word": "two",
+"start": 7.923,
+"end": 8.123
+},
+{
+"line": "L02",
+"word": "places.",
+"start": 8.103,
+"end": 8.543
+},
+{
+"line": "L02",
+"word": "Antarctica",
+"start": 8.523,
+"end": 9.623
+},
+{
+"line": "L02",
+"word": "holds",
+"start": 9.603,
+"end": 9.903
+},
+{
+"line": "L02",
+"word": "about",
+"start": 9.883,
+"end": 10.163
+},
+{
+"line": "L02",
+"word": "ninety-one",
+"start": 10.143,
+"end": 10.743
+},
+{
+"line": "L02",
+"word": "percent.",
+"start": 10.723,
+"end": 11.203
+},
+{
+"line": "L02",
+"word": "Greenland,",
+"start": 11.183,
+"end": 12.243
+},
+{
+"line": "L02",
+"word": "about",
+"start": 12.223,
+"end": 12.643
+},
+{
+"line": "L02",
+"word": "eight.",
+"start": 12.623,
+"end": 13.063
+},
+{
+"line": "L03",
+"word": "Every",
+"start": 13.421,
+"end": 13.681
+},
+{
+"line": "L03",
+"word": "mountain",
+"start": 13.661,
+"end": 14.081
+},
+{
+"line": "L03",
+"word": "glacier",
+"start": 14.061,
+"end": 14.421
+},
+{
+"line": "L03",
+"word": "on",
+"start": 14.401,
+"end": 14.521
+},
+{
+"line": "L03",
+"word": "the",
+"start": 14.501,
+"end": 14.661
+},
+{
+"line": "L03",
+"word": "planet?",
+"start": 14.641,
+"end": 15.501
+},
+{
+"line": "L03",
+"word": "Just",
+"start": 15.481,
+"end": 15.761
+},
+{
+"line": "L03",
+"word": "one",
+"start": 15.741,
+"end": 15.901
+},
+{
+"line": "L03",
+"word": "percent.",
+"start": 15.881,
+"end": 16.301
+},
+{
+"line": "L04",
+"word": "Melt",
+"start": 16.97,
+"end": 17.17
+},
+{
+"line": "L04",
+"word": "it,",
+"start": 17.15,
+"end": 17.35
+},
+{
+"line": "L04",
+"word": "and",
+"start": 17.33,
+"end": 17.49
+},
+{
+"line": "L04",
+"word": "the",
+"start": 17.47,
+"end": 17.63
+},
+{
+"line": "L04",
+"word": "sea",
+"start": 17.61,
+"end": 17.75
+},
+{
+"line": "L04",
+"word": "comes",
+"start": 17.73,
+"end": 18.03
+},
+{
+"line": "L04",
+"word": "up",
+"start": 18.01,
+"end": 18.11
+},
+{
+"line": "L04",
+"word": "the",
+"start": 18.09,
+"end": 18.33
+},
+{
+"line": "L04",
+"word": "beach,",
+"start": 18.31,
+"end": 18.95
+},
+{
+"line": "L04",
+"word": "over",
+"start": 18.93,
+"end": 19.13
+},
+{
+"line": "L04",
+"word": "the",
+"start": 19.11,
+"end": 19.27
+},
+{
+"line": "L04",
+"word": "boardwalk,",
+"start": 19.25,
+"end": 19.81
+},
+{
+"line": "L04",
+"word": "and",
+"start": 19.79,
+"end": 19.93
+},
+{
+"line": "L04",
+"word": "into",
+"start": 19.91,
+"end": 20.17
+},
+{
+"line": "L04",
+"word": "town.",
+"start": 20.15,
+"end": 20.41
+},
+{
+"line": "L05",
+"word": "First",
+"start": 20.837,
+"end": 21.077
+},
+{
+"line": "L05",
+"word": "floor,",
+"start": 21.057,
+"end": 21.397
+},
+{
+"line": "L05",
+"word": "gone.",
+"start": 21.377,
+"end": 21.617
+},
+{
+"line": "L05",
+"word": "Fifth",
+"start": 21.597,
+"end": 22.277
+},
+{
+"line": "L05",
+"word": "floor,",
+"start": 22.257,
+"end": 22.637
+},
+{
+"line": "L05",
+"word": "gone.",
+"start": 22.617,
+"end": 22.877
+},
+{
+"line": "L05",
+"word": "By",
+"start": 22.857,
+"end": 23.397
+},
+{
+"line": "L05",
+"word": "the",
+"start": 23.377,
+"end": 23.537
+},
+{
+"line": "L05",
+"word": "tenth",
+"start": 23.517,
+"end": 23.817
+},
+{
+"line": "L05",
+"word": "floor,",
+"start": 23.797,
+"end": 24.117
+},
+{
+"line": "L05",
+"word": "the",
+"start": 24.097,
+"end": 24.257
+},
+{
+"line": "L05",
+"word": "fish",
+"start": 24.237,
+"end": 24.457
+},
+{
+"line": "L05",
+"word": "are",
+"start": 24.437,
+"end": 24.597
+},
+{
+"line": "L05",
+"word": "window",
+"start": 24.577,
+"end": 24.877
+},
+{
+"line": "L05",
+"word": "shopping.",
+"start": 24.857,
+"end": 25.337
+},
+{
+"line": "L06",
+"word": "Low",
+"start": 26.06,
+"end": 26.22
+},
+{
+"line": "L06",
+"word": "countries",
+"start": 26.2,
+"end": 26.74
+},
+{
+"line": "L06",
+"word": "vanish,",
+"start": 26.72,
+"end": 27.5
+},
+{
+"line": "L06",
+"word": "and",
+"start": 27.48,
+"end": 27.66
+},
+{
+"line": "L06",
+"word": "every",
+"start": 27.64,
+"end": 27.96
+},
+{
+"line": "L06",
+"word": "coastline",
+"start": 27.94,
+"end": 28.44
+},
+{
+"line": "L06",
+"word": "on",
+"start": 28.42,
+"end": 28.54
+},
+{
+"line": "L06",
+"word": "the",
+"start": 28.52,
+"end": 28.68
+},
+{
+"line": "L06",
+"word": "map",
+"start": 28.66,
+"end": 28.82
+},
+{
+"line": "L06",
+"word": "gets",
+"start": 28.8,
+"end": 29.22
+},
+{
+"line": "L06",
+"word": "redrawn.",
+"start": 29.2,
+"end": 29.62
+},
+{
+"line": "L07",
+"word": "But",
+"start": 30.333,
+"end": 30.553
+},
+{
+"line": "L07",
+"word": "here's",
+"start": 30.533,
+"end": 30.933
+},
+{
+"line": "L07",
+"word": "the",
+"start": 30.913,
+"end": 31.073
+},
+{
+"line": "L07",
+"word": "twist.",
+"start": 31.053,
+"end": 31.753
+},
+{
+"line": "L07",
+"word": "The",
+"start": 31.733,
+"end": 31.893
+},
+{
+"line": "L07",
+"word": "ice",
+"start": 31.873,
+"end": 32.053
+},
+{
+"line": "L07",
+"word": "floating",
+"start": 32.033,
+"end": 32.453
+},
+{
+"line": "L07",
+"word": "at",
+"start": 32.433,
+"end": 32.553
+},
+{
+"line": "L07",
+"word": "the",
+"start": 32.533,
+"end": 32.793
+},
+{
+"line": "L07",
+"word": "North",
+"start": 32.773,
+"end": 33.353
+},
+{
+"line": "L07",
+"word": "Pole?",
+"start": 33.333,
+"end": 33.693
+},
+{
+"line": "L07",
+"word": "Melt",
+"start": 33.673,
+"end": 33.873
+},
+{
+"line": "L07",
+"word": "all",
+"start": 33.853,
+"end": 34.013
+},
+{
+"line": "L07",
+"word": "of",
+"start": 33.993,
+"end": 34.093
+},
+{
+"line": "L07",
+"word": "it,",
+"start": 34.073,
+"end": 34.233
+},
+{
+"line": "L07",
+"word": "and",
+"start": 34.213,
+"end": 34.373
+},
+{
+"line": "L07",
+"word": "the",
+"start": 34.353,
+"end": 34.513
+},
+{
+"line": "L07",
+"word": "sea",
+"start": 34.493,
+"end": 34.653
+},
+{
+"line": "L07",
+"word": "barely",
+"start": 34.633,
+"end": 34.913
+},
+{
+"line": "L07",
+"word": "moves.",
+"start": 34.893,
+"end": 35.353
+},
+{
+"line": "L08",
+"word": "Floating",
+"start": 35.762,
+"end": 36.182
+},
+{
+"line": "L08",
+"word": "ice",
+"start": 36.162,
+"end": 36.322
+},
+{
+"line": "L08",
+"word": "already",
+"start": 36.302,
+"end": 36.742
+},
+{
+"line": "L08",
+"word": "pushes",
+"start": 36.722,
+"end": 37.082
+},
+{
+"line": "L08",
+"word": "aside",
+"start": 37.062,
+"end": 37.342
+},
+{
+"line": "L08",
+"word": "its",
+"start": 37.322,
+"end": 37.522
+},
+{
+"line": "L08",
+"word": "own",
+"start": 37.502,
+"end": 37.682
+},
+{
+"line": "L08",
+"word": "weight",
+"start": 37.662,
+"end": 37.982
+},
+{
+"line": "L08",
+"word": "in",
+"start": 37.962,
+"end": 38.142
+},
+{
+"line": "L08",
+"word": "water,",
+"start": 38.122,
+"end": 38.462
+},
+{
+"line": "L08",
+"word": "just",
+"start": 38.442,
+"end": 39.142
+},
+{
+"line": "L08",
+"word": "like",
+"start": 39.122,
+"end": 39.422
+},
+{
+"line": "L08",
+"word": "an",
+"start": 39.402,
+"end": 39.602
+},
+{
+"line": "L08",
+"word": "ice",
+"start": 39.582,
+"end": 39.742
+},
+{
+"line": "L08",
+"word": "cube",
+"start": 39.722,
+"end": 40.102
+},
+{
+"line": "L08",
+"word": "melting",
+"start": 40.082,
+"end": 40.522
+},
+{
+"line": "L08",
+"word": "in",
+"start": 40.502,
+"end": 40.622
+},
+{
+"line": "L08",
+"word": "a",
+"start": 40.602,
+"end": 40.662
+},
+{
+"line": "L08",
+"word": "glass.",
+"start": 40.642,
+"end": 41.162
+},
+{
+"line": "L09",
+"word": "It's",
+"start": 41.528,
+"end": 41.788
+},
+{
+"line": "L09",
+"word": "the",
+"start": 41.768,
+"end": 41.928
+},
+{
+"line": "L09",
+"word": "ice",
+"start": 41.908,
+"end": 42.068
+},
+{
+"line": "L09",
+"word": "sitting",
+"start": 42.048,
+"end": 42.408
+},
+{
+"line": "L09",
+"word": "on",
+"start": 42.388,
+"end": 42.488
+},
+{
+"line": "L09",
+"word": "land",
+"start": 42.468,
+"end": 42.688
+},
+{
+"line": "L09",
+"word": "that",
+"start": 42.668,
+"end": 42.988
+},
+{
+"line": "L09",
+"word": "does",
+"start": 42.968,
+"end": 43.228
+},
+{
+"line": "L09",
+"word": "the",
+"start": 43.208,
+"end": 43.368
+},
+{
+"line": "L09",
+"word": "damage.",
+"start": 43.348,
+"end": 43.868
+},
+{
+"line": "L10",
+"word": "Luckily,",
+"start": 44.523,
+"end": 45.003
+},
+{
+"line": "L10",
+"word": "melting",
+"start": 44.983,
+"end": 45.383
+},
+{
+"line": "L10",
+"word": "all",
+"start": 45.363,
+"end": 45.563
+},
+{
+"line": "L10",
+"word": "of",
+"start": 45.543,
+"end": 45.663
+},
+{
+"line": "L10",
+"word": "it",
+"start": 45.643,
+"end": 45.783
+},
+{
+"line": "L10",
+"word": "would",
+"start": 45.763,
+"end": 46.083
+},
+{
+"line": "L10",
+"word": "take",
+"start": 46.063,
+"end": 46.423
+},
+{
+"line": "L10",
+"word": "thousands",
+"start": 46.403,
+"end": 46.883
+},
+{
+"line": "L10",
+"word": "of",
+"start": 46.863,
+"end": 47.143
+},
+{
+"line": "L10",
+"word": "years.",
+"start": 47.123,
+"end": 47.863
+},
+{
+"line": "L10",
+"word": "Unluckily,",
+"start": 47.843,
+"end": 48.703
+},
+{
+"line": "L10",
+"word": "the",
+"start": 48.683,
+"end": 48.863
+},
+{
+"line": "L10",
+"word": "sea",
+"start": 48.843,
+"end": 49.023
+},
+{
+"line": "L10",
+"word": "is",
+"start": 49.003,
+"end": 49.163
+},
+{
+"line": "L10",
+"word": "already",
+"start": 49.143,
+"end": 49.503
+},
+{
+"line": "L10",
+"word": "rising.",
+"start": 49.483,
+"end": 49.863
+},
+{
+"line": "L11",
+"word": "So",
+"start": 50.622,
+"end": 50.742
+},
+{
+"line": "L11",
+"word": "maybe",
+"start": 50.722,
+"end": 50.982
+},
+{
+"line": "L11",
+"word": "skip",
+"start": 50.962,
+"end": 51.222
+},
+{
+"line": "L11",
+"word": "the",
+"start": 51.202,
+"end": 51.462
+},
+{
+"line": "L11",
+"word": "beach",
+"start": 51.442,
+"end": 51.702
+},
+{
+"line": "L11",
+"word": "house,",
+"start": 51.682,
+"end": 52.042
+},
+{
+"line": "L11",
+"word": "and",
+"start": 52.022,
+"end": 52.462
+},
+{
+"line": "L11",
+"word": "buy",
+"start": 52.442,
+"end": 52.622
+},
+{
+"line": "L11",
+"word": "the",
+"start": 52.602,
+"end": 52.762
+},
+{
+"line": "L11",
+"word": "one",
+"start": 52.742,
+"end": 52.902
+},
+{
+"line": "L11",
+"word": "on",
+"start": 52.882,
+"end": 53.002
+},
+{
+"line": "L11",
+"word": "the",
+"start": 52.982,
+"end": 53.162
+},
+{
+"line": "L11",
+"word": "hill.",
+"start": 53.142,
+"end": 53.442
+}
+]
+}
