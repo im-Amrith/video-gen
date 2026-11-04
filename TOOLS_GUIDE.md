@@ -237,9 +237,10 @@ This repo is already set up for it:
 2. **`bash scripts/setup.sh voice`** installs Node and Python deps, checks ffmpeg (fetches a static ffmpeg 7 if it can) and downloads the Kokoro TTS model.
 3. **Network:** cloud sessions use an allowlist (package registries and GitHub by default). YouTube downloads, Hugging Face, edge-tts, kenney.nl and MaxFusion may be blocked. Work around it: Kokoro comes from GitHub releases, and reference clips are committed into the repo.
 4. **No GPU:** Remotion uses software GL (`swangle`). **Measured: the 3D cartoon short renders at ~40-77 s per frame at half size in the cloud**, so a 60 s short would take more than a day. 3D shorts are prepared in the cloud and **rendered on your PC** (`RENDER_LOCALLY.md`). The cloud renders only light 2D styles itself, after timing 10 frames first.
-5. **Approval gates:** `CLAUDE.md` tells the session to decide, log its reasons in `DECISIONS.md` and continue.
+5. **Gates inside skills** (storyboards, style frames): the session decides, logs its reasons in `DECISIONS.md` and continues within a video.
 6. **Effort cap:** high, never max, for every agent (in `CLAUDE.md` and in the cartoon skill).
-7. **Gemini prompt packs** between videos: the `gemini-video-prompts` skill reads `gemini-refs/<genre>/` and writes to `prompts/<genre>/`.
+7. **Gemini reel remixes** at each approval gate: the `gemini-video-prompts` skill reads `gemini-refs/<series>/<reel>/` and writes to `prompts/<series>/`.
+8. **Approval gate:** after every video the session pushes it, posts the path and a contact sheet, and waits for your OK.
 
 ## 11. Batching genres: 5 + 5, or interleaved?
 
@@ -260,11 +261,13 @@ Better still, **one cloud session per series**. Each session holds one style in 
 
 ---
 
-## 12. Gemini video prompts (`.claude/skills/gemini-video-prompts`), written for this repo
+## 12. Gemini reel remixes (`.claude/skills/gemini-video-prompts`), written for this repo
 
-**What it is:** reads the clips and notes you put in `gemini-refs/<genre>/`, writes `STYLE_NOTES.md`, and produces prompt packs:
-a ~40 s short as 4 × 10 s Gemini/Veo clips with a word-for-word **style lock** and **cast lock** (so the clips match),
-"ends on / continues from" hand-offs between clips, a voice-over script, and sources. It also has an **assemble mode**:
-put your generated clips in `gemini-clips/<slug>/` and the session joins them and adds voice, music and captions.
+**What it is:** for your **separate reel-edit channel** (pharaohs in the modern world, armour, space...). For each reel
+you put in `gemini-refs/<series>/<reel>/`, it makes a shot list with ffmpeg, keeps `SERIES_NOTES.md` up to date, and
+writes `prompts/<series>/<reel>_remix.md`: one Gemini/Veo prompt per shot with a word-for-word style lock and cast lock,
+plus an edit plan for a ~40 s reel. The rule: **heavy inspiration, never the same shot**. Every shot changes its
+action, vehicle/prop or setting (Cleopatra racing a car → flying a jet over the Nile). Its **assemble mode** joins the
+clips you generate (`gemini-clips/<slug>/`) into `deliveries/reels/`.
 
-**When:** between every finished code-rendered video (CLAUDE.md), or any time you ask for "Gemini prompts".
+**When:** at the approval gate after every What If / History video, or any time you ask.

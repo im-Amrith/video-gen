@@ -1,7 +1,8 @@
 # VIDEO GEN
 
 Animated YouTube Shorts made by Claude in a cloud session: **What If** and **History** series, rendered from code,
-plus **Gemini video prompt packs** written from your own reference clips.
+plus **Gemini remix prompt packs** for a separate reel-edit channel, written from reels you upload.
+Every video waits for your approval before the next one starts.
 
 ## Layout
 
@@ -16,17 +17,17 @@ plus **Gemini video prompt packs** written from your own reference clips.
 | `briefs/<series>/` | One brief per episode (the queue) |
 | `shorts/<slug>/` | Working files per short (script, voice, decisions) |
 | `deliveries/<series>/` | **Finished videos + titles/descriptions** |
-| `gemini-refs/<genre>/` | **You add** example clips + notes.md here |
-| `prompts/<genre>/` | Gemini prompt packs Claude writes for you |
+| `gemini-refs/<series>/<reel>/` | **You add** reels you like (+ optional prompt.txt, notes.md) for the Gemini remix channel |
+| `prompts/<series>/` | Remix prompt packs Claude writes for you |
 | `gemini-clips/<slug>/` | **You add** the clips you generated in Gemini; Claude joins them |
 
 ## Start a cloud session
 
 Open a cloud session on this repo and send:
 
-> Read CLAUDE.md and PROGRESS.md, run the setup, then make the What If batch (5 shorts) and then the History batch
-> (5 shorts). Write Gemini prompt packs from gemini-refs between videos. Work without waiting for my approval;
-> log your decisions. High effort, never max.
+> Read CLAUDE.md and PROGRESS.md, run the setup, then start the What If batch (5 shorts), then the History batch
+> (5 shorts). After each video, show it to me and wait for my approval; while waiting, write Gemini remix packs
+> from gemini-refs. High effort, never max.
 
 Talk to it in the session chat at any time ("make the next one funnier", "skip to History"). It reads your message
 at its next step.

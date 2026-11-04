@@ -1,8 +1,10 @@
 # VIDEO GEN: instructions for every Claude session in this repo
 
 You make **vertical YouTube Shorts (1080x1920)** for the owner's channel, rendered from code (no AI video generator),
-in two series: **What If** and **History**. Between videos you also write **Gemini video prompt packs**.
-The owner usually isn't watching: work unattended (see "Working alone").
+in two series: **What If** and **History**. Between videos you also write **Gemini remix prompt packs** for the
+owner's separate reel-edit channel (see "Gemini remix prompts").
+Within one video, work without waiting (see "Working alone"). **Between videos, stop and wait for the owner's approval**
+(see "Approval gate").
 
 ## Hard rules
 
@@ -32,7 +34,7 @@ If setup reports `!!` problems, work around them (see TOOLS_GUIDE.md section 10)
 
 - Briefs live in `briefs/what-if/` and `briefs/history/` (format: `briefs/_TEMPLATE.md`). Status is in the front matter: `todo`, `doing` or `done`.
 - If a series has fewer than 5 `todo` briefs, **write the missing briefs yourself** (strong, visual, fact-checked topics) and commit them before starting.
-- **Work in batches by series:** finish the What If batch, then the History batch. Don't alternate.
+- **Work in batches by series:** finish the What If batch, then the History batch. Don't alternate. One video at a time: each waits for approval (Approval gate).
 - Episode 1 of each series is the **pilot**. It sets the look. Record the locked look in `briefs/<series>/SERIES_LOOK.md`. Episodes 2-5 reuse the pilot's project and change only the story, voice and shot plan.
 
 ## Rendering speed: measured, read this before choosing a style
@@ -60,7 +62,7 @@ short renders at **~40-77 s per frame at half size**. A 60 s short (1,800 frames
 | Maps (routes, borders, globe) | `remotion-maps` | Inside Remotion shorts. |
 | Captions, title cards, overlays | `remotion-captions` or `hyperframes` | Only if the series look uses captions. |
 | Studying a reference video | `watch`, `reverse-any-video` | Local files in the repo (YouTube downloads are usually blocked here). |
-| **Gemini prompt packs** | `gemini-video-prompts` | See below. |
+| **Gemini remix prompts** (owner's reel-edit channel) | `gemini-video-prompts` | Only at the approval gate. See below. |
 
 One engine per series: don't mix Remotion, Lemo-Opuscar and HyperFrames inside one video.
 
@@ -74,23 +76,44 @@ The skill was written on someone else's PC. In this repo:
 - Voice: Kokoro offline TTS (`models/kokoro/`), one steady voice per series. Word timings come from faster-whisper (`word_timestamps=True`), written to `shorts/<slug>/voice/words.json`.
 - Kenney 3D props in `public/bridge/kenney/` are optional. If they're missing, the world still renders.
 
-## Between videos: Gemini prompt packs
+## Approval gate (after every video)
 
-After **each finished video** (delivered and pushed), before starting the next one:
-1. Use the **`gemini-video-prompts`** skill. Read `gemini-refs/<genre>/` (the owner's example clips and notes), update its `STYLE_NOTES.md`, then write **2 new prompt packs** (a ~40 s short as 4 × 10 s clips, 9:16) in that genre.
-   Prefer the genre that matches the batch you're working on. If that genre's folder is empty, use any genre folder that has references. If all are empty, skip this step and note it in `PROGRESS.md`.
-2. If `gemini-clips/<slug>/` holds clips the owner generated, run the skill's **assemble mode** and deliver the joined short.
-3. Commit and push, then continue with the next brief.
+The owner watches and approves **every** video before the next one starts.
+
+1. When a video is delivered (or, for a 3D short, when it's ready for the owner's local render), commit and push, then
+   post a chat message with:
+   - the file path in the repo (`deliveries/<series>/<NN>_<slug>.mp4`), which the owner downloads from GitHub or pulls to their PC;
+   - a contact sheet (`deliveries/<series>/<NN>_<slug>_sheet.jpg`, 12 frames, made with ffmpeg) so they can judge it at a glance;
+   - the title, a one-line summary, and anything you weren't sure about;
+   - the question: **"Approve, or what should change?"**
+2. While waiting, do only the **Gemini remix prompts** step below. It doesn't start a new video.
+3. Then **stop and wait** for the owner's reply. Don't start the next brief on your own.
+4. Feedback: apply it to this video (re-render if asked) **and** write it into `briefs/<series>/SERIES_LOOK.md`
+   so every later episode follows it. Only after "approved" (or "next", "go on", "ok") start the next brief.
+
+## Gemini remix prompts (separate genre)
+
+The owner runs a **different channel** with AI reel edits (armour, space, pharaohs in the modern world, and so on) made in
+Gemini/Veo. It has nothing to do with the What If / History shorts. Their reference reels are in `gemini-refs/<series>/`.
+
+While waiting at the approval gate, use the **`gemini-video-prompts`** skill:
+1. Find reels in `gemini-refs/` without a finished remix pack (`prompts/<series>/<reel>_remix.md`). Do **1-2 reels** per gate.
+2. For each, write the remix pack. It takes **heavy inspiration** from the reel (same concept, vibe, camera energy and
+   edit rhythm) but **never repeats a shot exactly**: every shot changes its action, vehicle/prop or setting
+   (Cleopatra racing a car → Cleopatra flying a jet, or racing a different car through Cairo at night).
+3. If `gemini-clips/<slug>/` holds clips the owner generated, run the skill's **assemble mode**.
+4. Commit and push. If no reels are waiting, skip this step.
 
 ## Working alone
 
-- Don't stop for approval gates (storyboards, style frames, metaphor gates in skills). Decide, write the decision
+- Don't stop for the approval gates *inside skills* (storyboards, style frames, metaphor gates). The only stop is the Approval gate between videos. Decide, write the decision
   and the reason in `shorts/<slug>/DECISIONS.md`, and continue.
-- If you're truly blocked (missing tool, network blocked, render keeps failing), write it in `PROGRESS.md`, switch to the next brief or to Gemini prompts, and mention it in your chat message.
+- If you're truly blocked (missing tool, network blocked, render keeps failing), write it in `PROGRESS.md`, ask the owner in chat, and do Gemini remix prompts while you wait.
 - Keep `PROGRESS.md` current: done, in progress, next, problems. It's how the owner and the next session catch up.
 
 ## Delivering
 
 - Final video: `deliveries/<series>/<NN>_<slug>.mp4` (H.264, CRF 20, AAC 192k, under 95 MB) plus
   `deliveries/<series>/<NN>_<slug>.md` with a title, a description of 2-3 sentences, 5 hashtags and the sources.
-- Commit, push, and update `PROGRESS.md` and the brief's status to `done`.
+- Commit, push, and update `PROGRESS.md`. Set the brief's status to `review`, then to `done` after the owner approves.
+- Then follow the **Approval gate**.
