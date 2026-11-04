@@ -108,7 +108,7 @@ export class Batch {
   build(parent: THREE.Object3D, cast = true) {
     for (const [mat, list] of this.g) {
       const mesh = new THREE.Mesh(mergeGeometries(list, false), mat);
-      mesh.castShadow = cast; mesh.receiveShadow = true; mesh.matrixAutoUpdate = false;
+      mesh.castShadow = cast && !mat.userData.noCast; mesh.receiveShadow = !mat.userData.noRecv; mesh.matrixAutoUpdate = false;
       parent.add(mesh);
     }
     this.g.clear();

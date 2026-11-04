@@ -2,9 +2,10 @@
 // a 1930s army truck, a Lewis gun on a tripod, ammo crates and a mountain of spent shell casings.
 import * as THREE from "three";
 import { Batch, boxGeo, V, lam, house, prop } from "../toon/build";
-import { ctex, rep, planksHD } from "../toon/paint";
+import { ctex, rep, planksHD, beamHD, grassHD } from "../toon/paint";
 import { Particles } from "../toon/fx";
 import { ground, sea } from "../toon/kit";
+import { tuft, post, rock, casingGeo, brassM, dressLand, mountain } from "../toon/dress";
 import { BuildCtx, PoseCtx, SetHandle, hh } from "../toon/core";
 import { DAM, FARM, truckAt, gunPos, CASINGS, casingAt, fenceFall, JAM } from "./story";
 
@@ -13,30 +14,31 @@ const wheatTex = () => ctex("wheatGround", 512, 512, (g, r) => { g.fillStyle = "
 export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const b = new Batch();
   ground(b, lam("wheatG", () => ({ map: wheatTex() })), 0, 0, 500, 120);
-  // wheat tufts
-  const tuftM = lam("wheatTuft", () => ({ color: "#e8c25a" }));
-  for (let i = 0; i < 420; i++) {
-    const x = -60 + hh(i, 1) * 120, z = -50 + hh(i, 2) * 70;
-    if (Math.hypot(x - DAM[0], z - DAM[2]) < 9 || (Math.abs(z - 6) < 4)) continue;
-    const h = 0.6 + hh(i, 3) * 0.5, g = new THREE.ConeGeometry(0.22, h, 5); g.translate(0, h / 2, 0);
-    b.add(g, tuftM, new THREE.Matrix4().makeTranslation(x, 0, z));
+  // wheat: clustered inked tufts with seed heads (dense near the action, sparser out to the hills)
+  for (let i = 0; i < 1100; i++) {
+    const x = -70 + hh(i, 1) * 140, z = -60 + hh(i, 2) * 80;
+    if (Math.hypot(x - DAM[0], z - DAM[2]) < 9.5 || Math.abs(z - 6) < 3.6 || Math.hypot(x - CASINGS[0], z - CASINGS[2]) < 5 || (Math.abs(x - FARM[0]) < 12 && Math.abs(z - FARM[2]) < 9)) continue;
+    tuft(b, x, 0, z, "wheat", 0.9 + 0.5 * hh(i, 3), i);
   }
+  for (let i = 0; i < 90; i++) { const x = -40 + hh(i, 5) * 80, z = 9 + hh(i, 6) * 16; tuft(b, x, 0, z, "wheat", 1.0 + 0.4 * hh(i, 7), i + 900); } // foreground layer, near the cameras
+  dressLand(b, { cx: 0, cz: -10, r0: 45, r1: 110, rocks: 40, bushes: 26, trees: 30, treeKinds: ["tree_default", "tree_fat", "tree-high-round"], hillR: 170, hillCol: "#d2ad62", hillN: 16, hillH: 22, hillMap: false, seed: 3 });
+  for (let k = 0; k < 6; k++) mountain(b, -220 + k * 90, -260 - (k % 2) * 40, 40 + (k % 3) * 18, 70, k, false, ["#b08a5a", "#9a7a4e", "#c49a66", "#8a6a44"]);
+  for (let i = 0; i < 24; i++) rock(b, -30 + hh(i, 8) * 70, 0, -4 + hh(i, 9) * 4, 0.2 + 0.35 * hh(i, 10), i + 50);
   // dirt track along z = 6
   b.add(new THREE.PlaneGeometry(300, 6).rotateX(-Math.PI / 2), lam("track", () => ({ color: "#c49a64" })), new THREE.Matrix4().makeTranslation(0, 0.02, 6));
   // farmhouse + fence posts (rails are dynamic: they fall)
   house(b, FARM[0], FARM[2], 0.3, 9, 7, 5.5, 4, 0);
-  for (let i = 0; i < 18; i++) b.add(new THREE.CylinderGeometry(0.08, 0.08, 1.3).translate(0, 0.65, 0), lam("fpost", () => ({ color: "#7a5a3a" })), new THREE.Matrix4().makeTranslation(-24 + i * 3, 0, 2.5));
+  for (let i = 0; i < 18; i++) post(b, -24 + i * 3, 2.5, 1.3);
   // dam pond rim + hill
   b.add(new THREE.TorusGeometry(8.5, 0.5, 8, 40).rotateX(Math.PI / 2), lam("damRim", () => ({ color: "#a8804c" })), new THREE.Matrix4().makeTranslation(DAM[0], 0, DAM[2]));
   const hill = new THREE.SphereGeometry(1, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2); hill.scale(40, 12, 22);
-  b.add(hill, lam("hillDry", () => ({ color: "#c8a65a" })), new THREE.Matrix4().makeTranslation(-10, 0, -70));
-  for (let i = 0; i < 10; i++) prop(b, {}, "tree_default", -50 + i * 11 + hh(i) * 3, 0, -40 - hh(i, 2) * 10, 5 + hh(i, 3) * 3);
+  b.add(hill, lam("hillDry", () => ({ color: "#d8b66a" })), new THREE.Matrix4().makeTranslation(-10, 0, -70));
   // ammo crates by the farm
   for (let k = 0; k < 6; k++) b.add(boxGeo(V(FARM[0] + 6 + (k % 3) * 1.05, Math.floor(k / 3) * 0.6, FARM[2] + 4), V(FARM[0] + 7 + (k % 3) * 1.05, 0.6 + Math.floor(k / 3) * 0.6, FARM[2] + 4.7)), lam("ammoCrate", () => ({ map: planksHD(), color: "#7d8a5a" })));
   b.build(root);
   const dam = sea(root, DAM[0], DAM[2], 8, "#4a9ac0"); dam.position.y = 0.08;
   // falling fence rails
-  const rails = Array.from({ length: 17 }, (_, i) => { const m = new THREE.Mesh(new THREE.BoxGeometry(3.0, 0.12, 0.06), lam("rail", () => ({ color: "#9a7a5a" }))); m.position.set(-22.5 + i * 3, 1.0, 2.5); root.add(m); return m; });
+  const rails = Array.from({ length: 17 }, (_, i) => { const m = new THREE.Mesh(new THREE.BoxGeometry(3.0, 0.12, 0.06), lam("woodPainted", () => ({ map: beamHD() }))); m.position.set(-22.5 + i * 3, 1.0, 2.5); root.add(m); return m; });
   // truck
   const truck = new THREE.Group();
   const olive = lam("truckOlive", () => ({ color: "#6a7a4a" })), dark = lam("truckDark", () => ({ color: "#2b2b33" }));
@@ -54,7 +56,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   for (const a of [0, 2.1, 4.2]) { const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.3), dark); leg.position.set(Math.cos(a) * 0.35, 0.55, Math.sin(a) * 0.35); leg.rotation.set(Math.sin(a) * 0.4, 0, -Math.cos(a) * 0.4); gun.add(leg); }
   root.add(gun);
   // casings mountain (instanced brass cylinders)
-  const cas = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.06, 0.06, 0.22, 8), lam("brass", () => ({ color: "#e0b040" })), 900);
+  const cas = new THREE.InstancedMesh(casingGeo(), brassM(), 900);
   cas.castShadow = true; root.add(cas);
   const m4 = new THREE.Matrix4(), q4 = new THREE.Quaternion(), e = new THREE.Euler();
   const dust = new Particles(root, 260, "#d9b47a", 2.4, "dot", 1.0);

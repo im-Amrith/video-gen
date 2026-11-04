@@ -11,6 +11,7 @@ import { NOINK } from "./ink";
 import { Pool, Actor, Fx, Stage, CamInfo } from "./cast";
 import { FPS, Episode, SetHandle, camAt, hh } from "./core";
 import { setSight } from "./build";
+import { setTuftTint } from "./dress";
 
 const discTex = () => ctex("sunDisc", 128, 128, (g) => {
   const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
@@ -42,6 +43,8 @@ export class World {
   private sunCache = new Map<number, THREE.Vector3>();
   private cloudMaps: Record<"day" | "golden", THREE.Texture[]>;
   private clouds: THREE.Mesh[] = [];
+  private lowClouds: THREE.Mesh[] = [];
+  private birds: THREE.Points; private motes: THREE.Points;
   private frustum = new THREE.Frustum();
   private m4 = new THREE.Matrix4(); private v = new THREE.Vector3(); private sph = new THREE.Sphere();
 
@@ -97,6 +100,18 @@ export class World {
       m.layers.set(NOINK);
       this.clouds.push(m); R.add(m);
     }
+    // small life (owner feedback #2): low drifting clouds, a bird flock, dust motes — day/golden only, camera-relative
+    if (ep.clouds !== false) for (let i = 0; i < 7; i++) {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: this.cloudMaps.day[(i + 1) % 4], color: new THREE.Color(1.05, 1.05, 1.05), transparent: true, depthWrite: false, fog: false, opacity: 0.92 }));
+      m.layers.set(NOINK); m.renderOrder = -0.6; this.lowClouds.push(m); R.add(m);
+    }
+    const birdT = ctex("birdV", 64, 64, (g) => { g.strokeStyle = "#2a2430"; g.lineWidth = 7; g.lineCap = "round"; g.beginPath(); g.moveTo(6, 26); g.quadraticCurveTo(20, 18, 32, 34); g.quadraticCurveTo(44, 18, 58, 26); g.stroke(); });
+    const bg = new THREE.BufferGeometry(); bg.setAttribute("position", new THREE.BufferAttribute(new Float32Array(9 * 3), 3));
+    this.birds = new THREE.Points(bg, new THREE.PointsMaterial({ size: 2.6, map: birdT, transparent: true, alphaTest: 0.3, depthWrite: false, sizeAttenuation: true, fog: false }));
+    this.birds.frustumCulled = false; this.birds.layers.set(NOINK); R.add(this.birds);
+    const mg = new THREE.BufferGeometry(); mg.setAttribute("position", new THREE.BufferAttribute(new Float32Array(70 * 3), 3));
+    this.motes = new THREE.Points(mg, new THREE.PointsMaterial({ size: 0.035, map: starTex(), color: new THREE.Color(1.6, 1.45, 1.2), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true, fog: false }));
+    this.motes.frustumCulled = false; this.motes.layers.set(NOINK); R.add(this.motes);
     setSight(ep.sight ? ep.sight() : []);
     this.set = ep.build({ root: R });
   }
@@ -166,6 +181,39 @@ export class World {
       if (!cl) continue;
       m.lookAt(cam.position.x, m.position.y, cam.position.z);
       mat.map = this.cloudMaps[light as "day" | "golden"][i % 4];
+    }
+    setTuftTint(light);
+    // ---- small life ----
+    const fwd = V(0, 0, -1).applyQuaternion(cam.quaternion); fwd.y = 0; fwd.normalize();
+    const rgt = V(-fwd.z, 0, fwd.x);
+    this.lowClouds.forEach((m, i) => {
+      const a = (i / this.lowClouds.length - 0.5) * 2.2, d = 260 + (i % 3) * 70, drift = ((t * 3 + i * 47) % 160) - 80;
+      m.visible = cl && this.ep.clouds !== false;
+      m.position.copy(cam.position).addScaledVector(fwd, d * Math.cos(a)).addScaledVector(rgt, d * Math.sin(a) + drift); m.position.y = cam.position.y * 0.3 + 55 + (i % 4) * 14;
+      m.lookAt(cam.position.x, m.position.y, cam.position.z); const w = 90 + (i % 3) * 35; m.scale.set(w, w / 2, 1);
+      if (cl) (m.material as THREE.MeshBasicMaterial).map = this.cloudMaps[light as "day" | "golden"][(i + 1) % 4];
+    });
+    const lifeOn = cl && this.ep.clouds !== false;
+    this.birds.visible = lifeOn;
+    if (lifeOn) {
+      const p = this.birds.geometry.attributes.position as THREE.BufferAttribute, sweep = ((t * 6) % 160) - 80;
+      for (let i = 0; i < 9; i++) {
+        const row = Math.floor((i + 1) / 2), side = i % 2 ? 1 : -1;
+        const c = V(0, 0, 0).copy(cam.position).addScaledVector(fwd, 95 - row * 3).addScaledVector(rgt, sweep - row * 2.4 + side * row * 0.0).addScaledVector(fwd, 0);
+        c.addScaledVector(fwd, side * row * 2.5 * 0).addScaledVector(V(-rgt.z, 0, rgt.x), side * row * 2.5);
+        p.setXYZ(i, c.x, cam.position.y + 26 + 0.6 * Math.sin(t * 6 + i), c.z);
+      }
+      p.needsUpdate = true;
+    }
+    this.motes.visible = lifeOn;
+    if (lifeOn) {
+      const p = this.motes.geometry.attributes.position as THREE.BufferAttribute;
+      for (let i = 0; i < 70; i++) {
+        const d = 2.5 + 9 * hh(i, 41), sx = (hh(i, 42) - 0.5) * d * 0.9, sy = (hh(i, 43) - 0.3) * d * 0.9 + Math.sin(t * 0.4 + i) * 0.3;
+        const c = V(0, 0, 0).copy(cam.position).addScaledVector(V(0, 0, -1).applyQuaternion(cam.quaternion), d).addScaledVector(V(1, 0, 0).applyQuaternion(cam.quaternion), sx + Math.sin(t * 0.3 + i * 1.7) * 0.4).addScaledVector(V(0, 1, 0).applyQuaternion(cam.quaternion), sy);
+        p.setXYZ(i, c.x, c.y, c.z);
+      }
+      p.needsUpdate = true;
     }
     // ---- the episode's set ----
     this.set.pose?.({ id, f, t, cam, light });

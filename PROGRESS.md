@@ -24,6 +24,12 @@ mix.wav, SCRIPT.md with sources, words.json, story.ts shot plan, sets, cast, sti
 
 Render all on the PC: `.\scripts\render_all.ps1` (RENDER_LOCALLY.md). Stills sheets: `deliveries/<series>/<NN>_<slug>_stills.jpg`.
 
+## Feedback #2 pass (dressing: real props, 3 depth layers, small life) — RE-RENDER THESE
+Engine change for all: drifting low clouds, bird flocks and dust motes in day/golden shots (src/videos/toon/world.ts),
+painted tuft cards / rocks / posts / brass casings / icebergs / mountains (src/videos/toon/dress.ts).
+Episodes changed (re-render only these; audio unchanged unless noted):
+- [x] History 03 emu-war (wheat tufts, brass casings, painted fence, hills + mountains + trees)
+
 ## How it's built
 - **Engine** `src/videos/toon/`: the bridge short's look modules (ink, lens blur, grade, two-tone shading, card shading,
   toon characters, painted textures) + generic world (light presets day/golden/night/space/magma, stars, clouds, camera-relative
