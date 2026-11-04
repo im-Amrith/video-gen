@@ -1,0 +1,52 @@
+{
+ "fps": 30,
+ "total": 1723,
+ "dur": 57.433,
+ "lines": {
+  "L01": {
+   "t0": 0.3,
+   "t1": 7.624,
+   "text": "In thirteen twenty-five, two Italian cities fought a battle with thousands of soldiers, and the winners went home with a bucket."
+  },
+  "L02": {
+   "t0": 8.324,
+   "t1": 13.487,
+   "text": "Modena and Bologna. Neighbours, about forty kilometers apart, and old rivals."
+  },
+  "L03": {
+   "t0": 14.037,
+   "t1": 18.222,
+   "text": "Modena grabs one of Bologna's castles. Bologna declares war."
+  },
+  "L04": {
+   "t0": 18.822,
+   "t1": 24.238,
+   "text": "At Zappolino, about thirty thousand Bolognese face about seven thousand from Modena."
+  },
+  "L05": {
+   "t0": 24.788,
+   "t1": 29.094,
+   "text": "Modena fakes a river crossing, and part of Bologna's army goes to look."
+  },
+  "L06": {
+   "t0": 29.344,
+   "t1": 35.244,
+   "text": "The rest of Modena walks around behind them, and before sunset, Bologna's army is running home."
+  },
+  "L07": {
+   "t0": 35.844,
+   "t1": 42.151,
+   "text": "Modena chases them right up to the city walls, and grabs a trophy: the wooden bucket from a well by the gate."
+  },
+  "L08": {
+   "t0": 42.851,
+   "t1": 50.801,
+   "text": "Luckily, everyone remembers the war. Unluckily, they remember it as the war that started over a bucket. The bucket came at the end."
+  },
+  "L09": {
+   "t0": 51.501,
+   "t1": 55.118,
+   "text": "It's still in Modena's town hall. Bologna never got it back."
+  }
+ }
+}

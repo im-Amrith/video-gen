@@ -1,5 +1,5 @@
 ---
-status: todo
+status: review
 series: history
 episode: 4
 slug: 1904-marathon

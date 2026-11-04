@@ -11,6 +11,8 @@ import { MoonShort, MOON_FRAMES } from "./videos/moon/Moon";
 import { ZanzibarShort, ZANZIBAR_FRAMES } from "./videos/zanzibar/Zanzibar";
 import { PisaShort, PISA_FRAMES } from "./videos/pisa/Pisa";
 import { EmuShort, EMU_FRAMES } from "./videos/emu/Emu";
+import { MarathonShort, MARATHON_FRAMES } from "./videos/marathon/Marathon";
+import { BucketShort, BUCKET_FRAMES } from "./videos/bucket/Bucket";
 
 export const Root: React.FC = () => (
   <>
@@ -25,5 +27,7 @@ export const Root: React.FC = () => (
     <Composition id="History01ShortestWar" component={ZanzibarShort} durationInFrames={ZANZIBAR_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="History02LeaningTower" component={PisaShort} durationInFrames={PISA_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="History03EmuWar" component={EmuShort} durationInFrames={EMU_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="History04Marathon1904" component={MarathonShort} durationInFrames={MARATHON_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="History05WarOfTheBucket" component={BucketShort} durationInFrames={BUCKET_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );

@@ -34,6 +34,7 @@ Optional QA: `python scripts/short_qa.py deliveries/<series>/<NN>_<slug>.mp4 out
 | history | 01 | shortest-war | History01ShortestWar | yes (`projects/shortest-war/audio/mix.wav`, 62.13 s) | no |
 | history | 02 | leaning-tower | History02LeaningTower | yes (`projects/leaning-tower/audio/mix.wav`, 63.07 s) | no |
 | history | 03 | emu-war | History03EmuWar | yes (`projects/emu-war/audio/mix.wav`, 60.73 s) | no |
+| history | 04 | 1904-marathon | History04Marathon1904 | yes (`projects/1904-marathon/audio/mix.wav`, 65.53 s) | no |
 
 ### Exact commands per short
 
@@ -84,4 +85,10 @@ ffmpeg -y -i out/pisa/video.mp4 -i projects/leaning-tower/audio/mix.wav -map 0:v
 ```powershell
 npx remotion render src/index.ts History03EmuWar out/emu/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
 ffmpeg -y -i out/emu/video.mp4 -i projects/emu-war/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/03_emu-war.mp4
+```
+
+**history 04 — 1904-marathon** (1966 frames, 65.53 s)
+```powershell
+npx remotion render src/index.ts History04Marathon1904 out/marathon/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+ffmpeg -y -i out/marathon/video.mp4 -i projects/1904-marathon/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/04_1904-marathon.mp4
 ```

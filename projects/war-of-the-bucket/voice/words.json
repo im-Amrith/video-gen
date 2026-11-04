@@ -1,0 +1,833 @@
+{
+"note": "estimated from voiced audio + character counts (Whisper blocked in the cloud)",
+"words": [
+{
+"line": "L01",
+"word": "In",
+"start": 0.32,
+"end": 0.44
+},
+{
+"line": "L01",
+"word": "thirteen",
+"start": 0.42,
+"end": 0.9
+},
+{
+"line": "L01",
+"word": "twenty-five,",
+"start": 0.88,
+"end": 1.92
+},
+{
+"line": "L01",
+"word": "two",
+"start": 1.9,
+"end": 2.08
+},
+{
+"line": "L01",
+"word": "Italian",
+"start": 2.06,
+"end": 2.46
+},
+{
+"line": "L01",
+"word": "cities",
+"start": 2.44,
+"end": 2.78
+},
+{
+"line": "L01",
+"word": "fought",
+"start": 2.76,
+"end": 3.08
+},
+{
+"line": "L01",
+"word": "a",
+"start": 3.06,
+"end": 3.22
+},
+{
+"line": "L01",
+"word": "battle",
+"start": 3.2,
+"end": 3.54
+},
+{
+"line": "L01",
+"word": "with",
+"start": 3.52,
+"end": 3.74
+},
+{
+"line": "L01",
+"word": "thousands",
+"start": 3.72,
+"end": 4.5
+},
+{
+"line": "L01",
+"word": "of",
+"start": 4.48,
+"end": 4.6
+},
+{
+"line": "L01",
+"word": "soldiers,",
+"start": 4.58,
+"end": 5.08
+},
+{
+"line": "L01",
+"word": "and",
+"start": 5.06,
+"end": 5.22
+},
+{
+"line": "L01",
+"word": "the",
+"start": 5.2,
+"end": 5.76
+},
+{
+"line": "L01",
+"word": "winners",
+"start": 5.74,
+"end": 6.14
+},
+{
+"line": "L01",
+"word": "went",
+"start": 6.12,
+"end": 6.34
+},
+{
+"line": "L01",
+"word": "home",
+"start": 6.32,
+"end": 6.56
+},
+{
+"line": "L01",
+"word": "with",
+"start": 6.54,
+"end": 6.76
+},
+{
+"line": "L01",
+"word": "a",
+"start": 6.74,
+"end": 6.94
+},
+{
+"line": "L01",
+"word": "bucket.",
+"start": 6.92,
+"end": 7.42
+},
+{
+"line": "L02",
+"word": "Modena",
+"start": 8.344,
+"end": 8.724
+},
+{
+"line": "L02",
+"word": "and",
+"start": 8.704,
+"end": 8.984
+},
+{
+"line": "L02",
+"word": "Bologna.",
+"start": 8.964,
+"end": 9.464
+},
+{
+"line": "L02",
+"word": "Neighbours,",
+"start": 9.444,
+"end": 10.724
+},
+{
+"line": "L02",
+"word": "about",
+"start": 10.704,
+"end": 11.064
+},
+{
+"line": "L02",
+"word": "forty",
+"start": 11.044,
+"end": 11.404
+},
+{
+"line": "L02",
+"word": "kilometers",
+"start": 11.384,
+"end": 12.084
+},
+{
+"line": "L02",
+"word": "apart,",
+"start": 12.064,
+"end": 12.604
+},
+{
+"line": "L02",
+"word": "and",
+"start": 12.584,
+"end": 12.784
+},
+{
+"line": "L02",
+"word": "old",
+"start": 12.764,
+"end": 12.984
+},
+{
+"line": "L02",
+"word": "rivals.",
+"start": 12.964,
+"end": 13.404
+},
+{
+"line": "L03",
+"word": "Modena",
+"start": 14.057,
+"end": 14.457
+},
+{
+"line": "L03",
+"word": "grabs",
+"start": 14.437,
+"end": 14.797
+},
+{
+"line": "L03",
+"word": "one",
+"start": 14.777,
+"end": 15.017
+},
+{
+"line": "L03",
+"word": "of",
+"start": 14.997,
+"end": 15.157
+},
+{
+"line": "L03",
+"word": "Bologna's",
+"start": 15.137,
+"end": 15.837
+},
+{
+"line": "L03",
+"word": "castles.",
+"start": 15.817,
+"end": 16.697
+},
+{
+"line": "L03",
+"word": "Bologna",
+"start": 16.677,
+"end": 17.137
+},
+{
+"line": "L03",
+"word": "declares",
+"start": 17.117,
+"end": 17.877
+},
+{
+"line": "L03",
+"word": "war.",
+"start": 17.857,
+"end": 18.137
+},
+{
+"line": "L04",
+"word": "At",
+"start": 18.842,
+"end": 18.982
+},
+{
+"line": "L04",
+"word": "Zappolino,",
+"start": 18.962,
+"end": 19.622
+},
+{
+"line": "L04",
+"word": "about",
+"start": 19.602,
+"end": 20.382
+},
+{
+"line": "L04",
+"word": "thirty",
+"start": 20.362,
+"end": 20.802
+},
+{
+"line": "L04",
+"word": "thousand",
+"start": 20.782,
+"end": 21.262
+},
+{
+"line": "L04",
+"word": "Bolognese",
+"start": 21.242,
+"end": 21.842
+},
+{
+"line": "L04",
+"word": "face",
+"start": 21.822,
+"end": 22.082
+},
+{
+"line": "L04",
+"word": "about",
+"start": 22.062,
+"end": 22.642
+},
+{
+"line": "L04",
+"word": "seven",
+"start": 22.622,
+"end": 22.962
+},
+{
+"line": "L04",
+"word": "thousand",
+"start": 22.942,
+"end": 23.482
+},
+{
+"line": "L04",
+"word": "from",
+"start": 23.462,
+"end": 23.722
+},
+{
+"line": "L04",
+"word": "Modena.",
+"start": 23.702,
+"end": 24.142
+},
+{
+"line": "L05",
+"word": "Modena",
+"start": 24.808,
+"end": 25.188
+},
+{
+"line": "L05",
+"word": "fakes",
+"start": 25.168,
+"end": 25.508
+},
+{
+"line": "L05",
+"word": "a",
+"start": 25.488,
+"end": 25.568
+},
+{
+"line": "L05",
+"word": "river",
+"start": 25.548,
+"end": 25.868
+},
+{
+"line": "L05",
+"word": "crossing,",
+"start": 25.848,
+"end": 26.468
+},
+{
+"line": "L05",
+"word": "and",
+"start": 26.448,
+"end": 26.968
+},
+{
+"line": "L05",
+"word": "part",
+"start": 26.948,
+"end": 27.188
+},
+{
+"line": "L05",
+"word": "of",
+"start": 27.168,
+"end": 27.308
+},
+{
+"line": "L05",
+"word": "Bologna's",
+"start": 27.288,
+"end": 27.888
+},
+{
+"line": "L05",
+"word": "army",
+"start": 27.868,
+"end": 28.128
+},
+{
+"line": "L05",
+"word": "goes",
+"start": 28.108,
+"end": 28.428
+},
+{
+"line": "L05",
+"word": "to",
+"start": 28.408,
+"end": 28.548
+},
+{
+"line": "L05",
+"word": "look.",
+"start": 28.528,
+"end": 28.868
+},
+{
+"line": "L06",
+"word": "The",
+"start": 29.364,
+"end": 29.564
+},
+{
+"line": "L06",
+"word": "rest",
+"start": 29.544,
+"end": 29.824
+},
+{
+"line": "L06",
+"word": "of",
+"start": 29.804,
+"end": 29.944
+},
+{
+"line": "L06",
+"word": "Modena",
+"start": 29.924,
+"end": 30.304
+},
+{
+"line": "L06",
+"word": "walks",
+"start": 30.284,
+"end": 30.644
+},
+{
+"line": "L06",
+"word": "around",
+"start": 30.624,
+"end": 31.004
+},
+{
+"line": "L06",
+"word": "behind",
+"start": 30.984,
+"end": 31.364
+},
+{
+"line": "L06",
+"word": "them,",
+"start": 31.344,
+"end": 32.044
+},
+{
+"line": "L06",
+"word": "and",
+"start": 32.024,
+"end": 32.224
+},
+{
+"line": "L06",
+"word": "before",
+"start": 32.204,
+"end": 32.564
+},
+{
+"line": "L06",
+"word": "sunset,",
+"start": 32.544,
+"end": 33.344
+},
+{
+"line": "L06",
+"word": "Bologna's",
+"start": 33.324,
+"end": 33.924
+},
+{
+"line": "L06",
+"word": "army",
+"start": 33.904,
+"end": 34.164
+},
+{
+"line": "L06",
+"word": "is",
+"start": 34.144,
+"end": 34.444
+},
+{
+"line": "L06",
+"word": "running",
+"start": 34.424,
+"end": 34.864
+},
+{
+"line": "L06",
+"word": "home.",
+"start": 34.844,
+"end": 35.164
+},
+{
+"line": "L07",
+"word": "Modena",
+"start": 35.864,
+"end": 36.224
+},
+{
+"line": "L07",
+"word": "chases",
+"start": 36.204,
+"end": 36.564
+},
+{
+"line": "L07",
+"word": "them",
+"start": 36.544,
+"end": 36.804
+},
+{
+"line": "L07",
+"word": "right",
+"start": 36.784,
+"end": 37.084
+},
+{
+"line": "L07",
+"word": "up",
+"start": 37.064,
+"end": 37.204
+},
+{
+"line": "L07",
+"word": "to",
+"start": 37.184,
+"end": 37.384
+},
+{
+"line": "L07",
+"word": "the",
+"start": 37.364,
+"end": 37.564
+},
+{
+"line": "L07",
+"word": "city",
+"start": 37.544,
+"end": 37.784
+},
+{
+"line": "L07",
+"word": "walls,",
+"start": 37.764,
+"end": 38.124
+},
+{
+"line": "L07",
+"word": "and",
+"start": 38.104,
+"end": 38.604
+},
+{
+"line": "L07",
+"word": "grabs",
+"start": 38.584,
+"end": 38.884
+},
+{
+"line": "L07",
+"word": "a",
+"start": 38.864,
+"end": 38.944
+},
+{
+"line": "L07",
+"word": "trophy:",
+"start": 38.924,
+"end": 39.364
+},
+{
+"line": "L07",
+"word": "the",
+"start": 39.344,
+"end": 39.964
+},
+{
+"line": "L07",
+"word": "wooden",
+"start": 39.944,
+"end": 40.304
+},
+{
+"line": "L07",
+"word": "bucket",
+"start": 40.284,
+"end": 40.864
+},
+{
+"line": "L07",
+"word": "from",
+"start": 40.844,
+"end": 41.084
+},
+{
+"line": "L07",
+"word": "a",
+"start": 41.064,
+"end": 41.144
+},
+{
+"line": "L07",
+"word": "well",
+"start": 41.124,
+"end": 41.364
+},
+{
+"line": "L07",
+"word": "by",
+"start": 41.344,
+"end": 41.524
+},
+{
+"line": "L07",
+"word": "the",
+"start": 41.504,
+"end": 41.704
+},
+{
+"line": "L07",
+"word": "gate.",
+"start": 41.684,
+"end": 42.064
+},
+{
+"line": "L08",
+"word": "Luckily,",
+"start": 42.871,
+"end": 43.431
+},
+{
+"line": "L08",
+"word": "everyone",
+"start": 43.411,
+"end": 43.891
+},
+{
+"line": "L08",
+"word": "remembers",
+"start": 43.871,
+"end": 44.431
+},
+{
+"line": "L08",
+"word": "the",
+"start": 44.411,
+"end": 44.591
+},
+{
+"line": "L08",
+"word": "war.",
+"start": 44.571,
+"end": 44.831
+},
+{
+"line": "L08",
+"word": "Unluckily,",
+"start": 44.811,
+"end": 45.731
+},
+{
+"line": "L08",
+"word": "they",
+"start": 45.711,
+"end": 46.211
+},
+{
+"line": "L08",
+"word": "remember",
+"start": 46.191,
+"end": 46.651
+},
+{
+"line": "L08",
+"word": "it",
+"start": 46.631,
+"end": 46.771
+},
+{
+"line": "L08",
+"word": "as",
+"start": 46.751,
+"end": 47.051
+},
+{
+"line": "L08",
+"word": "the",
+"start": 47.031,
+"end": 47.251
+},
+{
+"line": "L08",
+"word": "war",
+"start": 47.231,
+"end": 47.411
+},
+{
+"line": "L08",
+"word": "that",
+"start": 47.391,
+"end": 47.631
+},
+{
+"line": "L08",
+"word": "started",
+"start": 47.611,
+"end": 48.051
+},
+{
+"line": "L08",
+"word": "over",
+"start": 48.031,
+"end": 48.271
+},
+{
+"line": "L08",
+"word": "a",
+"start": 48.251,
+"end": 48.331
+},
+{
+"line": "L08",
+"word": "bucket.",
+"start": 48.311,
+"end": 48.871
+},
+{
+"line": "L08",
+"word": "The",
+"start": 48.851,
+"end": 49.451
+},
+{
+"line": "L08",
+"word": "bucket",
+"start": 49.431,
+"end": 49.931
+},
+{
+"line": "L08",
+"word": "came",
+"start": 49.911,
+"end": 50.151
+},
+{
+"line": "L08",
+"word": "at",
+"start": 50.131,
+"end": 50.311
+},
+{
+"line": "L08",
+"word": "the",
+"start": 50.291,
+"end": 50.491
+},
+{
+"line": "L08",
+"word": "end.",
+"start": 50.471,
+"end": 50.711
+},
+{
+"line": "L09",
+"word": "It's",
+"start": 51.521,
+"end": 51.821
+},
+{
+"line": "L09",
+"word": "still",
+"start": 51.801,
+"end": 52.121
+},
+{
+"line": "L09",
+"word": "in",
+"start": 52.101,
+"end": 52.241
+},
+{
+"line": "L09",
+"word": "Modena's",
+"start": 52.221,
+"end": 52.741
+},
+{
+"line": "L09",
+"word": "town",
+"start": 52.721,
+"end": 52.981
+},
+{
+"line": "L09",
+"word": "hall.",
+"start": 52.961,
+"end": 53.261
+},
+{
+"line": "L09",
+"word": "Bologna",
+"start": 53.241,
+"end": 54.001
+},
+{
+"line": "L09",
+"word": "never",
+"start": 53.981,
+"end": 54.281
+},
+{
+"line": "L09",
+"word": "got",
+"start": 54.261,
+"end": 54.461
+},
+{
+"line": "L09",
+"word": "it",
+"start": 54.441,
+"end": 54.561
+},
+{
+"line": "L09",
+"word": "back.",
+"start": 54.541,
+"end": 54.921
+}
+]
+}
