@@ -3,7 +3,7 @@ import TL from "./timeline.json";
 import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, zoom, orbit, pushK, smooth, seg, q, hh, lerp } from "../toon/core";
 import { Stage, CamInfo, card } from "../toon/cast";
 import { fxBang, fxWhat, fxSweat, fxImpact } from "../toon/fx";
-import { fxBurst, fxPuff, Outfit } from "../toon/toon";
+import { fxBurst, fxPuff, Outfit, Pen } from "../toon/toon";
 import { put, exprAt } from "../toon/kit";
 import { emu } from "../toon/animals";
 import { buildSet } from "./set";
@@ -41,7 +41,7 @@ export const SHOTS: ShotDef[] = [
   { id: 1, a: 0, b: 240, light: "golden", sunAz: 30, sunEl: 14 },
   { id: 2, a: 240, b: 455, light: "day", sunAz: 120, sunEl: 55 },
   { id: 3, a: 455, b: 655, light: "day", sunAz: 120, sunEl: 45 },
-  { id: 4, a: 655, b: 840, light: "day", sunAz: 110, sunEl: 40 },
+  { id: 4, a: 655, b: 840, light: "golden", sunAz: 110, sunEl: 14 },
   { id: 5, a: 840, b: 1075, light: "day", sunAz: 120, sunEl: 45 },
   { id: 6, a: 1075, b: 1305, light: "day", sunAz: 120, sunEl: 40 },
   { id: 7, a: 1305, b: 1390, light: "day", sunAz: 120, sunEl: 40 },
@@ -53,23 +53,28 @@ export const FLASH_AT = [Math.round(tl("L01", 5.6) * FPS)];
 const KICKS: [number, number][] = [[tl("L01", 5.6), 0.6], [FIRE4, 0.6], [FIRE4 + 0.35, 0.6], [JAM, 0.4], [tl("L05", 1.0), 0.5], [tl("L08", 3.0), 0.8]];
 
 const C = (base: V3, d: V3): V3 => [base[0] + d[0], base[1] + d[1], base[2] + d[2]];
+/** owner rule #4 (every shot moves): swing the camera around its look point by `yaw` rad/frame, raise it `rise` m/frame */
+const arc = (pos: V3, look: V3, f: number, f0: number, yaw: number, rise = 0): V3 => {
+  const a = yaw * (f - f0), dx = pos[0] - look[0], dz = pos[2] - look[2];
+  return [look[0] + dx * Math.cos(a) - dz * Math.sin(a), pos[1] + rise * (f - f0), look[2] + dx * Math.sin(a) + dz * Math.cos(a)];
+};
 export const CAMS: Record<number, Key[]> = {
   1: [
-    { f: 0, s: (f) => dolly([-1.2, 1.5, 12.8], [1.0, 1.4, 8.6], pushK(f, 0, 0.003), { fov: 40, roll: 0.03 }) }, // a gunner faces the wheat...
+    { f: 0, s: (f) => dolly(arc([-1.2, 1.5, 12.8], [1.0, 1.4, 8.6], f, 0, 0.0035), [1.0, 1.4, 8.6], pushK(f, 0, 0.003), { fov: 40, roll: 0.03 }) }, // a gunner faces the wheat...
     { f: 110, dur: 34, s: (f) => dolly([-2.6, 2.6, 15], [6, 1.2, -20], pushK(f, 110, 0.002), { fov: 46 }) }, // ...and the heads pop up
-    { f: 168, cut: true, s: (f) => dolly([8, 1.2, -6], [10, 1.5, -12], pushK(f, 168, 0.004, 0.009, 30), { fov: 40, roll: -0.05 }) }, // "The emus won."
+    { f: 168, cut: true, s: (f) => dolly(arc([8, 1.2, -6], [10, 1.5, -12], f, 168, -0.003), [10, 1.5, -12], pushK(f, 168, 0.004, 0.009, 30), { fov: 40, roll: -0.05 }) }, // "The emus won."
   ],
   2: [
-    { f: 240, s: (f) => zoom([0, 10, 30], [0, 1, -10], 46, pushK(f, 240, 0.002)) }, // a drought; twenty thousand emus
-    { f: 340, cut: true, s: (f) => dolly([-8, 1.2, 9], [-12, 1.0, 2.5], pushK(f, 340, 0.003), { fov: 42, roll: 0.05 }) }, // fences flattened
+    { f: 240, s: (f) => zoom(arc([0, 10, 30], [0, 1, -10], f, 240, 0.0025, -0.05), [0, 1, -10], 46, pushK(f, 240, 0.002)) }, // a drought; twenty thousand emus
+    { f: 340, cut: true, s: (f) => dolly(arc([-8, 1.2, 9], [-12, 1.0, 2.5], f, 340, -0.0035, 0.008), [-12, 1.0, 2.5], pushK(f, 340, 0.003), { fov: 42, roll: 0.05 }) }, // fences flattened
   ],
   3: [
     { f: 455, s: (f) => dolly([FARM[0] + 2, 1.6, 0], [FARM[0], 1.5, -8], pushK(f, 455, 0.003), { fov: 44 }) }, // the farmers ask for help
-    { f: 520, cut: true, s: (f) => zoom([FARM[0] + 14, 3, 22], [FARM[0] + 2, 1.5, 6], 44, pushK(f, 520, 0.002)) }, // the army arrives
+    { f: 520, cut: true, s: (f) => zoom(arc([FARM[0] + 14, 3, 22], [FARM[0] + 2, 1.5, 6], f, 520, 0.003, -0.01), [FARM[0] + 2, 1.5, 6], 44, pushK(f, 520, 0.002)) }, // the army arrives
     { f: 600, cut: true, s: (f) => dolly([FARM[0] + 6.5, 1.7, 9.5], [FARM[0] + 5.5, 1.7, 6.2], pushK(f, 600, 0.004, 0.008, 30), { fov: 40 }) }, // Major Meredith
   ],
   4: [
-    { f: 655, s: (f) => dolly(C(DAM, [-16, 1.2, 14]), C(DAM, [0, 1.0, 0]), pushK(f, 655, 0.0025), { fov: 46 }) }, // ambush at the dam
+    { f: 655, s: (f) => dolly(arc(C(DAM, [-16, 1.2, 14]), C(DAM, [0, 1.0, 0]), f, 655, -0.003, 0.02), C(DAM, [0, 1.0, 0]), pushK(f, 655, 0.0025), { fov: 46 }) }, // ambush at the dam
     { f: 745, cut: true, s: (f) => dolly(C(DAM, [-10.4, 1.9, 14.6]), C(DAM, [-12.6, 1.5, 10.8]), pushK(f, 745, 0.004, 0.009, 24), { fov: 40, roll: -0.06 }) }, // ...click.
     { f: 790, cut: true, s: (f) => dolly(C(DAM, [-6, 2.5, 16]), C(DAM, [2, 1.0, -4]), pushK(f, 790, 0.003), { fov: 46 }) }, // emus scatter
   ],
@@ -78,17 +83,17 @@ export const CAMS: Record<number, Key[]> = {
     { f: 960, cut: true, s: (f) => { const x = -40 + (f / FPS - tl("L05", 0)) * 6; return dolly([x + 16, 1.0, 9], [x + 6, 1.4, 6], 1, { fov: 44, roll: -0.04 }); } }, // the emus look back
   ],
   6: [
-    { f: 1075, s: (f) => dolly(C(CASINGS, [3, 2.4, 9]), C(CASINGS, [0, 1.0, 0]), pushK(f, 1075, 0.0025), { fov: 44 }) }, // the casings pile up
-    { f: 1200, dur: 30, s: (f) => dolly(C(CASINGS, [5, 4.5, 12]), C(CASINGS, [0, 1.6, 0]), pushK(f, 1200, 0.002), { fov: 46, roll: 0.04 }) },
+    { f: 1075, s: (f) => dolly(arc(C(CASINGS, [3, 2.4, 9]), C(CASINGS, [0, 1.0, 0]), f, 1075, 0.004), C(CASINGS, [0, 1.0, 0]), pushK(f, 1075, 0.0025), { fov: 44 }) }, // the casings pile up
+    { f: 1200, dur: 30, s: (f) => dolly(arc(C(CASINGS, [5, 4.5, 12]), C(CASINGS, [0, 1.6, 0]), f, 1200, 0.003, 0.03), C(CASINGS, [0, 1.6, 0]), pushK(f, 1200, 0.002), { fov: 46, roll: 0.04 }) },
   ],
-  7: [{ f: 1305, s: (f) => dolly(C(CASINGS, [1.2, 1.4, 5.0]), C(CASINGS, [0, 1.4, 1.5]), pushK(f, 1305, 0.004, 0.009, 24), { fov: 40 }) }], // ten bullets, one emu
+  7: [{ f: 1305, s: (f) => dolly(arc(C(CASINGS, [1.2, 1.4, 5.0]), C(CASINGS, [0, 1.4, 1.5]), f, 1305, -0.004), C(CASINGS, [0, 1.4, 1.5]), pushK(f, 1305, 0.004, 0.009, 24), { fov: 40 }) }], // ten bullets, one emu
   8: [
-    { f: 1390, s: (f) => dolly([FARM[0] + 8, 1.6, 10], [FARM[0] + 7.5, 1.0, 4.4], pushK(f, 1390, 0.003), { fov: 42 }) }, // ten thousand bullets...
-    { f: 1480, cut: true, s: (f) => zoom([-10, 5, 30], [-10, 10, -70], 44, pushK(f, 1480, 0.002, 0.006, 30)) }, // ...twenty thousand emus
+    { f: 1390, s: (f) => dolly(arc([FARM[0] + 8, 1.6, 10], [FARM[0] + 7.5, 1.0, 4.4], f, 1390, 0.004), [FARM[0] + 7.5, 1.0, 4.4], pushK(f, 1390, 0.003), { fov: 42 }) }, // ten thousand bullets...
+    { f: 1480, cut: true, s: (f) => zoom(arc([-10, 5, 30], [-10, 10, -70], f, 1480, 0.0012, 0.04), [-10, 10, -70], 44, pushK(f, 1480, 0.002, 0.006, 30)) }, // ...twenty thousand emus
   ],
   9: [
-    { f: 1585, s: (f) => zoom([FARM[0] - 2, 3, 22], [FARM[0] + 20, 1.5, 6], 46, pushK(f, 1585, 0.002)) }, // the army leaves
-    { f: 1680, cut: true, s: (f) => dolly([-7, 13.6, -52], [-10, 13.2, -66], pushK(f, 1680, 0.003), { fov: 40, roll: 0.03 }) }, // the emu in the major's hat
+    { f: 1585, s: (f) => zoom(arc([FARM[0] - 2, 3, 22], [FARM[0] + 20, 1.5, 6], f, 1585, -0.003, 0.02), [FARM[0] + 20, 1.5, 6], 46, pushK(f, 1585, 0.002)) }, // the army leaves
+    { f: 1680, cut: true, s: (f) => dolly(arc([-7, 13.6, -52], [-10, 13.2, -66], f, 1680, 0.003), [-10, 13.2, -66], pushK(f, 1680, 0.003), { fov: 40, roll: 0.03 }) }, // the emu in the major's hat
   ],
 };
 export const DOF: Dof[] = [
@@ -100,7 +105,16 @@ export const DOF: Dof[] = [
 const emuCard = (out: Stage, key: string, x: number, z: number, s: number, ph: number, shock = false, hat = false, look = 0, y = 0) =>
   card(out, `emu|${key}|${ph < 0 ? -1 : q(ph, 8)}|${shock ? 1 : 0}|${hat ? 1 : 0}|${look}`, (p) => emu(p, ph, shock, hat, look), x, y + 0.9 * s, z, 1.2 * s, 1.8 * s, { cw: 400, ch: 600 });
 
+// owner rule #5: places say who they are (unlit painted cards, drawn with fillText)
+const txt = (p: Pen, s: string, x: number, y: number, px: number, col: string) => { const g = p.g; g.textAlign = "center"; g.textBaseline = "middle"; g.fillStyle = col; g.font = `bold ${px}px sans-serif`; g.fillText(s, x, y); };
+/** roadside sign (600 x 760): where and when */
+const waSign = (p: Pen) => { p.poly([[275, 380], [325, 380], [325, 760], [275, 760]], "#8a5a32", 10); p.poly([[20, 30], [580, 30], [580, 400], [20, 400]], "#f4e3bf", 12); txt(p, "CAMPION", 300, 115, 86, "#c0353a"); txt(p, "WESTERN", 300, 215, 62, "#2a3f6a"); txt(p, "AUSTRALIA", 300, 285, 62, "#2a3f6a"); txt(p, "1932", 300, 360, 46, "#3a2f28"); };
+/** the army's tally board (600 x 820) on an easel */
+const tally = (p: Pen) => { p.stroke([[140, 400], [80, 810]], 14); p.stroke([[460, 400], [520, 810]], 14); p.poly([[30, 30], [570, 30], [570, 470], [30, 470]], "#2f4a3a", 14); txt(p, "ROUNDS", 300, 105, 62, "#f4f1e6"); txt(p, "9,860", 300, 190, 92, "#f2c230"); txt(p, "EMUS", 300, 290, 62, "#f4f1e6"); txt(p, "986", 300, 385, 92, "#f2c230"); };
+
 const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
+  if (id === 2) card(out, "waSign", waSign, -3.0, 1.3, 12.0, 2.0, 2.53, { cw: 600, ch: 760 });
+  if (id === 6) card(out, "tally", tally, CASINGS[0] + 2.0, 1.25, CASINGS[2] - 1.2, 1.5, 2.05, { cw: 600, ch: 820 });
   if (id === 1) {
     put(cam, out, { i: 100, o: GUNNER, okey: "gun1" }, t, 0.0, 0, 9.0, exprAt(t, [[0, "stern"], [tl("L01", 3.8), "nervous"], [tl("L01", 5.6), "shock"]]), { scale: 1.1 });
     const n = Math.floor(40 * smooth(seg(t, tl("L01", 1.5), tl("L01", 5.0))));
