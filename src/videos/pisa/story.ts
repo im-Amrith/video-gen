@@ -71,14 +71,14 @@ export const CAMS: Record<number, Key[]> = {
   ],
   2: [
     { f: 175, s: (f) => orbit([0, 6, 0], 40, 0.3 + 0.002 * (f - 175), 14, { fov: 44 }) }, // Pisa, 1173: building it
-    { f: 320, cut: true, s: (f) => dolly(C(SEC, [0, 2, 26]), C(SEC, [0, -2.5, 0]), pushK(f, 320, 0.0025), { fov: 44 }) }, // the soil, the shallow foundation
+    { f: 320, cut: true, s: (f) => dolly(C(SEC, [2, 3, 40]), C(SEC, [0, 0, 0]), pushK(f, 320, 0.0025), { fov: 44 }) }, // the soil, the shallow foundation
   ],
-  3: [{ f: 420, s: (f) => dolly(C(SEC, [2, 0, 18]), C(SEC, [0, -0.5, 0]), pushK(f, 420, 0.004, 0.008, 24), { fov: 42, roll: 0.05 }) }], // sinking
+  3: [{ f: 420, s: (f) => dolly(C(SEC, [3, 2, 32]), C(SEC, [0, 0.5, 0]), pushK(f, 420, 0.004, 0.008, 24), { fov: 42, roll: 0.05 }) }], // sinking
   4: [
     { f: 510, s: (f) => dolly([-14, 2.0, 22], [8, 2.2, 6], pushK(f, 510, 0.0025), { fov: 46 }) }, // off to war
     { f: 600, cut: true, s: (f) => zoom([10, 3, 34], [0, 5, 0], 44, pushK(f, 600, 0.002)) }, // ...the years fly by
   ],
-  5: [{ f: 668, s: (f) => dolly([4, 7.4, 8.5], [0.5, 6.9, 1.5], pushK(f, 668, 0.003), { fov: 40 }) }], // a cat asleep on the stub
+  5: [{ f: 668, s: (f) => dolly([3.6, 12.6, 8.5], [0.2, 10.7, 1.8], pushK(f, 668, 0.003), { fov: 40 }) }], // a cat asleep on the stub
   6: [
     { f: 806, s: (f) => orbit([0, 10, 0], 34, 0.6 + 0.003 * (f - 806), 6, { fov: 46 }) }, // the builders are back
     { f: 930, cut: true, s: (f) => dolly([10, 26, 22], [0, 22, 0], pushK(f, 930, 0.003), { fov: 44, roll: -0.05 }) }, // the banana + a gull
@@ -90,7 +90,7 @@ export const CAMS: Record<number, Key[]> = {
   ],
   9: [
     { f: 1297, s: (f) => dolly([16, 3, 12], [FR, 1.5, 0], pushK(f, 1297, 0.003), { fov: 44 }) }, // lead blocks
-    { f: 1400, cut: true, s: (f) => dolly(C(SEC, [4, -1, 18]), C(SEC, [3, -2, 0]), pushK(f, 1400, 0.003), { fov: 42 }) }, // drilling underneath
+    { f: 1400, cut: true, s: (f) => dolly(C(SEC, [4, 3, 40]), C(SEC, [2, 2, 0]), pushK(f, 1400, 0.003), { fov: 42 }) }, // drilling underneath
   ],
   10: [
     { f: 1487, s: (f) => zoom([22, 5, 50], [0, 14, 0], 46, pushK(f, 1487, 0.002)) }, // it comes back a little

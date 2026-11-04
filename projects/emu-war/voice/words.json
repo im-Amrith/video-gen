@@ -1,0 +1,911 @@
+{
+"note": "estimated from voiced audio + character counts (Whisper blocked in the cloud)",
+"words": [
+{
+"line": "L01",
+"word": "In",
+"start": 0.32,
+"end": 0.46
+},
+{
+"line": "L01",
+"word": "nineteen",
+"start": 0.44,
+"end": 1.02
+},
+{
+"line": "L01",
+"word": "thirty-two,",
+"start": 1.0,
+"end": 2.04
+},
+{
+"line": "L01",
+"word": "Australia",
+"start": 2.02,
+"end": 2.6
+},
+{
+"line": "L01",
+"word": "sent",
+"start": 2.58,
+"end": 2.86
+},
+{
+"line": "L01",
+"word": "soldiers",
+"start": 2.84,
+"end": 3.52
+},
+{
+"line": "L01",
+"word": "with",
+"start": 3.5,
+"end": 3.78
+},
+{
+"line": "L01",
+"word": "machine",
+"start": 3.76,
+"end": 4.22
+},
+{
+"line": "L01",
+"word": "guns",
+"start": 4.2,
+"end": 4.58
+},
+{
+"line": "L01",
+"word": "to",
+"start": 4.56,
+"end": 4.7
+},
+{
+"line": "L01",
+"word": "fight",
+"start": 4.68,
+"end": 5.02
+},
+{
+"line": "L01",
+"word": "a",
+"start": 5.0,
+"end": 5.08
+},
+{
+"line": "L01",
+"word": "war",
+"start": 5.06,
+"end": 5.28
+},
+{
+"line": "L01",
+"word": "against",
+"start": 5.26,
+"end": 5.8
+},
+{
+"line": "L01",
+"word": "emus.",
+"start": 5.78,
+"end": 6.54
+},
+{
+"line": "L01",
+"word": "The",
+"start": 6.52,
+"end": 6.74
+},
+{
+"line": "L01",
+"word": "emus",
+"start": 6.72,
+"end": 6.98
+},
+{
+"line": "L01",
+"word": "won.",
+"start": 6.96,
+"end": 7.24
+},
+{
+"line": "L02",
+"word": "Western",
+"start": 8.074,
+"end": 8.514
+},
+{
+"line": "L02",
+"word": "Australia.",
+"start": 8.494,
+"end": 9.134
+},
+{
+"line": "L02",
+"word": "A",
+"start": 9.114,
+"end": 9.194
+},
+{
+"line": "L02",
+"word": "drought",
+"start": 9.174,
+"end": 9.974
+},
+{
+"line": "L02",
+"word": "sends",
+"start": 9.954,
+"end": 10.334
+},
+{
+"line": "L02",
+"word": "about",
+"start": 10.314,
+"end": 10.614
+},
+{
+"line": "L02",
+"word": "twenty",
+"start": 10.594,
+"end": 11.014
+},
+{
+"line": "L02",
+"word": "thousand",
+"start": 10.994,
+"end": 11.554
+},
+{
+"line": "L02",
+"word": "emus",
+"start": 11.534,
+"end": 11.774
+},
+{
+"line": "L02",
+"word": "into",
+"start": 11.754,
+"end": 11.994
+},
+{
+"line": "L02",
+"word": "the",
+"start": 11.974,
+"end": 12.154
+},
+{
+"line": "L02",
+"word": "wheat",
+"start": 12.134,
+"end": 12.574
+},
+{
+"line": "L02",
+"word": "fields,",
+"start": 12.554,
+"end": 13.334
+},
+{
+"line": "L02",
+"word": "flattening",
+"start": 13.314,
+"end": 13.954
+},
+{
+"line": "L02",
+"word": "crops",
+"start": 13.934,
+"end": 14.334
+},
+{
+"line": "L02",
+"word": "and",
+"start": 14.314,
+"end": 14.554
+},
+{
+"line": "L02",
+"word": "fences.",
+"start": 14.534,
+"end": 14.934
+},
+{
+"line": "L03",
+"word": "The",
+"start": 15.295,
+"end": 15.515
+},
+{
+"line": "L03",
+"word": "farmers",
+"start": 15.495,
+"end": 15.935
+},
+{
+"line": "L03",
+"word": "ask",
+"start": 15.915,
+"end": 16.115
+},
+{
+"line": "L03",
+"word": "for",
+"start": 16.095,
+"end": 16.415
+},
+{
+"line": "L03",
+"word": "help.",
+"start": 16.395,
+"end": 17.195
+},
+{
+"line": "L03",
+"word": "The",
+"start": 17.175,
+"end": 17.375
+},
+{
+"line": "L03",
+"word": "army",
+"start": 17.355,
+"end": 17.615
+},
+{
+"line": "L03",
+"word": "sends",
+"start": 17.595,
+"end": 17.915
+},
+{
+"line": "L03",
+"word": "Major",
+"start": 17.895,
+"end": 18.195
+},
+{
+"line": "L03",
+"word": "Meredith,",
+"start": 18.175,
+"end": 19.035
+},
+{
+"line": "L03",
+"word": "two",
+"start": 19.015,
+"end": 19.195
+},
+{
+"line": "L03",
+"word": "machine",
+"start": 19.175,
+"end": 19.615
+},
+{
+"line": "L03",
+"word": "guns,",
+"start": 19.595,
+"end": 20.155
+},
+{
+"line": "L03",
+"word": "and",
+"start": 20.135,
+"end": 20.335
+},
+{
+"line": "L03",
+"word": "ten",
+"start": 20.315,
+"end": 20.515
+},
+{
+"line": "L03",
+"word": "thousand",
+"start": 20.495,
+"end": 21.035
+},
+{
+"line": "L03",
+"word": "rounds.",
+"start": 21.015,
+"end": 21.435
+},
+{
+"line": "L04",
+"word": "First",
+"start": 22.107,
+"end": 22.487
+},
+{
+"line": "L04",
+"word": "ambush:",
+"start": 22.467,
+"end": 23.227
+},
+{
+"line": "L04",
+"word": "the",
+"start": 23.207,
+"end": 23.407
+},
+{
+"line": "L04",
+"word": "emus",
+"start": 23.387,
+"end": 23.667
+},
+{
+"line": "L04",
+"word": "walk",
+"start": 23.647,
+"end": 23.987
+},
+{
+"line": "L04",
+"word": "right",
+"start": 23.967,
+"end": 24.387
+},
+{
+"line": "L04",
+"word": "up",
+"start": 24.367,
+"end": 24.527
+},
+{
+"line": "L04",
+"word": "to",
+"start": 24.507,
+"end": 24.647
+},
+{
+"line": "L04",
+"word": "the",
+"start": 24.627,
+"end": 24.847
+},
+{
+"line": "L04",
+"word": "dam.",
+"start": 24.827,
+"end": 25.507
+},
+{
+"line": "L04",
+"word": "The",
+"start": 25.487,
+"end": 25.687
+},
+{
+"line": "L04",
+"word": "gun",
+"start": 25.667,
+"end": 25.967
+},
+{
+"line": "L04",
+"word": "fires",
+"start": 25.947,
+"end": 26.327
+},
+{
+"line": "L04",
+"word": "a",
+"start": 26.307,
+"end": 26.387
+},
+{
+"line": "L04",
+"word": "few",
+"start": 26.367,
+"end": 26.587
+},
+{
+"line": "L04",
+"word": "shots,",
+"start": 26.567,
+"end": 27.087
+},
+{
+"line": "L04",
+"word": "and",
+"start": 27.067,
+"end": 27.287
+},
+{
+"line": "L04",
+"word": "jams.",
+"start": 27.267,
+"end": 27.607
+},
+{
+"line": "L05",
+"word": "So",
+"start": 28.338,
+"end": 28.478
+},
+{
+"line": "L05",
+"word": "they",
+"start": 28.458,
+"end": 28.718
+},
+{
+"line": "L05",
+"word": "bolt",
+"start": 28.698,
+"end": 28.938
+},
+{
+"line": "L05",
+"word": "a",
+"start": 28.918,
+"end": 28.998
+},
+{
+"line": "L05",
+"word": "gun",
+"start": 28.978,
+"end": 29.178
+},
+{
+"line": "L05",
+"word": "onto",
+"start": 29.158,
+"end": 29.458
+},
+{
+"line": "L05",
+"word": "a",
+"start": 29.438,
+"end": 29.518
+},
+{
+"line": "L05",
+"word": "truck.",
+"start": 29.498,
+"end": 29.898
+},
+{
+"line": "L05",
+"word": "But",
+"start": 29.878,
+"end": 30.618
+},
+{
+"line": "L05",
+"word": "emus",
+"start": 30.598,
+"end": 30.858
+},
+{
+"line": "L05",
+"word": "sprint",
+"start": 30.838,
+"end": 31.258
+},
+{
+"line": "L05",
+"word": "at",
+"start": 31.238,
+"end": 31.378
+},
+{
+"line": "L05",
+"word": "about",
+"start": 31.358,
+"end": 31.878
+},
+{
+"line": "L05",
+"word": "fifty",
+"start": 31.858,
+"end": 32.238
+},
+{
+"line": "L05",
+"word": "kilometers",
+"start": 32.218,
+"end": 32.878
+},
+{
+"line": "L05",
+"word": "an",
+"start": 32.858,
+"end": 32.998
+},
+{
+"line": "L05",
+"word": "hour,",
+"start": 32.978,
+"end": 33.278
+},
+{
+"line": "L05",
+"word": "over",
+"start": 33.258,
+"end": 33.818
+},
+{
+"line": "L05",
+"word": "ground",
+"start": 33.798,
+"end": 34.158
+},
+{
+"line": "L05",
+"word": "the",
+"start": 34.138,
+"end": 34.338
+},
+{
+"line": "L05",
+"word": "truck",
+"start": 34.318,
+"end": 34.638
+},
+{
+"line": "L05",
+"word": "can't",
+"start": 34.618,
+"end": 35.058
+},
+{
+"line": "L05",
+"word": "handle.",
+"start": 35.038,
+"end": 35.458
+},
+{
+"line": "L06",
+"word": "By",
+"start": 36.11,
+"end": 36.25
+},
+{
+"line": "L06",
+"word": "the",
+"start": 36.23,
+"end": 36.41
+},
+{
+"line": "L06",
+"word": "army's",
+"start": 36.39,
+"end": 36.75
+},
+{
+"line": "L06",
+"word": "own",
+"start": 36.73,
+"end": 36.95
+},
+{
+"line": "L06",
+"word": "count,",
+"start": 36.93,
+"end": 37.27
+},
+{
+"line": "L06",
+"word": "they",
+"start": 37.25,
+"end": 37.93
+},
+{
+"line": "L06",
+"word": "fired",
+"start": 37.91,
+"end": 38.21
+},
+{
+"line": "L06",
+"word": "nine",
+"start": 38.19,
+"end": 38.43
+},
+{
+"line": "L06",
+"word": "thousand",
+"start": 38.41,
+"end": 38.93
+},
+{
+"line": "L06",
+"word": "eight",
+"start": 38.91,
+"end": 39.23
+},
+{
+"line": "L06",
+"word": "hundred",
+"start": 39.21,
+"end": 39.63
+},
+{
+"line": "L06",
+"word": "and",
+"start": 39.61,
+"end": 39.79
+},
+{
+"line": "L06",
+"word": "sixty",
+"start": 39.77,
+"end": 40.15
+},
+{
+"line": "L06",
+"word": "rounds,",
+"start": 40.13,
+"end": 40.55
+},
+{
+"line": "L06",
+"word": "for",
+"start": 40.53,
+"end": 41.09
+},
+{
+"line": "L06",
+"word": "nine",
+"start": 41.07,
+"end": 41.33
+},
+{
+"line": "L06",
+"word": "hundred",
+"start": 41.31,
+"end": 41.71
+},
+{
+"line": "L06",
+"word": "and",
+"start": 41.69,
+"end": 42.07
+},
+{
+"line": "L06",
+"word": "eighty-six",
+"start": 42.05,
+"end": 42.75
+},
+{
+"line": "L06",
+"word": "birds.",
+"start": 42.73,
+"end": 43.11
+},
+{
+"line": "L07",
+"word": "That's",
+"start": 43.771,
+"end": 44.151
+},
+{
+"line": "L07",
+"word": "about",
+"start": 44.131,
+"end": 44.551
+},
+{
+"line": "L07",
+"word": "ten",
+"start": 44.531,
+"end": 44.731
+},
+{
+"line": "L07",
+"word": "bullets",
+"start": 44.711,
+"end": 45.251
+},
+{
+"line": "L07",
+"word": "per",
+"start": 45.231,
+"end": 45.431
+},
+{
+"line": "L07",
+"word": "emu.",
+"start": 45.411,
+"end": 45.671
+},
+{
+"line": "L08",
+"word": "Luckily,",
+"start": 46.49,
+"end": 46.97
+},
+{
+"line": "L08",
+"word": "the",
+"start": 46.95,
+"end": 47.13
+},
+{
+"line": "L08",
+"word": "army",
+"start": 47.11,
+"end": 47.35
+},
+{
+"line": "L08",
+"word": "brought",
+"start": 47.33,
+"end": 47.85
+},
+{
+"line": "L08",
+"word": "ten",
+"start": 47.83,
+"end": 48.01
+},
+{
+"line": "L08",
+"word": "thousand",
+"start": 47.99,
+"end": 48.47
+},
+{
+"line": "L08",
+"word": "bullets.",
+"start": 48.45,
+"end": 49.33
+},
+{
+"line": "L08",
+"word": "Unluckily,",
+"start": 49.31,
+"end": 50.19
+},
+{
+"line": "L08",
+"word": "the",
+"start": 50.17,
+"end": 50.35
+},
+{
+"line": "L08",
+"word": "emus",
+"start": 50.33,
+"end": 50.57
+},
+{
+"line": "L08",
+"word": "brought",
+"start": 50.55,
+"end": 51.13
+},
+{
+"line": "L08",
+"word": "twenty",
+"start": 51.11,
+"end": 51.47
+},
+{
+"line": "L08",
+"word": "thousand",
+"start": 51.45,
+"end": 51.91
+},
+{
+"line": "L08",
+"word": "emus.",
+"start": 51.89,
+"end": 52.19
+},
+{
+"line": "L09",
+"word": "The",
+"start": 52.993,
+"end": 53.193
+},
+{
+"line": "L09",
+"word": "army",
+"start": 53.173,
+"end": 53.413
+},
+{
+"line": "L09",
+"word": "went",
+"start": 53.393,
+"end": 53.633
+},
+{
+"line": "L09",
+"word": "home.",
+"start": 53.613,
+"end": 53.933
+},
+{
+"line": "L09",
+"word": "The",
+"start": 53.913,
+"end": 54.433
+},
+{
+"line": "L09",
+"word": "farmers",
+"start": 54.413,
+"end": 54.853
+},
+{
+"line": "L09",
+"word": "went",
+"start": 54.833,
+"end": 55.093
+},
+{
+"line": "L09",
+"word": "back",
+"start": 55.073,
+"end": 55.493
+},
+{
+"line": "L09",
+"word": "to",
+"start": 55.473,
+"end": 55.613
+},
+{
+"line": "L09",
+"word": "bounties.",
+"start": 55.593,
+"end": 56.113
+},
+{
+"line": "L09",
+"word": "And",
+"start": 56.093,
+"end": 56.613
+},
+{
+"line": "L09",
+"word": "the",
+"start": 56.593,
+"end": 56.773
+},
+{
+"line": "L09",
+"word": "emus",
+"start": 56.753,
+"end": 57.013
+},
+{
+"line": "L09",
+"word": "never",
+"start": 56.993,
+"end": 57.293
+},
+{
+"line": "L09",
+"word": "signed",
+"start": 57.273,
+"end": 57.633
+},
+{
+"line": "L09",
+"word": "a",
+"start": 57.613,
+"end": 57.693
+},
+{
+"line": "L09",
+"word": "peace",
+"start": 57.673,
+"end": 58.013
+},
+{
+"line": "L09",
+"word": "treaty.",
+"start": 57.993,
+"end": 58.453
+}
+]
+}

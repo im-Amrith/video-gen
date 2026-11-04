@@ -99,3 +99,17 @@ export const levelCard = (p: Pen, u: number) => {
   p.stroke([[185, 40], [185, 80]], 4); p.stroke([[215, 40], [215, 80]], 4);
   p.ell(200 + 50 * Math.max(-1.6, Math.min(1.6, u)), 60, 16, 12, "#ffffff", 5);
 };
+/** emu (400 x 600, feet at y 590): phase = running leg cycle (-1 = standing), shock, hat = the major's cap, look = head turn -1..1 */
+export const emu = (p: Pen, phase = -1, shock = false, hat = false, look = 0) => {
+  const run = phase >= 0, a = phase * Math.PI * 2;
+  const legs: [number, number][] = run ? [[Math.sin(a) * 60, Math.max(0, Math.cos(a)) * 40], [Math.sin(a + Math.PI) * 60, Math.max(0, Math.cos(a + Math.PI)) * 40]] : [[-25, 0], [25, 0]];
+  for (const [dx, lift] of legs) { p.stroke([[200, 380], [200 + dx * 0.5, 470], [200 + dx, 585 - lift]], 12, "#6e5a4a"); p.stroke([[200 + dx - 20, 585 - lift], [200 + dx + 25, 585 - lift]], 10, "#6e5a4a"); }
+  p.ell(200, 330, 130, 95, "#7a6a5c", 12);
+  for (let i = 0; i < 9; i++) p.stroke([[100 + i * 22, 300 + (i % 2) * 10], [95 + i * 22, 350 + (i % 3) * 10]], 7, "#5d4f43");
+  const hx = 250 + look * 40, hy = 90;
+  p.line([[230, 270], [240, 180], [hx, hy + 30]], "#8a7a6c", 34);
+  p.ell(hx, hy, 42, 38, "#8a7a6c", 10);
+  p.poly([[hx + 30 * Math.sign(look || 1), hy + 5], [hx + 80 * Math.sign(look || 1), hy + 14], [hx + 30 * Math.sign(look || 1), hy + 24]], "#3a2f28", 7);
+  p.ell(hx + 10, hy - 6, shock ? 16 : 11, shock ? 16 : 11, "#ffffff", 6); p.dot(hx + 12, hy - 6, shock ? 7 : 8, "#c0353a");
+  if (hat) { p.ell(hx, hy - 34, 56, 12, "#7a6a3a", 8); p.poly([[hx - 34, hy - 36], [hx - 26, hy - 70], [hx + 26, hy - 70], [hx + 34, hy - 36]], "#8a7a4a", 8); p.stroke([[hx - 30, hy - 44], [hx + 30, hy - 44]], 6, "#3a2f28"); }
+};

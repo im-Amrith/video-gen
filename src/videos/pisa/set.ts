@@ -91,9 +91,10 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
       tw.base.rotation.z = lean;
       tw.floors.forEach((g, k) => { g.visible = k < n; g.rotation.z = k >= 4 && k < 8 ? -bend : 0; g.scale.y = 1; });
     }
+    S.base.rotation.z = lean * 2.2;
     T.base.position.set(0, -0.15 * (lean / 0.1), 0);
     S.base.position.y = -1.2 * (lean / 0.1);
-    found.position.set(SEC[0], -1.5 + S.base.position.y, SEC[2] - 0.4); found.rotation.z = lean;
+    found.position.set(SEC[0], -1.5 + S.base.position.y, SEC[2] - 0.4); found.rotation.z = lean * 2.2;
     const ld = leadAt(t);
     lead.forEach((m, k) => { m.visible = k < ld * 12; m.position.set(FR + 0.6 + (k % 3) * 0.2, 0.3 + Math.floor(k / 3) * 0.6, -1.2 + (k % 3) * 1.1); });
     const dr = drillAt(t); rig.visible = dr > 0; rig.position.set(FR + 6, 0, 3);

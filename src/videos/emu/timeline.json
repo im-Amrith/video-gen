@@ -1,0 +1,52 @@
+{
+ "fps": 30,
+ "total": 1822,
+ "dur": 60.733,
+ "lines": {
+  "L01": {
+   "t0": 0.3,
+   "t1": 7.354,
+   "text": "In nineteen thirty-two, Australia sent soldiers with machine guns to fight a war against emus. The emus won."
+  },
+  "L02": {
+   "t0": 8.054,
+   "t1": 15.025,
+   "text": "Western Australia. A drought sends about twenty thousand emus into the wheat fields, flattening crops and fences."
+  },
+  "L03": {
+   "t0": 15.275,
+   "t1": 21.517,
+   "text": "The farmers ask for help. The army sends Major Meredith, two machine guns, and ten thousand rounds."
+  },
+  "L04": {
+   "t0": 22.067,
+   "t1": 27.698,
+   "text": "First ambush: the emus walk right up to the dam. The gun fires a few shots, and jams."
+  },
+  "L05": {
+   "t0": 28.298,
+   "t1": 35.54,
+   "text": "So they bolt a gun onto a truck. But emus sprint at about fifty kilometers an hour, over ground the truck can't handle."
+  },
+  "L06": {
+   "t0": 36.09,
+   "t1": 43.201,
+   "text": "By the army's own count, they fired nine thousand eight hundred and sixty rounds, for nine hundred and eighty-six birds."
+  },
+  "L07": {
+   "t0": 43.751,
+   "t1": 45.77,
+   "text": "That's about ten bullets per emu."
+  },
+  "L08": {
+   "t0": 46.47,
+   "t1": 52.273,
+   "text": "Luckily, the army brought ten thousand bullets. Unluckily, the emus brought twenty thousand emus."
+  },
+  "L09": {
+   "t0": 52.973,
+   "t1": 58.55,
+   "text": "The army went home. The farmers went back to bounties. And the emus never signed a peace treaty."
+  }
+ }
+}

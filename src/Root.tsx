@@ -10,6 +10,7 @@ import { SunShort, SUN_FRAMES } from "./videos/sun/Sun";
 import { MoonShort, MOON_FRAMES } from "./videos/moon/Moon";
 import { ZanzibarShort, ZANZIBAR_FRAMES } from "./videos/zanzibar/Zanzibar";
 import { PisaShort, PISA_FRAMES } from "./videos/pisa/Pisa";
+import { EmuShort, EMU_FRAMES } from "./videos/emu/Emu";
 
 export const Root: React.FC = () => (
   <>
@@ -23,5 +24,6 @@ export const Root: React.FC = () => (
     {/* History */}
     <Composition id="History01ShortestWar" component={ZanzibarShort} durationInFrames={ZANZIBAR_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="History02LeaningTower" component={PisaShort} durationInFrames={PISA_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="History03EmuWar" component={EmuShort} durationInFrames={EMU_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
