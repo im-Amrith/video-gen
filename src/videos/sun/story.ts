@@ -82,10 +82,10 @@ export const CAMS: Record<number, Key[]> = {
   ],
   10: [
     { f: 1410, s: (f) => dolly(C(VENT, [3, 4, 14]), C(VENT, [0, 2.5, -4]), pushK(f, 1410, 0.0025), { fov: 46 }) }, // vents
-    { f: 1500, dur: 30, s: (f) => dolly(C(VENT, [1.0, 1.2, 4.5]), C(VENT, [0, 0.9, 0]), pushK(f, 1500, 0.003), { fov: 40, roll: -0.04 }) },
+    { f: 1500, dur: 30, s: (f) => dolly(C(VENT, [1.0, 1.4, 8.5]), C(VENT, [0.2, 1.0, 2.9]), pushK(f, 1500, 0.003), { fov: 42, roll: -0.04 }) },
   ],
   11: [
-    { f: 1592, s: (f) => dolly(C(VENT, [0.6, 1.0, 3.6]), C(VENT, [0, 0.9, 0]), pushK(f, 1592, 0.004, 0.009, 30), { fov: 38 }) }, // the shrimp, in shades
+    { f: 1592, s: (f) => dolly(C(VENT, [0.5, 1.2, 7.4]), C(VENT, [0.2, 1.0, 2.9]), pushK(f, 1592, 0.004, 0.009, 30), { fov: 40 }) }, // the shrimp, in shades
     { f: 1660, dur: 36, s: (f) => dolly(C(VENT, [2, 3, 10]), C(VENT, [0, 2, -2]), pushK(f, 1660, 0.002), { fov: 46, roll: 0.03 }) },
   ],
 };
@@ -96,12 +96,12 @@ export const DOF: Dof[] = [
   { f: 1410, cInf: 4 }, { f: 1500, dur: 30, cInf: 12 }, { f: 1592, cInf: 14 }, { f: 1660, dur: 36, cInf: 5 },
 ];
 
-const SHRIMP: [number, number, number][] = [[-1.2, 0.4, 0.6], [0.6, 0.25, 0.9], [1.6, 0.7, 0.2], [-0.4, 1.3, 0.4], [0.9, 1.6, -0.5]];
+const SHRIMP: [number, number, number][] = [[-1.0, 0.4, 3.0], [0.5, 0.25, 3.3], [1.4, 0.7, 2.8], [-0.4, 1.2, 2.9], [0.8, 1.5, 2.6]];
 const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   if (id === 1 || id === 4) {
     const dark = id === 4;
     const e = dark ? exprAt(t, [[0, "shock"], [tl("L04", 2.0), "dazed"]]) : exprAt(t, [[0, "lick"], [tl("L01", 2.5), "smile_closed"], [tl("L01", 3.6), "lick"]]);
-    pip(cam, out, t, 0, 0.15, 0.2, e, { mode: "sit", prop: dark ? null : "icecream", swaps: [OUT] });
+    pip(cam, out, t, 0, 0.32, 0.75, e, { mode: "sit", prop: dark ? null : "icecream", swaps: [OUT] });
     if (!dark && t < VANISH + 0.5) card(out, `sun1${q(t % 1, 6)}`, (p) => sunCard(p, t), -1.0, 7.5, -12, 4, 4, { cw: 300, ch: 300 });
     if (!dark && t >= VANISH && t < VANISH + 0.6) { const u = q(seg(t, VANISH, VANISH + 0.6), 20); card(out, `puff1${u}`, (p) => fxPuff(p, u), -1.0, 7.5, -12, 5, 5, { soft: true }); }
     if (dark) {
@@ -127,8 +127,8 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
       const bob = 0.15 * Math.sin(t * 3 + k), hop = shades ? Math.abs(Math.sin(t * 6 + k)) * 0.25 : 0;
       card(out, `shrimp${shades ? 1 : 0}${k % 2}${q(Math.sin(t * 6 + k), 4)}`, (p) => shrimp(p, shades, t * 6 + k), VENT[0] + x, y + bob + hop + 0.3, VENT[2] + z, 0.8, 0.6, { cw: 400, ch: 300, rot: shades ? 0.2 * Math.sin(t * 6 + k) : 0 });
     });
-    if (shades) for (let k = 0; k < 6; k++) card(out, `spk11${k}`, (p) => fxSparkle(p, ["#ff6ad5", "#6af0ff", "#fff36a"][k % 3]), VENT[0] - 2 + k * 0.8, 1.6 + 0.6 * Math.sin(t * 4 + k), VENT[2] - 0.5, 0.3, 0.3, { cw: 200, ch: 200 });
-    if (id === 11 && t > tl("L10", 1.6)) card(out, "what11", (p) => fxWhat(p), VENT[0] + 1.6, 2.1, VENT[2] + 0.2, 0.3, 0.45, { cw: 200, ch: 300 });
+    if (shades) for (let k = 0; k < 6; k++) card(out, `spk11${k}`, (p) => fxSparkle(p, ["#ff6ad5", "#6af0ff", "#fff36a"][k % 3]), VENT[0] - 2 + k * 0.8, 1.6 + 0.6 * Math.sin(t * 4 + k), VENT[2] + 2.4, 0.3, 0.3, { cw: 200, ch: 200 });
+    if (id === 11 && t > tl("L10", 1.6)) card(out, "what11", (p) => fxWhat(p), VENT[0] + 1.6, 2.1, VENT[2] + 2.7, 0.3, 0.45, { cw: 200, ch: 300 });
   }
 };
 

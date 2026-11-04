@@ -1,0 +1,935 @@
+{
+"note": "estimated from voiced audio + character counts (Whisper blocked in the cloud)",
+"words": [
+{
+"line": "L01",
+"word": "Tonight,",
+"start": 0.34,
+"end": 0.78
+},
+{
+"line": "L01",
+"word": "the",
+"start": 0.76,
+"end": 0.92
+},
+{
+"line": "L01",
+"word": "Moon",
+"start": 0.9,
+"end": 1.1
+},
+{
+"line": "L01",
+"word": "is",
+"start": 1.08,
+"end": 1.2
+},
+{
+"line": "L01",
+"word": "gone.",
+"start": 1.18,
+"end": 1.42
+},
+{
+"line": "L01",
+"word": "The",
+"start": 1.4,
+"end": 2.04
+},
+{
+"line": "L01",
+"word": "first",
+"start": 2.02,
+"end": 2.26
+},
+{
+"line": "L01",
+"word": "thing",
+"start": 2.24,
+"end": 2.58
+},
+{
+"line": "L01",
+"word": "you'd",
+"start": 2.56,
+"end": 2.8
+},
+{
+"line": "L01",
+"word": "notice",
+"start": 2.78,
+"end": 3.1
+},
+{
+"line": "L01",
+"word": "isn't",
+"start": 3.08,
+"end": 3.34
+},
+{
+"line": "L01",
+"word": "the",
+"start": 3.32,
+"end": 3.52
+},
+{
+"line": "L01",
+"word": "sky.",
+"start": 3.5,
+"end": 4.08
+},
+{
+"line": "L01",
+"word": "It's",
+"start": 4.06,
+"end": 4.32
+},
+{
+"line": "L01",
+"word": "the",
+"start": 4.3,
+"end": 4.46
+},
+{
+"line": "L01",
+"word": "sea.",
+"start": 4.44,
+"end": 4.64
+},
+{
+"line": "L02",
+"word": "The",
+"start": 5.437,
+"end": 5.617
+},
+{
+"line": "L02",
+"word": "Moon",
+"start": 5.597,
+"end": 5.837
+},
+{
+"line": "L02",
+"word": "is",
+"start": 5.817,
+"end": 5.937
+},
+{
+"line": "L02",
+"word": "the",
+"start": 5.917,
+"end": 6.097
+},
+{
+"line": "L02",
+"word": "main",
+"start": 6.077,
+"end": 6.317
+},
+{
+"line": "L02",
+"word": "reason",
+"start": 6.297,
+"end": 6.637
+},
+{
+"line": "L02",
+"word": "we",
+"start": 6.617,
+"end": 6.757
+},
+{
+"line": "L02",
+"word": "have",
+"start": 6.737,
+"end": 6.957
+},
+{
+"line": "L02",
+"word": "tides.",
+"start": 6.937,
+"end": 7.337
+},
+{
+"line": "L02",
+"word": "Its",
+"start": 7.317,
+"end": 8.097
+},
+{
+"line": "L02",
+"word": "gravity",
+"start": 8.077,
+"end": 8.517
+},
+{
+"line": "L02",
+"word": "pulls",
+"start": 8.497,
+"end": 8.877
+},
+{
+"line": "L02",
+"word": "the",
+"start": 8.857,
+"end": 9.077
+},
+{
+"line": "L02",
+"word": "ocean",
+"start": 9.057,
+"end": 9.337
+},
+{
+"line": "L02",
+"word": "into",
+"start": 9.317,
+"end": 9.557
+},
+{
+"line": "L02",
+"word": "a",
+"start": 9.537,
+"end": 9.637
+},
+{
+"line": "L02",
+"word": "bulge,",
+"start": 9.617,
+"end": 9.977
+},
+{
+"line": "L02",
+"word": "and",
+"start": 9.957,
+"end": 10.557
+},
+{
+"line": "L02",
+"word": "Earth",
+"start": 10.537,
+"end": 10.917
+},
+{
+"line": "L02",
+"word": "spins",
+"start": 10.897,
+"end": 11.257
+},
+{
+"line": "L02",
+"word": "underneath",
+"start": 11.237,
+"end": 11.797
+},
+{
+"line": "L02",
+"word": "it.",
+"start": 11.777,
+"end": 12.037
+},
+{
+"line": "L03",
+"word": "Without",
+"start": 12.397,
+"end": 12.757
+},
+{
+"line": "L03",
+"word": "it,",
+"start": 12.737,
+"end": 12.997
+},
+{
+"line": "L03",
+"word": "only",
+"start": 12.977,
+"end": 13.197
+},
+{
+"line": "L03",
+"word": "the",
+"start": 13.177,
+"end": 13.357
+},
+{
+"line": "L03",
+"word": "Sun",
+"start": 13.337,
+"end": 13.497
+},
+{
+"line": "L03",
+"word": "is",
+"start": 13.477,
+"end": 13.597
+},
+{
+"line": "L03",
+"word": "left",
+"start": 13.577,
+"end": 13.797
+},
+{
+"line": "L03",
+"word": "pulling,",
+"start": 13.777,
+"end": 14.277
+},
+{
+"line": "L03",
+"word": "and",
+"start": 14.257,
+"end": 14.877
+},
+{
+"line": "L03",
+"word": "the",
+"start": 14.857,
+"end": 15.057
+},
+{
+"line": "L03",
+"word": "tides",
+"start": 15.037,
+"end": 15.297
+},
+{
+"line": "L03",
+"word": "shrink",
+"start": 15.277,
+"end": 15.657
+},
+{
+"line": "L03",
+"word": "to",
+"start": 15.637,
+"end": 15.757
+},
+{
+"line": "L03",
+"word": "about",
+"start": 15.737,
+"end": 15.997
+},
+{
+"line": "L03",
+"word": "a",
+"start": 15.977,
+"end": 16.037
+},
+{
+"line": "L03",
+"word": "third.",
+"start": 16.017,
+"end": 16.417
+},
+{
+"line": "L04",
+"word": "Rock",
+"start": 17.205,
+"end": 17.565
+},
+{
+"line": "L04",
+"word": "pools",
+"start": 17.545,
+"end": 17.845
+},
+{
+"line": "L04",
+"word": "dry",
+"start": 17.825,
+"end": 18.045
+},
+{
+"line": "L04",
+"word": "up,",
+"start": 18.025,
+"end": 18.205
+},
+{
+"line": "L04",
+"word": "and",
+"start": 18.185,
+"end": 18.745
+},
+{
+"line": "L04",
+"word": "the",
+"start": 18.725,
+"end": 18.905
+},
+{
+"line": "L04",
+"word": "beach",
+"start": 18.885,
+"end": 19.265
+},
+{
+"line": "L04",
+"word": "gets",
+"start": 19.245,
+"end": 19.505
+},
+{
+"line": "L04",
+"word": "very",
+"start": 19.485,
+"end": 19.725
+},
+{
+"line": "L04",
+"word": "boring.",
+"start": 19.705,
+"end": 20.105
+},
+{
+"line": "L05",
+"word": "Nights",
+"start": 20.865,
+"end": 21.225
+},
+{
+"line": "L05",
+"word": "get",
+"start": 21.205,
+"end": 21.345
+},
+{
+"line": "L05",
+"word": "much",
+"start": 21.325,
+"end": 21.605
+},
+{
+"line": "L05",
+"word": "darker,",
+"start": 21.585,
+"end": 22.065
+},
+{
+"line": "L05",
+"word": "too.",
+"start": 22.045,
+"end": 22.785
+},
+{
+"line": "L05",
+"word": "And",
+"start": 22.765,
+"end": 22.945
+},
+{
+"line": "L05",
+"word": "corals",
+"start": 22.925,
+"end": 23.205
+},
+{
+"line": "L05",
+"word": "that",
+"start": 23.185,
+"end": 23.405
+},
+{
+"line": "L05",
+"word": "time",
+"start": 23.385,
+"end": 23.665
+},
+{
+"line": "L05",
+"word": "their",
+"start": 23.645,
+"end": 23.905
+},
+{
+"line": "L05",
+"word": "spawning",
+"start": 23.885,
+"end": 24.345
+},
+{
+"line": "L05",
+"word": "by",
+"start": 24.325,
+"end": 24.425
+},
+{
+"line": "L05",
+"word": "the",
+"start": 24.405,
+"end": 24.565
+},
+{
+"line": "L05",
+"word": "full",
+"start": 24.545,
+"end": 24.805
+},
+{
+"line": "L05",
+"word": "moon",
+"start": 24.785,
+"end": 24.985
+},
+{
+"line": "L05",
+"word": "would",
+"start": 24.965,
+"end": 25.205
+},
+{
+"line": "L05",
+"word": "lose",
+"start": 25.185,
+"end": 25.385
+},
+{
+"line": "L05",
+"word": "their",
+"start": 25.365,
+"end": 25.625
+},
+{
+"line": "L05",
+"word": "calendar.",
+"start": 25.605,
+"end": 26.185
+},
+{
+"line": "L06",
+"word": "But",
+"start": 27.068,
+"end": 27.268
+},
+{
+"line": "L06",
+"word": "the",
+"start": 27.248,
+"end": 27.408
+},
+{
+"line": "L06",
+"word": "big",
+"start": 27.388,
+"end": 27.568
+},
+{
+"line": "L06",
+"word": "one",
+"start": 27.548,
+"end": 27.708
+},
+{
+"line": "L06",
+"word": "is",
+"start": 27.688,
+"end": 27.808
+},
+{
+"line": "L06",
+"word": "slower.",
+"start": 27.788,
+"end": 28.768
+},
+{
+"line": "L06",
+"word": "The",
+"start": 28.748,
+"end": 28.928
+},
+{
+"line": "L06",
+"word": "Moon",
+"start": 28.908,
+"end": 29.108
+},
+{
+"line": "L06",
+"word": "keeps",
+"start": 29.088,
+"end": 29.408
+},
+{
+"line": "L06",
+"word": "Earth's",
+"start": 29.388,
+"end": 29.868
+},
+{
+"line": "L06",
+"word": "tilt",
+"start": 29.848,
+"end": 30.128
+},
+{
+"line": "L06",
+"word": "steady,",
+"start": 30.108,
+"end": 30.908
+},
+{
+"line": "L06",
+"word": "wobbling",
+"start": 30.888,
+"end": 31.368
+},
+{
+"line": "L06",
+"word": "only",
+"start": 31.348,
+"end": 31.548
+},
+{
+"line": "L06",
+"word": "between",
+"start": 31.528,
+"end": 31.928
+},
+{
+"line": "L06",
+"word": "about",
+"start": 31.908,
+"end": 32.168
+},
+{
+"line": "L06",
+"word": "twenty-two",
+"start": 32.148,
+"end": 32.788
+},
+{
+"line": "L06",
+"word": "and",
+"start": 32.768,
+"end": 32.928
+},
+{
+"line": "L06",
+"word": "twenty-four",
+"start": 32.908,
+"end": 33.568
+},
+{
+"line": "L06",
+"word": "and",
+"start": 33.548,
+"end": 33.708
+},
+{
+"line": "L06",
+"word": "a",
+"start": 33.688,
+"end": 33.748
+},
+{
+"line": "L06",
+"word": "half",
+"start": 33.728,
+"end": 33.948
+},
+{
+"line": "L06",
+"word": "degrees.",
+"start": 33.928,
+"end": 34.568
+},
+{
+"line": "L07",
+"word": "Without",
+"start": 34.913,
+"end": 35.313
+},
+{
+"line": "L07",
+"word": "it,",
+"start": 35.293,
+"end": 35.633
+},
+{
+"line": "L07",
+"word": "the",
+"start": 35.613,
+"end": 35.873
+},
+{
+"line": "L07",
+"word": "tilt",
+"start": 35.853,
+"end": 36.073
+},
+{
+"line": "L07",
+"word": "could",
+"start": 36.053,
+"end": 36.333
+},
+{
+"line": "L07",
+"word": "swing",
+"start": 36.313,
+"end": 36.593
+},
+{
+"line": "L07",
+"word": "wildly,",
+"start": 36.573,
+"end": 37.473
+},
+{
+"line": "L07",
+"word": "anywhere",
+"start": 37.453,
+"end": 37.873
+},
+{
+"line": "L07",
+"word": "from",
+"start": 37.853,
+"end": 38.073
+},
+{
+"line": "L07",
+"word": "nearly",
+"start": 38.053,
+"end": 38.373
+},
+{
+"line": "L07",
+"word": "zero",
+"start": 38.353,
+"end": 38.573
+},
+{
+"line": "L07",
+"word": "to",
+"start": 38.553,
+"end": 38.693
+},
+{
+"line": "L07",
+"word": "eighty-five",
+"start": 38.673,
+"end": 39.353
+},
+{
+"line": "L07",
+"word": "degrees.",
+"start": 39.333,
+"end": 39.993
+},
+{
+"line": "L08",
+"word": "Luckily,",
+"start": 40.643,
+"end": 41.103
+},
+{
+"line": "L08",
+"word": "that",
+"start": 41.083,
+"end": 41.283
+},
+{
+"line": "L08",
+"word": "would",
+"start": 41.263,
+"end": 41.543
+},
+{
+"line": "L08",
+"word": "take",
+"start": 41.523,
+"end": 41.803
+},
+{
+"line": "L08",
+"word": "millions",
+"start": 41.783,
+"end": 42.183
+},
+{
+"line": "L08",
+"word": "of",
+"start": 42.163,
+"end": 42.263
+},
+{
+"line": "L08",
+"word": "years.",
+"start": 42.243,
+"end": 43.123
+},
+{
+"line": "L08",
+"word": "Unluckily,",
+"start": 43.103,
+"end": 43.663
+},
+{
+"line": "L08",
+"word": "when",
+"start": 43.643,
+"end": 43.863
+},
+{
+"line": "L08",
+"word": "it",
+"start": 43.843,
+"end": 43.943
+},
+{
+"line": "L08",
+"word": "happens,",
+"start": 43.923,
+"end": 44.683
+},
+{
+"line": "L08",
+"word": "the",
+"start": 44.663,
+"end": 44.823
+},
+{
+"line": "L08",
+"word": "seasons",
+"start": 44.803,
+"end": 45.163
+},
+{
+"line": "L08",
+"word": "go",
+"start": 45.143,
+"end": 45.263
+},
+{
+"line": "L08",
+"word": "completely",
+"start": 45.243,
+"end": 45.883
+},
+{
+"line": "L08",
+"word": "bonkers.",
+"start": 45.863,
+"end": 46.463
+},
+{
+"line": "L09",
+"word": "So",
+"start": 47.284,
+"end": 47.404
+},
+{
+"line": "L09",
+"word": "next",
+"start": 47.384,
+"end": 47.624
+},
+{
+"line": "L09",
+"word": "time",
+"start": 47.604,
+"end": 47.864
+},
+{
+"line": "L09",
+"word": "you",
+"start": 47.844,
+"end": 48.004
+},
+{
+"line": "L09",
+"word": "see",
+"start": 47.984,
+"end": 48.144
+},
+{
+"line": "L09",
+"word": "the",
+"start": 48.124,
+"end": 48.284
+},
+{
+"line": "L09",
+"word": "Moon,",
+"start": 48.264,
+"end": 48.524
+},
+{
+"line": "L09",
+"word": "say",
+"start": 48.504,
+"end": 48.664
+},
+{
+"line": "L09",
+"word": "thanks.",
+"start": 48.644,
+"end": 49.244
+},
+{
+"line": "L09",
+"word": "It's",
+"start": 49.224,
+"end": 50.004
+},
+{
+"line": "L09",
+"word": "been",
+"start": 49.984,
+"end": 50.244
+},
+{
+"line": "L09",
+"word": "holding",
+"start": 50.224,
+"end": 50.584
+},
+{
+"line": "L09",
+"word": "the",
+"start": 50.564,
+"end": 50.804
+},
+{
+"line": "L09",
+"word": "planet",
+"start": 50.784,
+"end": 51.164
+},
+{
+"line": "L09",
+"word": "steady",
+"start": 51.144,
+"end": 51.444
+},
+{
+"line": "L09",
+"word": "for",
+"start": 51.424,
+"end": 51.604
+},
+{
+"line": "L09",
+"word": "billions",
+"start": 51.584,
+"end": 52.004
+},
+{
+"line": "L09",
+"word": "of",
+"start": 51.984,
+"end": 52.104
+},
+{
+"line": "L09",
+"word": "years.",
+"start": 52.084,
+"end": 52.544
+}
+]
+}

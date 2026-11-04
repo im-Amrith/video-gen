@@ -1,0 +1,56 @@
+[
+ {
+  "id": "L01",
+  "text": "Tonight, the Moon is gone. The first thing you'd notice isn't the sky. It's the sea.",
+  "voice": "am_michael",
+  "speed": 1.2
+ },
+ {
+  "id": "L02",
+  "text": "The Moon is the main reason we have tides. Its gravity pulls the ocean into a bulge, and Earth spins underneath it.",
+  "voice": "am_michael",
+  "speed": 1.2
+ },
+ {
+  "id": "L03",
+  "text": "Without it, only the Sun is left pulling, and the tides shrink to about a third.",
+  "voice": "am_michael",
+  "speed": 1.2
+ },
+ {
+  "id": "L04",
+  "text": "Rock pools dry up, and the beach gets very boring.",
+  "voice": "am_michael",
+  "speed": 1.2
+ },
+ {
+  "id": "L05",
+  "text": "Nights get much darker, too. And corals that time their spawning by the full moon would lose their calendar.",
+  "voice": "am_michael",
+  "speed": 1.2
+ },
+ {
+  "id": "L06",
+  "text": "But the big one is slower. The Moon keeps Earth's tilt steady, wobbling only between about twenty-two and twenty-four and a half degrees.",
+  "voice": "am_michael",
+  "speed": 1.2
+ },
+ {
+  "id": "L07",
+  "text": "Without it, the tilt could swing wildly, anywhere from nearly zero to eighty-five degrees.",
+  "voice": "am_michael",
+  "speed": 1.2
+ },
+ {
+  "id": "L08",
+  "text": "Luckily, that would take millions of years. Unluckily, when it happens, the seasons go completely bonkers.",
+  "voice": "am_michael",
+  "speed": 1.2
+ },
+ {
+  "id": "L09",
+  "text": "So next time you see the Moon, say thanks. It's been holding the planet steady for billions of years.",
+  "voice": "am_michael",
+  "speed": 1.2
+ }
+]

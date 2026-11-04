@@ -18,7 +18,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   for (let i = 0; i < 16; i++) prop(b, {}, ["tree_oak", "tree_fat", "plant_bushLarge"][i % 3], -40 + i * 5.5 + hh(i) * 2, 0, -14 - hh(i, 2) * 10, i % 3 === 2 ? 1.5 : 6 + hh(i, 3) * 3);
   // deck chair: frame + striped canvas
   const stripeT = ctex("chairStripe", 64, 256, (g) => { for (let i = 0; i < 8; i++) { g.fillStyle = i % 2 ? "#ffffff" : "#e2453c"; g.fillRect(0, i * 32, 64, 32); } });
-  b.add(new THREE.BoxGeometry(0.9, 0.05, 1.5).rotateX(-0.6).translate(0, 0.65, 0), lam("chairCanvas", () => ({ map: stripeT, side: THREE.DoubleSide })), new THREE.Matrix4().makeTranslation(0, 0, 0.2));
+  b.add(new THREE.BoxGeometry(0.9, 0.05, 1.5).rotateX(0.6).translate(0, 0.65, 0), lam("chairCanvas", () => ({ map: stripeT, side: THREE.DoubleSide })), new THREE.Matrix4().makeTranslation(0, 0, 0.2));
   for (const sx of [-0.45, 0.45]) b.add(boxGeo(V(sx - 0.03, 0, -0.6), V(sx + 0.03, 1.2, -0.5)), lam("chairWood", () => ({ color: "#b0703f" })));
   // umbrella
   b.add(new THREE.CylinderGeometry(0.04, 0.04, 2.6).translate(0, 1.3, 0), lam("umbPole", () => ({ color: "#f3efe6" })), new THREE.Matrix4().makeTranslation(1.3, 0, -0.6));
@@ -47,7 +47,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   // dynamic: the Sun, light front, orbit ring, the Earth, the Moon
   const sunBall = new THREE.Mesh(new THREE.SphereGeometry(8, 48, 32), glowMat("#ffd27a", 2.2)); sunBall.position.set(...SPACE); sunBall.layers.set(NOINK); root.add(sunBall);
   const sunHalo = new Glow(root, "#ffbf5a", 2.0);
-  const front = new THREE.Mesh(new THREE.TorusGeometry(1, 0.35, 8, 96).rotateX(Math.PI / 2), glowMat("#fff1c0", 1.6)); front.layers.set(NOINK); root.add(front);
+  const front = new THREE.Mesh(new THREE.TorusGeometry(1, 0.012, 6, 160).rotateX(Math.PI / 2), glowMat("#fff1c0", 1.6)); front.layers.set(NOINK); root.add(front);
   const orbit = new THREE.Mesh(new THREE.TorusGeometry(ORB, 0.12, 6, 160).rotateX(Math.PI / 2), glowMat("#8fb8ff", 0.9)); orbit.position.set(...SPACE); orbit.layers.set(NOINK); root.add(orbit);
   const E = globe(root, 4);
   const moon = new THREE.Mesh(new THREE.SphereGeometry(1.2, 32, 24), lam("moonSun", () => ({ color: "#c9c4b8" }))); root.add(moon);

@@ -7,6 +7,7 @@ import { TunnelShort, TUNNEL_FRAMES } from "./videos/tunnel/Tunnel";
 import { SpinShort, SPIN_FRAMES } from "./videos/spin/Spin";
 import { IceShort, ICE_FRAMES } from "./videos/ice/Ice";
 import { SunShort, SUN_FRAMES } from "./videos/sun/Sun";
+import { MoonShort, MOON_FRAMES } from "./videos/moon/Moon";
 
 export const Root: React.FC = () => (
   <>
@@ -16,5 +17,6 @@ export const Root: React.FC = () => (
     <Composition id="WhatIf02Spin" component={SpinShort} durationInFrames={SPIN_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="WhatIf03Ice" component={IceShort} durationInFrames={ICE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="WhatIf04Sun" component={SunShort} durationInFrames={SUN_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="WhatIf05Moon" component={MoonShort} durationInFrames={MOON_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );

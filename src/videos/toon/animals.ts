@@ -59,3 +59,15 @@ export const shrimp = (p: Pen, shades = false, k = 0) => {
   if (shades) { p.poly([[258, 100], [318, 100], [312, 125], [262, 125]], "#1d1a24", 6); p.stroke([[250, 104], [326, 104]], 6); }
   else { p.ell(290, 108, 13, 13, "#ffffff", 6); p.dot(292, 108, 7); }
 };
+/** crab (400 x 300), front view; sad = drooping eyes and mouth */
+export const crab = (p: Pen, sad = false, k = 0) => {
+  for (const s of [-1, 1]) {
+    for (let i = 0; i < 3; i++) p.stroke([[200 + s * 80, 200 + i * 15], [200 + s * (150 + i * 12), 250 + i * 12]], 9, "#c8452e");
+    const cx = 200 + s * (150 + 10 * Math.sin(k)), cy = 110;
+    p.stroke([[200 + s * 90, 170], [cx, cy + 40]], 12, "#c8452e");
+    p.ell(cx, cy, 42, 34, "#e2553a", 9); p.poly([[cx - s * 10, cy - 30], [cx + s * 40, cy - 46], [cx + s * 20, cy - 4]], "#ffffff", 0);
+  }
+  p.ell(200, 200, 110, 70, "#e2553a", 10);
+  for (const s of [-1, 1]) { p.stroke([[200 + s * 30, 140], [200 + s * 36, 95]], 7); p.ell(200 + s * 36, 88, 16, 16, "#ffffff", 6); p.dot(200 + s * 36, sad ? 94 : 88, 7); }
+  if (sad) p.arc(200, 235, 30, 14, 200, 340, 7); else p.arc(200, 215, 30, 16, 20, 160, 7);
+};
