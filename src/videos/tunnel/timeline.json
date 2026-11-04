@@ -1,0 +1,72 @@
+{
+ "fps": 30,
+ "total": 1960,
+ "dur": 65.333,
+ "lines": {
+  "L01": {
+   "t0": 0.3,
+   "t1": 5.413,
+   "text": "If you jumped into a hole straight through the Earth, you'd pop out the other side in thirty-eight minutes."
+  },
+  "L02": {
+   "t0": 6.013,
+   "t1": 12.766,
+   "text": "The deepest hole we ever actually dug is twelve kilometers. They gave up when the rock hit a hundred and eighty degrees."
+  },
+  "L03": {
+   "t0": 13.016,
+   "t1": 16.861,
+   "text": "So let's cheat. One tunnel, pole to pole, with all the air pumped out."
+  },
+  "L04": {
+   "t0": 17.211,
+   "t1": 17.799,
+   "text": "Jump!"
+  },
+  "L05": {
+   "t0": 18.599,
+   "t1": 21.518,
+   "text": "Within a minute, you've passed every hole humans ever dug."
+  },
+  "L06": {
+   "t0": 21.768,
+   "t1": 26.789,
+   "text": "And weirdly, gravity gets stronger as you fall, because you're closing in on the heavy iron core."
+  },
+  "L07": {
+   "t0": 27.039,
+   "t1": 32.523,
+   "text": "Thirteen minutes in, you're shooting through an ocean of liquid iron, as hot as the surface of the Sun."
+  },
+  "L08": {
+   "t0": 32.773,
+   "t1": 37.828,
+   "text": "At the center, you're doing over twenty-eight thousand kilometers an hour. And you weigh nothing at all."
+  },
+  "L09": {
+   "t0": 38.628,
+   "t1": 41.328,
+   "text": "Luckily, gravity now pulls you back and slows you down."
+  },
+  "L10": {
+   "t0": 41.578,
+   "t1": 45.416,
+   "text": "Unluckily, it stops you exactly at the far end, for about half a second."
+  },
+  "L11": {
+   "t0": 45.916,
+   "t1": 51.894,
+   "text": "Miss the edge, and you fall all the way home. Like a kid on a swing: fastest in the middle, stopped at each end."
+  },
+  "L12": {
+   "t0": 52.444,
+   "t1": 60.708,
+   "text": "Leave the air in, and drag holds you to two hundred kilometers an hour. After more than a day, you'd end up floating at the center of the Earth. Forever."
+  },
+  "L13": {
+   "t0": 61.358,
+   "t1": 63.43,
+   "text": "The plane is slower. But it has snacks."
+  }
+ }
+}

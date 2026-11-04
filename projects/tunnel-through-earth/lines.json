@@ -1,92 +1,80 @@
 [
  {
   "id": "L01",
-  "text": "If you jumped into a hole straight through the Earth, you'd come out the other side in thirty-eight minutes.",
+  "text": "If you jumped into a hole straight through the Earth, you'd pop out the other side in thirty-eight minutes.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L02",
-  "text": "The deepest hole we've ever actually dug is twelve kilometers.",
+  "text": "The deepest hole we ever actually dug is twelve kilometers. They gave up when the rock hit a hundred and eighty degrees.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L03",
-  "text": "That's about a tenth of one percent of the way through.",
+  "text": "So let's cheat. One tunnel, pole to pole, with all the air pumped out.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L04",
-  "text": "So let's cheat. One tunnel, pole to pole, with all the air pumped out. Jump!",
+  "text": "Jump!",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L05",
-  "text": "Down through the crust, then almost three thousand kilometers of hot rock.",
+  "text": "Within a minute, you've passed every hole humans ever dug.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L06",
-  "text": "Weirdly, gravity gets stronger as you fall, all the way to the core.",
+  "text": "And weirdly, gravity gets stronger as you fall, because you're closing in on the heavy iron core.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L07",
-  "text": "Thirteen minutes in, you plunge into an ocean of liquid iron.",
+  "text": "Thirteen minutes in, you're shooting through an ocean of liquid iron, as hot as the surface of the Sun.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L08",
-  "text": "Near the center it's about six thousand degrees. As hot as the surface of the Sun.",
+  "text": "At the center, you're doing over twenty-eight thousand kilometers an hour. And you weigh nothing at all.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L09",
-  "text": "At the center, you're doing over twenty-eight thousand kilometers an hour, and you weigh nothing at all.",
+  "text": "Luckily, gravity now pulls you back and slows you down.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L10",
-  "text": "Now gravity pulls you back. You slow down, and down, and down.",
+  "text": "Unluckily, it stops you exactly at the far end, for about half a second.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L11",
-  "text": "Thirty-eight minutes after you jumped, you stop, right at the far side.",
+  "text": "Miss the edge, and you fall all the way home. Like a kid on a swing: fastest in the middle, stopped at each end.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L12",
-  "text": "Grab the edge. Miss it, and you fall all the way back. Forever.",
+  "text": "Leave the air in, and drag holds you to two hundred kilometers an hour. After more than a day, you'd end up floating at the center of the Earth. Forever.",
   "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  },
  {
   "id": "L13",
-  "text": "Unless you leave the air in. Then drag holds you to about two hundred kilometers an hour.",
+  "text": "The plane is slower. But it has snacks.",
   "voice": "am_michael",
-  "speed": 1.2
- },
- {
-  "id": "L14",
-  "text": "After more than a day of falling, you'd end up floating at the center of the Earth. Weightless. Stuck.",
-  "voice": "am_michael",
-  "speed": 1.2
- },
- {
-  "id": "L15",
-  "text": "Maybe just take the plane.",
-  "voice": "am_michael",
-  "speed": 1.2
+  "speed": 1.22
  }
 ]

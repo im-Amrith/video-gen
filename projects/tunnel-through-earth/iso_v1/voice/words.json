@@ -1,0 +1,1217 @@
+{
+"note": "estimated from voiced audio + character counts (Whisper model download blocked in this container)",
+"words": [
+{
+"line": "L01",
+"word": "If",
+"start": 0.47,
+"end": 0.57
+},
+{
+"line": "L01",
+"word": "you",
+"start": 0.55,
+"end": 0.71
+},
+{
+"line": "L01",
+"word": "jumped",
+"start": 0.69,
+"end": 0.99
+},
+{
+"line": "L01",
+"word": "into",
+"start": 0.97,
+"end": 1.17
+},
+{
+"line": "L01",
+"word": "a",
+"start": 1.15,
+"end": 1.21
+},
+{
+"line": "L01",
+"word": "hole",
+"start": 1.19,
+"end": 1.37
+},
+{
+"line": "L01",
+"word": "straight",
+"start": 1.35,
+"end": 1.79
+},
+{
+"line": "L01",
+"word": "through",
+"start": 1.77,
+"end": 2.21
+},
+{
+"line": "L01",
+"word": "the",
+"start": 2.19,
+"end": 2.35
+},
+{
+"line": "L01",
+"word": "Earth,",
+"start": 2.33,
+"end": 3.11
+},
+{
+"line": "L01",
+"word": "you'd",
+"start": 3.09,
+"end": 3.37
+},
+{
+"line": "L01",
+"word": "come",
+"start": 3.35,
+"end": 3.59
+},
+{
+"line": "L01",
+"word": "out",
+"start": 3.57,
+"end": 3.73
+},
+{
+"line": "L01",
+"word": "the",
+"start": 3.71,
+"end": 3.85
+},
+{
+"line": "L01",
+"word": "other",
+"start": 3.83,
+"end": 4.07
+},
+{
+"line": "L01",
+"word": "side",
+"start": 4.05,
+"end": 4.23
+},
+{
+"line": "L01",
+"word": "in",
+"start": 4.21,
+"end": 4.33
+},
+{
+"line": "L01",
+"word": "thirty-eight",
+"start": 4.31,
+"end": 4.97
+},
+{
+"line": "L01",
+"word": "minutes.",
+"start": 4.95,
+"end": 5.55
+},
+{
+"line": "L02",
+"word": "The",
+"start": 6.137,
+"end": 6.297
+},
+{
+"line": "L02",
+"word": "deepest",
+"start": 6.277,
+"end": 6.737
+},
+{
+"line": "L02",
+"word": "hole",
+"start": 6.717,
+"end": 6.917
+},
+{
+"line": "L02",
+"word": "we've",
+"start": 6.897,
+"end": 7.177
+},
+{
+"line": "L02",
+"word": "ever",
+"start": 7.157,
+"end": 7.397
+},
+{
+"line": "L02",
+"word": "actually",
+"start": 7.377,
+"end": 7.837
+},
+{
+"line": "L02",
+"word": "dug",
+"start": 7.817,
+"end": 7.977
+},
+{
+"line": "L02",
+"word": "is",
+"start": 7.957,
+"end": 8.077
+},
+{
+"line": "L02",
+"word": "twelve",
+"start": 8.057,
+"end": 8.757
+},
+{
+"line": "L02",
+"word": "kilometers.",
+"start": 8.737,
+"end": 9.497
+},
+{
+"line": "L03",
+"word": "That's",
+"start": 9.825,
+"end": 10.125
+},
+{
+"line": "L03",
+"word": "about",
+"start": 10.105,
+"end": 10.405
+},
+{
+"line": "L03",
+"word": "a",
+"start": 10.385,
+"end": 10.445
+},
+{
+"line": "L03",
+"word": "tenth",
+"start": 10.425,
+"end": 10.745
+},
+{
+"line": "L03",
+"word": "of",
+"start": 10.725,
+"end": 10.845
+},
+{
+"line": "L03",
+"word": "one",
+"start": 10.825,
+"end": 10.965
+},
+{
+"line": "L03",
+"word": "percent",
+"start": 10.945,
+"end": 11.305
+},
+{
+"line": "L03",
+"word": "of",
+"start": 11.285,
+"end": 11.385
+},
+{
+"line": "L03",
+"word": "the",
+"start": 11.365,
+"end": 11.525
+},
+{
+"line": "L03",
+"word": "way",
+"start": 11.505,
+"end": 11.645
+},
+{
+"line": "L03",
+"word": "through.",
+"start": 11.625,
+"end": 12.025
+},
+{
+"line": "L04",
+"word": "So",
+"start": 12.599,
+"end": 12.719
+},
+{
+"line": "L04",
+"word": "let's",
+"start": 12.699,
+"end": 12.979
+},
+{
+"line": "L04",
+"word": "cheat.",
+"start": 12.959,
+"end": 13.739
+},
+{
+"line": "L04",
+"word": "One",
+"start": 13.719,
+"end": 13.899
+},
+{
+"line": "L04",
+"word": "tunnel,",
+"start": 13.879,
+"end": 14.319
+},
+{
+"line": "L04",
+"word": "pole",
+"start": 14.299,
+"end": 14.519
+},
+{
+"line": "L04",
+"word": "to",
+"start": 14.499,
+"end": 14.639
+},
+{
+"line": "L04",
+"word": "pole,",
+"start": 14.619,
+"end": 14.919
+},
+{
+"line": "L04",
+"word": "with",
+"start": 14.899,
+"end": 15.139
+},
+{
+"line": "L04",
+"word": "all",
+"start": 15.119,
+"end": 15.279
+},
+{
+"line": "L04",
+"word": "the",
+"start": 15.259,
+"end": 15.439
+},
+{
+"line": "L04",
+"word": "air",
+"start": 15.419,
+"end": 15.599
+},
+{
+"line": "L04",
+"word": "pumped",
+"start": 15.579,
+"end": 15.959
+},
+{
+"line": "L04",
+"word": "out.",
+"start": 15.939,
+"end": 16.219
+},
+{
+"line": "L04",
+"word": "Jump!",
+"start": 16.199,
+"end": 16.839
+},
+{
+"line": "L05",
+"word": "Down",
+"start": 18.151,
+"end": 18.351
+},
+{
+"line": "L05",
+"word": "through",
+"start": 18.331,
+"end": 18.751
+},
+{
+"line": "L05",
+"word": "the",
+"start": 18.731,
+"end": 18.911
+},
+{
+"line": "L05",
+"word": "crust,",
+"start": 18.891,
+"end": 19.591
+},
+{
+"line": "L05",
+"word": "then",
+"start": 19.571,
+"end": 19.771
+},
+{
+"line": "L05",
+"word": "almost",
+"start": 19.751,
+"end": 20.131
+},
+{
+"line": "L05",
+"word": "three",
+"start": 20.111,
+"end": 20.391
+},
+{
+"line": "L05",
+"word": "thousand",
+"start": 20.371,
+"end": 20.771
+},
+{
+"line": "L05",
+"word": "kilometers",
+"start": 20.751,
+"end": 21.231
+},
+{
+"line": "L05",
+"word": "of",
+"start": 21.211,
+"end": 21.351
+},
+{
+"line": "L05",
+"word": "hot",
+"start": 21.331,
+"end": 21.471
+},
+{
+"line": "L05",
+"word": "rock.",
+"start": 21.451,
+"end": 21.771
+},
+{
+"line": "L06",
+"word": "Weirdly,",
+"start": 22.289,
+"end": 22.729
+},
+{
+"line": "L06",
+"word": "gravity",
+"start": 22.709,
+"end": 23.129
+},
+{
+"line": "L06",
+"word": "gets",
+"start": 23.109,
+"end": 23.329
+},
+{
+"line": "L06",
+"word": "stronger",
+"start": 23.309,
+"end": 23.829
+},
+{
+"line": "L06",
+"word": "as",
+"start": 23.809,
+"end": 23.949
+},
+{
+"line": "L06",
+"word": "you",
+"start": 23.929,
+"end": 24.109
+},
+{
+"line": "L06",
+"word": "fall,",
+"start": 24.089,
+"end": 24.389
+},
+{
+"line": "L06",
+"word": "all",
+"start": 24.369,
+"end": 24.549
+},
+{
+"line": "L06",
+"word": "the",
+"start": 24.529,
+"end": 25.089
+},
+{
+"line": "L06",
+"word": "way",
+"start": 25.069,
+"end": 25.249
+},
+{
+"line": "L06",
+"word": "to",
+"start": 25.229,
+"end": 25.349
+},
+{
+"line": "L06",
+"word": "the",
+"start": 25.329,
+"end": 25.529
+},
+{
+"line": "L06",
+"word": "core.",
+"start": 25.509,
+"end": 25.829
+},
+{
+"line": "L07",
+"word": "Thirteen",
+"start": 26.245,
+"end": 26.685
+},
+{
+"line": "L07",
+"word": "minutes",
+"start": 26.665,
+"end": 27.465
+},
+{
+"line": "L07",
+"word": "in,",
+"start": 27.445,
+"end": 27.665
+},
+{
+"line": "L07",
+"word": "you",
+"start": 27.645,
+"end": 27.805
+},
+{
+"line": "L07",
+"word": "plunge",
+"start": 27.785,
+"end": 28.105
+},
+{
+"line": "L07",
+"word": "into",
+"start": 28.085,
+"end": 28.365
+},
+{
+"line": "L07",
+"word": "an",
+"start": 28.345,
+"end": 28.465
+},
+{
+"line": "L07",
+"word": "ocean",
+"start": 28.445,
+"end": 28.705
+},
+{
+"line": "L07",
+"word": "of",
+"start": 28.685,
+"end": 28.805
+},
+{
+"line": "L07",
+"word": "liquid",
+"start": 28.785,
+"end": 29.225
+},
+{
+"line": "L07",
+"word": "iron.",
+"start": 29.205,
+"end": 29.465
+},
+{
+"line": "L08",
+"word": "Near",
+"start": 29.841,
+"end": 30.061
+},
+{
+"line": "L08",
+"word": "the",
+"start": 30.041,
+"end": 30.221
+},
+{
+"line": "L08",
+"word": "center",
+"start": 30.201,
+"end": 30.541
+},
+{
+"line": "L08",
+"word": "it's",
+"start": 30.521,
+"end": 30.801
+},
+{
+"line": "L08",
+"word": "about",
+"start": 30.781,
+"end": 31.101
+},
+{
+"line": "L08",
+"word": "six",
+"start": 31.081,
+"end": 31.301
+},
+{
+"line": "L08",
+"word": "thousand",
+"start": 31.281,
+"end": 31.801
+},
+{
+"line": "L08",
+"word": "degrees.",
+"start": 31.781,
+"end": 32.781
+},
+{
+"line": "L08",
+"word": "As",
+"start": 32.761,
+"end": 32.881
+},
+{
+"line": "L08",
+"word": "hot",
+"start": 32.861,
+"end": 33.041
+},
+{
+"line": "L08",
+"word": "as",
+"start": 33.021,
+"end": 33.141
+},
+{
+"line": "L08",
+"word": "the",
+"start": 33.121,
+"end": 33.301
+},
+{
+"line": "L08",
+"word": "surface",
+"start": 33.281,
+"end": 33.701
+},
+{
+"line": "L08",
+"word": "of",
+"start": 33.681,
+"end": 33.801
+},
+{
+"line": "L08",
+"word": "the",
+"start": 33.781,
+"end": 33.961
+},
+{
+"line": "L08",
+"word": "Sun.",
+"start": 33.941,
+"end": 34.161
+},
+{
+"line": "L09",
+"word": "At",
+"start": 35.58,
+"end": 35.74
+},
+{
+"line": "L09",
+"word": "the",
+"start": 35.72,
+"end": 35.86
+},
+{
+"line": "L09",
+"word": "center,",
+"start": 35.84,
+"end": 36.48
+},
+{
+"line": "L09",
+"word": "you're",
+"start": 36.46,
+"end": 36.76
+},
+{
+"line": "L09",
+"word": "doing",
+"start": 36.74,
+"end": 36.98
+},
+{
+"line": "L09",
+"word": "over",
+"start": 36.96,
+"end": 37.22
+},
+{
+"line": "L09",
+"word": "twenty-eight",
+"start": 37.2,
+"end": 37.92
+},
+{
+"line": "L09",
+"word": "thousand",
+"start": 37.9,
+"end": 38.3
+},
+{
+"line": "L09",
+"word": "kilometers",
+"start": 38.28,
+"end": 38.76
+},
+{
+"line": "L09",
+"word": "an",
+"start": 38.74,
+"end": 38.86
+},
+{
+"line": "L09",
+"word": "hour,",
+"start": 38.84,
+"end": 39.1
+},
+{
+"line": "L09",
+"word": "and",
+"start": 39.08,
+"end": 39.68
+},
+{
+"line": "L09",
+"word": "you",
+"start": 39.66,
+"end": 39.8
+},
+{
+"line": "L09",
+"word": "weigh",
+"start": 39.78,
+"end": 40.04
+},
+{
+"line": "L09",
+"word": "nothing",
+"start": 40.02,
+"end": 40.34
+},
+{
+"line": "L09",
+"word": "at",
+"start": 40.32,
+"end": 40.44
+},
+{
+"line": "L09",
+"word": "all.",
+"start": 40.42,
+"end": 40.62
+},
+{
+"line": "L10",
+"word": "Now",
+"start": 41.328,
+"end": 41.508
+},
+{
+"line": "L10",
+"word": "gravity",
+"start": 41.488,
+"end": 41.848
+},
+{
+"line": "L10",
+"word": "pulls",
+"start": 41.828,
+"end": 42.208
+},
+{
+"line": "L10",
+"word": "you",
+"start": 42.188,
+"end": 42.368
+},
+{
+"line": "L10",
+"word": "back.",
+"start": 42.348,
+"end": 43.128
+},
+{
+"line": "L10",
+"word": "You",
+"start": 43.108,
+"end": 43.288
+},
+{
+"line": "L10",
+"word": "slow",
+"start": 43.268,
+"end": 43.488
+},
+{
+"line": "L10",
+"word": "down,",
+"start": 43.468,
+"end": 43.748
+},
+{
+"line": "L10",
+"word": "and",
+"start": 43.728,
+"end": 43.908
+},
+{
+"line": "L10",
+"word": "down,",
+"start": 43.888,
+"end": 44.168
+},
+{
+"line": "L10",
+"word": "and",
+"start": 44.148,
+"end": 44.308
+},
+{
+"line": "L10",
+"word": "down.",
+"start": 44.288,
+"end": 44.568
+},
+{
+"line": "L11",
+"word": "Thirty-eight",
+"start": 44.945,
+"end": 45.505
+},
+{
+"line": "L11",
+"word": "minutes",
+"start": 45.485,
+"end": 45.845
+},
+{
+"line": "L11",
+"word": "after",
+"start": 45.825,
+"end": 46.105
+},
+{
+"line": "L11",
+"word": "you",
+"start": 46.085,
+"end": 46.245
+},
+{
+"line": "L11",
+"word": "jumped,",
+"start": 46.225,
+"end": 46.665
+},
+{
+"line": "L11",
+"word": "you",
+"start": 46.645,
+"end": 46.845
+},
+{
+"line": "L11",
+"word": "stop,",
+"start": 46.825,
+"end": 47.505
+},
+{
+"line": "L11",
+"word": "right",
+"start": 47.485,
+"end": 47.785
+},
+{
+"line": "L11",
+"word": "at",
+"start": 47.765,
+"end": 47.865
+},
+{
+"line": "L11",
+"word": "the",
+"start": 47.845,
+"end": 48.005
+},
+{
+"line": "L11",
+"word": "far",
+"start": 47.985,
+"end": 48.145
+},
+{
+"line": "L11",
+"word": "side.",
+"start": 48.125,
+"end": 48.365
+},
+{
+"line": "L12",
+"word": "Grab",
+"start": 48.915,
+"end": 49.135
+},
+{
+"line": "L12",
+"word": "the",
+"start": 49.115,
+"end": 49.275
+},
+{
+"line": "L12",
+"word": "edge.",
+"start": 49.255,
+"end": 49.535
+},
+{
+"line": "L12",
+"word": "Miss",
+"start": 49.515,
+"end": 49.835
+},
+{
+"line": "L12",
+"word": "it,",
+"start": 49.815,
+"end": 49.975
+},
+{
+"line": "L12",
+"word": "and",
+"start": 49.955,
+"end": 50.115
+},
+{
+"line": "L12",
+"word": "you",
+"start": 50.095,
+"end": 50.275
+},
+{
+"line": "L12",
+"word": "fall",
+"start": 50.255,
+"end": 50.475
+},
+{
+"line": "L12",
+"word": "all",
+"start": 50.455,
+"end": 50.655
+},
+{
+"line": "L12",
+"word": "the",
+"start": 50.635,
+"end": 50.795
+},
+{
+"line": "L12",
+"word": "way",
+"start": 50.775,
+"end": 50.955
+},
+{
+"line": "L12",
+"word": "back.",
+"start": 50.935,
+"end": 51.195
+},
+{
+"line": "L12",
+"word": "Forever.",
+"start": 51.175,
+"end": 51.995
+},
+{
+"line": "L13",
+"word": "Unless",
+"start": 52.901,
+"end": 53.241
+},
+{
+"line": "L13",
+"word": "you",
+"start": 53.221,
+"end": 53.401
+},
+{
+"line": "L13",
+"word": "leave",
+"start": 53.381,
+"end": 53.681
+},
+{
+"line": "L13",
+"word": "the",
+"start": 53.661,
+"end": 53.841
+},
+{
+"line": "L13",
+"word": "air",
+"start": 53.821,
+"end": 54.001
+},
+{
+"line": "L13",
+"word": "in.",
+"start": 53.981,
+"end": 54.721
+},
+{
+"line": "L13",
+"word": "Then",
+"start": 54.701,
+"end": 54.921
+},
+{
+"line": "L13",
+"word": "drag",
+"start": 54.901,
+"end": 55.141
+},
+{
+"line": "L13",
+"word": "holds",
+"start": 55.121,
+"end": 55.401
+},
+{
+"line": "L13",
+"word": "you",
+"start": 55.381,
+"end": 55.561
+},
+{
+"line": "L13",
+"word": "to",
+"start": 55.541,
+"end": 55.681
+},
+{
+"line": "L13",
+"word": "about",
+"start": 55.661,
+"end": 55.961
+},
+{
+"line": "L13",
+"word": "two",
+"start": 55.941,
+"end": 56.221
+},
+{
+"line": "L13",
+"word": "hundred",
+"start": 56.201,
+"end": 56.581
+},
+{
+"line": "L13",
+"word": "kilometers",
+"start": 56.561,
+"end": 57.161
+},
+{
+"line": "L13",
+"word": "an",
+"start": 57.141,
+"end": 57.281
+},
+{
+"line": "L13",
+"word": "hour.",
+"start": 57.261,
+"end": 57.601
+},
+{
+"line": "L14",
+"word": "After",
+"start": 58.019,
+"end": 58.299
+},
+{
+"line": "L14",
+"word": "more",
+"start": 58.279,
+"end": 58.459
+},
+{
+"line": "L14",
+"word": "than",
+"start": 58.439,
+"end": 58.639
+},
+{
+"line": "L14",
+"word": "a",
+"start": 58.619,
+"end": 58.679
+},
+{
+"line": "L14",
+"word": "day",
+"start": 58.659,
+"end": 58.799
+},
+{
+"line": "L14",
+"word": "of",
+"start": 58.779,
+"end": 58.879
+},
+{
+"line": "L14",
+"word": "falling,",
+"start": 58.859,
+"end": 59.279
+},
+{
+"line": "L14",
+"word": "you'd",
+"start": 59.259,
+"end": 59.499
+},
+{
+"line": "L14",
+"word": "end",
+"start": 59.479,
+"end": 59.619
+},
+{
+"line": "L14",
+"word": "up",
+"start": 59.599,
+"end": 59.699
+},
+{
+"line": "L14",
+"word": "floating",
+"start": 59.679,
+"end": 60.139
+},
+{
+"line": "L14",
+"word": "at",
+"start": 60.119,
+"end": 60.239
+},
+{
+"line": "L14",
+"word": "the",
+"start": 60.219,
+"end": 60.359
+},
+{
+"line": "L14",
+"word": "center",
+"start": 60.339,
+"end": 60.679
+},
+{
+"line": "L14",
+"word": "of",
+"start": 60.659,
+"end": 60.759
+},
+{
+"line": "L14",
+"word": "the",
+"start": 60.739,
+"end": 60.899
+},
+{
+"line": "L14",
+"word": "Earth.",
+"start": 60.879,
+"end": 61.219
+},
+{
+"line": "L14",
+"word": "Weightless.",
+"start": 61.199,
+"end": 62.359
+},
+{
+"line": "L14",
+"word": "Stuck.",
+"start": 62.339,
+"end": 62.939
+},
+{
+"line": "L15",
+"word": "Maybe",
+"start": 63.728,
+"end": 63.988
+},
+{
+"line": "L15",
+"word": "just",
+"start": 63.968,
+"end": 64.188
+},
+{
+"line": "L15",
+"word": "take",
+"start": 64.168,
+"end": 64.428
+},
+{
+"line": "L15",
+"word": "the",
+"start": 64.408,
+"end": 64.648
+},
+{
+"line": "L15",
+"word": "plane.",
+"start": 64.628,
+"end": 64.968
+}
+]
+}
