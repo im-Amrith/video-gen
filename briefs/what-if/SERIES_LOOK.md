@@ -1,6 +1,6 @@
 # What If — locked series look (from the pilot, ep. 1 tunnel-through-earth)
 
-Status: **pilot delivered, waiting for the owner's approval.** Owner feedback goes at the bottom and wins over everything above.
+Status: **superseded look (iso-infographic) — see the owner feedback below; the series is now built in the 3D cartoon look.** Owner feedback goes at the bottom and wins over everything above.
 
 - **Engine:** Lemo-Opuscar `iso-infographic`, Canvas 2D (`projects/tunnel-through-earth/engine.js`), rendered with
   `$LIB/core/render/video.mjs --fps 30 --workers 4 --size 1080x1920` (~0.1 s/frame in the cloud; a 67 s short renders in a few minutes).
@@ -16,5 +16,18 @@ Status: **pilot delivered, waiting for the owner's approval.** Owner feedback go
 - **Sound:** synthesized kalimba motif (D major pentatonic) for the subject, marimba chords, shaker/woodblock/bass groove at 100 BPM,
   one near-silence before the peak, glock pings on reveals; procedural foley on every event (pins pop, layers thump, whooshes).
 
-## Owner feedback
-(none yet)
+
+## Owner feedback — 2026-11-04 (applies to EVERY episode from now on, both series)
+- **Engine change:** both series use the 3D cartoon look (`cartoon-3d-short`: Remotion + three.js, 2D characters in a 3D world).
+  The cloud builds everything up to the render; the owner renders the finals on their PC (RENDER_LOCALLY.md). Cloud renders only
+  3-6 check stills per video at `--scale 0.5`.
+- **Something new every 1.5-3 s** (cut, camera move, gag, effect, expression change). No long holds.
+- **Real camera moves:** dollies, cranes, orbits, whip-pans, push-ins, kicks on impacts.
+- **Bigger, more expressive characters:** close and medium shots, clear expression changes, big poses.
+- **Detailed world:** painted textures, glow, particles, atmosphere (dust, sparks, snow, bubbles, stars).
+- **No caption box that repeats the voice-over.** (No captions at all, per the cartoon style.)
+- **Strong first-frame hook:** frame 0 is already an arresting image and the first line is the absurd fact.
+- **A joke / payoff beat** in every episode (deadpan "Luckily... / Unluckily..." or a callback twist).
+- **SFX for every action** (every fall, hit, glow, pop, whoosh, step).
+- Every short ships: SCRIPT.md with sources, voice + words.json, story.ts shot plan, world, cast, mix.wav, a registered composition,
+  `npx tsc --noEmit` clean, and a RENDER_LOCALLY.md row with exact render + mux commands.
