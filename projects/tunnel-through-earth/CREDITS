@@ -1,0 +1,6 @@
+What If You Jumped Into a Hole Through the Earth? — credits for third-party material
+- Voice: Kokoro-82M (kokoro-onnx), voice am_michael — Apache-2.0 (hexgrad/Kokoro-82M; thewh1teagle/kokoro-onnx)
+- Font: Jost by Owen Earl (indestructible type*) — SIL Open Font License 1.1 (fonts/Jost-OFL.txt), via @fontsource-variable/jost
+- Rendering engine: engine.js from the Lemo-Opuscar "iso-infographic" style demo — MIT (code), style CC BY 4.0 (LemoLab)
+- Music and sound effects: synthesized in code for this film (mix.py, Lemo-Opuscar core/audio/sfx.py — MIT)
+- Facts: see SCRIPT.md (Klotz 2015 Am. J. Phys.; Anzellini et al. 2013 Science; Britannica; Kola Superdeep Borehole records; C. Baird, WTAMU)

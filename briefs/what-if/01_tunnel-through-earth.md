@@ -1,5 +1,5 @@
 ---
-status: doing
+status: review
 series: what-if
 episode: 1
 slug: tunnel-through-earth
