@@ -3,7 +3,7 @@ import TL from "./timeline.json";
 import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, zoom, orbit, pushK, smooth, seg, q, lerp } from "../toon/core";
 import { Stage, CamInfo, card } from "../toon/cast";
 import { fxBang, fxWhat, fxSweat, fxSparkle, fxImpact } from "../toon/fx";
-import { fxSplash } from "../toon/toon";
+import { fxSplash, Pen } from "../toon/toon";
 import { pip, put, exprAt } from "../toon/kit";
 import { bear, penguin, fish, hourglass } from "../toon/animals";
 import { buildSet } from "./set";
@@ -48,40 +48,40 @@ const ROOF: V3 = [TOWER[0], FLOORS * FLOORH + 1.0, TOWER[2]];
 const PIP4: V3 = [2, 1.0, 4.2];
 export const CAMS: Record<number, Key[]> = {
   1: [
-    { f: 0, s: (f) => dolly(C(ROOF, [2.6, 3.4, 10.5]), C(ROOF, [0.3, -2.0, 3.0]), pushK(f, 0, 0.003), { fov: 42, roll: -0.05 }) }, // Pip on the roof edge, the drowned tower through the water
+    { f: 0, s: (f) => dolly(C(ROOF, [2.6 - 0.02 * f, 3.4 - 0.012 * f, 10.5]), C(ROOF, [0.3, -2.0, 3.0]), pushK(f, 0, 0.003), { fov: 42, roll: -0.05 }) }, // Pip on the roof edge, the drowned tower through the water
     { f: 70, dur: 40, s: (f) => dolly(C(ROOF, [14, 9, 30]), C(ROOF, [0, 0, 0]), pushK(f, 70, 0.002), { fov: 46, roll: 0.04 }) }, // crane out: nothing but sea
     { f: 140, cut: true, s: (f) => dolly(C(ROOF, [1.2, 0.6, 6.6]), C(ROOF, [0.4, 1.0, 2.5]), pushK(f, 140, 0.004, 0.008, 30), { fov: 38 }) }, // "twenty-storey building"
   ],
   2: [
-    { f: 197, s: (f) => dolly(C(ICE, [-6, 3.2, 9]), C(ICE, [-6, 1.6, -2]), pushK(f, 197, 0.0025), { fov: 44 }) }, // the big pile (91 %)
-    { f: 320, dur: 30, s: (f) => dolly(C(ICE, [2.0, 2.0, 7.5]), C(ICE, [1.9, 0.9, 1.3]), pushK(f, 320, 0.0025), { fov: 42, roll: 0.04 }) }, // Greenland pile (8 %)
+    { f: 197, s: (f) => orbit(C(ICE, [-6, 1.6, -2]), 11 * pushK(f, 197, 0.0025), -0.25 + 0.004 * (f - 197), 1.6 + 0.01 * (f - 197), { fov: 44 }) }, // the big pile (91 %)
+    { f: 320, dur: 30, s: (f) => dolly(C(ICE, [2.0 - 0.025 * (f - 320), 2.0, 7.5]), C(ICE, [1.9, 0.9, 1.3]), pushK(f, 320, 0.0025), { fov: 42, roll: 0.04 }) }, // Greenland pile (8 %)
   ],
-  3: [{ f: 402, s: (f) => dolly(C(ICE, [6.6, 1.5, 8.2]), C(ICE, [4.2, 0.8, 2.8]), pushK(f, 402, 0.004, 0.008, 30), { fov: 40, roll: -0.05 }) }], // one tiny cube
+  3: [{ f: 402, s: (f) => orbit(C(ICE, [4.2, 0.8, 2.8]), 5.9 * pushK(f, 402, 0.004, 0.008, 30), 0.42 + 0.0045 * (f - 402), 0.7, { fov: 40, roll: -0.05 }) }], // one tiny cube
   4: [
-    { f: 508, s: (f) => dolly([5, 1.2, 16], [1, 1.2, 3], pushK(f, 508, 0.003), { fov: 46 }) }, // the beach, the boardwalk
+    { f: 508, s: (f) => dolly([5 - 0.04 * (f - 508), 1.2, 16], [1, 1.2, 3], pushK(f, 508, 0.003), { fov: 46 }) }, // the beach, the boardwalk
     { f: 570, dur: 26, s: (f) => dolly([4, 1.6, 9.5], [2, 1.6, 4], pushK(f, 570, 0.003), { fov: 42, roll: 0.05 }) },
   ],
   5: [
     { f: 624, s: (f) => { const y = seaAt(5, f / FPS); return dolly(C(TOWER, [9, y + 2.5, 22]), C(TOWER, [0, y + 1.5, 0]), 1, { fov: 44 }); } }, // the waterline climbs the tower
     { f: 712, cut: true, s: (f) => dolly(C(TOWER, [1.5, 11 * FLOORH + 1.4, 12]), C(TOWER, [0, 10 * FLOORH + 1.6, 6]), pushK(f, 712, 0.004), { fov: 40, roll: -0.04 }) }, // window shopping
   ],
-  6: [{ f: 781, s: (f) => zoom([10, 48, 30], [-28, 14, -52], 50, pushK(f, 781, 0.002)) }], // drowned town: only the hill and the tower top
+  6: [{ f: 781, s: (f) => orbit([26, 27, -34], 162 * pushK(f, 781, 0.001), -1.93 + 0.0008 * (f - 781), 23 - 0.02 * (f - 781), { fov: 50 }) }], // drowned town: the hill-top house in front, the tower rising from the sea behind (arc)
   7: [
     { f: 909, s: (f) => orbit(C(FLOE, [0, 1.4, 1.5]), 11, 0.4 + 0.004 * (f - 909), 3.0, { fov: 44 }) }, // bear on the floe, gauge steady
     { f: 1000, dur: 30, s: (f) => dolly(C(FLOE, [5.6, 1.6, 9]), C(FLOE, [4.5, 1.6, 4]), pushK(f, 1000, 0.003), { fov: 40 }) }, // the gauge: barely moves
   ],
   8: [
-    { f: 1070, s: (f) => dolly(C(GLASS, [0.6, 2.2, 4.2]), C(GLASS, [0, 1.6, 0]), pushK(f, 1070, 0.003), { fov: 38 }) },
-    { f: 1160, dur: 30, s: (f) => dolly(C(GLASS, [0.3, 1.85, 2.0]), C(GLASS, [0, 1.75, 0]), pushK(f, 1160, 0.003), { fov: 36, roll: 0.04 }) }, // the line holds
+    { f: 1070, s: (f) => orbit(C(GLASS, [0, 1.6, 0]), 4.25 * pushK(f, 1070, 0.003), 0.14 + 0.004 * (f - 1070), 0.6, { fov: 38 }) },
+    { f: 1160, dur: 30, s: (f) => dolly(C(GLASS, [0.3 + 0.008 * (f - 1160), 1.95 - 0.003 * (f - 1160), 2.1]), C(GLASS, [0, 1.85, 0]), pushK(f, 1160, 0.003), { fov: 36, roll: 0.04 }) }, // the line holds
   ],
-  9: [{ f: 1245, s: (f) => zoom(C(GREEN, [10, 8, 60]), C(GREEN, [-10, 10, -60]), 46, pushK(f, 1245, 0.003, 0.007, 30), { roll: -0.04 }) }],
+  9: [{ f: 1245, s: (f) => zoom(C(GREEN, [10 - 0.12 * (f - 1245), 8 + 0.03 * (f - 1245), 60]), C(GREEN, [-10, 10, -60]), 46, pushK(f, 1245, 0.003, 0.007, 30), { roll: -0.04 }) }],
   10: [
-    { f: 1335, s: (f) => dolly([3.5, 1.2, 9.5], [2, 1.0, 5.5], pushK(f, 1335, 0.0025), { fov: 42 }) }, // deck chair
+    { f: 1335, s: (f) => orbit([2, 1.0, 5.5], 4.3 * pushK(f, 1335, 0.0025), 0.36 - 0.004 * (f - 1335), 0.2, { fov: 42 }) }, // deck chair
     { f: 1440, cut: true, s: (f) => dolly([3.6, 1.0, 9.8], [2, 0.8, 5.5], pushK(f, 1440, 0.004, 0.009, 24), { fov: 40, roll: 0.06 }) }, // the toes get wet
   ],
   11: [
     { f: 1517, s: (f) => dolly(C(HILL, [24, 10, 46]), C(HILL, [6, 14, 14]), pushK(f, 1517, 0.002), { fov: 44 }) }, // up the hill
-    { f: 1580, dur: 30, s: (f) => dolly(C(HILL, [10, 21, 28]), C(HILL, [4, 22, 18]), pushK(f, 1580, 0.003), { fov: 40, roll: 0.04 }) },
+    { f: 1580, dur: 30, s: (f) => dolly(C(HILL, [10 - 0.02 * (f - 1580), 21 + 0.012 * (f - 1580), 28]), C(HILL, [4, 22, 18]), pushK(f, 1580, 0.003), { fov: 40, roll: 0.04 }) },
   ],
 };
 export const DOF: Dof[] = [
@@ -94,7 +94,27 @@ export const DOF: Dof[] = [
   { f: 1245, cInf: 0 }, { f: 1335, cInf: 9 }, { f: 1440, cInf: 14 }, { f: 1517, cInf: 0 }, { f: 1580, dur: 30, cInf: 8 },
 ];
 
+// painted sign cards (unlit, read instantly), 640 x 1000: post + board
+const signCard = (top: string, l1: string, l2: string, col = "#c9302c", board = "#f4e3bf") => (p: Pen) => {
+  const g = p.g;
+  p.poly([[295, 520], [345, 520], [345, 1000], [295, 1000]], "#8a5a32", 10);
+  p.poly([[20, 40], [620, 40], [620, 560], [20, 560]], board, 14);
+  g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillStyle = "#2a3f6a"; g.font = "bold 58px sans-serif"; g.fillText(top, 320, 120);
+  g.fillStyle = col; g.font = "bold 130px sans-serif"; g.fillText(l1, 320, 285); g.font = "bold 70px sans-serif"; g.fillText(l2, 320, 450);
+};
+const S_ANT = signCard("ANTARCTICA", "91%", "OF ALL ICE"), S_GRN = signCard("GREENLAND", "8%", "OF ALL ICE");
+const S_GLA = signCard("GLACIERS", "1%", "(ALL OF THEM)"), S_NP = signCard("YOU ARE AT THE", "NORTH", "POLE", "#2a6fb5", "#eef6fb");
+const S_HILL = signCard("HILL HOUSE", "FOR SALE", "DRY FEET!", "#2f8a3a");
+const hillY = (x: number, z: number) => 22 * Math.sqrt(Math.max(0, 1 - ((x - HILL[0]) / 42) ** 2 - ((z - HILL[2]) / 34) ** 2));
 const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
+  if (id === 2 || id === 3) {
+    card(out, "sAnt", S_ANT, ICE[0] - 6.9, 1.0, ICE[2] + 1.3, 1.3, 2.0, { cw: 640, ch: 1000 });
+    card(out, "sGrn", S_GRN, ICE[0] + 0.5, 0.8, ICE[2] + 2.4, 1.0, 1.6, { cw: 640, ch: 1000 });
+    card(out, "sGla", S_GLA, ICE[0] + 5.4, 0.7, ICE[2] + 2.0, 0.9, 1.4, { cw: 640, ch: 1000 });
+  }
+  if (id === 7) card(out, "sNP", S_NP, FLOE[0] - 0.4, 0.6 + 1.1, FLOE[2] - 0.6, 1.4, 2.2, { cw: 640, ch: 1000 });
+  if (id === 11) card(out, "sHill", S_HILL, HILL[0] + 3.5, hillY(HILL[0] + 3.5, HILL[2] + 16) + 1.0, HILL[2] + 16, 1.3, 2.0, { cw: 640, ch: 1000 });
   if (id === 1) {
     pip(cam, out, t, ROOF[0] + 0.4, ROOF[1], ROOF[2] + 5.4, exprAt(t, [[0, "nervous"], [tl("L01", 3.0), "shock"], [tl("L01", 4.6), "dazed"]]), { mode: "sit" });
     const jump = ((t * 0.7) % 1); if (jump < 0.5) card(out, `fishj${q(jump, 20)}`, (p) => fish(p, "#f08a2c", Math.sin(t * 20)), ROOF[0] + 3.5 - jump * 2, ROOF[1] - 1.2 + Math.sin(jump * Math.PI * 2) * 1.6, ROOF[2] + 4, 0.8, 0.48, { cw: 400, ch: 240, rot: -0.6 + jump * 1.2 });
