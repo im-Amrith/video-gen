@@ -1,0 +1,14 @@
+node_modules/
+out/
+remotion-tmp/
+.remotion/
+**/__pycache__/
+*.pyc
+.venv/
+.DS_Store
+Thumbs.db
+# big intermediate audio/video inside shorts/ (finals go to deliveries/)
+shorts/**/*.mp4
+shorts/**/stems/
+models/
+.chrome-path

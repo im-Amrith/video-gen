@@ -1,0 +1,96 @@
+# VIDEO GEN: instructions for every Claude session in this repo
+
+You make **vertical YouTube Shorts (1080x1920)** for the owner's channel, rendered from code (no AI video generator),
+in two series: **What If** and **History**. Between videos you also write **Gemini video prompt packs**.
+The owner usually isn't watching: work unattended (see "Working alone").
+
+## Hard rules
+
+1. **Effort cap: high. Never max.** This applies to you and every agent you start (verifiers, sandboxes, audits).
+   Wherever a skill says "Opus max", use high effort.
+2. **Budget:** cloud credits are limited and expire. Prefer fewer, finished videos over many half-done ones.
+   - At most **3 sub-agents at a time** and **one verifier round per video** (a second only if the first scored any area below 5/10).
+   - Look checks at `--scale 0.5`, a handful of frames. Final renders at **1080x1920 (`--scale 1`)**, not 2K.
+3. **Original content only.** Stories, characters, scripts and voices are our own. The files in
+   `.claude/skills/cartoon-3d-short/references/` and `gemini-refs/` are for studying the look only: never copy their
+   shots or characters, never upload them anywhere, and never name their channels in a video, title or description.
+4. **Facts:** every History fact and every What If science claim is checked with web search. Put the sources at the
+   top of the short's `SCRIPT.md`.
+5. **Save often:** commit and push after every finished step (script, voice, shot plan, stills, render, delivery).
+   Small commits with clear messages. Never commit `node_modules/`, `out/` or files over 95 MB.
+
+## First thing in every new session
+
+```bash
+bash scripts/setup.sh voice        # node deps, python deps, ffmpeg, offline TTS (safe to re-run)
+export PATH="$HOME/.local/bin:$PATH"
+```
+Read `PROGRESS.md` to see where the last session stopped, then continue from there.
+If setup reports `!!` problems, work around them (see TOOLS_GUIDE.md section 10), note them in `PROGRESS.md`, and carry on.
+
+## The queue: what to make
+
+- Briefs live in `briefs/what-if/` and `briefs/history/` (format: `briefs/_TEMPLATE.md`). Status is in the front matter: `todo`, `doing` or `done`.
+- If a series has fewer than 5 `todo` briefs, **write the missing briefs yourself** (strong, visual, fact-checked topics) and commit them before starting.
+- **Work in batches by series:** finish the What If batch, then the History batch. Don't alternate.
+- Episode 1 of each series is the **pilot**. It sets the look. Record the locked look in `briefs/<series>/SERIES_LOOK.md`. Episodes 2-5 reuse the pilot's project and change only the story, voice and shot plan.
+
+## Rendering speed: measured, read this before choosing a style
+
+The cloud container has **no GPU**. Measured on 2026-11-04 (2-core cloud container, software GL): the 3D bridge
+short renders at **~40-77 s per frame at half size**. A 60 s short (1,800 frames) would take more than a day, so:
+
+- **Before any full render, time 10 frames** (`--frames=0-9`) and project: frames × seconds per frame ÷ concurrency.
+  Use `--concurrency` = number of cores (`nproc`) if memory allows.
+- **If the projected render is over 45 minutes, don't render it in the cloud.** Finish everything else (script,
+  voice, words.json, shot plan, sound mix, 3-6 check stills), commit, and add the short to `RENDER_LOCALLY.md`
+  with its exact command. The owner renders it on their PC with a GPU.
+- So in the cloud, **prefer light 2D looks** (Canvas2D, SVG, HTML/CSS: most Lemo-Opuscar 2D styles and HyperFrames)
+  that render in about 1 s per frame or less. Avoid WebGL-heavy styles, MSAA, lens blur, motion-blur
+  sub-frames and watercolour fills in cloud renders.
+- Always pass `--gl=swangle --timeout=300000 --browser-executable="$(cat .chrome-path)"` to Remotion in the cloud.
+
+## Which tool for which job (details in TOOLS_GUIDE.md)
+
+| Job | Skill / tool | Notes |
+|---|---|---|
+| **History** shorts | `cartoon-3d-short` + `remotion-*` skills | 2D characters in a 3D world. Repo root is the Remotion project. **The final render runs on the owner's PC** (see RENDER_LOCALLY.md); the cloud does everything up to it. |
+| **What If** shorts | `lemo-opuscar` | A vertical 1080x1920 style such as iso-infographic, lowpoly-island, dataviz, blueprint. Save the series style with "make a style your own". |
+| History, documentary look (optional) | `lemo-opuscar` newsreel / engraving / archive-lighttable | Only if the owner asks or the cartoon style doesn't fit the topic. |
+| Maps (routes, borders, globe) | `remotion-maps` | Inside Remotion shorts. |
+| Captions, title cards, overlays | `remotion-captions` or `hyperframes` | Only if the series look uses captions. |
+| Studying a reference video | `watch`, `reverse-any-video` | Local files in the repo (YouTube downloads are usually blocked here). |
+| **Gemini prompt packs** | `gemini-video-prompts` | See below. |
+
+One engine per series: don't mix Remotion, Lemo-Opuscar and HyperFrames inside one video.
+
+### Path mapping for `cartoon-3d-short`
+
+The skill was written on someone else's PC. In this repo:
+- "your Remotion project" means the **repo root** (`src/`, `public/`, `scripts/`, `src/Root.tsx`)
+- `~/bridge-short/` means `shorts/<slug>/` (SCRIPT.md, voice/, audio outputs, notes)
+- The audio scripts are in `audio/`, and the stills and QA scripts are in `scripts/`
+- Stills: `node scripts/bridge-stills.mjs out/<slug>/x_ 100,400 0.5 <CompositionId>`. Software GL is used automatically on Linux.
+- Voice: Kokoro offline TTS (`models/kokoro/`), one steady voice per series. Word timings come from faster-whisper (`word_timestamps=True`), written to `shorts/<slug>/voice/words.json`.
+- Kenney 3D props in `public/bridge/kenney/` are optional. If they're missing, the world still renders.
+
+## Between videos: Gemini prompt packs
+
+After **each finished video** (delivered and pushed), before starting the next one:
+1. Use the **`gemini-video-prompts`** skill. Read `gemini-refs/<genre>/` (the owner's example clips and notes), update its `STYLE_NOTES.md`, then write **2 new prompt packs** (a ~40 s short as 4 × 10 s clips, 9:16) in that genre.
+   Prefer the genre that matches the batch you're working on. If that genre's folder is empty, use any genre folder that has references. If all are empty, skip this step and note it in `PROGRESS.md`.
+2. If `gemini-clips/<slug>/` holds clips the owner generated, run the skill's **assemble mode** and deliver the joined short.
+3. Commit and push, then continue with the next brief.
+
+## Working alone
+
+- Don't stop for approval gates (storyboards, style frames, metaphor gates in skills). Decide, write the decision
+  and the reason in `shorts/<slug>/DECISIONS.md`, and continue.
+- If you're truly blocked (missing tool, network blocked, render keeps failing), write it in `PROGRESS.md`, switch to the next brief or to Gemini prompts, and mention it in your chat message.
+- Keep `PROGRESS.md` current: done, in progress, next, problems. It's how the owner and the next session catch up.
+
+## Delivering
+
+- Final video: `deliveries/<series>/<NN>_<slug>.mp4` (H.264, CRF 20, AAC 192k, under 95 MB) plus
+  `deliveries/<series>/<NN>_<slug>.md` with a title, a description of 2-3 sentences, 5 hashtags and the sources.
+- Commit, push, and update `PROGRESS.md` and the brief's status to `done`.
