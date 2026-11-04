@@ -3,7 +3,7 @@ import TL from "./timeline.json";
 import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, zoom, orbit, pushK, smooth, seg, q, hh, lerp } from "../toon/core";
 import { Stage, CamInfo, card } from "../toon/cast";
 import { fxSpeed, fxBang, fxWhat, fxImpact, fxSweat, fxSparkle } from "../toon/fx";
-import { fxSplash, fxStars, fxPuff } from "../toon/toon";
+import { fxSplash, fxStars, fxPuff, Pen } from "../toon/toon";
 import { pip, put, exprAt, FOLK, clockCard, alarmCard, calendarCard, sunCard } from "../toon/kit";
 import { buildSet } from "./set";
 
@@ -65,29 +65,29 @@ const moonCam = (f: number, back: number, up: number, roll: number) => {
 };
 export const CAMS: Record<number, Key[]> = {
   1: [
-    { f: 0, s: (f) => dolly(C(TOP, [2.2, 1.6, 3.6]), C(TOP, [0, 1.2, 0]), pushK(f, 0, 0.003), { fov: 46, roll: -0.08 }) }, // Pip on a tiny spinning planet
+    { f: 0, s: (f) => orbit(C(TOP, [0, 1.2, 0]), 4.2 * pushK(f, 0, 0.003), 0.55 - 0.006 * f, 1.4 - 0.008 * f, { fov: 46, roll: -0.08 }) }, // Pip on a tiny spinning planet
     { f: 70, dur: 40, s: (f) => orbit(C(SPACE, [0, 3, 0]), 17, 0.4 + 0.004 * (f - 70), 5, { fov: 50, roll: 0.05 }) }, // pull back: the whole little world
     { f: 150, cut: true, s: (f) => dolly(C(TOP, [0.8, 1.5, 2.5]), C(TOP, [0, 1.35, 0]), pushK(f, 150, 0.003, 0.008, 30), { fov: 40 }) }, // "...stopped?"
   ],
   2: [
-    { f: 216, s: (f) => zoom([-14, 3.2, 5], [6, 1.5, -2], 46, pushK(f, 216, 0.002)) }, // the street
+    { f: 216, s: (f) => zoom([-14 + 0.05 * (f - 216), 3.2 - 0.012 * (f - 216), 5 + 0.02 * (f - 216)], [6, 1.5, -2], 46, pushK(f, 216, 0.002)) }, // the street
     { f: 296, cut: true, s: (f) => dolly([6, 1.2, 6.5], [0, 1.4, 1.5], pushK(f, 296, 0.003), { fov: 52, roll: 0.08 }) }, // everyone flies past, east
     { f: 345, cut: true, s: (f) => dolly([-8, 3, 4], [10, 3, -10.5], pushK(f, 345, 0.002), { fov: 46 }) }, // your house
     { f: 385, cut: true, s: (f) => dolly([-4, 2.2, 8], [4, 3.5, -2], pushK(f, 385, 0.003), { fov: 56, roll: -0.08 }) }, // and the ocean
   ],
   3: [
     { f: 410, s: (f) => orbit(C(SPACE, [0, 1, 0]), 32, -0.3 + 0.003 * (f - 410), 5, { fov: 46 }) },
-    { f: 505, dur: 30, s: (f) => dolly(C(SPACE, [GR + 4, 3.5, 14]), C(SPACE, [GR + 1.5, 1.0, 0]), pushK(f, 505, 0.0025), { fov: 44, roll: 0.05 }) }, // the brake
+    { f: 505, dur: 30, s: (f) => dolly(C(SPACE, [GR + 4 - 0.06 * (f - 505), 3.5 - 0.02 * (f - 505), 14]), C(SPACE, [GR + 1.5, 1.0, 0]), pushK(f, 505, 0.0025), { fov: 44, roll: 0.05 }) }, // the brake
   ],
   4: [
-    { f: 584, s: (f) => dolly(C(SPACE, [0, 1.5, 21]), C(SPACE, [0, 0.5, 0]), pushK(f, 584, 0.002), { fov: 42 }) }, // side on: the fat middle
-    { f: 668, cut: true, s: (f) => dolly(C(SPACE, [3.6, 0.6, GR + 3.2]), C(SPACE, [1.6, 0.2, GR - 0.4]), pushK(f, 668, 0.003), { fov: 40, roll: -0.05 }) }, // Pip with the tape
+    { f: 584, s: (f) => orbit(C(SPACE, [0, 0.5, 0]), 21 * pushK(f, 584, 0.002), -0.35 + 0.006 * (f - 584), 1.0, { fov: 42 }) }, // side on: the fat middle
+    { f: 668, cut: true, s: (f) => dolly(C(SPACE, [3.6 - 0.025 * (f - 668), 0.6 + 0.012 * (f - 668), GR + 3.2]), C(SPACE, [1.6, 0.6, GR - 0.4]), pushK(f, 668, 0.003), { fov: 40, roll: -0.05 }) }, // Pip with the tape
   ],
   5: [
     { f: 750, s: (f) => orbit(C(SPACE, [0, 0, 0]), 31, 0.9 + 0.005 * (f - 750), 10 - 0.05 * (f - 750), { fov: 44 }) }, // oceans slide to the poles
   ],
   6: [
-    { f: 890, s: (f) => dolly(C(FLOOD, [2.0, 1.8, 7.5]), C(FLOOD, [0.3, 1.6, -4]), pushK(f, 890, 0.0025), { fov: 46 }) },
+    { f: 890, s: (f) => dolly(C(FLOOD, [2.0 - 0.04 * (f - 890), 1.8 + 0.015 * (f - 890), 7.5]), C(FLOOD, [0.3, 1.6, -4]), pushK(f, 890, 0.0025), { fov: 46 }) },
     { f: 952, dur: 30, s: (f) => dolly(C(FLOOD, [-2, 0.9, 4]), C(FLOOD, [0, 1.3, 0]), pushK(f, 952, 0.003), { fov: 40, roll: 0.05 }) },
   ],
   7: [
@@ -98,22 +98,22 @@ export const CAMS: Record<number, Key[]> = {
     { f: 1215, dur: 26, s: (f) => dolly([-1.2, 1.3, 4.6], [-2, 1.4, 1.5], pushK(f, 1215, 0.003), { fov: 40, roll: 0.05 }) },
   ],
   9: [
-    { f: 1262, s: (f) => dolly([-3.0, 1.6, 6.8], [-2, 1.3, 1.5], pushK(f, 1262, 0.003), { fov: 44, roll: -0.04 }) }, // six months of night
+    { f: 1262, s: (f) => orbit([-2, 1.3, 1.5], 5.4 * pushK(f, 1262, 0.003), -0.45 + 0.006 * (f - 1262), 0.5, { fov: 44, roll: -0.04 }) }, // six months of night
   ],
   10: [
-    { f: 1352, s: (f) => dolly([-0.9, 1.8, 5.6], [-1.5, 1.6, 1.5], pushK(f, 1352, 0.004, 0.008, 30), { fov: 40 }) }, // the alarm clock
+    { f: 1352, s: (f) => dolly([-0.9 - 0.02 * (f - 1352), 1.8, 5.6], [-1.5, 1.6, 1.5], pushK(f, 1352, 0.004, 0.008, 30), { fov: 40 }) }, // the alarm clock
   ],
   11: [
     { f: 1436, s: (f) => moonCam(f, 13, 4.5, 0) }, // over the Moon (Pip waving) at the Earth behind
     { f: 1505, dur: 34, s: (f) => moonCam(f, 7.5, 2.2, 0.06) },
   ],
   12: [
-    { f: 1572, s: (f) => zoom(C(PRE, [4, 2.2, 12]), C(PRE, [-2, 4, -20]), 50, pushK(f, 1572, 0.002)) }, // 1.4 billion years ago
+    { f: 1572, s: (f) => zoom(C(PRE, [4 - 0.03 * (f - 1572), 5.0 - 0.04 * (f - 1572), 12]), C(PRE, [-2, 4, -20]), 50, pushK(f, 1572, 0.002)) }, // 1.4 billion years ago
     { f: 1640, cut: true, s: (f) => dolly(C(PRE, [1.6, 1.3, 5.0]), C(PRE, [0, 1.4, 1]), pushK(f, 1640, 0.003), { fov: 40, roll: -0.05 }) },
   ],
   13: [
-    { f: 1712, s: (f) => dolly([-3.0, 1.4, 6.2], [-2, 1.3, 1.5], pushK(f, 1712, 0.002), { fov: 42 }) },
-    { f: 1770, dur: 30, s: (f) => dolly([-1.6, 1.25, 4.4], [-2, 1.4, 1.5], pushK(f, 1770, 0.003), { fov: 38, roll: 0.04 }) },
+    { f: 1712, s: (f) => orbit([-2, 1.3, 1.5], 4.8 * pushK(f, 1712, 0.002), -0.2 + 0.005 * (f - 1712), 0.1, { fov: 42 }) },
+    { f: 1770, dur: 30, s: (f) => dolly([-1.6 + 0.012 * (f - 1770), 1.25 + 0.006 * (f - 1770), 4.4], [-2, 1.5, 1.5], pushK(f, 1770, 0.003), { fov: 38, roll: 0.04 }) },
   ],
 };
 
@@ -130,6 +130,18 @@ export const DOF: Dof[] = [
   { f: 1572, cInf: 4 }, { f: 1640, cInf: 12 },
   { f: 1712, cInf: 10 }, { f: 1770, dur: 30, cInf: 13 },
 ];
+
+// ---------------- painted sign cards (unlit, read instantly) ----------------
+const signCard = (top: string, l1: string, l2: string, col: string) => (p: Pen) => {
+  const g = p.g;
+  p.poly([[295, 520], [345, 520], [345, 1000], [295, 1000]], "#8a5a32", 10);
+  p.poly([[20, 40], [620, 40], [620, 560], [20, 560]], "#f4e3bf", 14);
+  g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillStyle = "#2a3f6a"; g.font = "bold 54px sans-serif"; g.fillText(top, 320, 120);
+  g.fillStyle = col; g.font = "bold 120px sans-serif"; g.fillText(l1, 320, 270); g.font = "bold 76px sans-serif"; g.fillText(l2, 320, 440);
+};
+const EUROPE = signCard("WELCOME TO", "EUROPE", "(UNDERWATER)", "#c9302c");
+const PAST = signCard("EARTH, THE PAST", "1.4 BYA", "DAY = 18 HRS", "#c9302c");
 
 // ---------------- cast ----------------
 const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
@@ -159,6 +171,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     if (t > EAST && t < EAST + 1.5) for (let k = 0; k < 3; k++) card(out, `spd2${k}${q((t * 3 + k * 0.3) % 1, 12)}`, (p) => fxSpeed(p, (t * 3 + k * 0.3) % 1), 1 + k * 2, 1.6, 1.5 + k, 1.4, 2.8, { cw: 400, ch: 800, soft: true, rot: Math.PI / 2 });
     if (t > OCEAN) { const u = q(seg(t, OCEAN, OCEAN + 1.1), 30); card(out, `splash${u}`, (p) => fxSplash(p, u), 1.5, 2.6, -3, 14, 14, { cw: 800, ch: 800 }); }
   }
+  if (id === 6) card(out, "euroSign", EUROPE, FLOOD[0] + 1.5, 1.0 + 0.05 * Math.sin(t * 1.5), FLOOD[2] - 1.9, 1.9, 3.0, { cw: 640, ch: 1000, rot: 0.08 });
   if (id === 6) put(cam, out, { i: 1, o: { jacket: "#f2b531", pants: "#3b5b9a", boots: "#e2453c", hat: "cap", cap: "#e2453c", build: "kid" }, okey: "pip" }, t, FLOOD[0], 0.2 + 0.12 * Math.sin(t * 2.2), FLOOD[2] + 0.3,
     exprAt(t, [[0, "nervous"], [tl("L06", 2.0), "dazed"]]), { mode: "sit", scale: 1.25, noBlob: true });
   if (id === 8 || id === 9 || id === 10 || id === 13) {
@@ -186,6 +199,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     if (t > tl("L10", 3.0) && t < tl("L10", 3.8)) card(out, `imp11${q(seg(t, tl("L10", 3.0), tl("L10", 3.5)), 20)}`, (p) => fxImpact(p, seg(t, tl("L10", 3.0), tl("L10", 3.5)), "#fff3b0", "#ffcf3a"), SPACE[0] + GR * 0.9, 1, SPACE[2] + GR * 0.5, 3, 3, { cw: 500, ch: 500 });
   }
   if (id === 12) {
+    card(out, "pastSign", PAST, PRE[0] - 1.6, 1.25, PRE[2] - 1.0, 1.6, 2.5, { cw: 640, ch: 1000 });
     pip(cam, out, t, PRE[0], 0, PRE[2] + 1, exprAt(t, [[0, "shock"], [tl("L11", 2.6), "dazed"]]), { look: Math.sin(t * 3) > 0 ? 1 : -1 });
     const a = (t - tl("L11", 0)) * 10; card(out, `clk12${q(a % (Math.PI * 2), 24)}`, (p) => clockCard(p, a), PRE[0] + 1.3, 2.2, PRE[2] + 1.2, 0.8, 0.8, { cw: 300, ch: 300 });
     for (let k = 0; k < 3; k++) card(out, `spk12${k}`, (p) => fxSparkle(p), PRE[0] - 1.5 + k * 1.4, 2.8 + 0.3 * Math.sin(t * 3 + k), PRE[2] - 2, 0.25, 0.25, { cw: 200, ch: 200 });

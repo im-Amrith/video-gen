@@ -76,6 +76,24 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const fastSun = new Glow(root, "#ffe7a0", 3.0);
   const smoke = new Particles(root, 80, "#9a8a80", 6, "dot", 1.0);
   const motes = new Particles(root, 200, "#ffffff", 0.06, "soft", 1.5);
+  // owner #3: space is never an empty black void: a bright star field, two soft nebulae, the Sun's glow
+  const starsBig = new Particles(root, 420, "#ffffff", 2.2, "soft", 1.6);
+  const starsCol = new Particles(root, 160, "#9fc4ff", 3.4, "soft", 1.4);
+  const nebA = new Glow(root, "#7a46c8", 0.55), nebB = new Glow(root, "#2a7ad8", 0.5), nebC = new Glow(root, "#d0508a", 0.35);
+  const sunG = new Glow(root, "#ffe7a0", 2.4);
+  // street lamps behind Pip's bench: painted iron posts with lanterns that glow in the six-month night (owner #3: lit night)
+  const LAMPS: [number, number][] = [[-9.5, -4.6], [-0.5, -4.6], [5.5, -4.8], [-15, 4.8], [9, 4.8]];
+  const lampHead = glowMat("#ffd27a", 2.2), lampOff = lam("lampOff", () => ({ color: "#e8d8a8" }));
+  const heads: THREE.Mesh[] = [], halos: Glow[] = [];
+  for (const [x, z] of LAMPS) {
+    const pole = new THREE.Mesh(new THREE.BoxGeometry(0.14, 3.6, 0.14), lam("lampPole", () => ({ color: "#2e3442" }))); pole.position.set(x, 1.8, z);
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.1, 0.1), lam("lampPole", () => ({ color: "#2e3442" }))); arm.position.set(x, 3.55, z);
+    const head = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.32, 0.5, 6), lampOff); head.position.set(x, 3.3, z);
+    const cap = new THREE.Mesh(new THREE.ConeGeometry(0.4, 0.3, 6), lam("lampPole", () => ({ color: "#2e3442" }))); cap.position.set(x, 3.7, z);
+    root.add(pole, arm, head, cap); heads.push(head); halos.push(new Glow(root, "#ffcf7a", 1.6));
+    for (const m of [pole, cap]) m.castShadow = true;
+  }
+  const flies = new Particles(root, 70, "#d8ff8a", 0.09, "soft", 2.2);
   for (const m of [pad, arm, moon]) { m.castShadow = true; m.receiveShadow = true; }
   void glowMat; void twoTone; void clamp01;
 
@@ -101,6 +119,14 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     smoke.pose((i, o) => { const u = (t * 0.08 + hh(i, 1)) % 1, v = i % 4; o.set(PRE[0] - 60 + v * 45 + u * 10, 30 + v * 12 + u * 40, PRE[2] - 160 - v * 30); return true; }, id === 12);
     motes.pose((i, o) => { const u = (t * 0.05 + hh(i, 1)) % 1; o.set(SPACE[0] + (hh(i, 2) - 0.5) * 30, SPACE[1] + (hh(i, 3) - 0.5) * 30, SPACE[2] + (hh(i, 4) - 0.5) * 30 + u); return true; }, inSpace);
     preSea.visible = id === 12; floodSea.visible = id === 6;
+    const dark = id === 9 || id === 10;
+    heads.forEach((h, k) => { h.material = dark ? lampHead : lampOff; halos[k].set(LAMPS[k][0], 3.3, LAMPS[k][1], 3.4, 0.9 + 0.08 * Math.sin(t * 5 + k), dark); });
+    flies.pose((i, o) => { const a = t * (0.3 + 0.4 * hh(i, 3)) + hh(i, 4) * 6.28; o.set(-2 + Math.cos(a) * (1.5 + 4 * hh(i, 5)), 0.6 + 2.2 * hh(i, 6) + 0.3 * Math.sin(t * 2 + i), 0.5 + Math.sin(a) * (1 + 3 * hh(i, 7))); return true; }, dark);
+    const shell = (i: number, o: THREE.Vector3, k: number) => { const u = hh(i, k) * 2 - 1, a = hh(i, k + 1) * Math.PI * 2, r = 260 + 60 * hh(i, k + 2), c = Math.sqrt(1 - u * u); o.set(SPACE[0] + Math.cos(a) * c * r, SPACE[1] + u * r, SPACE[2] + Math.sin(a) * c * r); return true; };
+    starsBig.pose((i, o) => shell(i, o, 11), inSpace); starsCol.pose((i, o) => shell(i, o, 21), inSpace);
+    nebA.set(SPACE[0] - 260, SPACE[1] + 90, SPACE[2] - 300, 420, 1, inSpace); nebB.set(SPACE[0] + 320, SPACE[1] - 60, SPACE[2] - 200, 380, 1, inSpace);
+    nebC.set(SPACE[0] - 200, SPACE[1] - 120, SPACE[2] + 300, 360, 1, inSpace);
+    sunG.set(SPACE[0] + 0.7 * 300, SPACE[1] + 0.35 * 300, SPACE[2] + 0.6 * 300, 90, 1, inSpace);
     void smooth; void lerp;
   };
   return { pose };
