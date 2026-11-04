@@ -25,7 +25,7 @@ if f"| {comp} |" not in R:
     R += f"""
 **{series} {nn} — {slug}** ({T['total']} frames, {T['dur']:.2f} s)
 ```powershell
-npx remotion render src/index.ts {comp} out/{src}/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts {comp} out/{src}/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/{src}/video.mp4 -i {P}/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/{series}/{nn}_{slug}.mp4
 ```
 """

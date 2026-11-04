@@ -12,19 +12,26 @@ npm install
 $env:REMOTION_TMP = "D:\remotion-tmp"   # Remotion bundles are big; keep them off C:
 ```
 
+Tested on the owner's PC (Windows, Node 26): Remotion's headless-shell download fails and concurrency 4 runs out of memory
+(WebGL context lost, x264 malloc failed). What works: the installed Chrome, one tab, ~0.68 s/frame — every command below uses
+`--gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing`. Raise `--concurrency` only if memory allows.
+
 ## Render everything in one go
 
 ```powershell
 git pull
 npm install
-.\scripts\render_all.ps1                      # all ten, or:  .\scripts\render_all.ps1 WhatIf01Tunnel
+.\scripts\render_all.ps1                         # every short whose delivery mp4 doesn't exist yet
+.\scripts\render_all.ps1 -Only WhatIf01Tunnel     # one short (always re-renders)
+.\scripts\render_all.ps1 -Concurrency 2           # more Chrome tabs (default 1; 4 ran out of memory)
+.\scripts\render_all.ps1 -Force                   # re-render shorts that already have a delivery mp4
 ```
 
 ## Render one short
 
 ```powershell
 git pull
-npx remotion render src/index.ts <CompositionId> out/<slug>/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts <CompositionId> out/<slug>/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/<slug>/video.mp4 -i projects/<slug>/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k -shortest deliveries/<series>/<NN>_<slug>.mp4
 ```
 Then `git add deliveries; git commit -m "render <slug>"; git push`, or just upload it.
@@ -49,61 +56,61 @@ Optional QA: `python scripts/short_qa.py deliveries/<series>/<NN>_<slug>.mp4 out
 
 **What If 01 — tunnel-through-earth** (1960 frames, 65.33 s)
 ```powershell
-npx remotion render src/index.ts WhatIf01Tunnel out/tunnel/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts WhatIf01Tunnel out/tunnel/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/tunnel/video.mp4 -i projects/tunnel-through-earth/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/what-if/01_tunnel-through-earth.mp4
 ```
 Optional 2K: add `--scale 1.3333` to the render (1440x2560).
 
 **what-if 02 — earth-stops-spinning** (1853 frames, 61.77 s)
 ```powershell
-npx remotion render src/index.ts WhatIf02Spin out/spin/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts WhatIf02Spin out/spin/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/spin/video.mp4 -i projects/earth-stops-spinning/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/what-if/02_earth-stops-spinning.mp4
 ```
 
 **what-if 03 — all-ice-melts** (1663 frames, 55.43 s)
 ```powershell
-npx remotion render src/index.ts WhatIf03Ice out/ice/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts WhatIf03Ice out/ice/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/ice/video.mp4 -i projects/all-ice-melts/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/what-if/03_all-ice-melts.mp4
 ```
 
 **what-if 04 — sun-vanishes** (1753 frames, 58.43 s)
 ```powershell
-npx remotion render src/index.ts WhatIf04Sun out/sun/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts WhatIf04Sun out/sun/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/sun/video.mp4 -i projects/sun-vanishes/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/what-if/04_sun-vanishes.mp4
 ```
 
 **what-if 05 — moon-disappears** (1657 frames, 55.23 s)
 ```powershell
-npx remotion render src/index.ts WhatIf05Moon out/moon/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts WhatIf05Moon out/moon/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/moon/video.mp4 -i projects/moon-disappears/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/what-if/05_moon-disappears.mp4
 ```
 
 **history 01 — shortest-war** (1864 frames, 62.13 s)
 ```powershell
-npx remotion render src/index.ts History01ShortestWar out/zanzibar/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts History01ShortestWar out/zanzibar/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/zanzibar/video.mp4 -i projects/shortest-war/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/01_shortest-war.mp4
 ```
 
 **history 02 — leaning-tower** (1892 frames, 63.07 s)
 ```powershell
-npx remotion render src/index.ts History02LeaningTower out/pisa/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts History02LeaningTower out/pisa/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/pisa/video.mp4 -i projects/leaning-tower/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/02_leaning-tower.mp4
 ```
 
 **history 03 — emu-war** (1822 frames, 60.73 s)
 ```powershell
-npx remotion render src/index.ts History03EmuWar out/emu/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts History03EmuWar out/emu/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/emu/video.mp4 -i projects/emu-war/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/03_emu-war.mp4
 ```
 
 **history 04 — 1904-marathon** (1966 frames, 65.53 s)
 ```powershell
-npx remotion render src/index.ts History04Marathon1904 out/marathon/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts History04Marathon1904 out/marathon/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/marathon/video.mp4 -i projects/1904-marathon/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/04_1904-marathon.mp4
 ```
 
 **history 05 — war-of-the-bucket** (1723 frames, 57.43 s)
 ```powershell
-npx remotion render src/index.ts History05WarOfTheBucket out/bucket/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+npx remotion render src/index.ts History05WarOfTheBucket out/bucket/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=1 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe" --chrome-mode=chrome-for-testing
 ffmpeg -y -i out/bucket/video.mp4 -i projects/war-of-the-bucket/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/history/05_war-of-the-bucket.mp4
 ```
