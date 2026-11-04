@@ -37,6 +37,9 @@ When every box below is ticked, ALL 10 are ready to re-render in one go (`.\scri
 - [x] What If 01 tunnel: glowing hole (no black interior), distinct layer looks (grey crust -> dark red -> magma with embers ->
       liquid iron -> white-hot core with glints -> cooling back), CUs re-aimed at the face, Kola rig orbit crane, South Pole
       payoff with research-station crew in parkas (replaced the penguins: none live at the Pole) + SOUTH POLE sign + a bright crane shot (replaces the 3 s down-the-hole shot), Pip pops higher.
+- [x] What If 02 earth-stops-spinning: star field, nebula + sun glows in space; lit lamps + fireflies on the six-month-night street; held keys now orbit/crane; painted EUROPE (UNDERWATER) and 1.4 BYA / DAY = 18 HRS signs.
+- [x] What If 03 all-ice-melts: dress.ts ice slabs, icebergs, mountains, posts (no plain cones); dune grass, fences, hill + picnic layers; ANTARCTICA 91% / GREENLAND 8% / GLACIERS 1% / NORTH POLE / HILL HOUSE FOR SALE signs; held keys move; drowned-town aerial reframed.
+- [x] What If 04 sun-vanishes: star field + nebulae; Earth city lights after lights-out; lit lamps and window glow in the dark park/town; plankton + lantern glow in the ocean cutaway; painted vents, rocks, kelp, snow tufts; held keys move.
 
 ## How it's built
 - **Engine** `src/videos/toon/`: the bridge short's look modules (ink, lens blur, grade, two-tone shading, card shading,
