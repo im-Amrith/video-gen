@@ -40,6 +40,9 @@ When every box below is ticked, ALL 10 are ready to re-render in one go (`.\scri
 - [x] What If 02 earth-stops-spinning: star field, nebula + sun glows in space; lit lamps + fireflies on the six-month-night street; held keys now orbit/crane; painted EUROPE (UNDERWATER) and 1.4 BYA / DAY = 18 HRS signs.
 - [x] What If 03 all-ice-melts: dress.ts ice slabs, icebergs, mountains, posts (no plain cones); dune grass, fences, hill + picnic layers; ANTARCTICA 91% / GREENLAND 8% / GLACIERS 1% / NORTH POLE / HILL HOUSE FOR SALE signs; held keys move; drowned-town aerial reframed.
 - [x] What If 04 sun-vanishes: star field + nebulae; Earth city lights after lights-out; lit lamps and window glow in the dark park/town; plankton + lantern glow in the ocean cutaway; painted vents, rocks, kelp, snow tufts; held keys move.
+- [x] History 03 emu-war: held keys now orbit/crane; dam ambush at golden dawn (breaks the long day stretch); CAMPION, WESTERN AUSTRALIA 1932 sign + ROUNDS 9,860 / EMUS 986 tally board.
+- [x] History 04 1904-marathon: held keys now orbit/crane; day/golden alternate by beat (shots 2, 5 golden); ST. LOUIS 1904, WATER (the only one), FINISH, BOSTON MARATHON 1905 signs.
+- [x] History 05 war-of-the-bucket: feedback #2 dressing (inked tufts in 3 layers, painted rocks at the ford/banks, fences, well posts, bushes/trees, hill ring); town hall relit (brick + marble, arched windows, red carpet, sun in front instead of the washed-out purple backlight); PALAZZO COMUNALE MODENA banner, THE STOLEN BUCKET placard, MODENA/BOLOGNA signpost, BOLOGNA gate sign, well sign "BUCKET MISSING SINCE 1325"; every key orbits/cranes.
 
 ## How it's built
 - **Engine** `src/videos/toon/`: the bridge short's look modules (ink, lens blur, grade, two-tone shading, card shading,
