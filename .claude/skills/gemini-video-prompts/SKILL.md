@@ -1,6 +1,6 @@
 ---
 name: gemini-video-prompts
-description: Remix the owner's reference reels (AI edits like armour, space, pharaohs in the modern world) into new Google Gemini / Veo prompt packs - study each reel in gemini-refs/<series>/<reel>/ shot by shot, then write one new prompt per shot that keeps the concept, vibe and edit rhythm but changes the action, vehicle/prop or setting, plus an edit plan. Use at the approval gate in CLAUDE.md, or when asked for Gemini prompts, Veo prompts, reel remixes, or to assemble generated clips from gemini-clips/.
+description: Remix the owner's reference reels (AI edits like armour, space, pharaohs in the modern world) into new Google Gemini / Veo prompt packs - study each reel in gemini-refs/<series>/<reel>/ shot by shot, then write one remixed Gemini prompt per 10 s of the reel (3-4 for a 30-40 s reel) that keeps the concept, vibe and edit rhythm but changes the action, vehicle/prop or setting, plus a final prompt that combines the clips into the finished reel. Use at the approval gate in CLAUDE.md, or when asked for Gemini prompts, Veo prompts, reel remixes, or to assemble generated clips from gemini-clips/.
 ---
 
 # Gemini reel remixes
@@ -28,6 +28,13 @@ usually two. The idea must stay recognisably the same kind of shot.
 
 Never remake the whole reel in the same order with tiny swaps. Reorder or replace about a third of the shots with
 new ideas in the same concept.
+
+## The 10-second structure
+
+The owner's reels are **~30-40 s**. Gemini makes **~10 s clips**. So:
+- Split the reel into **10 s windows**: 0-10, 10-20, 20-30, 30-40 (3 or 4 windows; a last window under 4 s merges into the one before).
+- Write **one clip prompt per window**. It remixes everything that happens in that window, keeping its beats and its number of cuts ("cut to").
+- Finish with **one final prompt** that combines the clips into the finished reel.
 
 ## Folder layout
 
@@ -60,7 +67,9 @@ ffmpeg -v error -i "$R" -vf "fps=2,scale=180:-2,tile=8x6" -frames:v 1 "$W/sheet.
 transcript and pacing numbers. Check the audio too (`ffmpeg -i "$R" -af volumedetect -f null -`): is it music-only,
 narration, or sound effects?
 
-Write the **shot list** at the top of the pack: `#, start-end s, what we see, camera, transition`.
+Write the **shot list** at the top of the pack: `#, start-end s, what we see, camera, transition`, then group the
+shots into the 10 s windows. Make one 2 fps sheet per window to check the grouping:
+`ffmpeg -v error -ss <start> -t 10 -i "$R" -vf "fps=2,scale=180:-2,tile=5x4" -frames:v 1 "$W/win<k>.jpg"`
 
 ## Step 2: Series notes
 
@@ -84,25 +93,38 @@ works, the recurring characters and how they look, and 5 do's and 5 don'ts. Add 
 ## CAST LOCK  (paste into every prompt with that character, word for word)
 <per character: 25-40 words of fixed details such as face, age, outfit colours, jewellery, signature item>
 
-## Clips
-### Clip 1: <name>  (remix of reel shot #<n>: <what changed>)
+## Clip 1 · 0-10 s  (remixes reel shots #1-#3: <what changed>)
 ```text
 <STYLE LOCK>
 <CAST LOCK>
-<Shot size, lens, camera move and speed>. <Character> <does what> in <setting>, <time/weather/light>.
-0-3 s: <beat>. 3-7 s: <beat>. 7-10 s: <beat>.
-Sound: <SFX/ambience>, no music, no dialogue.
+Vertical 9:16, 10 seconds.
+0-3 s: <shot size, lens, camera move>. <Character> <does what> in <setting>, <light>.
+Cut to 3-6 s: <next beat, same detail level>.
+Cut to 6-10 s: <beat>. Ends on: <final frame: what is where>.
+Sound: <SFX/ambience on each beat>, no music, no dialogue.
 Avoid: text, captions, logos, watermarks, extra fingers, warped faces, flicker.
 ```
-(... one clip per remixed shot: usually 4-8 clips; the owner cuts the best 2-5 s of each)
+## Clip 2 · 10-20 s  (remixes reel shots #4-#6: ...)
+## Clip 3 · 20-30 s
+## Clip 4 · 30-40 s  (only if the reel is longer than ~34 s)
 
-## Edit plan (~40 s)
-| Order | Clip | Use seconds | Transition | Beat/hook note |
-Music: describe the feel and tempo (BPM) only; the owner picks the track. Don't name copyrighted songs to reuse.
+## FINAL REEL: combining prompt
+Gemini makes clips; it doesn't stitch uploaded clips together. Paste this into **Google Flow's scene builder**
+(or use it as the edit list in CapCut or any editor). Or put the clips in `gemini-clips/<slug>/` and the session joins them.
+```text
+Assemble one vertical 9:16 reel of about <N> seconds from these clips, in this order:
+1. Clip 1, 0.0-<t> s: <role, e.g. hook>. Transition: <hard cut on the beat / whip pan / flash>.
+2. Clip 2, <in>-<out> s: ...
+3. ...
+Pacing: <cuts per second from the reel>, cut on the beat of a <BPM> <genre feel> track.
+Colour: one consistent <grade> across all clips. No text overlays except <title card if the reel has one>.
+End on <payoff image>, held for <0.5-1> s.
+```
+**Music:** describe the feel and tempo (BPM) only; the owner picks the track. Don't name copyrighted songs to reuse.
 ~~~
 
 Prompt-writing rules:
-- One clear action per clip, with concrete nouns and verbs. Words like "epic" or "cinematic" add nothing on their own.
+- One clear action per beat, with concrete nouns and verbs. Keep each window's number of cuts close to the reel's (fast reels: 3-4 beats per 10 s clip). Words like "epic" or "cinematic" add nothing on their own.
 - The style lock and cast lock are identical in every clip, so the clips look like one reel.
 - Always give camera direction: shot size + lens + move + speed ("low-angle tracking shot, 24 mm, fast push-in").
 - Front-load the hook: clip 1 is the most striking remix.
@@ -118,7 +140,7 @@ Append a row to `prompts/README.md` (date, series, reel, file, status `ready`). 
 ## Assemble mode (when `gemini-clips/<slug>/` has clips)
 
 1. Check each clip with `ffprobe` and a 2 fps contact sheet you Read.
-2. Follow the pack's edit plan: trim each clip (`-ss/-t`), scale or pad to 1080x1920 at 30 fps, and join with hard cuts
+2. Follow the pack's FINAL REEL prompt: trim each clip (`-ss/-t`), scale or pad to 1080x1920 at 30 fps, and join with hard cuts
    (or the transition the plan names). Cut on the beat if the owner added `gemini-clips/<slug>/music.*`.
 3. Add the owner's music if present. Otherwise deliver silent with a note.
 4. Deliver to `deliveries/reels/<slug>.mp4` plus `<slug>_sheet.jpg`, commit and push, and tell the owner in chat.

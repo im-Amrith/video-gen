@@ -37,6 +37,33 @@ If setup reports `!!` problems, work around them (see TOOLS_GUIDE.md section 10)
 - **Work in batches by series:** finish the What If batch, then the History batch. Don't alternate. One video at a time: each waits for approval (Approval gate).
 - Episode 1 of each series is the **pilot**. It sets the look. Record the locked look in `briefs/<series>/SERIES_LOOK.md`. Episodes 2-5 reuse the pilot's project and change only the story, voice and shot plan.
 
+## Reference study: the owner's Shorts (`Shorts/`)
+
+The owner downloads Shorts they want our videos to look like into `Shorts/` (by series: `Shorts/what-if/`,
+`Shorts/history/`; a video loose in `Shorts/` applies to both). Study them the way the original creator did:
+**every frame at 30 fps, contact sheets of 2 s = 60 frames, numbers instead of adjectives**.
+
+**When:** before each series' pilot, and at every approval gate if `Shorts/` has videos not yet listed in `Shorts/STUDIED.json`.
+
+1. `python3 -I scripts/study_refs.py Shorts` splits each new video into `out/study/<id>/sheets/sNN.jpg` (60 frames
+   each) and `frames/` (one 540x960 frame every 2 s), and commits quick-look sheets plus measured stats
+   (cuts/min, shot lengths, loudness, sound start) to `Shorts/_study/`.
+2. Look at the material: Read each video's `_overview.jpg` and `_cuts.jpg`, then the 60-frame sheets for the hook
+   (first 2 sheets), one middle sheet and the last sheet, plus 3-4 full frames. For many new videos, split the
+   reading across up to 3 agents (high effort), one topic each.
+3. Measure the same seven topics as the cartoon skill's reports (motion, depth, textures, characters, lighting,
+   outlines, grade), plus **script and pacing** (hook line, beats, words per second, length, music/SFX). Write numbers:
+   shot length in seconds, camera speed, outline width as a fraction of frame width, hex colours, blur amount.
+4. Write the findings into `briefs/<series>/REFERENCE_STUDY.md` (newest study on top: what works, the numbers, what
+   we do differently). If the look matches the cartoon-3d-short style, also add to
+   `.claude/skills/cartoon-3d-short/references/STYLE_BIBLE.md` and copy 2 frames per short into its
+   `references/frames/` (`short21_0060.jpg`, ... continuing the numbering).
+5. **Pick the engine by the look:** 2D characters in a 3D world → cartoon-3d-short. Flat 2D, infographic or collage
+   → the closest Lemo-Opuscar style (or HyperFrames `reverse-any-video` to rebuild the look). Say which and why in
+   `REFERENCE_STUDY.md`.
+6. Use the references for **look and craft only**: our stories, characters, scripts and voice stay our own (hard rule 3).
+   Commit and push.
+
 ## Rendering speed: measured, read this before choosing a style
 
 The cloud container has **no GPU**. Measured on 2026-11-04 (2-core cloud container, software GL): the 3D bridge
@@ -70,10 +97,10 @@ One engine per series: don't mix Remotion, Lemo-Opuscar and HyperFrames inside o
 
 The skill was written on someone else's PC. In this repo:
 - "your Remotion project" means the **repo root** (`src/`, `public/`, `scripts/`, `src/Root.tsx`)
-- `~/bridge-short/` means `shorts/<slug>/` (SCRIPT.md, voice/, audio outputs, notes)
+- `~/bridge-short/` means `projects/<slug>/` (SCRIPT.md, voice/, audio outputs, notes)
 - The audio scripts are in `audio/`, and the stills and QA scripts are in `scripts/`
 - Stills: `node scripts/bridge-stills.mjs out/<slug>/x_ 100,400 0.5 <CompositionId>`. Software GL is used automatically on Linux.
-- Voice: Kokoro offline TTS (`models/kokoro/`), one steady voice per series. Word timings come from faster-whisper (`word_timestamps=True`), written to `shorts/<slug>/voice/words.json`.
+- Voice: Kokoro offline TTS (`models/kokoro/`), one steady voice per series. Word timings come from faster-whisper (`word_timestamps=True`), written to `projects/<slug>/voice/words.json`.
 - Kenney 3D props in `public/bridge/kenney/` are optional. If they're missing, the world still renders.
 
 ## Approval gate (after every video)
@@ -86,7 +113,7 @@ The owner watches and approves **every** video before the next one starts.
    - a contact sheet (`deliveries/<series>/<NN>_<slug>_sheet.jpg`, 12 frames, made with ffmpeg) so they can judge it at a glance;
    - the title, a one-line summary, and anything you weren't sure about;
    - the question: **"Approve, or what should change?"**
-2. While waiting, do only the **Gemini remix prompts** step below. It doesn't start a new video.
+2. While waiting, do only the **reference study** (if `Shorts/` has new videos) and the **Gemini remix prompts** step below. Neither starts a new video.
 3. Then **stop and wait** for the owner's reply. Don't start the next brief on your own.
 4. Feedback: apply it to this video (re-render if asked) **and** write it into `briefs/<series>/SERIES_LOOK.md`
    so every later episode follows it. Only after "approved" (or "next", "go on", "ok") start the next brief.
@@ -107,7 +134,7 @@ While waiting at the approval gate, use the **`gemini-video-prompts`** skill:
 ## Working alone
 
 - Don't stop for the approval gates *inside skills* (storyboards, style frames, metaphor gates). The only stop is the Approval gate between videos. Decide, write the decision
-  and the reason in `shorts/<slug>/DECISIONS.md`, and continue.
+  and the reason in `projects/<slug>/DECISIONS.md`, and continue.
 - If you're truly blocked (missing tool, network blocked, render keeps failing), write it in `PROGRESS.md`, ask the owner in chat, and do Gemini remix prompts while you wait.
 - Keep `PROGRESS.md` current: done, in progress, next, problems. It's how the owner and the next session catch up.
 

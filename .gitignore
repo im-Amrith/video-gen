@@ -7,8 +7,8 @@ remotion-tmp/
 .venv/
 .DS_Store
 Thumbs.db
-# big intermediate audio/video inside shorts/ (finals go to deliveries/)
-shorts/**/*.mp4
-shorts/**/stems/
+# big intermediate audio/video inside projects/ (finals go to deliveries/)
+projects/**/*.mp4
+projects/**/stems/
 models/
 .chrome-path

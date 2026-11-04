@@ -17,7 +17,7 @@ $env:REMOTION_TMP = "D:\remotion-tmp"   # Remotion bundles are big; keep them of
 ```powershell
 git pull
 npx remotion render src/index.ts <CompositionId> out/<slug>/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
-ffmpeg -y -i out/<slug>/video.mp4 -i shorts/<slug>/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k -shortest deliveries/<series>/<NN>_<slug>.mp4
+ffmpeg -y -i out/<slug>/video.mp4 -i projects/<slug>/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k -shortest deliveries/<series>/<NN>_<slug>.mp4
 ```
 Then `git add deliveries; git commit -m "render <slug>"; git push`, or just upload it.
 Optional QA: `python scripts/short_qa.py deliveries/<series>/<NN>_<slug>.mp4 out/<slug>/qa`

@@ -21,6 +21,7 @@ Checked on 2026-11-04 by reading each repo's README, SKILL.md, licence and insta
 | Make a hand-painted 2D **character animation** with a mascot | **ClaudeAnimationBase** | p5.js + p5.brush |
 | Make a 5-second **paper-collage B-roll** clip for one line of a script | **VOX-COLLAGE-BROLL** (needs a paid MaxFusion account) | generative AI via MaxFusion |
 | Make a **product launch or app promo** film | **onetake** (non-commercial licence only) | HTML, frame by frame |
+| **Study your reference Shorts** frame by frame (30 fps sheets, cuts, pacing) | `scripts/study_refs.py` → `Shorts/_study/` | ffmpeg |
 | **Watch and analyse** a reference video (hook, pacing, frames) | **claude-watch** (`/watch`) | yt-dlp + ffmpeg + Whisper |
 | Read YouTube subtitles, Reddit, X or Chinese platforms for research | **agent-reach** | Python CLI |
 
@@ -265,8 +266,8 @@ Better still, **one cloud session per series**. Each session holds one style in 
 
 **What it is:** for your **separate reel-edit channel** (pharaohs in the modern world, armour, space...). For each reel
 you put in `gemini-refs/<series>/<reel>/`, it makes a shot list with ffmpeg, keeps `SERIES_NOTES.md` up to date, and
-writes `prompts/<series>/<reel>_remix.md`: one Gemini/Veo prompt per shot with a word-for-word style lock and cast lock,
-plus an edit plan for a ~40 s reel. The rule: **heavy inspiration, never the same shot**. Every shot changes its
+writes `prompts/<series>/<reel>_remix.md`: the 30-40 s reel split into 10 s windows, one remixed Gemini/Veo prompt per window
+(word-for-word style lock and cast lock in each), and a **final combining prompt** that joins the clips into the reel. The rule: **heavy inspiration, never the same shot**. Every shot changes its
 action, vehicle/prop or setting (Cleopatra racing a car → flying a jet over the Nile). Its **assemble mode** joins the
 clips you generate (`gemini-clips/<slug>/`) into `deliveries/reels/`.
 

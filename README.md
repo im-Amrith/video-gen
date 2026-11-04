@@ -14,8 +14,9 @@ Every video waits for your approval before the next one starts.
 | `RENDER_LOCALLY.md` | 3D shorts waiting for a render on your PC (the cloud has no GPU) |
 | `.claude/skills/` | All skills: cartoon-3d-short, remotion-*, lemo-opuscar, hyperframes*, media-use, reverse-any-video, style-sampling, watch, gemini-video-prompts |
 | `src/`, `public/`, `scripts/`, `audio/` | The Remotion project (the bridge short as the starting template) |
-| `briefs/<series>/` | One brief per episode (the queue) |
-| `shorts/<slug>/` | Working files per short (script, voice, decisions) |
+| `Shorts/<series>/` | **You add** reference Shorts for the Claude-made videos; studied frame by frame |
+| `briefs/<series>/` | One brief per episode (the queue), plus REFERENCE_STUDY.md and SERIES_LOOK.md |
+| `projects/<slug>/` | Working files per short (script, voice, decisions) |
 | `deliveries/<series>/` | **Finished videos + titles/descriptions** |
 | `gemini-refs/<series>/<reel>/` | **You add** reels you like (+ optional prompt.txt, notes.md) for the Gemini remix channel |
 | `prompts/<series>/` | Remix prompt packs Claude writes for you |

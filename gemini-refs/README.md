@@ -17,5 +17,6 @@ Make a new folder for any new series (e.g. `gods-in-tokyo/`). A video placed str
 Keep files under 100 MB (under 25 MB if you upload through the GitHub website).
 
 After each video at the approval gate, Claude remixes 1-2 waiting reels into `prompts/<series>/<reel>_remix.md`:
+one prompt per 10 s of the reel (3-4 clips) plus a final prompt that combines them into the reel. The remix is
 heavily inspired by the reel, but every shot changes its action, vehicle/prop or setting
 (Cleopatra racing a car → Cleopatra flying a jet over the Nile).
