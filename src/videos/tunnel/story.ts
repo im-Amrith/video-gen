@@ -4,7 +4,7 @@ import TL from "./timeline.json";
 import {
   Episode, Key, Dof, V3, ShotDef, FPS, dolly, zoom, orbit, pushK, glide, clamp01, smooth, lin, hh, q, seg, lerp,
 } from "../toon/core";
-import { Stage, CamInfo, person, blob, card, lidAt, light2D, Who, Expr, Outfit } from "../toon/cast";
+import { Stage, CamInfo, person, blob, card, lidAt, light2D, spinAbout, Who, Expr, Outfit } from "../toon/cast";
 import { Pen, INK, fxBurst, fxPuff, fxStars } from "../toon/toon";
 import { fxSpeed, fxSweat, fxHeat, fxImpact, fxBang, fxWhat, fxSparkle } from "../toon/fx";
 import { swingKid } from "../toon/toon";
@@ -68,20 +68,20 @@ const T = (f: number) => f / FPS;
 const tu = (y: number): V3 => [TUN[0], y, TUN[2]];
 const C = (base: V3, d: V3): V3 => [base[0] + d[0], base[1] + d[1], base[2] + d[2]];
 const HERO_NP: V3 = [-3.0, 0, 0.7], BEAR: V3 = [-7.4, 0, -2.6], SCI: V3 = [SP[0] + 3.2, 0, SP[2] - 1.4];
-const KW: V3[] = [[KOLA[0] - 2.6, 0.4, KOLA[2] + 2.2], [KOLA[0] + 2.4, 0.4, KOLA[2] + 2.6]];
+const KW: V3[] = [[KOLA[0] - 1.25, 0.4, KOLA[2] + 2.2], [KOLA[0] + 1.3, 0.4, KOLA[2] + 2.4]];
 export const CAMS: Record<number, Key[]> = {
   1: [
-    { f: 0, s: (f) => dolly([-1.6, 0.75, 3.6], [-2.7, 0.95, 0.5], pushK(f, 0, 0.003), { fov: 42, roll: -0.04 }) }, // frame 0: Pip at the lip of a black hole in the ice
+    { f: 0, s: (f) => dolly([-4.9, 3.3, 3.5], [-1.2, 0.1, -0.2], pushK(f, 0, 0.003), { fov: 46, roll: -0.05 }) }, // frame 0: over Pip's shoulder into the black hole
     { f: 52, dur: 30, s: (f) => dolly([-1.0, 9.5, 3.0], [0, -3, 0], pushK(f, 52, 0.003), { fov: 46, roll: 0.05 }) }, // crane up: straight down the hole
     { f: 112, cut: true, s: (f) => dolly([-6.0, 1.6, 0.6], [-7.4, 1.45, -2.6], pushK(f, 112, 0.004, 0.008, 30), { fov: 36 }) }, // the bear's double take
   ],
   2: [
     { f: 178, s: (f) => zoom(C(KOLA, [9, 5.5, 18]), C(KOLA, [0, 6, 0]), 44, pushK(f, 178, 0.0022)) }, // the rig
     { f: 262, cut: true, s: (f) => dolly(C(KOLA, [0.6, 1.9, 6.0]), C(KOLA, [0, 1.2, 2.2]), pushK(f, 262, 0.003), { fov: 40, roll: 0.03 }) }, // workers peer in
-    { f: 330, cut: true, s: (f) => dolly(C(KOLA, [1.2, 1.6, 3.4]), C(KOLA, [0, 1.6, 0]), pushK(f, 330, 0.004, 0.009, 24), { fov: 36, roll: -0.05 }) }, // red-hot pipe
+    { f: 330, cut: true, s: (f) => dolly(C(KOLA, [0.4, 2.3, 10.5]), C(KOLA, [0, 1.5, 1.2]), pushK(f, 330, 0.004, 0.009, 24), { fov: 40, roll: -0.05 }) }, // red-hot pipe, thermometer, workers
   ],
   3: [
-    { f: 388, s: (f) => orbit([1.0, 1.2, -0.6], 13, -0.25 + 0.0018 * (f - 388), 4.0, { fov: 42 }) }, // the pump sucking the air out
+    { f: 388, s: (f) => dolly([-7.0, 1.9, 3.6], [3.4, 0.8, -1.9], pushK(f, 388, 0.0025), { fov: 44 }) }, // Pip in front, the hole, the pump behind: air sucked out
     { f: 452, dur: 26, s: (f) => dolly([-1.6, 1.25, 3.4], [-3.0, 1.05, 0.7], pushK(f, 452, 0.003), { fov: 38, roll: 0.04 }) }, // Pip: ready
   ],
   4: [
@@ -107,8 +107,8 @@ export const CAMS: Record<number, Key[]> = {
     { f: 1110, dur: 40, s: (f) => orbit(C(TUN, [0, 0.9, 0]), 1.9, -0.25 + 0.004 * (f - 1110), 0.1, { fov: 42 }) },
   ],
   9: [
-    { f: 1157, s: (f) => dolly(C(TUN, [1.2, 3.0, 1.0]), C(TUN, [0, 0.3, 0]), pushK(f, 1157, 0.003), { fov: 54, roll: -0.05 }) }, // flipped, slowing
-    { f: 1205, dur: 26, s: (f) => dolly(C(TUN, [2.0, 0.6, 1.2]), C(TUN, [0, 0.8, 0]), pushK(f, 1205, 0.003), { fov: 50 }) },
+    { f: 1157, s: (f) => dolly(C(TUN, [1.2, 3.6, 1.2]), C(TUN, [0, 1.3, 0]), pushK(f, 1157, 0.003), { fov: 54, roll: -0.05 }) }, // flipped, slowing
+    { f: 1205, dur: 26, s: (f) => dolly(C(TUN, [2.0, 1.4, 1.4]), C(TUN, [0, 1.3, 0]), pushK(f, 1205, 0.003), { fov: 50 }) },
   ],
   10: [
     { f: 1245, s: (f) => zoom(C(SP, [10, 4.2, 14]), C(SP, [0, 0.8, -2]), 44, pushK(f, 1245, 0.002)) }, // South Pole: the hut, the pole, a scientist
@@ -116,8 +116,8 @@ export const CAMS: Record<number, Key[]> = {
     { f: 1362, cut: true, s: (f) => dolly(C(SP, [0.4, 6.0, 1.4]), C(SP, [0, -6, 0]), pushK(f, 1362, 0.003), { fov: 48, roll: -0.06 }) }, // down the hole: away he goes
   ],
   11: [
-    { f: 1450, s: (f) => dolly(C(PG, [0.2, 2.0, 7.6]), C(PG, [0, 1.7, 0]), pushK(f, 1450, 0.0025), { fov: 42 }) },
-    { f: 1512, dur: 28, s: (f) => dolly(C(PG, [1.2, 1.6, 5.4]), C(PG, [0, 1.5, 0]), pushK(f, 1512, 0.0025), { fov: 40, roll: 0.04 }) },
+    { f: 1450, s: (f) => dolly(C(PG, [0.2, 1.6, 6.4]), C(PG, [0, 1.3, 0]), pushK(f, 1450, 0.0025), { fov: 30 }) },
+    { f: 1512, dur: 28, s: (f) => dolly(C(PG, [1.0, 1.3, 5.6]), C(PG, [0, 1.2, 0]), pushK(f, 1512, 0.0025), { fov: 30, roll: 0.04 }) },
   ],
   12: [
     { f: 1571, s: (f) => dolly(C(TUN, [1.8, -0.2, 1.4]), C(TUN, [0, 0.9, 0]), pushK(f, 1571, 0.0025), { fov: 50 }) }, // drifting through dusty air
@@ -190,6 +190,7 @@ const clock = (p: Pen, a: number) => {
 
 const pip = (cam: CamInfo, out: Stage, t: number, x: number, y: number, z: number, expr: Expr, o: { mode?: "stand" | "fall" | "sit"; face?: boolean; roll?: number; wave?: number; prop?: "icecream" | null; look?: number; swaps?: number[]; scale?: number } = {}) => {
   const sc = o.scale ?? PIP_S;
+  if (o.face && o.roll) [x, y, z] = spinAbout(cam, [x, y + 1.05 * sc, z], 1.05 * sc, o.roll);
   out.places.push(person(cam, W_PIP, x, y, z, { side: false, mirror: false }, { mode: o.mode ?? "stand", expr, blink: lidAt(t, 1, o.swaps), wave: o.wave, prop: o.prop ?? null, look: o.look ?? 0 }, {}, sc,
     { face: o.face, roll: o.roll }));
 };
@@ -223,10 +224,10 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage, f: number) => {
     });
     if (hot) {
       const u = q(seg(t, DRILL_HOT, DRILL_HOT + 0.5), 30);
-      card(out, `thermo${q(seg(t, DRILL_HOT - 0.6, DRILL_HOT), 20)}`, (p) => thermo(p, 0.4 + 0.6 * seg(t, DRILL_HOT - 0.6, DRILL_HOT)), KOLA[0] - 1.1, 2.3, KOLA[2] + 0.6, 0.6, 1.2, { cw: 300, ch: 600 });
-      if (u < 1) card(out, `imp${u}`, (p) => fxImpact(p, u), KOLA[0] - 1.1, 3.0, KOLA[2] + 0.7, 1.4, 1.4, { cw: 500, ch: 500 });
+      card(out, `thermo${q(seg(t, DRILL_HOT - 0.6, DRILL_HOT), 20)}`, (p) => thermo(p, 0.4 + 0.6 * seg(t, DRILL_HOT - 0.6, DRILL_HOT)), KOLA[0] + 0.62, 2.7, KOLA[2] + 0.5, 0.5, 1.0, { cw: 300, ch: 600 });
+      if (u < 1) card(out, `imp${u}`, (p) => fxImpact(p, u), KOLA[0] + 0.62, 3.25, KOLA[2] + 0.6, 1.4, 1.4, { cw: 500, ch: 500 });
       card(out, `heat${q(t % 1, 15)}`, (p) => fxHeat(p, t), KOLA[0], 2.9, KOLA[2] + 0.2, 1.2, 1.6, { cw: 300, ch: 400, soft: true });
-    } else if (t > DRILL_HOT - 1.5) card(out, `thermo${q(seg(t, DRILL_HOT - 1.5, DRILL_HOT), 20)}`, (p) => thermo(p, 0.15 + 0.5 * seg(t, DRILL_HOT - 1.5, DRILL_HOT)), KOLA[0] - 1.1, 2.3, KOLA[2] + 0.6, 0.6, 1.2, { cw: 300, ch: 600 });
+    } else if (t > DRILL_HOT - 1.5) card(out, `thermo${q(seg(t, DRILL_HOT - 1.5, DRILL_HOT), 20)}`, (p) => thermo(p, 0.15 + 0.5 * seg(t, DRILL_HOT - 1.5, DRILL_HOT)), KOLA[0] + 0.62, 2.7, KOLA[2] + 0.5, 0.5, 1.0, { cw: 300, ch: 600 });
   }
   if (id >= 5 && id <= 9) {
     const v = Math.abs(speedAt(t));
@@ -235,7 +236,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage, f: number) => {
     swaps.push(tl("L06", 0.4), tl("L07", 0.4), tl("L08", 0.2), tl("L08", 3.2), tl("L09", 0.1));
     const weightless = t > tl("L08", 3.0) && t < tl("L08", 5.6);
     const roll = id === 9 ? Math.PI : weightless ? (t - tl("L08", 3.0)) * 1.1 : 0.12 * Math.sin(t * 3);
-    const bob = id === 9 ? 1.8 : 0;
+    const bob = 0;
     pip(cam, out, t, TUN[0], bob, TUN[2], e, { mode: "fall", face: true, roll, swaps });
     // speed lines around the faller
     if (v > 300 && !weightless) for (let k = 0; k < 3; k++) {

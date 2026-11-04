@@ -170,8 +170,8 @@ export class World {
     // ---- the episode's set ----
     this.set.pose?.({ id, f, t, cam, light });
     // ---- cast + effects ----
-    const right = V(0, 0, 0).setFromMatrixColumn(cam.matrixWorld, 0);
-    const info: CamInfo = { pos: cam.position, right, sun: sunDir, light };
+    const right = V(0, 0, 0).setFromMatrixColumn(cam.matrixWorld, 0), up = V(0, 0, 0).setFromMatrixColumn(cam.matrixWorld, 1);
+    const info: CamInfo = { pos: cam.position, right, up, sun: sunDir, light };
     const st: Stage = { places: [], fx: [] };
     this.ep.stage(id, t, info, st, f);
     this.frustum.setFromProjectionMatrix(this.m4.multiplyMatrices(cam.projectionMatrix, cam.matrixWorldInverse));

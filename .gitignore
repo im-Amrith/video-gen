@@ -12,3 +12,6 @@ projects/**/*.mp4
 projects/**/stems/
 models/
 .chrome-path
+
+# toon shorts: stems are rebuilt by sound.py
+projects/**/audio/stem_*.wav

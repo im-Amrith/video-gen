@@ -84,6 +84,9 @@ const hole = (b: Batch, root: THREE.Object3D, cx: number, cz: number) => {
   const shaftT = ctex("shaftFade", 64, 256, (g) => { const gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, "#5c5f70"); gr.addColorStop(0.25, "#2b2a36"); gr.addColorStop(1, "#000000"); g.fillStyle = gr; g.fillRect(0, 0, 64, 256); });
   const sh = new THREE.Mesh(new THREE.CylinderGeometry(HOLE_R, HOLE_R, 40, 40, 1, true), new THREE.MeshBasicMaterial({ map: shaftT, side: THREE.BackSide, fog: false }));
   sh.position.set(cx, -20, cz); root.add(sh);
+  const voidT = ctex("holeVoid", 256, 256, (g) => { const gr = g.createRadialGradient(128, 128, 0, 128, 128, 128); gr.addColorStop(0, "#000000"); gr.addColorStop(0.62, "#05040a"); gr.addColorStop(0.9, "#2b2a36"); gr.addColorStop(1, "#4a4c5c"); g.fillStyle = gr; g.fillRect(0, 0, 256, 256); });
+  const vd = new THREE.Mesh(new THREE.CircleGeometry(HOLE_R + 0.05, 48), new THREE.MeshBasicMaterial({ map: voidT, fog: false }));
+  vd.rotation.x = -Math.PI / 2; vd.position.set(cx, 0.025, cz); root.add(vd);
   const cap = new THREE.Mesh(new THREE.CircleGeometry(HOLE_R, 40), new THREE.MeshBasicMaterial({ color: "#000000" }));
   cap.rotation.x = -Math.PI / 2; cap.position.set(cx, -39.9, cz); root.add(cap);
 };
@@ -111,8 +114,8 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   hole(b, root, 0, 0);
   ridges(b, 0, 0, 1);
   const poleM = lam("poleStripe", () => ({ map: stripes("#d93a3a", "#f7f3ea", 10) }));
-  b.add(new THREE.CylinderGeometry(0.09, 0.09, 2.6, 14).translate(0, 1.3, 0), poleM, new THREE.Matrix4().makeTranslation(-4.6, 0, -2.4));
-  b.add(new THREE.SphereGeometry(0.2, 16, 10), lam("poleKnob", () => ({ color: "#f2c230" })), new THREE.Matrix4().makeTranslation(-4.6, 2.7, -2.4));
+  b.add(new THREE.CylinderGeometry(0.09, 0.09, 2.6, 14).translate(0, 1.3, 0), poleM, new THREE.Matrix4().makeTranslation(-1.6, 0, -3.6));
+  b.add(new THREE.SphereGeometry(0.2, 16, 10), lam("poleKnob", () => ({ color: "#f2c230" })), new THREE.Matrix4().makeTranslation(-1.6, 2.7, -3.6));
   // vacuum pump: a chunky machine with a hose into the hole
   const pumpM = lam("pumpBody", () => ({ color: "#3f78c2" })), darkM = lam("pumpDark", () => ({ color: "#2f3542" }));
   b.add(boxGeo(V(PUMP[0] - 1.1, 0, PUMP[2] - 0.8), V(PUMP[0] + 1.1, 1.5, PUMP[2] + 0.8), 1), pumpM);
@@ -135,7 +138,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   for (let i = 0; i < 14; i++) prop(b, {}, i % 3 ? "tree_cone" : "tree_default", kx - 40 + hh(i, 3) * 80, 0, kz - 30 - hh(i, 4) * 60, 6 + hh(i, 5) * 6);
   const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 2.2, 20), glowMat("#ff5a1a", 1.0));
   pipe.position.set(kx, 1.5, kz); root.add(pipe);
-  const pipeGlow = new Glow(root, "#ff7a2a", 2.2);
+  const pipeGlow = new Glow(root, "#ff7a2a", 1.2);
   // SP: ice, the hole, a red hut, the ceremonial striped pole with a mirror ball and a ring of pennants
   ground(b, ice, SP[0], SP[2], 300, 30);
   hole(b, root, SP[0], SP[2]);
@@ -154,7 +157,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   }
   // PG: lawn, A-frame swing, trees
   ground(b, lam("grassPG", () => ({ map: grassHD() })), PG[0], PG[2], 400, 100);
-  const wood = lam("swingWood", () => ({ color: "#b0703f" }));
+  const wood = lam("swingWood", () => ({ color: "#d9934e" }));
   for (const zz of [-1.6, 1.6]) for (const s of [-1, 1]) b.add(beamBetween(V(PG[0], 3.0, PG[2] + zz), V(PG[0] + s * 2.4, 0, PG[2] + zz), 0.16), wood);
   b.add(beamBetween(V(PG[0], 3.0, PG[2] - 1.8), V(PG[0], 3.0, PG[2] + 1.8), 0.18), wood);
   for (let i = 0; i < 18; i++) prop(b, {}, ["tree_oak", "tree_fat", "plant_bushLarge"][i % 3], PG[0] - 30 + hh(i, 7) * 60, 0, PG[2] - 18 - hh(i, 8) * 40, i % 3 === 2 ? 1.6 : 6 + hh(i, 9) * 4);
@@ -162,7 +165,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
 
   // plane (ending): fuselage, wings, tail, spinning prop
   const plane = new THREE.Group();
-  const red = lam("planeRed", () => ({ color: "#d9443a" })), white = lam("planeWhite", () => ({ color: "#f3efe6" }));
+  const red = lam("planeRed", () => ({ color: "#d9443a" })), white = lam("planeWhite", () => ({ color: "#f6e1bf" }));
   const fus = new THREE.Mesh(new THREE.CapsuleGeometry(0.9, 6, 8, 20).rotateZ(Math.PI / 2), white); plane.add(fus);
   const stripe = new THREE.Mesh(new THREE.CylinderGeometry(0.92, 0.92, 6, 20, 1, true).rotateZ(Math.PI / 2), red); stripe.scale.set(1, 1, 1); stripe.position.y = -0.05; plane.add(stripe);
   const wing = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.16, 11), red); wing.position.set(0.4, 0.55, 0); plane.add(wing);
@@ -225,8 +228,8 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     // kola pipe
     pipe.visible = id === 2;
     const hot = clamp01((t - DRILL_HOT) / 1.0);
-    (pipe.material as THREE.MeshBasicMaterial).color.set("#7a3a2a").lerp(new THREE.Color("#ff5a1a"), hot).multiplyScalar(1 + 1.4 * hot);
-    pipeGlow.set(KOLA[0], 1.4, KOLA[2], 3.2 + 2 * hot, hot, id === 2);
+    (pipe.material as THREE.MeshBasicMaterial).color.set("#7a3a2a").lerp(new THREE.Color("#ff5a1a"), hot).multiplyScalar(1 + 0.25 * hot);
+    pipeGlow.set(KOLA[0], 1.4, KOLA[2], 1.6 + 0.8 * hot, 0.6 * hot, id === 2);
     steam.pose((i, o) => { const u = (t * 0.25 + hh(i, 2)) % 1; o.set(KOLA[0] + (hh(i, 3) - 0.5) * 1.5 + u * 2, 0.5 + u * 7, KOLA[2] + (hh(i, 4) - 0.5) * 1.5); return hot > 0.05; }, id === 2);
     // snow drifting across NP / SP
     const onIce = id === 1 || id === 3 || id === 4 || id === 10 || id === 13;
@@ -254,12 +257,12 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     const r = Math.abs(D - 6371);
     const Dd = 6371 - r; // depth below the nearest surface
     const k1 = smooth((Dd - 20) / 300), k2 = smooth((Dd - 2700) / 300), k3 = smooth((Dd - 5000) / 300);
-    const base = new THREE.Color("#7a5a44").lerp(new THREE.Color("#a8442a"), k1).lerp(new THREE.Color("#ff9a2a"), k2).lerp(new THREE.Color("#fff0b0"), k3);
+    const base = new THREE.Color("#7a5a44").lerp(new THREE.Color("#a8442a"), k1).lerp(new THREE.Color("#ff9a2a"), k2).lerp(new THREE.Color("#ffc860"), k3);
     const band = new THREE.Color("#5a4234").lerp(new THREE.Color("#6a2014"), k1).lerp(new THREE.Color("#ffd060"), k2);
     const glow = new THREE.Color("#ff6a1a").lerp(new THREE.Color("#ffe08a"), k2);
-    U.uBase.value.copy(base).multiplyScalar(1 + 0.6 * k2 + 0.4 * k3); U.uBand.value.copy(band);
+    U.uBase.value.copy(base).multiplyScalar(1 + 0.35 * k2); U.uBand.value.copy(band);
     U.uGlow.value.copy(glow); U.uGlowK.value = 0.15 + 1.4 * k1 + 1.2 * k2;
-    U.uFog.value.copy(new THREE.Color("#1a1420").lerp(new THREE.Color("#5a1a0c"), k1).lerp(new THREE.Color("#ff9a3a"), k2).lerp(new THREE.Color("#fff2c0"), k3));
+    U.uFog.value.copy(new THREE.Color("#1a1420").lerp(new THREE.Color("#5a1a0c"), k1).lerp(new THREE.Color("#d8681e"), k2).lerp(new THREE.Color("#f0a040"), k3));
     U.uFogD.value = lerp(140, 70, k2); U.uAir.value = air;
     void r;
     const per = 25;
@@ -270,7 +273,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     // dust streaks up past the faller (air run: slow drifting dust)
     dust.pose((i, o) => { const y = (((hh(i, 1) * 120 + sc * (air ? 1 : 0.5)) % 120) + 120) % 120 - 60, a = hh(i, 2) * Math.PI * 2, rr = 0.6 + hh(i, 3) * 2.4; o.set(TUN[0] + Math.cos(a) * rr, y, TUN[2] + Math.sin(a) * rr); return true; });
     bubbles.pose((i, o) => { const y = (((hh(i, 1) * 80 + sc * 0.7 + t * 2) % 80) + 80) % 80 - 40, a = hh(i, 2) * Math.PI * 2, rr = 2.6 + hh(i, 3) * 0.5; o.set(TUN[0] + Math.cos(a) * rr, y, TUN[2] + Math.sin(a) * rr); return true; }, k2 > 0.05);
-    coreGlow.set(TUN[0], -60, TUN[2], 30, k2 * 0.8 + k3, true);
+    coreGlow.set(TUN[0], -60, TUN[2], 24, 0.5 * k2 + 0.3 * k3, true);
     // the Kola drill bit stuck in the wall, passing at 12 km
     const yb = (12.26 - D) * 1000 * F.SCROLL_PER_M;
     kolaBit.visible = Math.abs(yb) < 120;

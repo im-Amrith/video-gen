@@ -107,7 +107,12 @@ export type Place = {
 };
 export type FxPlace = { key: string; cw: number; ch: number; draw: (p: Pen) => void; x: number; y: number; z: number; w: number; h: number; flat?: boolean; rot?: number; soft?: boolean; k?: number };
 /** sun = world direction TOWARD the sun (world.ts always passes it) */
-export type CamInfo = { pos: THREE.Vector3; right: THREE.Vector3; sun: THREE.Vector3; light: LightName };
+export type CamInfo = { pos: THREE.Vector3; right: THREE.Vector3; up: THREE.Vector3; sun: THREE.Vector3; light: LightName };
+/** for a camera-facing card rolled by `roll` about its feet: where to put the feet so the point `hc` m above them stays at `c` */
+export const spinAbout = (cam: CamInfo, c: [number, number, number], hc: number, roll: number): [number, number, number] => {
+  const sx = -Math.sin(roll), cy = Math.cos(roll);
+  return [0, 1, 2].map((i) => c[i] - hc * (sx * cam.right.getComponent(i) + cy * cam.up.getComponent(i))) as [number, number, number];
+};
 export type Stage = { places: Place[]; fx: FxPlace[] };
 
 /** drawing resolution by distance: [canvas w, h, scale from the 600 x 1000 design]; sized for the 1440 x 2560 final */

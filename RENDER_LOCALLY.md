@@ -1,6 +1,6 @@
 # Shorts to render on your PC
 
-3D shorts (cartoon-3d-short) are too slow to render in the cloud (no GPU). The cloud session prepares everything
+Both series (What If, History) now use the 3D cartoon look (`src/videos/toon/` engine). They are too slow to render in the cloud (no GPU). The cloud session prepares everything
 (script, voice, shot plan, sound mix, check stills) and lists each one here. You render on your PC with a GPU.
 
 ## One-time setup (Windows, PowerShell, in this folder)
@@ -26,3 +26,13 @@ Optional QA: `python scripts/short_qa.py deliveries/<series>/<NN>_<slug>.mp4 out
 
 | Series | NN | Slug | CompositionId | Audio ready | Rendered |
 |---|---|---|---|---|---|
+| what-if | 01 | tunnel-through-earth | WhatIf01Tunnel | yes (`projects/tunnel-through-earth/audio/mix.wav`, 65.33 s) | no |
+
+### Exact commands per short
+
+**What If 01 — tunnel-through-earth** (1960 frames, 65.33 s)
+```powershell
+npx remotion render src/index.ts WhatIf01Tunnel out/tunnel/video.mp4 --codec h264 --crf 18 --gl=angle --concurrency=4
+ffmpeg -y -i out/tunnel/video.mp4 -i projects/tunnel-through-earth/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k -shortest deliveries/what-if/01_tunnel-through-earth.mp4
+```
+Optional 2K: add `--scale 1.3333` to the render (1440x2560).
