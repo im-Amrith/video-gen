@@ -2,7 +2,7 @@
 // Each frame an episode's stage() pushes Places (characters) and FxPlaces (effect cards); world.ts draws them through a
 // canvas pool so identical drawings share one canvas. Cards, effects and blobs live on the NOINK layer.
 import * as THREE from "three";
-import { Pen, bodyFront, bodySide, fxShadow, fxContact, Outfit, Expr, FrontOpts, SideOpts } from "./toon";
+import { Pen, bodyFront, bodySide, fxShadow, fxContact, Outfit, Expr, FrontOpts, SideOpts, seatDrop } from "./toon";
 import { NOINK } from "./ink";
 import { cardShade, blobMaterial, CARD_K } from "./cardshade";
 import { FPS, clamp01, hh, q } from "./core";
@@ -158,6 +158,8 @@ export const person = (cam: CamInfo, who: Who, x: number, y: number, z: number, 
   const mirror = view.side && view.mirror, light = light2D(cam, mirror), seed = (who.i % 7) + 1;
   const f2: FrontOpts = { ...fo, light, seed }, s2: SideOpts = { ...so, light, seed };
   const key = view.side ? `S|${who.okey}|${fkey(s2)}` : `F|${who.okey}|${fkey(f2)}`;
+  // seat mode: lower the card so the hips land on y and the shins hang below the seat
+  if (!view.side && fo.mode === "seat") y -= seatDrop(who.o, seed) * SU * scale;
   return {
     key, x, y, z, scale, mirror,
     draw: (p) => (view.side ? bodySide(p, who.o, s2) : bodyFront(p, who.o, f2)),

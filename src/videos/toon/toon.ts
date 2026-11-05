@@ -213,6 +213,9 @@ export const blobPts = (cx: number, cy: number, B: Blob, n = 72): P2[] => {
 };
 
 /** measured head: H/W 0.94, slightly pointed crown (1.75), fuller jaw (2.3), chin taper -0.12, 8 % bulge to the facing side */
+/** seat mode: shin length as a fraction of the standing leg; the card drops by this so the hips sit on the given y */
+export const SEAT_LEG = 0.55;
+export const seatDrop = (o: Outfit, seed: number) => { const Bd = BUILD[o.build ?? "adult"]; return 2 * headBlob(seed, Bd.a).b * (SEAT_LEG * Bd.legs); };
 export const headBlob = (seed: number, a = 118, facing = 0): Blob => ({
   a, b: a * (0.94 + 0.08 * (rnd(seed, 1) - 0.5)),
   nTop: 1.75 + 0.3 * (rnd(seed, 2) - 0.5), nBot: 2.3 + 0.3 * (rnd(seed, 3) - 0.5),
@@ -463,7 +466,7 @@ const BUILD: Record<Build, { a: number; torso: number; legs: number; tw: number 
 };
 
 export type FrontOpts = {
-  phase?: number; expr?: Expr; mode?: "march" | "stroll" | "stand" | "sit" | "fall"; look?: number; blink?: boolean | number; lift?: number;
+  phase?: number; expr?: Expr; mode?: "march" | "stroll" | "stand" | "sit" | "seat" | "fall"; look?: number; blink?: boolean | number; lift?: number;
   prop?: Prop; tilt?: number; headTilt?: number; wave?: number;
   /** canvas angle the key light comes FROM (painted crescent + thick outline side) */
   light?: number; facing?: -1 | 0 | 1; seed?: number;
@@ -482,7 +485,9 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   const tall = (1 + Bd.torso + Bd.legs) * HH, sole = 975;
   // body bob 5 % (march) / 3 % (stroll) of the height, lowest at contact (phase 0 and 0.5)
   const bob = mode === "march" ? 0.025 * tall * Math.cos(2 * two * phase) : mode === "stroll" ? 0.015 * tall * Math.cos(2 * two * phase) : 0;
-  const torsoBot = mode === "sit" ? sole - 0.2 * HH : sole - Bd.legs * HH + bob;
+  // owner: legs never shrink with pose. sit = on the ground, knees up (full-length thighs + shins);
+  // seat = on a chair/bench/boat/car: shins hang straight down, the card is lowered so the hips land on the seat (cast.ts SEAT_DROP)
+  const torsoBot = mode === "sit" ? sole - 0.2 * HH : mode === "seat" ? sole - (SEAT_LEG * Bd.legs - 0.12) * HH : sole - Bd.legs * HH + bob;
   const chin = torsoBot - Bd.torso * HH, hc = chin - H.b, crown = hc - H.b, hipY = torsoBot - 0.12 * HH;
   const thick = thickAngle(light), ow = 5 * u;
   const legCol = mix(o.pants, INK, 0.55), armCol = mix(o.jacket, INK, 0.5), footCol = o.boots;
@@ -490,15 +495,27 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   // ---- legs + feet (not rotated) ----
   p.rot = null;
   if (mode === "sit") {
+    // knees up: thigh rises out to the knee, shin comes down to a planted foot (each ~0.45 of the standing leg)
+    const Lg = Bd.legs * HH;
     for (const side of [-1, 1]) {
-      const h: P2 = [300 + side * 15 * u, hipY], k: P2 = [300 + side * 36 * u, hipY + 0.2 * HH], f: P2 = [300 + side * 44 * u, sole - 8 * u];
-      p.stroke(curve(h, k, f), legW, legCol);
-      footStroke(p, [f[0] - side * 2 * u, f[1]], [f[0] + side * 12 * u, f[1] - 5 * u], footW, footCol);
+      const h: P2 = [300 + side * 15 * u, hipY], k: P2 = [300 + side * 64 * u, hipY - 0.28 * Lg], f: P2 = [300 + side * 52 * u, sole - 6 * u];
+      p.stroke([h, [(h[0] + k[0]) / 2, (h[1] + k[1]) / 2 - 2 * u], k], legW, legCol);
+      p.stroke([k, [(k[0] + f[0]) / 2 + side * 2 * u, (k[1] + f[1]) / 2], f], legW, legCol);
+      footStroke(p, [f[0] - side * 2 * u, f[1]], [f[0] + side * 13 * u, f[1] + 1 * u], footW, footCol);
+    }
+  } else if (mode === "seat") {
+    // thighs foreshortened toward the lens, shins hang to the feet: full shin length below the seat
+    for (const side of [-1, 1]) {
+      const h: P2 = [300 + side * 15 * u, hipY], k: P2 = [300 + side * 26 * u, hipY + 0.08 * HH], f: P2 = [300 + side * 25 * u, sole - 6 * u];
+      p.stroke([h, [(h[0] + k[0]) / 2, h[1] + 0.05 * HH], k], legW * 1.15, legCol);
+      p.stroke([k, [(k[0] + f[0]) / 2 + side * u, (k[1] + f[1]) / 2], f], legW, legCol);
+      footStroke(p, [f[0] - side * 3 * u, f[1]], [f[0] + side * 12 * u, f[1] + 0.5 * u], footW, footCol);
     }
   } else if (mode === "fall") {
+    const g = Bd.legs * 1.22; // full standing leg length in every flail pose
     const legs: [P2, P2, P2][] = [
-      [[300 - 15 * u, hipY], [300 - 46 * u, hipY + 0.5 * HH], [300 - 70 * u, hipY + 0.72 * HH]],
-      [[300 + 15 * u, hipY], [300 + 50 * u, hipY + 0.45 * HH], [300 + 76 * u, hipY + 0.22 * HH]],
+      [[300 - 15 * u, hipY], [300 - 15 * u - 31 * u * g, hipY + 0.5 * HH * g], [300 - 15 * u - 55 * u * g, hipY + 0.72 * HH * g]],
+      [[300 + 15 * u, hipY], [300 + 15 * u + 35 * u * g, hipY + 0.45 * HH * g], [300 + 15 * u + 61 * u * g, hipY + 0.22 * HH * g]],
     ];
     legs.forEach(([h, k, f], i) => {
       p.stroke(curve(h, k, f), legW, legCol);
@@ -524,7 +541,7 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   const sway = mode === "march" ? 1.6 * Math.sin(two * phase) : mode === "stroll" ? 1.0 * Math.sin(two * phase) : 0;
   const A = tilt + sway;
   p.rot = A ? [rad(A), 300, hipY] : null;
-  const dress = !!o.dress && mode !== "sit" && mode !== "fall";
+  const dress = !!o.dress && mode !== "sit" && mode !== "seat" && mode !== "fall";
   const T: Blob = { a: ((Bd.tw / 2) * W) / 1.06, b: 0.5 * (torsoBot - (chin - 0.25 * HH)), nTop: 2.2, nBot: 2.6, egg: o.build === "stout" ? 0.17 : 0.12,
     asym: 0.04 * facing, rot: 0, noise: 0.006, seed: seed + 7 };
   const tcx = 300 + 3 * u * facing, tcy = torsoBot - T.b, tp = blobPts(tcx, tcy, T);
@@ -540,7 +557,7 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   const rifle = !!o.rifle && (mode === "march" || mode === "stand" || mode === "stroll");
   type Arm = { pts: [P2, P2, P2]; front: boolean };
   const arms: Arm[] = [];
-  if (mode === "sit") for (const side of [-1, 1]) arms.push({ pts: [sh(side), [tcx + side * (1.1 * T.a + 6 * u), sh(side)[1] + 0.4 * HH], [tcx + side * (1.2 * T.a + 10 * u), torsoBot + 0.04 * HH]], front: false });
+  if (mode === "sit" || mode === "seat") for (const side of [-1, 1]) arms.push({ pts: [sh(side), [tcx + side * (1.1 * T.a + 6 * u), sh(side)[1] + 0.4 * HH], [tcx + side * (1.2 * T.a + 10 * u), torsoBot + 0.04 * HH]], front: false });
   else if (mode === "fall") for (const side of [-1, 1]) arms.push({ pts: [sh(side), [tcx + side * (1.15 * T.a + 12 * u), sh(side)[1] - 0.25 * HH], [tcx + side * (1.3 * T.a + 24 * u), sh(side)[1] - 0.68 * HH]], front: false });
   else {
     arms.push({ pts: prop === "shako" ? hang(-1, 0) : hang(-1, -sw), front: false });
@@ -566,7 +583,7 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
     p.band([R0, R1], "#7a4b2a", 5 * u, 1.5 * u, "round");
     p.band([lerp2(R0, R1, 0.6), R1], "#8d949c", 2.4 * u, 1.2 * u, "round");
   }
-  if (o.sword && mode !== "sit") {
+  if (o.sword && mode !== "sit" && mode !== "seat") {
     const s0: P2 = [tcx - 0.75 * T.a, torsoBot - 0.2 * HH];
     p.band([s0, [s0[0] - Math.sin(rad(25)) * 0.8 * HH, s0[1] + Math.cos(rad(25)) * 0.8 * HH]], "#c9ccd2", 3 * u, 1.2 * u, "round");
   }

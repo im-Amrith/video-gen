@@ -20,7 +20,7 @@ export const FOLK: Outfit[] = [
   { jacket: "#7b5ac9", pants: "#3b3f52", boots: "#5a3b2a", hat: "hair", hair: "#8a4a2a", skin: "#ffe2c2" },
 ];
 export type PersonOpts = {
-  mode?: "stand" | "fall" | "sit" | "stroll" | "march"; face?: boolean; roll?: number; wave?: number; prop?: "icecream" | "shako" | ["hammer", number] | null;
+  mode?: "stand" | "fall" | "sit" | "seat" | "stroll" | "march"; face?: boolean; roll?: number; wave?: number; prop?: "icecream" | "shako" | ["hammer", number] | null;
   look?: number; swaps?: number[]; scale?: number; phase?: number; tilt?: number; headTilt?: number; mirror?: boolean; noBlob?: boolean; facing?: -1 | 0 | 1;
 };
 /** place anyone (front view); rolled + face cards spin about the body centre */
@@ -31,7 +31,7 @@ export const put = (cam: CamInfo, out: Stage, who: Who, t: number, x: number, y:
   out.places.push(person(cam, who, p[0], p[1], p[2], { side: false, mirror: false },
     { mode: o.mode ?? "stand", expr, blink: lidAt(t, who.i, o.swaps), wave: o.wave, prop: o.prop ?? null, look: o.look ?? 0, phase: o.phase, tilt: o.tilt, headTilt: o.headTilt, facing: o.facing },
     {}, sc, { face: o.face, roll: o.roll, mirror: o.mirror }));
-  if (!o.noBlob && (o.mode ?? "stand") !== "fall") blob(cam, out, x, y, z, sc);
+  if (!o.noBlob && (o.mode ?? "stand") !== "fall" && o.mode !== "seat") blob(cam, out, x, y, z, sc);
 };
 export const W_PIP: Who = { i: 1, o: PIP, okey: "pip" };
 export const pip = (cam: CamInfo, out: Stage, t: number, x: number, y: number, z: number, expr: Expr, o: PersonOpts = {}) =>
@@ -52,7 +52,7 @@ export const clockCard = (p: Pen, a: number, face = "#fff7e0") => {
 export const alarmCard = (p: Pen, ring: number) => {
   const s = ring > 0 ? Math.sin(ring * 40) * 8 : 0;
   p.ell(80 + s, 70, 40, 34, "#f2c230", 10); p.ell(220 + s, 70, 40, 34, "#f2c230", 10);
-  p.stroke([[110, 290], [80, 330]], 14); p.stroke([[190, 290], [220, 330]], 14);
+  p.stroke([[98, 250], [68, 332]], 14); p.stroke([[202, 250], [232, 332]], 14); // legs attached to the body
   p.g.save(); p.g.translate(s, 0); clockCard(p, 2.2, "#fff7e0"); p.g.restore();
   if (ring > 0) for (const sx of [-1, 1]) for (let k = 0; k < 3; k++) p.stroke([[150 + sx * (140 + k * 14), 60 + k * 30], [150 + sx * (170 + k * 14), 50 + k * 30]], 8);
 };

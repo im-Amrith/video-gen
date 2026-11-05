@@ -32,7 +32,7 @@ Episodes changed (re-render only these; audio unchanged unless noted):
 - [x] History 04 1904-marathon (corn tufts, painted fences, rocks, trees + hill ring)
 
 ## Feedback #4 (FEEDBACK.md, after watching all 10 renders) — status ("re-render" = fixed, re-render that episode)
-- [ ] A1 legs never shrink (shared cast code)
+- [x] A1 legs never shrink — re-render ALL (toon.ts: sit = knees-up full-length legs, new "seat" mode with hanging shins + card lowered onto the seat, fall legs scale with build; seat used for deck chair, car, boat, Moon, yacht). Alarm-clock legs attached (kit.ts).
 - [ ] A2 contact: no floating/sinking/clipping
 - [ ] A3 globe: FOV 25-35, no green line, water-like tide bulges
 - [ ] B What If 02 spin

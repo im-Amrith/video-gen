@@ -140,7 +140,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   }
   if (id === 6) {
     const ys = yachtSink(t);
-    put(cam, out, { i: 44, o: SAILOR, okey: "sail" }, t, YACHT[0] + 4 + ys * 6, -0.3, YACHT[2] + 4 + ys * 3, ys < 0.4 ? "shock" : "relief", { mode: "sit", wave: ys > 0.4 ? q(Math.sin(t * 8), 20) : undefined, noBlob: true, scale: 1.0 });
+    put(cam, out, { i: 44, o: SAILOR, okey: "sail" }, t, YACHT[0] + 4 + ys * 6, -0.3, YACHT[2] + 4 + ys * 3, ys < 0.4 ? "shock" : "relief", { mode: "seat", wave: ys > 0.4 ? q(Math.sin(t * 8), 20) : undefined, noBlob: true, scale: 1.0 });
     if (ys > 0.05 && ys < 0.95) { const u = q((t * 1.5) % 1, 20); card(out, `bub6${u}`, (p) => fxPuff(p, u), YACHT[0], 0.2, YACHT[2], 4, 3, { soft: true }); }
   }
   if (id === 7) {

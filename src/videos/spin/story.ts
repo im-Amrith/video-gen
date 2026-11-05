@@ -173,7 +173,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   }
   if (id === 6) card(out, "euroSign", EUROPE, FLOOD[0] + 1.5, 1.0 + 0.05 * Math.sin(t * 1.5), FLOOD[2] - 1.9, 1.9, 3.0, { cw: 640, ch: 1000, rot: 0.08 });
   if (id === 6) put(cam, out, { i: 1, o: { jacket: "#f2b531", pants: "#3b5b9a", boots: "#e2453c", hat: "cap", cap: "#e2453c", build: "kid" }, okey: "pip" }, t, FLOOD[0], 0.2 + 0.12 * Math.sin(t * 2.2), FLOOD[2] + 0.3,
-    exprAt(t, [[0, "nervous"], [tl("L06", 2.0), "dazed"]]), { mode: "sit", scale: 1.25, noBlob: true });
+    exprAt(t, [[0, "nervous"], [tl("L06", 2.0), "dazed"]]), { mode: "seat", scale: 1.25, noBlob: true });
   if (id === 8 || id === 9 || id === 10 || id === 13) {
     const night = id === 9 || id === 10;
     const e = id === 8 ? exprAt(t, [[0, "smile"], [tl("L08", 3.2), "pained"]]) : id === 9 ? "dazed" : id === 10 ? exprAt(t, [[0, "dazed"], [tl("L09", 0.9), "shock"]]) : exprAt(t, [[0, "neutral"], [tl("L12", 1.4), "smile_closed"]]);
@@ -195,7 +195,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   if (id === 11) {
     // Pip sits on the Moon, waving; a squeal of brakes as the tide drags
     const [mx, , mz] = moonAt(t);
-    pip(cam, out, t, mx, 1.5 + GR * 0.27 - 0.1, mz, exprAt(t, [[0, "smile"], [tl("L10", 3.0), "grin"]]), { mode: "sit", wave: q(Math.sin(t * 7), 20), noBlob: true, scale: 1.0 });
+    pip(cam, out, t, mx, 1.5 + GR * 0.27 - 0.1, mz, exprAt(t, [[0, "smile"], [tl("L10", 3.0), "grin"]]), { mode: "seat", wave: q(Math.sin(t * 7), 20), noBlob: true, scale: 1.0 });
     if (t > tl("L10", 3.0) && t < tl("L10", 3.8)) card(out, `imp11${q(seg(t, tl("L10", 3.0), tl("L10", 3.5)), 20)}`, (p) => fxImpact(p, seg(t, tl("L10", 3.0), tl("L10", 3.5)), "#fff3b0", "#ffcf3a"), SPACE[0] + GR * 0.9, 1, SPACE[2] + GR * 0.5, 3, 3, { cw: 500, ch: 500 });
   }
   if (id === 12) {

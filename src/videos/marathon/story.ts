@@ -112,7 +112,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage, f: number) => {
   if (id === 10 && f >= 1800) card(out, "bostonSign", bostonSign, FIN[0] - 37, 1.3, -4.0, 2.0, 2.53, { cw: 600, ch: 760 });
   if (id === 1) {
     const x = carAt(1, t).x;
-    put(cam, out, { i: 300, o: LORZ, okey: "lorz" }, t, x - 0.6, 1.5, -1.6, exprAt(t, [[0, "grin"], [tl("L01", 4.0), "smile_closed"]]), { mode: "sit", wave: q(Math.sin(t * 8), 20), noBlob: true });
+    put(cam, out, { i: 300, o: LORZ, okey: "lorz" }, t, x - 0.6, 1.5, -1.6, exprAt(t, [[0, "grin"], [tl("L01", 4.0), "smile_closed"]]), { mode: "seat", wave: q(Math.sin(t * 8), 20), noBlob: true });
     for (let k = 0; k < 4; k++) put(cam, out, { i: 310 + k, o: k % 2 ? HICKS : CARVAJAL, okey: `rn${k}` }, t, x - 10 - k * 3, 0, 1.0 + (k % 2) * 1.2, "pained", { mode: "stroll", phase: (t * 1.8 + k * 0.3) % 1, scale: 1.0 });
   }
   if (id === 2) {
@@ -122,7 +122,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage, f: number) => {
   }
   if (id === 3) {
     const x = carAt(3, t).x;
-    if (t < BREAK + 0.6) put(cam, out, { i: 300, o: LORZ, okey: "lorz" }, t, x - 0.6, 1.5, -1.6, t < BREAK ? "grin" : "shock", { mode: "sit", noBlob: true });
+    if (t < BREAK + 0.6) put(cam, out, { i: 300, o: LORZ, okey: "lorz" }, t, x - 0.6, 1.5, -1.6, t < BREAK ? "grin" : "shock", { mode: "seat", noBlob: true });
     else if (t < tl("L03", 6.0)) put(cam, out, { i: 300, o: LORZ, okey: "lorz" }, t, x + (t - BREAK - 0.6) * 3, 0, -0.5, "whistle", { mode: "stroll", phase: (t * 2) % 1 });
     if (t > BREAK && t < BREAK + 0.8) { const u = q(seg(t, BREAK, BREAK + 0.8), 12); card(out, `boom3${u}`, (p) => fxPuff(p, u), x + 1.6, 1.4, -1.6, 2.6, 2.6, { soft: true }); }
     if (t > tl("L03", 6.0)) { put(cam, out, { i: 300, o: LORZ, okey: "lorz" }, t, FIN[0] + 1, 0, 0.4, "laugh", { wave: q(Math.sin(t * 9), 20) }); crowd(cam, out, t, true); }

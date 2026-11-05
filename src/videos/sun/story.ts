@@ -101,7 +101,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   if (id === 1 || id === 4) {
     const dark = id === 4;
     const e = dark ? exprAt(t, [[0, "shock"], [tl("L04", 2.0), "dazed"]]) : exprAt(t, [[0, "lick"], [tl("L01", 2.5), "smile_closed"], [tl("L01", 3.6), "lick"]]);
-    pip(cam, out, t, 0, 0.32, 0.75, e, { mode: "sit", prop: dark ? null : "icecream", swaps: [OUT] });
+    pip(cam, out, t, 0, 0.32, 0.75, e, { mode: "seat", prop: dark ? null : "icecream", swaps: [OUT] });
     if (!dark && t < VANISH + 0.5) card(out, `sun1${q(t % 1, 6)}`, (p) => sunCard(p, t), -1.0, 7.5, -12, 4, 4, { cw: 300, ch: 300 });
     if (!dark && t >= VANISH && t < VANISH + 0.6) { const u = q(seg(t, VANISH, VANISH + 0.6), 20); card(out, `puff1${u}`, (p) => fxPuff(p, u), -1.0, 7.5, -12, 5, 5, { soft: true }); }
     if (dark) {
