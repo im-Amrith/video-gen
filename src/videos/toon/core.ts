@@ -76,6 +76,12 @@ export const zoom = (pos: V3, look: V3, fov: number, k: number, rest: Partial<Ca
 /** orbit: camera on a circle of radius r around look, angle a (rad, 0 = +z side), height h over look */
 export const orbit = (look: V3, r: number, a: number, h: number, rest: Partial<Cam> = {}): Shot =>
   ({ pos: [look[0] + r * Math.sin(a), look[1] + h, look[2] + r * Math.cos(a)], look, ...rest });
+/** owner: no wide-angle bulge on globes. Re-lens a camera to `fov` (deg) and move it back along its view line so the
+ *  subject at the look point keeps the same size: distance x tan(old/2) / tan(new/2). */
+export const tele = (fov: number, s: (f: number) => Shot) => (f: number): Shot => {
+  const c = s(f), old = c.fov ?? 40, k = Math.tan((old * Math.PI) / 360) / Math.tan((fov * Math.PI) / 360);
+  return { ...c, fov, pos: [c.look[0] + (c.pos[0] - c.look[0]) * k, c.look[1] + (c.pos[1] - c.look[1]) * k, c.look[2] + (c.pos[2] - c.look[2]) * k] };
+};
 export const rolled = (s: (f: number) => Shot, roll: number) => (f: number): Shot => ({ ...s(f), roll });
 
 /** impact kicks: image offset flips sign every frame, decays to 0 in 7 f */

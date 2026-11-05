@@ -1,6 +1,6 @@
 // "What If the Sun Vanished?" (What If ep. 4) — shot plan, camera, lens, cast.
 import TL from "./timeline.json";
-import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, orbit, pushK, smooth, seg, q, lerp } from "../toon/core";
+import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, orbit, pushK, smooth, seg, q, lerp, tele } from "../toon/core";
 import { Stage, CamInfo, card } from "../toon/cast";
 import { fxBang, fxWhat, fxSparkle } from "../toon/fx";
 import { fxPuff, fxStars } from "../toon/toon";
@@ -49,7 +49,10 @@ const KICKS: [number, number][] = [[VANISH, 0.6], [OUT, 1.0], [FLY, 0.8], [tl("L
 const C = (base: V3, d: V3): V3 => [base[0] + d[0], base[1] + d[1], base[2] + d[2]];
 const earthCam = (f: number, back: number, up: number, side: number, roll = 0) => {
   const e = earthAt(f / FPS), dx = e[0] - SPACE[0], dz = e[2] - SPACE[2], d = Math.hypot(dx, dz);
-  return { pos: [e[0] + (dx / d) * back + (-dz / d) * side, e[1] + up, e[2] + (dz / d) * back + (dx / d) * side] as V3, look: [lerp(e[0], SPACE[0], 0.25), e[1], lerp(e[2], SPACE[2], 0.25)] as V3, fov: 46, roll };
+  const k = Math.tan((46 * Math.PI) / 360) / Math.tan((32 * Math.PI) / 360); // owner: FOV ~32 deg, camera further back (no globe bulge)
+  const look: V3 = [lerp(e[0], SPACE[0], 0.25), e[1], lerp(e[2], SPACE[2], 0.25)];
+  const pos: V3 = [e[0] + (dx / d) * back + (-dz / d) * side, e[1] + up, e[2] + (dz / d) * back + (dx / d) * side];
+  return { pos: [look[0] + (pos[0] - look[0]) * k, look[1] + (pos[1] - look[1]) * k, look[2] + (pos[2] - look[2]) * k] as V3, look, fov: 32, roll };
 };
 export const CAMS: Record<number, Key[]> = {
   1: [
@@ -58,8 +61,8 @@ export const CAMS: Record<number, Key[]> = {
     { f: 118, dur: 30, s: (f) => dolly([0.8, 1.2, 3.4], [-1.0, 7.0, -12], pushK(f, 118, 0.002), { fov: 46 }) }, // up at the empty sky... still bright
   ],
   2: [
-    { f: 170, s: (f) => orbit(SPACE, 70, 0.5 + 0.003 * (f - 170), 22, { fov: 50 }) }, // the Sun pops; the darkness front spreads
-    { f: 260, dur: 36, s: (f) => orbit(SPACE, 58, 0.9 + 0.003 * (f - 260), 8, { fov: 48, roll: 0.05 }) },
+    { f: 170, s: tele(32, (f) => orbit(SPACE, 70, 0.5 + 0.003 * (f - 170), 22, { fov: 50 })) }, // the Sun pops; the darkness front spreads
+    { f: 260, dur: 36, s: tele(32, (f) => orbit(SPACE, 58, 0.9 + 0.003 * (f - 260), 8, { fov: 48, roll: 0.05 })) },
   ],
   3: [{ f: 336, s: (f) => earthCam(f, 14, 3 + 0.01 * (f - 336), 6 - 0.08 * (f - 336), -0.05) }], // Earth still circling nothing
   4: [

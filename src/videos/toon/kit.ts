@@ -1,3 +1,4 @@
+import { NOINK } from "./ink";
 // Toon engine episode kit: the recurring cast, placement helpers, pictogram cards and common set pieces, shared by
 // every episode after the pilot (both series).
 import * as THREE from "three";
@@ -139,6 +140,36 @@ export const globe = (root: THREE.Object3D, r: number) => {
   const m = new THREE.Mesh(new THREE.SphereGeometry(r, 96, 64), mat);
   root.add(m);
   return { mesh: m, U };
+};
+/** static set meshes built by b.build() that lie wholly outside a radius around a place: hide them while the camera is
+ *  there, so far ground planes never show as an edge-on ink line across the sky. Call: const far = farFrom(root, n0, c, r)
+ *  with n0 = root.children.length before b.build(root); then far(false) in shots at that place, far(true) elsewhere. */
+export const farFrom = (root: THREE.Object3D, n0: number, c: [number, number, number], r: number) => {
+  root.updateMatrixWorld(true);
+  const list: THREE.Object3D[] = [], bb = new THREE.Box3(), ctr = new THREE.Vector3(c[0], c[1], c[2]);
+  for (const o of root.children.slice(n0)) { bb.setFromObject(o); if (!bb.isEmpty() && bb.distanceToPoint(ctr) > r) list.push(o); }
+  return (vis: boolean) => { for (const o of list) o.visible = vis; };
+};
+/** tidal bulges that read as water: a shell around a globe of radius r, visible only toward both ends of its local
+ *  x axis (the bulge axis; scale x to stretch it). Smooth sea blue with a soft white rim, no ink outline. */
+export const tideShell = (root: THREE.Object3D, r: number, alpha = 0.92) => {
+  const U = { uR: { value: r }, uA: { value: alpha } };
+  const mat = new THREE.ShaderMaterial({
+    uniforms: U, transparent: true, depthWrite: false,
+    vertexShader: `uniform float uR; varying float vX; varying vec3 vN; varying vec3 vW;
+      void main(){ vX = position.x / uR; vN = normalize(normalMatrix * normal); vec4 mv = modelViewMatrix * vec4(position, 1.0); vW = mv.xyz; gl_Position = projectionMatrix * mv; }`,
+    fragmentShader: `uniform float uA; varying float vX; varying vec3 vN; varying vec3 vW;
+      void main(){ float cap = smoothstep(0.5, 0.9, abs(vX));
+        float ndv = abs(dot(normalize(vN), normalize(-vW)));
+        float rim = pow(1.0 - ndv, 2.2);
+        cap *= smoothstep(0.15, 0.75, 1.0 - ndv); // head-on the swell is just ocean: only its silhouette shows
+        vec3 col = mix(vec3(0.07, 0.36, 0.78), vec3(0.16, 0.52, 0.9), cap);
+        col = mix(col, vec3(0.96, 0.98, 1.0), 0.65 * rim * cap);
+        gl_FragColor = vec4(col, uA * cap); }`,
+  });
+  const m = new THREE.Mesh(new THREE.SphereGeometry(r, 96, 48), mat);
+  m.layers.set(NOINK); root.add(m);
+  return m;
 };
 /** cheap scattered rocks / bumps (stromatolites, boulders) */
 export const bumps = (b: Batch, n: number, cx: number, cz: number, rad: number, col: string, seed = 1, s0 = 0.4, s1 = 1.2) => {

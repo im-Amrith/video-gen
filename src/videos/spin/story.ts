@@ -1,6 +1,6 @@
 // "What If the Earth Stopped Spinning?" (What If ep. 2) — shot plan, camera, lens, cast.
 import TL from "./timeline.json";
-import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, zoom, orbit, pushK, smooth, seg, q, hh, lerp } from "../toon/core";
+import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, zoom, orbit, pushK, smooth, seg, q, hh, lerp, tele } from "../toon/core";
 import { Stage, CamInfo, card } from "../toon/cast";
 import { fxSpeed, fxBang, fxWhat, fxImpact, fxSweat, fxSparkle } from "../toon/fx";
 import { fxSplash, fxStars, fxPuff, Pen } from "../toon/toon";
@@ -66,7 +66,7 @@ const moonCam = (f: number, back: number, up: number, roll: number) => {
 export const CAMS: Record<number, Key[]> = {
   1: [
     { f: 0, s: (f) => orbit(C(TOP, [0, 1.2, 0]), 4.2 * pushK(f, 0, 0.003), 0.55 - 0.006 * f, 1.4 - 0.008 * f, { fov: 46, roll: -0.08 }) }, // Pip on a tiny spinning planet
-    { f: 70, dur: 40, s: (f) => orbit(C(SPACE, [0, 3, 0]), 17, 0.4 + 0.004 * (f - 70), 5, { fov: 50, roll: 0.05 }) }, // pull back: the whole little world
+    { f: 70, dur: 40, s: tele(32, (f) => orbit(C(SPACE, [0, 3, 0]), 17, 0.4 + 0.004 * (f - 70), 5, { fov: 50, roll: 0.05 })) }, // pull back: the whole little world
     { f: 150, cut: true, s: (f) => dolly(C(TOP, [0.8, 1.5, 2.5]), C(TOP, [0, 1.35, 0]), pushK(f, 150, 0.003, 0.008, 30), { fov: 40 }) }, // "...stopped?"
   ],
   2: [
@@ -76,22 +76,22 @@ export const CAMS: Record<number, Key[]> = {
     { f: 385, cut: true, s: (f) => dolly([-4, 2.2, 8], [4, 3.5, -2], pushK(f, 385, 0.003), { fov: 56, roll: -0.08 }) }, // and the ocean
   ],
   3: [
-    { f: 410, s: (f) => orbit(C(SPACE, [0, 1, 0]), 32, -0.3 + 0.003 * (f - 410), 5, { fov: 46 }) },
+    { f: 410, s: tele(32, (f) => orbit(C(SPACE, [0, 1, 0]), 32, -0.3 + 0.003 * (f - 410), 5, { fov: 46 })) },
     { f: 505, dur: 30, s: (f) => dolly(C(SPACE, [GR + 4 - 0.06 * (f - 505), 3.5 - 0.02 * (f - 505), 14]), C(SPACE, [GR + 1.5, 1.0, 0]), pushK(f, 505, 0.0025), { fov: 44, roll: 0.05 }) }, // the brake
   ],
   4: [
-    { f: 584, s: (f) => orbit(C(SPACE, [0, 0.5, 0]), 21 * pushK(f, 584, 0.002), -0.35 + 0.006 * (f - 584), 1.0, { fov: 42 }) }, // side on: the fat middle
+    { f: 584, s: tele(32, (f) => orbit(C(SPACE, [0, 0.5, 0]), 21 * pushK(f, 584, 0.002), -0.35 + 0.006 * (f - 584), 1.0, { fov: 42 })) }, // side on: the fat middle
     { f: 668, cut: true, s: (f) => dolly(C(SPACE, [3.6 - 0.025 * (f - 668), 0.6 + 0.012 * (f - 668), GR + 3.2]), C(SPACE, [1.6, 0.6, GR - 0.4]), pushK(f, 668, 0.003), { fov: 40, roll: -0.05 }) }, // Pip with the tape
   ],
   5: [
-    { f: 750, s: (f) => orbit(C(SPACE, [0, 0, 0]), 31, 0.9 + 0.005 * (f - 750), 10 - 0.05 * (f - 750), { fov: 44 }) }, // oceans slide to the poles
+    { f: 750, s: tele(32, (f) => orbit(C(SPACE, [0, 0, 0]), 31, 0.9 + 0.005 * (f - 750), 10 - 0.05 * (f - 750), { fov: 44 })) }, // oceans slide to the poles
   ],
   6: [
     { f: 890, s: (f) => dolly(C(FLOOD, [2.0 - 0.04 * (f - 890), 1.8 + 0.015 * (f - 890), 7.5]), C(FLOOD, [0.3, 1.6, -4]), pushK(f, 890, 0.0025), { fov: 46 }) },
     { f: 952, dur: 30, s: (f) => dolly(C(FLOOD, [-2, 0.9, 4]), C(FLOOD, [0, 1.3, 0]), pushK(f, 952, 0.003), { fov: 40, roll: 0.05 }) },
   ],
   7: [
-    { f: 1015, s: (f) => orbit(C(SPACE, [0, 0, 0]), 30, 2.0 + 0.006 * (f - 1015), 3, { fov: 46, roll: 0.06 }) }, // the ring continent
+    { f: 1015, s: tele(32, (f) => orbit(C(SPACE, [0, 0, 0]), 30, 2.0 + 0.006 * (f - 1015), 3, { fov: 46, roll: 0.06 })) }, // the ring continent
   ],
   8: [
     { f: 1160, s: (f) => dolly([-3.5, 1.4, 6.5], [-2, 1.3, 1.5], pushK(f, 1160, 0.003), { fov: 42 }) }, // six months of day
@@ -196,7 +196,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     // Pip sits on the Moon, waving; a squeal of brakes as the tide drags
     const [mx, , mz] = moonAt(t);
     pip(cam, out, t, mx, 1.5 + GR * 0.27 - 0.1, mz, exprAt(t, [[0, "smile"], [tl("L10", 3.0), "grin"]]), { mode: "seat", wave: q(Math.sin(t * 7), 20), noBlob: true, scale: 1.0 });
-    if (t > tl("L10", 3.0) && t < tl("L10", 3.8)) card(out, `imp11${q(seg(t, tl("L10", 3.0), tl("L10", 3.5)), 20)}`, (p) => fxImpact(p, seg(t, tl("L10", 3.0), tl("L10", 3.5)), "#fff3b0", "#ffcf3a"), SPACE[0] + GR * 0.9, 1, SPACE[2] + GR * 0.5, 3, 3, { cw: 500, ch: 500 });
+    // (tide shot: no burst; the bulges read as water)
   }
   if (id === 12) {
     card(out, "pastSign", PAST, PRE[0] - 1.6, 1.25, PRE[2] - 1.0, 1.6, 2.5, { cw: 640, ch: 1000 });

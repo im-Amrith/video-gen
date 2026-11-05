@@ -6,7 +6,7 @@ import { ctex, rep, grassHD, cobbleHD } from "../toon/paint";
 import { NOINK } from "../toon/ink";
 import { tuft, rock, mountain, dressLand } from "../toon/dress";
 import { Particles, Glow, glowMat } from "../toon/fx";
-import { ground, globe, bumps } from "../toon/kit";
+import { ground, globe, bumps, farFrom } from "../toon/kit";
 import { BuildCtx, PoseCtx, SetHandle, hh, smooth, seg, lerp } from "../toon/core";
 import { SPACE, SNOW, CUT, VENT, ORB, earthAt, sunGone, frontR, snowAt } from "./story";
 
@@ -49,7 +49,9 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     b.add(new THREE.CylinderGeometry(0.06, 0.06, h).translate(0, h / 2, 0), lam("tube", () => ({ color: "#f0ece4" })), new THREE.Matrix4().makeTranslation(x, 0, z));
     b.add(new THREE.SphereGeometry(0.11, 8, 6), lam("plume", () => ({ color: "#e2453c" })), new THREE.Matrix4().makeTranslation(x, h, z));
   }
+  const n0 = root.children.length;
   b.build(root);
+  const far = farFrom(root, n0, SPACE, 400); // owner: no edge-on ground line in the space shots
 
   // dynamic: the Sun, light front, orbit ring, the Earth, the Moon
   const sunBall = new THREE.Mesh(new THREE.SphereGeometry(8, 48, 32), glowMat("#ffd27a", 2.2)); sunBall.position.set(...SPACE); sunBall.layers.set(NOINK); root.add(sunBall);
@@ -86,6 +88,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
 
   const pose = ({ id, t }: PoseCtx) => {
     const sp = [2, 3, 5, 6].includes(id);
+    far(!sp);
     const gone = sunGone(t);
     sunBall.visible = sp && gone < 1; sunBall.scale.setScalar(Math.max(0.01, 1 - gone));
     sunHalo.set(SPACE[0], SPACE[1], SPACE[2], 60 * (1 - gone), 1 - gone, sp);

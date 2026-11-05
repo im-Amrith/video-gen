@@ -1,6 +1,6 @@
 // "What If the Moon Disappeared?" (What If ep. 5) — shot plan, camera, lens, cast.
 import TL from "./timeline.json";
-import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, orbit, pushK, smooth, seg, q, lerp } from "../toon/core";
+import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, orbit, pushK, smooth, seg, q, lerp, tele } from "../toon/core";
 import { Stage, CamInfo, card } from "../toon/cast";
 import { fxBang, fxWhat, fxSweat, fxSparkle } from "../toon/fx";
 import { fxPuff, fxStars } from "../toon/toon";
@@ -58,10 +58,10 @@ export const CAMS: Record<number, Key[]> = {
     { f: 118, dur: 30, s: (f) => dolly([-1, 0.6, 15], [2, 0.2, 30], pushK(f, 118, 0.002), { fov: 44 }) }, // look at the sea: wet sand, the boat, the lighthouse
   ],
   2: [
-    { f: 162, s: (f) => orbit(C(SPACE, [0, 7, 0]), 40, 0.4 + 0.003 * (f - 162), 4, { fov: 46 }) }, // bulge toward the Moon above, Earth spins under it
-    { f: 270, dur: 36, s: (f) => orbit(C(SPACE, [0, 6, 0]), 34, 0.9 + 0.003 * (f - 270), 2, { fov: 44, roll: 0.05 }) },
+    { f: 162, s: tele(32, (f) => orbit(C(SPACE, [0, 7, 0]), 40, 0.4 + 0.003 * (f - 162), 4, { fov: 46 })) }, // bulge toward the Moon above, Earth spins under it
+    { f: 270, dur: 36, s: tele(32, (f) => orbit(C(SPACE, [0, 6, 0]), 34, 0.9 + 0.003 * (f - 270), 2, { fov: 44, roll: 0.05 })) },
   ],
-  3: [{ f: 371, s: (f) => orbit(C(SPACE, [0, 7, 0]), 40, 1.4 + 0.003 * (f - 371), 4, { fov: 46 }) }],
+  3: [{ f: 371, s: tele(32, (f) => orbit(C(SPACE, [0, 7, 0]), 40, 1.4 + 0.003 * (f - 371), 4, { fov: 46 })) }],
   4: [
     { f: 516, s: (f) => dolly([1.4, 1.5, 13.5], [-0.5, 0.4, 6.5], pushK(f, 516, 0.003), { fov: 42 }) }, // rock pools dry up
     { f: 570, cut: true, s: (f) => dolly([1.0, 1.25, 13.0], [0.5, 1.1, 9.5], pushK(f, 570, 0.004, 0.008, 24), { fov: 38, roll: 0.05 }) }, // boring
@@ -71,11 +71,11 @@ export const CAMS: Record<number, Key[]> = {
     { f: 720, dur: 34, s: (f) => orbit(C(REEF, [0, 1.0, 0]), 8.6, 0.06 - 0.004 * (f - 720), 1.4, { fov: 42, roll: -0.04 }) },
   ],
   6: [
-    { f: 811, s: (f) => orbit(SPACE, 28.5, 0.21 + 0.003 * (f - 811), 3, { fov: 44 }) }, // the tilted axis, steady
+    { f: 811, s: tele(32, (f) => orbit(SPACE, 28.5, 0.21 + 0.003 * (f - 811), 3, { fov: 44 })) }, // the tilted axis, steady
     { f: 940, dur: 36, s: (f) => dolly([SPACE[0] + 3, 9.5 + 0.02 * (f - 940), 16], C(SPACE, [0, 7.5, 0]), pushK(f, 940, 0.002), { fov: 42, roll: 0.05 }) }, // crane up to the knob
   ],
   7: [
-    { f: 1047, s: (f) => orbit(C(SPACE, [0, 1, 0]), 31, 0.17 + 0.004 * (f - 1047), 3, { fov: 46, roll: -0.05 }) }, // wild swings
+    { f: 1047, s: tele(32, (f) => orbit(C(SPACE, [0, 1, 0]), 31, 0.17 + 0.004 * (f - 1047), 3, { fov: 46, roll: -0.05 })) }, // wild swings
     { f: 1130, cut: true, s: (f) => { const tp = axisTop(f / FPS), lk: V3 = [tp[0], tp[1] + 0.2, SPACE[2] + 0.3]; return dolly(C(lk, [1.5, 1.0, 8.5]), lk, pushK(f, 1130, 0.002), { fov: 44, roll: 0.08 }); } }, // Pip hanging on (camera follows the knob)
   ],
   8: [

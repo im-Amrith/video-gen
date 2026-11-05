@@ -6,7 +6,7 @@ import { ctex } from "../toon/paint";
 import { rock, tuft, post, mountain, rockM, woodM } from "../toon/dress";
 import { NOINK } from "../toon/ink";
 import { Particles, Glow, glowMat } from "../toon/fx";
-import { ground, globe, sea } from "../toon/kit";
+import { ground, globe, sea, tideShell, farFrom } from "../toon/kit";
 import { BuildCtx, PoseCtx, SetHandle, hh, smooth, seg } from "../toon/core";
 import { SPACE, REEF, GR, tideAt, moonOn, tiltAt, poolAt, moonPos, POP3, CAL, BONK } from "./story";
 
@@ -53,7 +53,9 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   }
   for (let i = 0; i < 40; i++) { const a = hh(i, 21) * Math.PI * 2, r = 12 + hh(i, 22) * 14; tuft(b, REEF[0] + Math.cos(a) * r, 0, REEF[2] + Math.sin(a) * r, "reed", 1.5 + hh(i, 23), i + 600); }
   for (let i = 0; i < 14; i++) { const a = (i / 14) * Math.PI * 2, r = 42 + hh(i, 24) * 10; mountain(b, REEF[0] + Math.cos(a) * r, REEF[2] + Math.sin(a) * r, 10 + hh(i, 25) * 10, 12, i + 20, false, i % 2 ? ["#5a4a8a", "#4a3a7a", "#6a5a9a", "#3e3270"] : ["#2f6a8a", "#255a7a", "#3a7a9a", "#204e6a"]); }
+  const n0 = root.children.length;
   b.build(root);
+  const far = farFrom(root, n0, SPACE, 400); // owner: no edge-on ground line in the space shots
   const bsea = sea(root, 0, 210, 200, "#2a7fb8");
   const pools = [0, 1, 2, 3].map((k) => { const m = new THREE.Mesh(new THREE.CircleGeometry(1, 24).rotateX(-Math.PI / 2), lam("poolW", () => ({ color: "#4aa8d8" }))); m.position.set(-3 + k * 2.6, 0.03, 6 + (k % 2) * 1.8); root.add(m); return m; });
   // the Moon in the beach sky
@@ -61,8 +63,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const skyHalo = new Glow(root, "#dfe8ff", 1.0);
   // SPACE
   const G = globe(root, GR); G.mesh.position.set(...SPACE);
-  const tide = new THREE.Mesh(new THREE.SphereGeometry(GR * 1.02, 64, 32), new THREE.MeshBasicMaterial({ color: new THREE.Color("#8fd8ff"), transparent: true, opacity: 0.42, depthWrite: false }));
-  tide.layers.set(NOINK); root.add(tide);
+  const tide = tideShell(root, GR * 1.02); // owner: water-like bulges (sea blue, soft white rim), no smear
   const moon = new THREE.Mesh(new THREE.SphereGeometry(GR * 0.27, 40, 24), lam("moonM5", () => ({ color: "#cdc8bc" }))); root.add(moon);
   const axis = new THREE.Group();
   const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, GR * 2.8, 12), lam("axisRod", () => ({ color: "#e2453c" })));
@@ -89,6 +90,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
 
   const pose = ({ id, t }: PoseCtx) => {
     const beach = [1, 4, 8, 9].includes(id), sp = [2, 3, 6, 7].includes(id), nb = id === 1 || id === 9;
+    far(!sp);
     const ty = tideAt(id, t), pulse = 0.85 + 0.15 * Math.sin(t * 5);
     lantG.forEach((g, k) => g.set(LANT[k][0], LANT[k][1], LANT[k][2], 2.0, nb ? 0.6 * pulse : 0, nb));
     lantM.color.setScalar(nb ? 2.2 : 1.0).multiply(new THREE.Color("#ffd27a"));

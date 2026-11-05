@@ -5,7 +5,7 @@ import { Batch, boxGeo, V, lam, house, prop } from "../toon/build";
 import { ctex, rep, cobbleHD, grassHD, stoneHD } from "../toon/paint";
 import { twoTone } from "../toon/shade";
 import { Particles, Glow, glowMat } from "../toon/fx";
-import { ground, globe, sea, bumps } from "../toon/kit";
+import { ground, globe, sea, bumps, tideShell, farFrom } from "../toon/kit";
 import { BuildCtx, PoseCtx, SetHandle, smooth, clamp01, hh, lerp } from "../toon/core";
 import { SPACE, FLOOD, PRE, GR, spinAt, oceanAt, bulgeAt, brakeAt, houseSlide, MOON } from "./story";
 
@@ -44,7 +44,9 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     const h = 30 + i * 12, g = new THREE.ConeGeometry(h * 0.9, h, 9, 1, true); g.translate(0, h / 2 - 1, 0);
     b.add(g, lam("volcano", () => ({ color: "#6b4a3a" })), new THREE.Matrix4().makeTranslation(PRE[0] - 60 + i * 45, 0, PRE[2] - 160 - i * 30));
   }
+  const n0 = root.children.length;
   b.build(root);
+  const far = farFrom(root, n0, SPACE, 400); // owner: no edge-on ground line in the space shots
   const preSea = sea(root, PRE[0], PRE[2] - 80, 160, "#3aa0b8"); preSea.position.y = 0.05;
   const floodSea = sea(root, FLOOD[0], FLOOD[2] - 30, 200, "#2f8fc4");
   // the sliding house (its own group)
@@ -71,8 +73,8 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const sparks = new Particles(root, 120, "#ffcf6a", 0.18, "soft", 3.0);
   const moon = new THREE.Mesh(new THREE.SphereGeometry(GR * 0.27, 48, 32), lam("moonM", () => ({ map: moonTex() })));
   root.add(moon);
-  const tide = new THREE.Mesh(new THREE.SphereGeometry(GR * 1.03, 64, 32), new THREE.MeshBasicMaterial({ color: new THREE.Color("#5fb8ff"), transparent: true, opacity: 0.14, depthWrite: false }));
-  tide.scale.set(1.12, 0.98, 0.98); root.add(tide);
+  const tide = tideShell(root, GR * 1.03); // owner: water-like bulges, no ink line
+  tide.scale.set(1.24, 0.98, 0.98);
   const fastSun = new Glow(root, "#ffe7a0", 3.0);
   const smoke = new Particles(root, 80, "#9a8a80", 6, "dot", 1.0);
   const motes = new Particles(root, 200, "#ffffff", 0.06, "soft", 1.5);
@@ -97,8 +99,9 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   for (const m of [pad, arm, moon]) { m.castShadow = true; m.receiveShadow = true; }
   void glowMat; void twoTone; void clamp01;
 
-  const pose = ({ id, t }: PoseCtx) => {
+  const pose = ({ id, t, cam }: PoseCtx) => {
     const inSpace = [1, 3, 4, 5, 7, 11].includes(id);
+    far(!inSpace);
     G.mesh.visible = inSpace; tape.visible = id === 4; brake.visible = id === 3; moon.visible = tide.visible = id === 11;
     G.U.uSpin.value = spinAt(t); G.U.uOcean.value = oceanAt(t);
     const bl = bulgeAt(t); G.mesh.scale.set(1 + bl, 1 - bl, 1 + bl); tape.scale.setScalar(1 + bl);
@@ -109,7 +112,12 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     sparks.pose((i, o) => { const u = (t * 2 + hh(i, 1)) % 1; o.set(SPACE[0] + GR + 0.2 + u * 3 * hh(i, 2), SPACE[1] + 0.5 + (hh(i, 3) - 0.3) * 3 * u, SPACE[2] + (hh(i, 4) - 0.5) * 2 + u * 2); return br > 0.9; }, id === 3);
     // moon orbit + tidal bulge toward it
     const ma = 0.4 + t * 0.12; moon.position.set(SPACE[0] + Math.cos(ma) * MOON, SPACE[1] + 1.5, SPACE[2] + Math.sin(ma) * MOON);
-    tide.position.set(...SPACE); tide.rotation.set(0, -ma, 0);
+    tide.position.set(...SPACE);
+    { // owner: two water bulges on opposite sides, seen side-on: axis toward the Moon, swung 55 deg across the view so both swells show
+      const vx = SPACE[0] - cam.position.x, vz = SPACE[2] - cam.position.z, vl = Math.hypot(vx, vz) || 1, mx = Math.cos(ma), mz = Math.sin(ma);
+      const sgn = (-vz * mx + vx * mz) >= 0 ? 1 : -1, ax = 0.57 * mx + 0.82 * sgn * (-vz / vl), az = 0.57 * mz + 0.82 * sgn * (vx / vl);
+      tide.rotation.set(0, -Math.atan2(az, ax), 0);
+    }
     // house slides east, sea rises, boat bobs
     const hs = houseSlide(t); slider.position.set(6 + hs * hs * 60, 0.2 * Math.sin(hs * 30) * (hs > 0 && hs < 1 ? 1 : 0), -10.5); slider.rotation.z = -0.1 * Math.min(1, hs * 3) * (1 - hs);
     boat.position.y = 0.15 + 0.12 * Math.sin(t * 2.2); boat.rotation.z = 0.06 * Math.sin(t * 1.7);
