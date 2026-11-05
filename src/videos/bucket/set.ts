@@ -59,6 +59,11 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   // Bologna's gate + the well
   b.add(boxGeo(V(WELL[0] - 6, 0, WELL[2] - 6), V(WELL[0] + 6, 9, WELL[2] - 4)), lam("cityWall#c9a07a", () => ({ map: stoneHD("cw#c9a07a", ["#c9a07a", "#c9a07a", "#c9a07a", "#c9a07a"]) })));
   b.add(boxGeo(V(WELL[0] - 1.8, 0, WELL[2] - 4.05), V(WELL[0] + 1.8, 5, WELL[2] - 3.95)), lam("gateWood", () => ({ map: planksHD(), color: "#7a4a2a" })));
+  // owner #4: the BOLOGNA sign is a flat painted board fixed to the wall above the gate (unlit, always readable, never clips)
+  const gsT = ctex("bolognaGate", 900, 260, (g) => { g.fillStyle = "#3a2a20"; g.fillRect(0, 0, 900, 260); g.fillStyle = "#c0353a"; g.fillRect(14, 14, 872, 232);
+    g.fillStyle = "#ffffff"; g.font = "bold 150px sans-serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("BOLOGNA", 450, 138); });
+  const gsM = new THREE.MeshBasicMaterial({ map: gsT, fog: false }); gsM.userData.noRecv = true;
+  b.add(new THREE.PlaneGeometry(4.6, 1.33).translate(0, 6.6, 0), gsM, new THREE.Matrix4().makeTranslation(WELL[0], 0, WELL[2] - 3.93));
   b.add(new THREE.CylinderGeometry(1.0, 1.1, 1.0, 20, 1, true).translate(0, 0.5, 0), lam("wellS", () => ({ map: stoneHD("wellS2"), side: THREE.DoubleSide })), new THREE.Matrix4().makeTranslation(WELL[0] + 3, 0, WELL[2]));
   for (const s of [-1, 1]) post(b, WELL[0] + 3 + s * 0.9, WELL[2], 2.4);
   b.add(new THREE.BoxGeometry(1.9, 0.1, 0.1).translate(0, 2.3, 0), lam("woodPainted", () => ({ map: beamHD() })), new THREE.Matrix4().makeTranslation(WELL[0] + 3, 0, WELL[2]));

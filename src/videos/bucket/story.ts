@@ -112,7 +112,7 @@ const signpost = (p: Pen) => { p.poly([[275, 180], [325, 180], [325, 900], [275,
 /** Bologna's well sign (700 x 420): the bucket never came back */
 const wellSign = (p: Pen) => { p.poly([[20, 20], [680, 20], [680, 400], [20, 400]], "#f4e3bf", 12); txt(p, "BOLOGNA", 350, 120, 110, "#c0353a"); txt(p, "WELL BUCKET:", 350, 245, 52, "#3a2f28"); txt(p, "MISSING SINCE 1325", 350, 330, 52, "#3a2f28"); };
 /** city gate sign (900 x 260) */
-const gateSign = (p: Pen) => { p.poly([[20, 20], [880, 20], [880, 240], [20, 240]], "#c0353a", 12); txt(p, "BOLOGNA", 450, 135, 150, "#ffffff"); };
+export const gateSign = (p: Pen) => { p.poly([[20, 20], [880, 20], [880, 240], [20, 240]], "#c0353a", 12); txt(p, "BOLOGNA", 450, 135, 150, "#ffffff"); };
 const hallSigns = (out: Stage) => {
   card(out, "hallBanner", hallBanner, HALL[0], 5.1, HALL[2] - 7.0, 4.6, 1.6, { cw: 1200, ch: 420 });
   card(out, "placard", placard, HALL[0] - 1.15, 0.62, HALL[2] - 2.0, 0.82, 1.25, { cw: 500, ch: 760 });
@@ -121,7 +121,7 @@ const hallSigns = (out: Stage) => {
 const stage = (id: number, t: number, cam: CamInfo, out: Stage, f: number) => {
   if (id === 1 || id === 8 || (id === 9 && f < 1615)) hallSigns(out);
   if (id === 2) card(out, "signpost", signpost, -65.4, 4.0, -24.3, 5.4, 8.1, { cw: 600, ch: 900 });
-  if (id === 7) card(out, "gateSign", gateSign, WELL[0], 6.4, WELL[2] - 3.7, 4.2, 1.2, { cw: 900, ch: 260 });
+  // (the BOLOGNA gate sign is now a flat board fixed on the wall in set.ts: a billboard here swung into the wall)
   if (id === 9 && f >= 1615) card(out, "wellSign", wellSign, WELL[0] + 2.65, 1.55, WELL[2] + 1.25, 1.3, 0.78, { cw: 700, ch: 420 });
   if (id === 1) put(cam, out, { i: 380, o: GUARD, okey: "guard" }, t, HALL[0] + 1.3, 0, HALL[2] - 2.4, exprAt(t, [[0, "stern"], [tl("L01", 6.6), "smile"]]), { scale: 1.1 });
   if (id === 3) {
