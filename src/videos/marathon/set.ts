@@ -45,12 +45,36 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   b.build(root);
   // the car
   const car = new THREE.Group();
-  const body = new THREE.Mesh(new THREE.BoxGeometry(3.0, 0.8, 1.5), lam("carBody", () => ({ color: "#2f5a3a" }))); body.position.y = 1.0; car.add(body);
-  const seat = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.22, 1.4), lam("carSeat", () => ({ color: "#7a3a2a" }))); seat.position.set(-0.6, 1.45, 0); car.add(seat);
-  const back = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.9, 1.4), lam("carSeat", () => ({ color: "#7a3a2a" }))); back.position.set(-1.2, 1.9, 0); car.add(back);
-  const hood = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.7, 1.2), lam("carBody", () => ({ color: "#2f5a3a" }))); hood.position.set(1.7, 1.05, 0); car.add(hood);
-  const wheels = [[1.3, 0.8], [1.3, -0.8], [-1.2, 0.8], [-1.2, -0.8]].map(([x, z]) => { const w = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.08, 8, 20), lam("wheel", () => ({ color: "#2b2b33" }))); w.position.set(x, 0.55, z); car.add(w); return w; });
-  const lamp = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.2, 12).rotateZ(Math.PI / 2), lam("brass", () => ({ color: "#e0b040" }))); lamp.position.set(2.3, 1.3, 0.4); car.add(lamp);
+  // owner #4: a real early-1900s open car: tall spoked wheels with mudguards, an open tub body (Lorz sits INSIDE it,
+  // waist above the side), tufted leather bench seats, short bonnet with a brass radiator, steering column + wheel, brass lamps + horn
+  const green = lam("carBody", () => ({ color: "#2f5a3a" })), leather = lam("carSeat", () => ({ color: "#7a3a2a" })), brass = lam("brass", () => ({ color: "#e0b040" })), blk = lam("carBlack", () => ({ color: "#22242a" }));
+  const floor = new THREE.Mesh(new THREE.BoxGeometry(2.9, 0.12, 1.5), blk); floor.position.set(-0.2, 0.85, 0); car.add(floor);
+  for (const sz of [-0.72, 0.72]) { const side = new THREE.Mesh(new THREE.BoxGeometry(2.9, 0.55, 0.08), green); side.position.set(-0.2, 1.17, sz); car.add(side);
+    const trim = new THREE.Mesh(new THREE.BoxGeometry(2.9, 0.05, 0.12), brass); trim.position.set(-0.2, 1.45, sz); car.add(trim); }
+  const rear = new THREE.Mesh(new THREE.CylinderGeometry(0.75, 0.75, 0.55, 20, 1, false, Math.PI, Math.PI), green); rear.scale.set(0.5, 1, 1); rear.position.set(-1.65, 1.17, 0); car.add(rear);
+  const dash = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.7, 1.5), lam("carDash", () => ({ color: "#6a4a2a" }))); dash.position.set(1.2, 1.25, 0); car.add(dash);
+  for (const [sx, h] of [[-0.7, 1.0], [0.55, 0.85]] as const) {
+    const seat = new THREE.Mesh(new THREE.BoxGeometry(0.75, 0.2, 1.36), leather); seat.position.set(sx, 1.38, 0); car.add(seat);
+    const back = new THREE.Mesh(new THREE.BoxGeometry(0.18, h * 0.75, 1.36), leather); back.position.set(sx - 0.42, 1.38 + h * 0.4, 0); back.rotation.z = 0.12; car.add(back);
+  }
+  const hood = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.62, 1.0), green); hood.position.set(1.7, 1.12, 0); car.add(hood);
+  const rad = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.8, 1.06), brass); rad.position.set(2.2, 1.2, 0); car.add(rad);
+  const col = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.9), blk); col.position.set(0.95, 1.65, -0.35); col.rotation.z = 0.7; car.add(col);
+  const sw = new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.03, 6, 18), blk); sw.position.set(0.66, 1.98, -0.35); sw.rotation.set(0, Math.PI / 2, 0.7); car.add(sw);
+  const spokeT = ctex("carSpokes", 128, 128, (c) => { c.clearRect(0, 0, 128, 128); c.strokeStyle = "#e8d8a8"; c.lineWidth = 5; for (let k = 0; k < 12; k++) { const an = (k / 12) * Math.PI * 2; c.beginPath(); c.moveTo(64, 64); c.lineTo(64 + 58 * Math.cos(an), 64 + 58 * Math.sin(an)); c.stroke(); } c.fillStyle = "#e0b040"; c.beginPath(); c.arc(64, 64, 12, 0, Math.PI * 2); c.fill(); });
+  const spokeM = new THREE.MeshLambertMaterial({ map: spokeT, transparent: true, alphaTest: 0.4, side: THREE.DoubleSide });
+  const wheels = [[1.45, 0.8], [1.45, -0.8], [-1.3, 0.8], [-1.3, -0.8]].map(([x, z]) => {
+    const w = new THREE.Group();
+    w.add(new THREE.Mesh(new THREE.TorusGeometry(0.52, 0.07, 8, 28), lam("wheel", () => ({ color: "#2b2b33" }))));
+    const sp = new THREE.Mesh(new THREE.CircleGeometry(0.5, 24), spokeM); w.add(sp);
+    w.position.set(x, 0.59, z); car.add(w);
+    const guard = new THREE.Mesh(new THREE.CylinderGeometry(0.66, 0.66, 0.32, 16, 1, true, -Math.PI / 2 - 0.3, Math.PI * 0.75).rotateX(Math.PI / 2), lam("carGuard", () => ({ color: "#22242a", side: THREE.DoubleSide })));
+    guard.position.set(x, 0.62, z); car.add(guard);
+    return w;
+  });
+  const lamp = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.12, 0.26, 12).rotateZ(Math.PI / 2), brass); lamp.position.set(2.3, 1.45, 0.42); car.add(lamp);
+  const lamp2 = lamp.clone(); lamp2.position.z = -0.42; car.add(lamp2);
+  const horn = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.35, 10).rotateZ(-Math.PI / 2), brass); horn.position.set(1.4, 1.7, 0.7); car.add(horn);
   car.traverse((o) => { const m = o as THREE.Mesh; if (m.isMesh) { m.castShadow = true; } });
   root.add(car);
   const dust = new Particles(root, 320, "#d9b98a", 3.0, "dot", 1.0);
@@ -60,7 +84,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const pose = ({ id, t }: PoseCtx) => {
     const c = carAt(id, t);
     car.visible = c.on; car.position.set(c.x, c.bump, -1.6); car.rotation.set(0, 0, c.tilt);
-    wheels.forEach((w, k) => { w.rotation.z = -c.x * 1.9; if (k === 0 && c.broken) { w.position.y = 0.3; w.rotation.x = 1.2; } else w.position.y = 0.55; });
+    wheels.forEach((w, k) => { w.rotation.z = -c.x * 1.9; if (k === 0 && c.broken) { w.position.y = 0.3; w.rotation.x = 1.2; } else { w.position.y = 0.59; w.rotation.x = 0; } });
     const d = dustAt(id, t);
     dust.pose((i, o) => { const u = (t * 0.5 + hh(i, 1)) % 1; o.set(d.x - u * 22 + (hh(i, 2) - 0.5) * 3, 0.4 + u * 2.6 * hh(i, 3), -1.6 + (hh(i, 4) - 0.5) * 6); return true; }, d.on);
     smoke.pose((i, o) => { const u = (t * 0.6 + hh(i, 1)) % 1; o.set(c.x + 1.7 + (hh(i, 2) - 0.5) * u, 1.4 + u * 3, -1.6); return true; }, c.broken);

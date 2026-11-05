@@ -117,7 +117,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage, f: number) => {
   }
   if (id === 2) {
     for (let k = 0; k < 4; k++) put(cam, out, { i: 320 + k, o: k % 2 ? HICKS : CARVAJAL, okey: `rn${k}` }, t, WELL[0] + 1.2 + k * 1.1, 0, WELL[2] - 1.4, k === 0 ? "relief" : "pained", { scale: 1.0, look: -1 });
-    card(out, `heat2${q(t % 1, 12)}`, (p) => fxHeat(p, t), WELL[0] - 2, 2, WELL[2], 1.5, 2.0, { cw: 300, ch: 400, soft: true });
+    // (heat-shimmer card removed: it read as a floating yellow noodle over the sign)
     for (let k = 0; k < 3; k++) card(out, `sw2${k}${q((t * 2 + k * 0.3) % 1, 6)}`, (p) => fxSweat(p), WELL[0] + 1.6 + k * 1.1, 2.2 - ((t + k * 0.3) % 0.5), WELL[2] - 1.2, 0.18, 0.27, { cw: 120, ch: 180 });
   }
   if (id === 3) {
@@ -168,8 +168,9 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage, f: number) => {
   if (id === 10) {
     if (t < tl("L10", 3.0)) {
       put(cam, out, { i: 340, o: HICKS, okey: "hicks" }, t, FIN[0] + 0.2, 0, 0, exprAt(t, [[0, "relief"], [tl("L10", 1.2), "smile_closed"]]), { scale: 1.1 });
-      card(out, "medal10", (p) => { p.stroke([[80, 20], [100, 90]], 10, "#3f6fb5"); p.stroke([[120, 20], [100, 90]], 10, "#d23b3b"); p.ell(100, 130, 46, 46, "#e8c45a", 9); }, FIN[0] + 0.25, 1.35, 0.3, 0.32, 0.32, { cw: 200, ch: 200 });
-      card(out, "spk10", (p) => fxSparkle(p), FIN[0] + 0.6, 1.7, 0.35, 0.2, 0.2, { cw: 200, ch: 200 });
+      // owner #4: the gold medal hangs around Hicks's neck: ribbon from both sides of the neck down to the medal on his chest
+      card(out, "medal10b", (p) => { p.stroke([[34, 0], [100, 150]], 14, "#3f6fb5"); p.stroke([[166, 0], [100, 150]], 14, "#d23b3b"); p.ell(100, 172, 40, 40, "#e8c45a", 9); p.ell(100, 172, 22, 22, "#f6d878", 0); p.ell(88, 160, 8, 6, "#fff4c0", 0); }, FIN[0] + 0.2, 1.14, 0.25, 0.42, 0.5, { cw: 200, ch: 220 });
+      card(out, "spk10", (p) => fxSparkle(p), FIN[0] + 0.45, 1.05, 0.35, 0.2, 0.2, { cw: 200, ch: 200 });
     } else {
       const x = runX(t, tl("L10", 3.0), FIN[0] - 34, 2.4);
       put(cam, out, { i: 300, o: LORZ, okey: "lorz" }, t, x, 0, -0.2, exprAt(t, [[0, "grin"], [tl("L10", 5.6), "smile_closed"]]), { mode: "stroll", phase: (t * 2) % 1, scale: 1.05 });
