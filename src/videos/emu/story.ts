@@ -127,7 +127,7 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   if (id === 3) {
     put(cam, out, { i: 101, o: FARMER, okey: "farm1" }, t, FARM[0] - 1, 0, -6.5, exprAt(t, [[0, "pained"], [tl("L03", 1.4), "relief"]]), { scale: 1.1, wave: t > tl("L03", 1.6) ? q(Math.sin(t * 8), 20) : undefined });
     put(cam, out, { i: 102, o: FARMER2, okey: "farm2" }, t, FARM[0] + 1.4, 0, -6.0, exprAt(t, [[0, "nervous"], [tl("L03", 1.6), "smile"]]), { scale: 1.05 });
-    if (t > tl("L03", 3.6)) put(cam, out, { i: 103, o: MAJOR, okey: "maj" }, t, FARM[0] + 5.5, 0, 6.2, exprAt(t, [[0, "stern"], [tl("L03", 5.0), "smile"]]), { scale: 1.15 });
+    if (t > tl("L03", 3.6)) put(cam, out, { i: 103, o: MAJOR, okey: "maj" }, t, FARM[0] + 4.0, 0, 8.6, /* owner #4: clear of the parked truck */ exprAt(t, [[0, "stern"], [tl("L03", 5.0), "smile"]]), { scale: 1.15 });
   }
   if (id === 4) {
     const fired = t > FIRE4, jam = t > JAM;

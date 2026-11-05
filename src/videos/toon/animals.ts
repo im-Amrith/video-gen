@@ -118,15 +118,28 @@ export const levelCard = (p: Pen, u: number) => {
 };
 /** emu (400 x 600, feet at y 590): phase = running leg cycle (-1 = standing), shock, hat = the major's cap, look = head turn -1..1 */
 export const emu = (p: Pen, phase = -1, shock = false, hat = false, look = 0) => {
-  const run = phase >= 0, a = phase * Math.PI * 2;
-  const legs: [number, number][] = run ? [[Math.sin(a) * 60, Math.max(0, Math.cos(a)) * 40], [Math.sin(a + Math.PI) * 60, Math.max(0, Math.cos(a + Math.PI)) * 40]] : [[-25, 0], [25, 0]];
-  for (const [dx, lift] of legs) { p.stroke([[200, 380], [200 + dx * 0.5, 470], [200 + dx, 585 - lift]], 12, "#6e5a4a"); p.stroke([[200 + dx - 20, 585 - lift], [200 + dx + 25, 585 - lift]], 10, "#6e5a4a"); }
-  p.ell(200, 330, 130, 95, "#7a6a5c", 12);
-  for (let i = 0; i < 9; i++) p.stroke([[100 + i * 22, 300 + (i % 2) * 10], [95 + i * 22, 350 + (i % 3) * 10]], 7, "#5d4f43");
-  const hx = 250 + look * 40, hy = 90;
-  p.line([[230, 270], [240, 180], [hx, hy + 30]], "#8a7a6c", 34);
+  // owner #4: a believable emu, still cartoon: shaggy drooping feathers, long neck with blue throat skin, proper legs
+  // (thigh hidden in the feathers, backward ankle joint, scaly shin, three spread toes), beak and a bright eye
+  const run = phase >= 0, a = phase * Math.PI * 2, legC = "#8a7a6a", legD = "#5d4f43";
+  const legs: [number, number][] = run ? [[Math.sin(a) * 60, Math.max(0, Math.cos(a)) * 40], [Math.sin(a + Math.PI) * 60, Math.max(0, Math.cos(a + Math.PI)) * 40]] : [[-28, 0], [28, 0]];
+  for (const [dx, lift] of legs) {
+    const hip: [number, number] = [200 + dx * 0.15, 380], ank: [number, number] = [200 + dx * 0.45 - 14, 480 - lift * 0.5], ft: [number, number] = [200 + dx, 580 - lift];
+    p.stroke([hip, ank], 15, legC); p.stroke([ank, ft], 12, legC);
+    for (let k = 0; k < 4; k++) { const u = (k + 1) / 5; p.stroke([[ank[0] + (ft[0] - ank[0]) * u - 6, ank[1] + (ft[1] - ank[1]) * u], [ank[0] + (ft[0] - ank[0]) * u + 6, ank[1] + (ft[1] - ank[1]) * u]], 3, legD); }
+    for (const td of [-26, 4, 30]) p.stroke([ft, [ft[0] + td, ft[1] + 4 + Math.abs(td) * 0.08]], 8, legC);
+  }
+  p.ell(200, 320, 135, 100, "#6e5e50", 12);
+  for (let i = 0; i < 26; i++) { const x = 85 + (i % 13) * 19, y0 = 250 + Math.floor(i / 13) * 50 + (i % 2) * 8; p.stroke([[x, y0], [x - 4, y0 + 45 + (i % 3) * 10], [x - 10, y0 + 70 + (i % 4) * 8]], 6, i % 3 ? "#4e4238" : "#8a7868"); }
+  for (let i = 0; i < 9; i++) p.stroke([[80 + i * 26, 395], [74 + i * 26, 425 + (i % 3) * 8]], 6, "#4e4238"); // shaggy fringe
+  const hx = 250 + look * 40, hy = 90, sg = Math.sign(look || 1);
+  p.line([[230, 260], [238, 180], [hx, hy + 30]], "#8a7a6c", 36);
+  p.line([[236, 210], [hx - 2, hy + 34]], "#7aa6c8", 18);                      // blue throat skin
+  for (let k = 0; k < 6; k++) p.stroke([[226 + k * 3, 250 - k * 22], [216 + k * 3, 244 - k * 22]], 4, "#5d4f43"); // neck feathers
   p.ell(hx, hy, 42, 38, "#8a7a6c", 10);
-  p.poly([[hx + 30 * Math.sign(look || 1), hy + 5], [hx + 80 * Math.sign(look || 1), hy + 14], [hx + 30 * Math.sign(look || 1), hy + 24]], "#3a2f28", 7);
-  p.ell(hx + 10, hy - 6, shock ? 16 : 11, shock ? 16 : 11, "#ffffff", 6); p.dot(hx + 12, hy - 6, shock ? 7 : 8, "#c0353a");
+  p.poly([[hx + 30 * sg, hy + 2], [hx + 82 * sg, hy + 12], [hx + 30 * sg, hy + 24]], "#3a2f28", 7);
+  p.stroke([[hx + 34 * sg, hy + 13], [hx + 70 * sg, hy + 13]], 3, "#1e1814");
+  p.ell(hx + 10, hy - 6, shock ? 16 : 12, shock ? 16 : 12, "#ffffff", 6); p.dot(hx + 12, hy - 6, shock ? 7 : 8, "#c0353a");
+  for (let k = 0; k < 4; k++) p.stroke([[hx - 30 + k * 12, hy - 34], [hx - 34 + k * 12, hy - 48]], 4, "#5d4f43"); // crest fuzz
   if (hat) { p.ell(hx, hy - 34, 56, 12, "#7a6a3a", 8); p.poly([[hx - 34, hy - 36], [hx - 26, hy - 70], [hx + 26, hy - 70], [hx + 34, hy - 36]], "#8a7a4a", 8); p.stroke([[hx - 30, hy - 44], [hx + 30, hy - 44]], 6, "#3a2f28"); }
 };
+
