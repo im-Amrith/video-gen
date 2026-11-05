@@ -77,13 +77,26 @@ export const crab = (p: Pen, sad = false, k = 0) => {
 };
 /** sleeping cat curled up (400 x 260) */
 export const cat = (p: Pen, col = "#e8964a", zz = 0) => {
-  p.ell(200, 170, 150, 75, col, 10);
-  p.poly([[60, 170], [20, 120], [40, 200]], col, 9);
-  p.ell(300, 140, 62, 52, col, 10);
-  p.poly([[262, 105], [270, 60], [295, 98]], col, 8); p.poly([[318, 98], [340, 60], [348, 108]], col, 8);
-  p.arc(285, 145, 12, 6, 20, 160, 5); p.arc(320, 145, 12, 6, 20, 160, 5);
-  for (let i = 0; i < 3; i++) p.stroke([[120 + i * 40, 120], [130 + i * 40, 150]], 6, "#b8682a");
-  if (zz > 0) p.stroke([[350, 60 - zz * 20], [380, 60 - zz * 20], [350, 90 - zz * 20], [380, 90 - zz * 20]], 6);
+  // owner #4: a detailed, cute sleeping cat (400 x 260): curled body, tail wrapped round, tabby stripes, tucked paws,
+  // pink inner ears + nose, closed smiling eyes with lashes, whiskers, a slow breathing swell
+  const br = 1 + 0.03 * Math.sin(zz * Math.PI * 2), dark = "#b8682a", pink = "#f2a0a8", cream = "#fbe3c4";
+  p.poly([[70, 205], [40, 190], [36, 160], [60, 150], [70, 175], [110, 200]], col, 9);                       // tail tip curling round
+  p.ell(190, 175, 140 * br, 70 * br, col, 10);                                                             // body
+  p.ell(200, 200, 95, 30, cream, 0);                                                                         // pale belly fur
+  for (let i = 0; i < 4; i++) p.stroke([[110 + i * 36, 112], [122 + i * 36, 140], [116 + i * 36, 160]], 7, dark); // tabby stripes
+  p.ell(110, 228, 40, 18, col, 8); p.ell(70, 222, 30, 14, col, 8);                                          // tail along the front
+  p.ell(255, 228, 26, 16, cream, 7); p.ell(300, 228, 26, 16, cream, 7);                                      // tucked paws
+  p.ell(300, 160, 64, 54, col, 10);                                                                          // head resting on the paws
+  p.poly([[255, 125], [262, 70], [292, 112]], col, 8); p.poly([[315, 112], [342, 70], [350, 124]], col, 8);   // ears
+  p.poly([[264, 115], [266, 88], [283, 110]], pink, 0); p.poly([[322, 110], [338, 88], [342, 118]], pink, 0);
+  p.stroke([[290, 112], [296, 128]], 5, dark); p.stroke([[306, 110], [304, 128]], 5, dark);                  // forehead stripes
+  p.ell(300, 180, 30, 20, cream, 0);                                                                         // muzzle
+  p.arc(278, 158, 13, 8, 20, 160, 5); p.arc(322, 158, 13, 8, 20, 160, 5);                                    // closed, smiling eyes
+  for (const [x, s2] of [[266, -1], [334, 1]] as const) p.stroke([[x, 160], [x + s2 * 8, 152]], 3);          // lashes
+  p.poly([[294, 174], [306, 174], [300, 182]], pink, 4);                                                     // nose
+  p.arc(294, 186, 6, 5, 10, 170, 3); p.arc(306, 186, 6, 5, 10, 170, 3);                                      // little w mouth
+  for (const s2 of [-1, 1]) for (const dy of [-4, 6]) p.stroke([[300 + s2 * 22, 182 + dy * 0.4], [300 + s2 * 62, 176 + dy]], 2.5);
+  if (zz > 0) { p.g.fillStyle = "#3a2a4a"; p.g.font = `bold ${26 + 10 * zz}px sans-serif`; p.g.fillText("z", 350, 70 - zz * 30); p.g.font = "bold 22px sans-serif"; p.g.fillText("z", 372, 40 - zz * 20); }
 };
 /** seagull (400 x 260), side view; slip = 0..1 tilting */
 export const gull = (p: Pen, slip = 0) => {

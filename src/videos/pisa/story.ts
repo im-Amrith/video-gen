@@ -13,7 +13,8 @@ export const TOTAL = TL.total;
 const L = TL.lines as Record<string, { t0: number; t1: number }>;
 const tl = (id: string, d = 0) => L[id].t0 + d;
 
-export const SEC: V3 = [3000, 0, 0], FH = 3.4, FR = 3.5;
+export const SEC: V3 = [3000, 0, 0], FH = 4.6, FR = 3.5; // owner #4: much taller tower (was 3.4/floor); camera heights scaled by HK
+export const HK = 4.6 / 3.4;
 const DEG = Math.PI / 180, EX = 1.5; // cartoon exaggeration of the lean
 /** floors standing: 2 in the hook; 1→3 during "1173"; 3 through the war; 4→7 on return; bells (9th) at 1372 */
 export const floorsAt = (t: number) => {
@@ -34,7 +35,8 @@ export const leanAt = (t: number) => {
 export const bendAt = (t: number) => (t < tl("L06", 2.6) ? 0 : smooth(seg(t, tl("L06", 2.6), tl("L06", 4.6))) * 1.4 * DEG * EX);
 export const bellsAt = (t: number) => (t > tl("L07", 1.4) && t < tl("L07", 3.6) ? 0.5 + 0.5 * Math.sin(t * 9) : 0);
 export const leadAt = (t: number) => (t < tl("L09", 0.6) ? 0 : t > tl("L11", 0) ? 0 : smooth(seg(t, tl("L09", 0.6), tl("L09", 3.0))));
-export const drillAt = (t: number) => (t > tl("L09", 3.4) && t < tl("L10", 4.0) ? 1 : 0);
+export const DRILL0 = tl("L09", 3.4), DRILL1 = tl("L10", 4.0);
+export const drillAt = (t: number) => (t > DRILL0 && t < DRILL1 ? 1 : 0);
 export const fenceOn = (t: number) => t > tl("L08", 2.6) && t < tl("L11", 0);
 export const lapseAt = (t: number) => (t > tl("L04", 3.2) && t < tl("L06", 0) ? 1 : 0);
 
@@ -67,26 +69,26 @@ const C = (base: V3, d: V3): V3 => [base[0] + d[0], base[1] + d[1], base[2] + d[
 const TOP = (n: number): V3 => [0, n * FH, 0];
 export const CAMS: Record<number, Key[]> = {
   1: [
-    { f: 0, s: (f) => dolly([3.0 + 0.015 * f, 6.8, 9.5], [0.4, 6.6, 1.8], pushK(f, 0, 0.003), { fov: 40, roll: -0.04 }) }, // a builder on the stub with a spirit level
-    { f: 96, dur: 30, s: (f) => dolly([12, 4 + 0.03 * (f - 96), 26], [0, 4, 0], pushK(f, 96, 0.002), { fov: 42 }) }, // pull back: the stub already tilts
+    { f: 0, s: (f) => dolly([3.0 + 0.015 * f, 9.2, 9.5], [0.4, 8.93, 1.8], pushK(f, 0, 0.003), { fov: 40, roll: -0.04 }) }, // a builder on the stub with a spirit level
+    { f: 96, dur: 30, s: (f) => dolly([12, 5.41 + 0.03 * (f - 96), 26], [0, 5.41, 0], pushK(f, 96, 0.002), { fov: 42 }) }, // pull back: the stub already tilts
   ],
   2: [
-    { f: 175, s: (f) => orbit([0, 6, 0], 40, 0.3 + 0.002 * (f - 175), 14, { fov: 44 }) }, // Pisa, 1173: building it
+    { f: 175, s: (f) => orbit([0, 8.12, 0], 40, 0.3 + 0.002 * (f - 175), 14, { fov: 44 }) }, // Pisa, 1173: building it
     { f: 320, cut: true, s: (f) => dolly(C(SEC, [4 - 0.05 * (f - 320), 3, 40]), C(SEC, [0, 0, 0]), pushK(f, 320, 0.0025), { fov: 44 }) }, // the soil, the shallow foundation
   ],
   3: [{ f: 420, s: (f) => dolly(C(SEC, [3 + 0.04 * (f - 420), 2, 32]), C(SEC, [0, 0.5, 0]), pushK(f, 420, 0.004, 0.008, 24), { fov: 42, roll: 0.05 }) }], // sinking
   4: [
     { f: 510, s: (f) => dolly([-14 + 0.06 * (f - 510), 2.0, 22], [8, 2.2, 6], pushK(f, 510, 0.0025), { fov: 46 }) }, // off to war
-    { f: 600, cut: true, s: (f) => orbit([0, 5, 0], 35.4, 0.29 - 0.004 * (f - 600), -2 + 0.04 * (f - 600), { fov: 44 }) }, // ...the years fly by
+    { f: 600, cut: true, s: (f) => orbit([0, 6.76, 0], 35.4, 0.29 - 0.004 * (f - 600), -2 + 0.04 * (f - 600), { fov: 44 }) }, // ...the years fly by
   ],
-  5: [{ f: 668, s: (f) => orbit([0.2, 10.7, 1.8], 7.5 - 0.008 * (f - 668), 0.47 - 0.005 * (f - 668), 1.9, { fov: 40 }) }], // a cat asleep on the stub
+  5: [{ f: 668, s: (f) => orbit([0.2, 14.48, 1.8], 7.5 - 0.008 * (f - 668), 0.47 - 0.005 * (f - 668), 1.9, { fov: 40 }) }], // a cat asleep on the stub
   6: [
-    { f: 806, s: (f) => orbit([0, 10, 0], 34, 0.6 + 0.003 * (f - 806), 6, { fov: 46 }) }, // the builders are back
-    { f: 930, cut: true, s: (f) => dolly([10, 24 + 0.04 * (f - 930), 22], [0, 22, 0], pushK(f, 930, 0.003), { fov: 44, roll: -0.05 }) }, // the banana + a gull
+    { f: 806, s: (f) => orbit([0, 13.53, 0], 34, 0.6 + 0.003 * (f - 806), 6, { fov: 46 }) }, // the builders are back
+    { f: 930, cut: true, s: (f) => dolly([10, 32.47 + 0.04 * (f - 930), 22], [0, 29.77, 0], pushK(f, 930, 0.003), { fov: 44, roll: -0.05 }) }, // the banana + a gull
   ],
-  7: [{ f: 1008, s: (f) => orbit([-1.5, 28, 0], 21.5 - 0.02 * (f - 1008), 0.38 - 0.005 * (f - 1008), 2, { fov: 44 }) }], // bells on top
+  7: [{ f: 1008, s: (f) => orbit([-1.5, 37.88, 0], 21.5 - 0.02 * (f - 1008), 0.38 - 0.005 * (f - 1008), 2, { fov: 44 }) }], // bells on top
   8: [
-    { f: 1146, s: (f) => dolly([24 - 0.06 * (f - 1146), 6, 56], [0, 14, 0], pushK(f, 1146, 0.002), { fov: 46 }) }, // 1990, closed
+    { f: 1146, s: (f) => dolly([24 - 0.06 * (f - 1146), 8.12, 56], [0, 18.94, 0], pushK(f, 1146, 0.002), { fov: 46 }) }, // 1990, closed
     { f: 1220, cut: true, s: (f) => dolly([3 - 0.03 * (f - 1220), 1.6, 15], [0, 1.6, 7], pushK(f, 1220, 0.003), { fov: 40 }) },
   ],
   9: [
@@ -94,12 +96,12 @@ export const CAMS: Record<number, Key[]> = {
     { f: 1400, cut: true, s: (f) => dolly(C(SEC, [6 - 0.05 * (f - 1400), 3, 40]), C(SEC, [2, 2, 0]), pushK(f, 1400, 0.003), { fov: 42 }) }, // drilling underneath
   ],
   10: [
-    { f: 1487, s: (f) => dolly([22 - 0.07 * (f - 1487), 5 + 0.03 * (f - 1487), 50], [0, 14, 0], pushK(f, 1487, 0.002), { fov: 46 }) }, // it comes back a little
-    { f: 1580, cut: true, s: (f) => orbit([-1, 29, 0], 14.3, 0.21 - 0.004 * (f - 1580), 1, { fov: 40, roll: 0.05 }) }, // the top: 40 cm
+    { f: 1487, s: (f) => dolly([22 - 0.07 * (f - 1487), 6.76 + 0.03 * (f - 1487), 50], [0, 18.94, 0], pushK(f, 1487, 0.002), { fov: 46 }) }, // it comes back a little
+    { f: 1580, cut: true, s: (f) => orbit([-1, 39.24, 0], 14.3, 0.21 - 0.004 * (f - 1580), 1, { fov: 40, roll: 0.05 }) }, // the top: 40 cm
   ],
   11: [
-    { f: 1715, s: (f) => dolly([-6 + 0.04 * (f - 1715), 1.6 + 0.02 * (f - 1715), 22], [0, 6, 0], pushK(f, 1715, 0.002), { fov: 46 }) }, // tourists holding it up
-    { f: 1780, dur: 40, s: (f) => dolly([-14 + 0.03 * (f - 1780), 3 + 0.05 * (f - 1780), 48 + 0.04 * (f - 1780)], [0, 14, 0], 1, { fov: 44 }) },
+    { f: 1715, s: (f) => dolly([-6 + 0.04 * (f - 1715), 1.6 + 0.02 * (f - 1715), 22], [0, 8.12, 0], pushK(f, 1715, 0.002), { fov: 46 }) }, // tourists holding it up
+    { f: 1780, dur: 40, s: (f) => dolly([-14 + 0.03 * (f - 1780), 3 + 0.05 * (f - 1780), 48 + 0.04 * (f - 1780)], [0, 18.94, 0], 1, { fov: 44 }) },
   ],
 };
 export const DOF: Dof[] = [
@@ -119,7 +121,7 @@ const signPost = (p: Pen, l1: string, l2: string, c1 = "#c0353a") => {
 };
 const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   const lean = leanAt(t);
-  const topOf = (n: number): V3 => [-Math.sin(lean) * n * FH, Math.cos(lean) * n * FH, 0];
+  const topOf = (n: number): V3 => [-Math.sin(lean) * (n * FH + 0.7), Math.cos(lean) * (n * FH + 0.7), 0]; // + the 0.7 m plinth
   if (id === 1) {
     const s = topOf(2);
     put(cam, out, { i: 50, o: BUILDER, okey: "b1" }, t, s[0] + 0.6, s[1], 2.0, exprAt(t, [[0, "neutral"], [1.4, "shock"], [3.0, "nervous"]]), { scale: 1.05 });

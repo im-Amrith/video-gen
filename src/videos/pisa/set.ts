@@ -2,12 +2,12 @@
 // lawn) at the origin; SECTION (a soil cross-section diorama with a half-tower) at x = 3000.
 import * as THREE from "three";
 import { Batch, boxGeo, V, lam, prop } from "../toon/build";
-import { ctex, rep, grassHD, stoneHD } from "../toon/paint";
+import { ctex, rep, grassHD, stoneHD, bed } from "../toon/paint";
 import { Particles, Glow } from "../toon/fx";
 import { ground } from "../toon/kit";
 import { dressLand } from "../toon/dress";
 import { BuildCtx, PoseCtx, SetHandle, hh, smooth, seg } from "../toon/core";
-import { SEC, FH, FR, floorsAt, leanAt, bendAt, bellsAt, leadAt, drillAt, fenceOn, lapseAt } from "./story";
+import { DRILL0, DRILL1, SEC, FH, FR, floorsAt, leanAt, bendAt, bellsAt, leadAt, drillAt, fenceOn, lapseAt } from "./story";
 
 const arcadeTex = () => ctex("pisaArcade", 1024, 256, (g, r) => {
   g.fillStyle = "#f4efe2"; g.fillRect(0, 0, 1024, 256);
@@ -34,12 +34,23 @@ const makeTower = (parent: THREE.Object3D, flatten = 1) => {
   const mat = lam("pisaArcade", () => ({ map: rep(arcadeTex(), 2, 1) })), ledge = lam("pisaLedge", () => ({ color: "#e2d9c4" }));
   const floors: THREE.Group[] = [];
   let prev: THREE.Object3D = base;
+  // owner #4: a visible base: a two-step marble plinth the tower stands on (not sitting on the lawn)
+  for (const [rr, y0, h] of [[1.24, -0.3, 0.55], [1.12, 0.25, 0.45]] as const) {
+    const st = new THREE.Mesh(new THREE.CylinderGeometry(FR * rr, FR * rr * 1.02, h, 48), ledge); st.position.y = y0 + h / 2; st.scale.z = flatten; st.castShadow = st.receiveShadow = true; base.add(st);
+  }
+  const colG = new THREE.CylinderGeometry(0.1, 0.12, FH * 0.66, 8), colM = lam("pisaColumn", () => ({ color: "#fbf8f0" }));
+  const m4 = new THREE.Matrix4();
   for (let k = 0; k < 9; k++) {
-    const g = new THREE.Group(); g.position.y = k === 0 ? 0 : FH; prev.add(g);
+    const g = new THREE.Group(); g.position.y = k === 0 ? 0.7 : FH; prev.add(g);
     const r = k === 8 ? FR * 0.7 : FR;
     const body = new THREE.Mesh(new THREE.CylinderGeometry(r, r, FH * (k === 8 ? 0.85 : 1), 40), mat); body.position.y = FH / 2; body.scale.z = flatten;
     const ring = new THREE.Mesh(new THREE.CylinderGeometry(r * 1.06, r * 1.06, 0.35, 40), ledge); ring.position.y = FH - 0.1; ring.scale.z = flatten;
     g.add(body, ring);
+    if (k >= 1 && k <= 6) { // open arcaded gallery: a ring of white columns standing proud of the wall
+      const n = 26, cols = new THREE.InstancedMesh(colG, colM, n);
+      for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2; cols.setMatrixAt(i, m4.makeTranslation(Math.cos(a) * r * 1.07, FH * 0.42, Math.sin(a) * r * 1.07 * flatten)); }
+      cols.castShadow = true; g.add(cols);
+    }
     if (k === 8) { const roof = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.9, r * 1.02, 0.6, 32), lam("pisaRoof", () => ({ color: "#b8a68a" }))); roof.position.y = FH * 0.85 + 0.3; roof.scale.z = flatten; g.add(roof); }
     g.traverse((o) => { const m = o as THREE.Mesh; if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; } });
     floors.push(g); prev = g;
@@ -77,7 +88,13 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const rig = new THREE.Group();
   const rigBox = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.8, 1.6), lam("rigY", () => ({ color: "#f2c230" }))); rigBox.position.y = 0.9; rig.add(rigBox);
   const drill = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 9, 10), lam("drillRod", () => ({ color: "#8d96a6" }))); drill.rotation.z = 1.1; drill.position.set(3.6, -1.2, 0); rig.add(drill);
+  // owner #4: the drilled soil comes out of the side and piles up visibly
+  const pile = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), lam("soilPile", () => ({ map: bed(), color: "#8a6a4a" })));
+  pile.position.set(2.2, 0, 2.0); rig.add(pile);
   root.add(rig);
+  const spray = new Particles(root, 90, "#7a5a3a", 0.22, "dot", 1.0);
+  const secPile = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), lam("soilPile", () => ({ map: bed(), color: "#8a6a4a" })));
+  secPile.position.set(SEC[0] + 8.2, 0, SEC[2] + 1.4); root.add(secPile);
   const fence = new THREE.Group();
   const tape = ctex("pisaTape", 256, 32, (g) => { for (let i = 0; i < 8; i++) { g.fillStyle = i % 2 ? "#ffffff" : "#e2453c"; g.fillRect(i * 32, 0, 32, 32); } });
   for (let k = 0; k < 16; k++) {
@@ -106,6 +123,10 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     const ld = leadAt(t);
     lead.forEach((m, k) => { m.visible = k < ld * 12; m.position.set(FR + 0.6 + (k % 3) * 0.2, 0.3 + Math.floor(k / 3) * 0.6, -1.2 + (k % 3) * 1.1); });
     const dr = drillAt(t); rig.visible = dr > 0; rig.position.set(FR + 6, 0, 3);
+    const pu = smooth(seg(t, DRILL0, DRILL1)); pile.scale.set(0.3 + 1.5 * pu, 0.15 + 0.95 * pu, 0.3 + 1.3 * pu);
+    const inSec = id === 9, sx = inSec ? SEC[0] + 4.6 : FR + 6 - 0.6, sz = inSec ? SEC[2] + 0.9 : 3 + 0.9, sy = inSec ? -0.2 : 0.3;
+    spray.pose((i, o) => { const uu = (t * 1.4 + hh(i, 3)) % 1; o.set(sx + uu * 2.8 + (hh(i, 4) - 0.5) * 0.4, sy + Math.sin(uu * Math.PI) * 1.6, sz + uu * 0.5 + (hh(i, 5) - 0.5) * 0.3); return true; }, dr > 0);
+    secPile.visible = inSec && dr > 0; secPile.scale.set(0.3 + 1.6 * pu, 0.15 + 1.0 * pu, 0.3 + 0.9 * pu);
     fence.visible = fenceOn(t);
     dust.pose((i, o) => { const u = (t * 0.8 + hh(i, 1)) % 1; o.set(SEC[0] + 6 - u * 4, -2 + u * 2.5, SEC[2] + 0.6); return true; }, id === 9 && dr > 0);
     const lp = lapseAt(t);
