@@ -2,7 +2,7 @@
 // x = 3000; SNOW town at z = -3000; CUT (ocean cutaway under an ice lid) at x = -3000; VENT (deep-sea vents) at z = 3000.
 import * as THREE from "three";
 import { Batch, boxGeo, V, lam, house, prop } from "../toon/build";
-import { ctex, rep, grassHD, cobbleHD } from "../toon/paint";
+import { ctex, rep, grassHD, cobbleHD, stoneHD } from "../toon/paint";
 import { NOINK } from "../toon/ink";
 import { tuft, rock, mountain, dressLand } from "../toon/dress";
 import { Particles, Glow, glowMat } from "../toon/fx";
@@ -22,6 +22,13 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const stripeT = ctex("chairStripe", 64, 256, (g) => { for (let i = 0; i < 8; i++) { g.fillStyle = i % 2 ? "#ffffff" : "#e2453c"; g.fillRect(0, i * 32, 64, 32); } });
   b.add(new THREE.BoxGeometry(0.9, 0.05, 1.5).rotateX(0.6).translate(0, 0.65, 0), lam("chairCanvas", () => ({ map: stripeT, side: THREE.DoubleSide })), new THREE.Matrix4().makeTranslation(0, 0, 0.2));
   for (const sx of [-0.45, 0.45]) b.add(boxGeo(V(sx - 0.03, 0, -0.6), V(sx + 0.03, 1.2, -0.5)), lam("chairWood", () => ({ color: "#b0703f" })));
+  // owner #4: front legs + side rails, so the chair stands on four legs
+  const rail = (a: THREE.Vector3, c: THREE.Vector3, w = 0.06) => { const d = c.clone().sub(a), g = new THREE.BoxGeometry(w, w, d.length()); g.lookAt(d); g.translate((a.x + c.x) / 2, (a.y + c.y) / 2, (a.z + c.z) / 2); return g; };
+  for (const sx of [-0.45, 0.45]) {
+    b.add(boxGeo(V(sx - 0.03, 0, 0.78), V(sx + 0.03, 0.3, 0.84)), lam("chairWood", () => ({ color: "#b0703f" })));
+    b.add(rail(V(sx, 0.28, 0.81), V(sx, 1.12, -0.55)), lam("chairWood", () => ({ color: "#b0703f" })));
+  }
+  b.add(boxGeo(V(-0.48, 0.24, 0.78), V(0.48, 0.3, 0.84)), lam("chairWood", () => ({ color: "#b0703f" })));
   // umbrella
   b.add(new THREE.CylinderGeometry(0.04, 0.04, 2.6).translate(0, 1.3, 0), lam("umbPole", () => ({ color: "#f3efe6" })), new THREE.Matrix4().makeTranslation(1.3, 0, -0.6));
   const umbT = ctex("umbT", 256, 64, (g) => { for (let i = 0; i < 8; i++) { g.fillStyle = i % 2 ? "#f2c230" : "#3f6fb5"; g.fillRect(i * 32, 0, 32, 64); } });
@@ -41,14 +48,16 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   // VENT: dark seabed, black smokers, tube worms
   ground(b, lam("ventFloor", () => ({ map: rep(cobbleHD(), 1, 1), color: "#5a5262" })), VENT[0], VENT[2], 200, 40);
   const chim = lam("smoker", () => ({ color: "#3a3440" }));
-  for (let k = 0; k < 5; k++) { const h = 3 + hh(k) * 4; mountain(b, VENT[0] - 6 + k * 3.2, VENT[2] - 4 - hh(k, 2) * 4, h + 0.5, 1.2, k + 80, false, ["#4a3f4e", "#3a3240", "#5a4c5c", "#2e2834"]); }
+  // owner #4: believable rocky chimneys (stacked lumpy rock, narrowing upward, a dark lip) with smoke from the top
+  const ventM = lam("ventChimney", () => ({ map: stoneHD("ventChimney", ["#4a3f4e", "#3a3240", "#5a4c5c", "#2e2834"], "#1e1a22") }));
+  for (let k = 0; k < 5; k++) {
+    const h = 3 + hh(k) * 4, cx = VENT[0] - 6 + k * 3.2, cz = VENT[2] - 4 - hh(k, 2) * 4, n = 7;
+    for (let j = 0; j < n; j++) { const u = j / (n - 1), r = 1.1 - 0.62 * u; rock(b, cx + (hh(j, k + 3) - 0.5) * 0.25, u * (h - 0.4), cz + (hh(j, k + 5) - 0.5) * 0.25, r, k * 10 + j + 300, ventM); }
+    b.add(new THREE.TorusGeometry(0.42, 0.12, 6, 14).rotateX(Math.PI / 2).translate(cx, h + 0.1, cz), lam("ventLip", () => ({ color: "#221c26" })));
+  }
   for (let i = 0; i < 30; i++) rock(b, VENT[0] - 14 + hh(i, 57) * 28, 0, VENT[2] - 10 + hh(i, 58) * 12, 0.3 + 0.8 * hh(i, 59), i + 90, lam("ventRock", () => ({ color: "#5a4e5e" })));
   void chim;
-  for (let k = 0; k < 40; k++) {
-    const x = VENT[0] - 5 + hh(k, 1) * 10, z = VENT[2] - 2 + hh(k, 2) * 4, h = 0.6 + hh(k, 3) * 0.8;
-    b.add(new THREE.CylinderGeometry(0.06, 0.06, h).translate(0, h / 2, 0), lam("tube", () => ({ color: "#f0ece4" })), new THREE.Matrix4().makeTranslation(x, 0, z));
-    b.add(new THREE.SphereGeometry(0.11, 8, 6), lam("plume", () => ({ color: "#e2453c" })), new THREE.Matrix4().makeTranslation(x, h, z));
-  }
+  // (tube worms removed: they read as matchsticks)
   const n0 = root.children.length;
   b.build(root);
   const far = farFrom(root, n0, SPACE, 400); // owner: no edge-on ground line in the space shots

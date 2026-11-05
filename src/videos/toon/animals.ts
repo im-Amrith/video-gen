@@ -56,7 +56,11 @@ export const shrimp = (p: Pen, shades = false, k = 0) => {
   p.poly([[60, 175], [20, 140 + Math.sin(k) * 10], [30, 205]], "#f28a7a", 8);
   for (let i = 0; i < 4; i++) p.stroke([[150 + i * 25, 215], [140 + i * 25, 255]], 6);
   p.stroke([[300, 110], [370, 40 + Math.sin(k) * 10]], 5); p.stroke([[300, 115], [380, 70 + Math.sin(k + 1) * 10]], 5);
-  if (shades) { p.poly([[258, 100], [318, 100], [312, 125], [262, 125]], "#1d1a24", 6); p.stroke([[250, 104], [326, 104]], 6); }
+  if (shades) { // owner #4: real glasses: two framed round lenses over the eye, a bridge, an arm back to the head, lens shine
+    p.stroke([[230, 112], [262, 104]], 6);
+    p.ell(280, 106, 22, 19, "#2b2f4a", 7); p.ell(322, 102, 19, 17, "#2b2f4a", 7); p.stroke([[300, 104], [304, 103]], 6);
+    p.ell(273, 99, 7, 5, "#cfe6ff", 0); p.ell(316, 96, 6, 4, "#cfe6ff", 0);
+  }
   else { p.ell(290, 108, 13, 13, "#ffffff", 6); p.dot(292, 108, 7); }
 };
 /** crab (400 x 300), front view; sad = drooping eyes and mouth */

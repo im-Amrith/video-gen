@@ -121,7 +121,8 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     if (id === 8) card(out, `zz8${q(t % 1, 10)}`, (p) => fxStars(p, (t * 0.5) % 1, ), SNOW[0], 2.6, SNOW[2] + 1, 0.9, 0.6, { cw: 400, ch: 300 });
   }
   if (id === 9) {
-    pip(cam, out, t, CUT[0] - 2, 0.6, CUT[2], exprAt(t, [[0, "nervous"], [tl("L08", 2.0), "smile"], [tl("L08", 4.0), "grin"]]), { mode: "stroll", phase: (t * 1.2) % 1, noBlob: true });
+    const px = CUT[0] - 3.2 + 0.35 * (t - 1182 / FPS); // owner #4: really walks on the ice lid, feet on it, with a contact shadow
+    pip(cam, out, t, px, 0.6, CUT[2], exprAt(t, [[0, "nervous"], [tl("L08", 2.0), "smile"], [tl("L08", 4.0), "grin"]]), { mode: "stroll", phase: (t * 1.2) % 1 });
     for (let k = 0; k < 5; k++) { const x = CUT[0] - 8 + ((t * (0.8 + 0.2 * k) + k * 3.3) % 16); card(out, `fish9${k}${q(Math.sin(t * 6 + k), 4)}`, (p) => fish(p, ["#f08a2c", "#f2c230", "#7fc8f0", "#e2453c", "#8fe08a"][k], Math.sin(t * 6 + k)), x, -2.5 - k * 1.7, CUT[2] + (k % 2 ? 1 : -1) * 0.8, 1.6, 0.96, { cw: 400, ch: 240 }); }
   }
   if (id === 10 || id === 11) {
