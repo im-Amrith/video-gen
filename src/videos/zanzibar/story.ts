@@ -72,15 +72,15 @@ export const CAMS: Record<number, Key[]> = {
     { f: 856, s: (f) => dolly([10 - 0.05 * (f - 856), 5 + 0.02 * (f - 856), 50], [0, 10, -18], pushK(f, 856, 0.002), { fov: 46 }) }, // palace burning
     { f: 940, cut: true, s: (f) => dolly(C(YACHT, [6 - 0.04 * (f - 940), 2.5, 16]), C(YACHT, [1, 0.5, 0]), pushK(f, 940, 0.003), { fov: 44, roll: -0.05 }) }, // the yacht settles
   ],
-  7: [{ f: 1042, s: (f) => { const u = smooth(seg(f / FPS, tl("L07", 0.3), tl("L07", 3.6))); return dolly(C(PAL, [20.5 + 8 * u, 1.9, 9]), C(PAL, [19.5 + 8 * u, 2.2, 2]), pushK(f, 1042, 0.002), { fov: 46 }); } }], // Khalid slips out the back
+  7: [{ f: 1042, s: (f) => { const u = smooth(seg(f / FPS, tl("L07", 0.3), tl("L07", 3.6))); return dolly(C(PAL, [25 + 8 * u, 2.4, 6.4]), C(PAL, [12 + 8 * u, 4.2, -1.5]), pushK(f, 1042, 0.002), { fov: 44 }); /* owner #4: high over the wall, the palace in view */ } }], // Khalid slips out the back
   8: [
     { f: 1172, s: (f) => dolly([0, 18, 26], [0, 22, -20], pushK(f, 1172, 0.003), { fov: 40 }) }, // 9:40
     { f: 1240, cut: true, s: (f) => orbit(C(BAL, [0, 1.6, 0]), 6.0 - 0.006 * (f - 1240), -0.23 + 0.004 * (f - 1240), -1.1 + 0.004 * (f - 1240), { fov: 40, roll: 0.04 }) }, // the new sultan
   ],
   9: [{ f: 1350, s: (f) => dolly([-14 + 0.04 * (f - 1350), 4 + 0.05 * (f - 1350), 46], [0, 10, -20], pushK(f, 1350, 0.0015), { fov: 44 }) }], // quiet: the smoking palace
   10: [
-    { f: 1475, s: (f) => dolly(C(PAL, [1.8 - 0.03 * (f - 1475), 1.6, 12]), C(PAL, [0, 1.6, 7.5]), pushK(f, 1475, 0.003), { fov: 40 }) }, // the bill slides under the door
-    { f: 1580, cut: true, s: (f) => dolly(C(PAL, [0.9 - 0.014 * (f - 1580), 1.7, 10]), C(PAL, [0, 1.7, 7.6]), pushK(f, 1580, 0.004, 0.009, 24), { fov: 36, roll: -0.05 }) },
+    { f: 1475, s: (f) => dolly(C(PAL, [1.8 - 0.03 * (f - 1475), 1.7, 13.2]), C(PAL, [0, 1.6, 7.6]), pushK(f, 1475, 0.003), { fov: 40 }) }, // the bill slides under the door
+    { f: 1580, cut: true, s: (f) => dolly(C(PAL, [0.3 - 0.01 * (f - 1580), 1.75, 13.9]), C(PAL, [0, 1.6, 7.7]), pushK(f, 1580, 0.003, 0.006, 24), { fov: 40, roll: -0.04 }) },
   ],
   11: [
     { f: 1690, s: (f) => dolly(C(OFF, [0.9, 1.7, 3.2]), C(OFF, [0, 1.7, 0]), pushK(f, 1690, 0.003), { fov: 38 }) }, // snap the watch shut
@@ -95,6 +95,22 @@ export const DOF: Dof[] = [
 
 /** paper note with a clock at nine; invoice with a shell and coins */
 const noteCard = (p: Pen) => { p.poly([[40, 30], [260, 40], [250, 270], [30, 260]], "#fffaf0", 10); p.ell(150, 150, 70, 70, "#ffffff", 8); p.stroke([[150, 150], [150, 95]], 10); p.stroke([[150, 150], [95, 150]], 12); p.stroke([[60, 230], [230, 236]], 6, "#c0353a"); };
+/** planks nailed across a doorway (600 x 520): n boards so far */
+const planks = (p: Pen, n: number) => {
+  const B: [number, number, number][] = [[90, 0.12, 0], [200, -0.18, 1], [300, 0.05, 2], [400, -0.1, 3], [160, 0.42, 4]];
+  for (let k = 0; k < n; k++) {
+    const [y, a, s] = B[k], c = Math.cos(a), sn = Math.sin(a), hw = 290, hh_ = 34, cx = 300;
+    const P = (x: number, yy: number): [number, number] => [cx + x * c - yy * sn, y + x * sn + yy * c];
+    p.poly([P(-hw, -hh_), P(hw, -hh_), P(hw, hh_), P(-hw, hh_)], ["#b0703f", "#a0623a", "#c07f4a"][s % 3], 9);
+    p.stroke([P(-hw + 20, -8), P(hw - 30, -12)], 3, "#7a4a2a"); p.stroke([P(-hw + 40, 12), P(hw - 60, 10)], 3, "#7a4a2a");
+    for (const ex of [-hw + 26, hw - 26]) { const q2 = P(ex, 0); p.dot(q2[0], q2[1], 6); }
+  }
+};
+const DEBRIS6: ((p: Pen) => void)[] = [
+  (p) => { p.poly([[10, 20], [290, 14], [292, 62], [8, 66]], "#b0703f", 8); p.stroke([[30, 40], [270, 36]], 3, "#7a4a2a"); },
+  (p) => { p.ell(150, 150, 110, 128, "#9a5a32", 9); for (const y of [70, 230]) p.stroke([[50, y], [250, y]], 10, "#3a3440"); },
+  (p) => { p.ell(150, 150, 130, 130, "#e2453c", 10); p.ell(150, 150, 62, 62, "#1fa3b8", 8); for (const a of [0.4, 2.0, 3.6, 5.2]) p.stroke([[150 + 70 * Math.cos(a), 150 + 70 * Math.sin(a)], [150 + 125 * Math.cos(a), 150 + 125 * Math.sin(a)]], 18, "#ffffff"); },
+];
 const billCard = (p: Pen) => {
   p.poly([[40, 20], [260, 30], [250, 290], [30, 280]], "#fffaf0", 10);
   p.poly([[80, 80], [120, 80], [120, 150], [100, 170], [80, 150]], "#8a8f9a", 8);
@@ -124,7 +140,8 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     const e = id === 2 ? exprAt(t, [[0, "smile"], [tl("L02", 5.0), "grin"]]) : "stern";
     put(cam, out, { i: 41, o: KHALID, okey: "kh" }, t, BAL[0], BAL[1], BAL[2], e, { scale: 1.1, wave: id === 2 && t > tl("L02", 5.6) ? q(Math.sin(t * 7), 20) : undefined, noBlob: true });
     if (id === 4) for (let k = 0; k < 2; k++) put(cam, out, { i: 42 + k, o: GUARD, okey: "gd" }, t, PAL[0] - 3 + k * 6, 0.6, PAL[2] + 7.5, "stern", { scale: 1.05 });
-    if (id === 4) for (let k = 0; k < 6; k++) if (t > tl("L04", 0.2 + k * 0.25)) card(out, "crate", (p) => { p.poly([[30, 30], [270, 30], [270, 270], [30, 270]], "#b0703f", 10); p.stroke([[30, 30], [270, 270]], 8); p.stroke([[270, 30], [30, 270]], 8); }, PAL[0] - 1.6 + (k % 3) * 1.1, 1.15 + Math.floor(k / 3) * 1.05, PAL[2] + 7.0, 1.0, 1.0, { cw: 300, ch: 300 });
+    // owner #4: a real barricade: planks nailed across the door, hammered on one by one
+    if (id === 4) { const n = Math.min(5, Math.floor(Math.max(0, t - tl("L04", 0.2)) / 0.3) + (t > tl("L04", 0.2) ? 1 : 0)); if (n > 0) card(out, `planks${n}`, (p) => planks(p, n), PAL[0] - 0.5, 1.95, PAL[2] + 7.0, 3.0, 2.6, { cw: 600, ch: 520 }); }
   }
   // payoff places say themselves: the harbour sign, torches on the night of the barricade, the German consulate
   if (id === 2) card(out, "signZ", (p) => sign(p, "ZANZIBAR", "AUGUST 1896"), 13, 3.0, -3.2, 3.4, 1.8, { cw: 640, ch: 360 });
@@ -142,6 +159,12 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     const ys = yachtSink(t);
     put(cam, out, { i: 44, o: SAILOR, okey: "sail" }, t, YACHT[0] + 4 + ys * 6, -0.3, YACHT[2] + 4 + ys * 3, ys < 0.4 ? "shock" : "relief", { mode: "seat", wave: ys > 0.4 ? q(Math.sin(t * 8), 20) : undefined, noBlob: true, scale: 1.0 });
     if (ys > 0.05 && ys < 0.95) { const u = q((t * 1.5) % 1, 20); card(out, `bub6${u}`, (p) => fxPuff(p, u), YACHT[0], 0.2, YACHT[2], 4, 3, { soft: true }); }
+    // owner #4: splashes at the hull and debris (planks, a barrel, a life ring) floating off
+    for (const d of [0, 0.5, 1.0]) { const u = q(seg(t, tl("L06", 2.6) + d, tl("L06", 2.6) + d + 0.9), 20); if (u > 0 && u < 1) card(out, `ysp${d}${u}`, (p) => fxSplash(p, u), YACHT[0] + (d - 0.5) * 6, 0.6, YACHT[2] + 1.6, 3.4, 3.4, { cw: 800, ch: 800 }); }
+    if (ys > 0.15) for (let k = 0; k < 6; k++) {
+      const dx = (k - 2.5) * 1.6 + ys * (k % 2 ? 2 : -2), dz = 1.4 + (k % 3) * 0.8, bob = 0.06 * Math.sin(t * 2 + k);
+      card(out, `deb6${k % 3}`, DEBRIS6[k % 3], YACHT[0] + dx, -0.5 + bob, YACHT[2] + dz, k % 3 === 0 ? 1.4 : 0.6, k % 3 === 0 ? 0.35 : 0.6, { cw: 300, ch: k % 3 === 0 ? 80 : 300, rot: 0.2 * Math.sin(t + k) });
+    }
   }
   if (id === 7) {
     const u = seg(t, tl("L07", 0.6), tl("L07", 3.4));
@@ -153,8 +176,10 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   }
   if (id === 10) {
     const slide = smooth(seg(t, tl("L10", 3.2), tl("L10", 3.9)));
-    put(cam, out, { i: 46, o: CLERK, okey: "clerk" }, t, PAL[0] - 0.8, 0.6, PAL[2] + 7.6, exprAt(t, [[0, "smile"], [tl("L10", 3.4), "shock"], [tl("L10", 5.4), "dazed"]]), { scale: 1.1 });
-    card(out, "bill10", (p) => billCard(p), PAL[0] + 0.3 + (1 - slide) * 1.5, 0.75 + 0.6 * slide, PAL[2] + 7.9, 0.5, 0.55, { cw: 300, ch: 300, rot: (1 - slide) * 0.5 });
+    put(cam, out, { i: 46, o: CLERK, okey: "clerk" }, t, PAL[0] - 0.75, 0.6, PAL[2] + 7.6, exprAt(t, [[0, "smile"], [tl("L10", 3.4), "shock"], [tl("L10", 5.4), "dazed"]]), { scale: 1.1 });
+    // owner #4: the bill is handed over by the winning side: a British officer, in frame
+    put(cam, out, { i: 47, o: OFFICER, okey: "offBill" }, t, PAL[0] + 0.75, 0.6, PAL[2] + 7.75, exprAt(t, [[0, "stern"], [tl("L10", 3.6), "smile_closed"]]), { scale: 1.1, look: -1 });
+    card(out, "bill10", (p) => billCard(p), PAL[0] + 0.55 - slide * 0.85, 1.35 + 0.05 * slide, PAL[2] + 7.95, 0.5, 0.55, { cw: 300, ch: 300, rot: (1 - slide) * 0.3 });
     if (t > tl("L10", 3.4) && t < tl("L10", 4.2)) card(out, "bang10", (p) => fxBang(p), PAL[0] - 0.6, 2.9, PAL[2] + 7.6, 0.4, 0.6, { cw: 200, ch: 300 });
   }
   void fxWhat; void fxImpact; void FPS;

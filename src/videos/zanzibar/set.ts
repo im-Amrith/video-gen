@@ -85,7 +85,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   });
   const wins = new THREE.Mesh(new THREE.PlaneGeometry(28, 14.4), new THREE.MeshBasicMaterial({ map: winT, color: new THREE.Color(1.8, 1.5, 1.1), transparent: true, depthWrite: false, fog: false }));
   wins.position.set(PAL[0], 7.8, PAL[2] + 6.03); wins.layers.set(NOINK); root.add(wins);
-  const torchM = glowMat("#ffb040", 2.4);
+  const torchM = glowMat("#ffb040", 1.5); // owner #4: natural lamp glow (soft warm falloff, not a hard bloom)
   const torches = [-2.6, 2.6].map((dx) => { const m = new THREE.Mesh(new THREE.SphereGeometry(0.22, 10, 8), torchM); m.position.set(PAL[0] + dx, 3.4, PAL[2] + 6.6); m.layers.set(NOINK); root.add(m); return { m, g: new Glow(root, "#ff9a40", 1.8), x: PAL[0] + dx }; });
   const flag = new THREE.Mesh(new THREE.PlaneGeometry(3, 1.9), lam("flagZ", () => ({ map: flagRed(), side: THREE.DoubleSide }))); flag.position.set(PAL[0] - 9.5, 22, PAL[2]); root.add(flag);
   const bay = sea(root, 0, 196, 200, "#1fa3b8"); bay.position.y = -0.6;
@@ -93,7 +93,23 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const ships = SHIPS.map(() => {
     const g = new THREE.Group();
     const grey = lam("shipGrey", () => ({ color: "#7d8896" })), dark = lam("shipDark", () => ({ color: "#3d434f" }));
-    const hull = new THREE.Mesh(new THREE.BoxGeometry(20, 2.6, 4.2), grey); hull.position.y = 0.8; g.add(hull);
+    // owner #4: detailed warship: painted hull (portholes, red boot-topping), turrets with barrels, two masts, funnel smoke, wake
+    const hullT = ctex("warHull", 1024, 128, (c) => { c.fillStyle = "#7d8896"; c.fillRect(0, 0, 1024, 128); c.fillStyle = "#a8362e"; c.fillRect(0, 100, 1024, 28);
+      c.fillStyle = "#5d6672"; c.fillRect(0, 0, 1024, 8); for (let i = 0; i < 26; i++) { c.fillStyle = "#2b2f38"; c.beginPath(); c.arc(30 + i * 38, 46, 7, 0, Math.PI * 2); c.fill(); }
+      c.strokeStyle = "rgba(40,44,52,.4)"; c.lineWidth = 2; for (let x = 0; x < 1024; x += 64) { c.beginPath(); c.moveTo(x, 8); c.lineTo(x, 100); c.stroke(); } });
+    const hull = new THREE.Mesh(new THREE.BoxGeometry(20, 2.6, 4.2), lam("warHullM", () => ({ map: hullT }))); hull.position.y = 0.8; g.add(hull);
+    for (const tx of [8.5, -8.0]) {
+      const tur = new THREE.Mesh(new THREE.CylinderGeometry(1.0, 1.1, 0.9, 16), grey); tur.position.set(tx, 2.55, 0); g.add(tur);
+      for (const dz of [-0.28, 0.28]) { const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.13, 3.0, 10).rotateZ(Math.PI / 2), dark); bar.position.set(tx + Math.sign(tx) * 2.0, 2.65, dz); g.add(bar); }
+    }
+    const mast2 = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 7.5), dark); mast2.position.set(-6.5, 6, 0); g.add(mast2);
+    for (const mx of [6, -6.5]) { const yard = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.1, 3.2), dark); yard.position.set(mx, 8.6, 0); g.add(yard); }
+    const wakeT = ctex("wakeV", 512, 128, (c) => { c.clearRect(0, 0, 512, 128); const gr = c.createLinearGradient(0, 0, 512, 0); gr.addColorStop(0, "rgba(255,255,255,0.95)"); gr.addColorStop(1, "rgba(255,255,255,0)"); c.fillStyle = gr;
+      c.beginPath(); c.moveTo(0, 50); c.lineTo(512, 0); c.lineTo(512, 18); c.lineTo(0, 64); c.lineTo(512, 110); c.lineTo(512, 128); c.lineTo(0, 78); c.closePath(); c.fill(); c.fillRect(0, 54, 300, 20); });
+    const wake = new THREE.Mesh(new THREE.PlaneGeometry(18, 7).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: wakeT, transparent: true, depthWrite: false }));
+    wake.position.set(-19, 0.04, 0); wake.layers.set(NOINK); g.add(wake);
+    const bowFoam = new THREE.Mesh(new THREE.PlaneGeometry(3, 5.4).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: wakeT, transparent: true, depthWrite: false }));
+    bowFoam.rotation.y = Math.PI; bowFoam.position.set(12.5, 0.04, 0); bowFoam.layers.set(NOINK); g.add(bowFoam);
     const bow = new THREE.Mesh(new THREE.ConeGeometry(2.1, 4, 4).rotateZ(-Math.PI / 2).rotateX(Math.PI / 4), grey); bow.position.set(12, 0.8, 0); bow.scale.set(1, 0.62, 1); g.add(bow);
     const deck = new THREE.Mesh(new THREE.BoxGeometry(9, 2, 3), lam("shipDeck", () => ({ color: "#d9d4c8" }))); deck.position.set(-1, 3, 0); g.add(deck);
     for (const x of [-3, 1.5]) { const f = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 4.5, 14), lam("funnel", () => ({ color: "#e0a24a" }))); f.position.set(x, 5.6, 0); g.add(f); const c = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.72, 0.6, 14), dark); c.position.set(x, 7.6, 0); g.add(c); }
@@ -116,11 +132,13 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const smoke = new Particles(root, 220, "#8a8590", 6.0, "dot", 1.0);
   const gunSmoke = new Particles(root, 150, "#e6e2da", 4.0, "dot", 1.0);
   const embers = new Particles(root, 160, "#ffb050", 0.25, "soft", 2.4);
+  const funnelSmoke = new Particles(root, 240, "#4a4650", 2.4, "dot", 1.0);
+  const wreckSmoke = new Particles(root, 120, "#3a3640", 2.8, "dot", 1.0);
 
   const pose = ({ t, light }: PoseCtx) => {
     const nt = light === "night";
     wins.visible = nt;
-    torches.forEach((o, k) => { o.m.visible = nt; o.g.set(o.x, 3.5, PAL[2] + 6.7, 3.4 + 0.4 * Math.sin(t * 11 + k * 2), 0.9, nt); });
+    torches.forEach((o, k) => { o.m.visible = nt; o.g.set(o.x, 3.5, PAL[2] + 6.7, 5.2 + 0.4 * Math.sin(t * 11 + k * 2), 0.42, nt); });
     const u = shipIn(t);
     ships.forEach((g, k) => { const [x, z] = SHIPS[k]; g.position.set(x + (1 - u) * (60 + k * 20), -0.6 + 0.08 * Math.sin(t * 1.2 + k), z); g.rotation.set(0, Math.PI, 0.01 * Math.sin(t + k)); });
     const ys = yachtSink(t);
@@ -131,6 +149,11 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     smoke.pose((i, o) => { const k = i % 6, uu = (t * 0.12 + hh(i, 1)) % 1; o.set(PAL[0] - 12 + k * 4.5 + uu * 6, 12 + uu * 26, PAL[2] - 2 + (hh(i, 2) - 0.5) * 6); return uu < sm; }, sm > 0);
     embers.pose((i, o) => { const uu = (t * 0.5 + hh(i, 1)) % 1; o.set(PAL[0] - 13 + hh(i, 2) * 26, 6 + uu * 14, PAL[2] + 6 + hh(i, 3) * 2); return true; }, f > 0.2);
     gunSmoke.pose((i, o) => { const k = i % 3, uu = (t * 0.4 + hh(i, 1)) % 1; const [x, z] = SHIPS[k]; o.set(x - 6.5 - uu * 4, 2.6 + uu * 6, z - 1 + (hh(i, 2) - 0.5) * 3); return true; }, t > clockMin.FIRE && t < clockMin.FIRE + 9);
+    // funnel smoke from every warship funnel (ship rotated 180 deg: local x -> world -x)
+    funnelSmoke.pose((i, o) => { const k = i % 3, j = Math.floor(i / 3) % 2, sp = ships[k].position, uu = (t * 0.35 + hh(i, 7)) % 1, fx = [-3, 1.5][j];
+      o.set(sp.x - fx + uu * 5, sp.y + 8.0 + uu * 9, sp.z + (hh(i, 8) - 0.5) * 1.5 * uu); return true; });
+    // the sinking yacht smokes
+    wreckSmoke.pose((i, o) => { const uu = (t * 0.3 + hh(i, 9)) % 1; o.set(YACHT[0] - 0.5 + (hh(i, 10) - 0.5) * 2 + uu * 3, -0.6 + uu * 12, YACHT[2] + (hh(i, 11) - 0.5) * 1.5); return true; }, ys > 0.02);
     void smooth; void seg; void rep;
   };
   return { pose };
