@@ -1,8 +1,9 @@
 // "What If the Earth Stopped Spinning?" — places: SPACE (little planet + Moon) at x = 3000, TOWN street at the origin,
 // FLOOD (drowned rooftops) at z = -3000, PRE (prehistoric shore) at x = -3000.
 import * as THREE from "three";
+import { NOINK } from "../toon/ink";
 import { Batch, boxGeo, V, lam, house, prop } from "../toon/build";
-import { ctex, rep, cobbleHD, grassHD, stoneHD } from "../toon/paint";
+import { ctex, rep, cobbleHD, grassHD, stoneHD, beamHD } from "../toon/paint";
 import { twoTone } from "../toon/shade";
 import { Particles, Glow, glowMat } from "../toon/fx";
 import { ground, globe, sea, bumps, tideShell, farFrom } from "../toon/kit";
@@ -57,9 +58,18 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   slider.position.set(6, 0, -10.5); root.add(slider);
   // rowing boat
   const boat = new THREE.Group();
-  const hull = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.6, 3.2, 16, 1, false, 0, Math.PI).rotateZ(Math.PI / 2).rotateX(Math.PI / 2), lam("boatHull", () => ({ color: "#c0603a", side: THREE.DoubleSide })));
-  hull.scale.set(1, 0.6, 1); boat.add(hull);
-  const oar = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 3.4), lam("oar", () => ({ color: "#e0b070" }))); oar.position.set(0, 0.4, 0); oar.rotation.y = 1.2; boat.add(oar);
+  // owner #4: a real small boat: curved hull (half ellipsoid), wooden rim, a seat; Pip sits with his waist above the rim
+  const hullM = lam("boatHull2", () => ({ map: beamHD(), color: "#e07a4a", side: THREE.DoubleSide }));
+  const hull = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 16, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), hullM);
+  hull.scale.set(1.35, 0.6, 0.68); hull.position.y = 0.4; boat.add(hull);
+  const rimG = new THREE.TorusGeometry(1, 0.055, 8, 64); rimG.rotateX(Math.PI / 2); rimG.scale(1.35, 1, 0.68);
+  const rim = new THREE.Mesh(rimG, lam("boatRim", () => ({ color: "#7a4a2a" }))); rim.position.y = 0.4; boat.add(rim);
+  const seat = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.07, 1.3), lam("boatSeat", () => ({ color: "#d9a066" }))); seat.position.y = 0.34; boat.add(seat);
+  const oar = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 3.4), lam("oar", () => ({ color: "#e0b070" }))); oar.position.set(0.3, 0.45, 0); oar.rotation.y = 1.2; boat.add(oar);
+  // foam waterline ring at sea level (follows the boat across, not up and down: the hull bobs through it)
+  const foamG = new THREE.RingGeometry(0.96, 1.12, 48); foamG.rotateX(-Math.PI / 2); foamG.scale(1.35, 1, 0.68);
+  const foam = new THREE.Mesh(foamG, new THREE.MeshBasicMaterial({ color: "#f4fbff", transparent: true, opacity: 0.85, depthWrite: false }));
+  foam.layers.set(NOINK); foam.position.set(FLOOD[0], 0.03, FLOOD[2]); root.add(foam);
   boat.position.set(FLOOD[0], 0.15, FLOOD[2]); root.add(boat);
   // ---------------- SPACE: the planet, a tape round the waist, a brake block, the Moon ----------------
   const G = globe(root, GR);
@@ -120,13 +130,13 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     }
     // house slides east, sea rises, boat bobs
     const hs = houseSlide(t); slider.position.set(6 + hs * hs * 60, 0.2 * Math.sin(hs * 30) * (hs > 0 && hs < 1 ? 1 : 0), -10.5); slider.rotation.z = -0.1 * Math.min(1, hs * 3) * (1 - hs);
-    boat.position.y = 0.15 + 0.12 * Math.sin(t * 2.2); boat.rotation.z = 0.06 * Math.sin(t * 1.7);
+    boat.position.y = 0.0 + 0.12 * Math.sin(t * 2.2); boat.rotation.z = 0.04 * Math.sin(t * 1.7); foam.scale.setScalar(1 - 0.08 * Math.sin(t * 2.2));
     // prehistoric: a sun racing across the sky, volcano smoke
     const su = ((t * 0.45) % 1);
     fastSun.set(PRE[0] - 120 + su * 240, 20 + Math.sin(su * Math.PI) * 90, PRE[2] - 260, 60, id === 12 ? 1 : 0, id === 12);
     smoke.pose((i, o) => { const u = (t * 0.08 + hh(i, 1)) % 1, v = i % 4; o.set(PRE[0] - 60 + v * 45 + u * 10, 30 + v * 12 + u * 40, PRE[2] - 160 - v * 30); return true; }, id === 12);
     motes.pose((i, o) => { const u = (t * 0.05 + hh(i, 1)) % 1; o.set(SPACE[0] + (hh(i, 2) - 0.5) * 30, SPACE[1] + (hh(i, 3) - 0.5) * 30, SPACE[2] + (hh(i, 4) - 0.5) * 30 + u); return true; }, inSpace);
-    preSea.visible = id === 12; floodSea.visible = id === 6;
+    preSea.visible = id === 12; floodSea.visible = foam.visible = id === 6;
     const dark = id === 9 || id === 10;
     heads.forEach((h, k) => { h.material = dark ? lampHead : lampOff; halos[k].set(LAMPS[k][0], 3.3, LAMPS[k][1], 3.4, 0.9 + 0.08 * Math.sin(t * 5 + k), dark); });
     flies.pose((i, o) => { const a = t * (0.3 + 0.4 * hh(i, 3)) + hh(i, 4) * 6.28; o.set(-2 + Math.cos(a) * (1.5 + 4 * hh(i, 5)), 0.6 + 2.2 * hh(i, 6) + 0.3 * Math.sin(t * 2 + i), 0.5 + Math.sin(a) * (1 + 3 * hh(i, 7))); return true; }, dark);

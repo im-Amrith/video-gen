@@ -35,7 +35,7 @@ Episodes changed (re-render only these; audio unchanged unless noted):
 - [x] A1 legs never shrink — re-render ALL (toon.ts: sit = knees-up full-length legs, new "seat" mode with hanging shins + card lowered onto the seat, fall legs scale with build; seat used for deck chair, car, boat, Moon, yacht). Alarm-clock legs attached (kit.ts).
 - [ ] A2 contact: handled per episode inside the B items (seat mode fixes the seated ones); OPEN until B is done
 - [x] A3 globe — re-render What If 02, 04, 05: globe shots re-lensed to 32 deg with the camera moved back (core.ts `tele`); the green line was the far town ground seen edge-on from space: static far meshes hidden in space shots (kit.ts `farFrom`); tides = sea-blue shell with soft white rim, no ink, fades head-on (kit.ts `tideShell`); brake burst removed from the tide shot.
-- [ ] B What If 02 spin
+- [x] B What If 02 spin — re-render: Pip planted on the globe top (follows the squash) with contact shadow, scale 0.8; 14-item debris stream flies east (cars, houses, lamp posts, tumbling people, dust); real boat (curved hull, rim, seat, foam waterline that bobs), Pip seated waist above the rim; alarm legs attached; legs + globe + tide via A1/A3.
 - [ ] B What If 03 ice
 - [ ] B What If 04 sun
 - [ ] B What If 05 moon

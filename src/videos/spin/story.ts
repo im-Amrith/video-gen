@@ -1,7 +1,7 @@
 // "What If the Earth Stopped Spinning?" (What If ep. 2) — shot plan, camera, lens, cast.
 import TL from "./timeline.json";
 import { Episode, Key, Dof, V3, ShotDef, FPS, dolly, zoom, orbit, pushK, smooth, seg, q, hh, lerp, tele } from "../toon/core";
-import { Stage, CamInfo, card } from "../toon/cast";
+import { Stage, CamInfo, card, blob } from "../toon/cast";
 import { fxSpeed, fxBang, fxWhat, fxImpact, fxSweat, fxSparkle } from "../toon/fx";
 import { fxSplash, fxStars, fxPuff, Pen } from "../toon/toon";
 import { pip, put, exprAt, FOLK, clockCard, alarmCard, calendarCard, sunCard } from "../toon/kit";
@@ -143,6 +143,31 @@ const signCard = (top: string, l1: string, l2: string, col: string) => (p: Pen) 
 const EUROPE = signCard("WELCOME TO", "EUROPE", "(UNDERWATER)", "#c9302c");
 const PAST = signCard("EARTH, THE PAST", "1.4 BYA", "DAY = 18 HRS", "#c9302c");
 
+// ---------------- flying debris (owner #4: many things fly off, not one) ----------------
+type Deb = ["car" | "house" | "lamp" | "person", number, number, number]; // kind, z, start y, start delay (s)
+const DEBRIS: Deb[] = [
+  ["car", -3.5, 0, 0.0], ["lamp", -1.0, 0, 0.15], ["person", -5.5, 0, 0.3], ["house", -9.5, 0, 0.45], ["car", 0.8, 0, 0.6],
+  ["person", -2.4, 0, 0.8], ["lamp", -7.0, 0, 0.95], ["house", -13.0, 0, 1.15], ["car", -6.0, 0, 1.3], ["person", 0.2, 0, 1.5],
+  ["lamp", -4.2, 0, 1.7], ["car", -8.5, 0, 1.9], ["house", -11.0, 0, 2.1], ["person", -3.0, 0, 2.3],
+];
+const CAR_COLS = ["#d9443a", "#3f6fb5", "#f2c230", "#2f8a4f"], HOUSE_COLS = ["#e8d2a6", "#d98a6a", "#a8c4d9", "#f0e0b0"];
+const carCard = (k: number) => (p: Pen) => { // 400 x 240
+  const c = CAR_COLS[k % 4];
+  p.poly([[30, 170], [40, 120], [110, 110], [150, 60], [270, 60], [320, 110], [375, 120], [380, 170]], c, 10);
+  p.poly([[165, 72], [210, 72], [210, 110], [135, 110]], "#bfe3ff", 6); p.poly([[222, 72], [262, 72], [300, 110], [222, 110]], "#bfe3ff", 6);
+  p.ell(110, 180, 36, 36, "#2b2b33", 8); p.ell(300, 180, 36, 36, "#2b2b33", 8); p.ell(110, 180, 14, 14, "#c9ccd6", 0); p.ell(300, 180, 14, 14, "#c9ccd6", 0);
+};
+const houseCard = (k: number) => (p: Pen) => { // 400 x 400
+  p.poly([[60, 170], [340, 170], [340, 380], [60, 380]], HOUSE_COLS[k % 4], 10);
+  p.poly([[40, 175], [200, 40], [360, 175]], "#b5543a", 10);
+  for (const [x, y] of [[100, 210], [250, 210]]) p.poly([[x, y], [x + 50, y], [x + 50, y + 50], [x, y + 50]], "#bfe3ff", 6);
+  p.poly([[175, 290], [225, 290], [225, 380], [175, 380]], "#6a4a32", 6);
+};
+const lampCard = (p: Pen) => { // 120 x 500
+  p.poly([[54, 90], [66, 90], [66, 490], [54, 490]], "#2e3442", 6);
+  p.poly([[30, 40], [90, 40], [80, 95], [40, 95]], "#ffe7a6", 6); p.poly([[24, 30], [96, 30], [60, 5]], "#2e3442", 6);
+};
+
 // ---------------- cast ----------------
 const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   if (id === 1 || id === 3 || id === 4 || id === 5 || id === 7) {
@@ -153,7 +178,9 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
       const stopped = id === 1 && t > STOP;
       const e = id === 1 ? exprAt(t, [[0, "laugh"], [tl("L01", 3.0), "grin"], [STOP, "shock"]]) : id === 3 ? exprAt(t, [[0, "relief"], [tl("L03", 2.4), "nervous"], [BRAKE, "grin"]]) : exprAt(t, [[0, "neutral"], [tl("L05", 1.8), "shock"]]);
       const tilt = id === 1 && !stopped ? -8 : stopped ? 18 * Math.max(0, 1 - (t - STOP) * 2) : 0;
-      pip(cam, out, t, SPACE[0], GR - 0.05, SPACE[2], e, { tilt, swaps: [STOP], noBlob: true, wave: id === 3 && t > BRAKE ? q(Math.sin(t * 8), 20) : undefined });
+      const topY = SPACE[1] + GR * (1 - bulgeAt(t)) - 0.03; // owner: feet on the surface (the globe squashes by bulgeAt)
+      pip(cam, out, t, SPACE[0], topY, SPACE[2], e, { tilt, swaps: [STOP], noBlob: true, scale: 0.8, wave: id === 3 && t > BRAKE ? q(Math.sin(t * 8), 20) : undefined });
+      blob(cam, out, SPACE[0], topY + 0.01, SPACE[2], 0.8);
       if (id === 1 && !stopped) card(out, `spd1${q((t * 2) % 1, 12)}`, (p) => fxSpeed(p, (t * 2) % 1), SPACE[0] - 1.4, GR + 1.2, SPACE[2], 1.0, 2.0, { cw: 400, ch: 800, soft: true, rot: Math.PI / 2 });
       if (stopped && t < STOP + 0.8) card(out, "bang1", (p) => fxBang(p), SPACE[0] + 0.5, GR + 3.0, SPACE[2], 0.5, 0.75, { cw: 200, ch: 300 });
     }
@@ -168,11 +195,21 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
       const d = fly(EAST + 0.12 * (i + 1), i + 1);
       put(cam, out, { i: 30 + i, o: FOLK[i], okey: `fk${i}` }, t, p[0] + d.dx, d.dy, p[2], t > EAST ? "shock" : "smile", { mode: t > EAST ? "fall" : "stand", tilt: t > EAST ? 25 : 0, noBlob: t > EAST });
     });
+    // owner: MANY things fly off east: houses, cars, lamp posts, people tumbling the same way, with dust
+    DEBRIS.forEach(([kind, z, y0, dt], k) => {
+      const t0 = EAST + dt, u = t - t0;
+      if (u <= 0 || u > 3.2) return;
+      const x = -16 + u * u * 6 + u * 8, y = y0 + Math.min(2.2, u * 2.4) - Math.max(0, u - 1.4) * 0.9, rot = (k % 2 ? 1 : -1) * u * (1.6 + 0.3 * (k % 3));
+      if (kind === "person") put(cam, out, { i: 60 + k, o: FOLK[k % FOLK.length], okey: `deb${k}` }, t, x, y, z, "shock", { mode: "fall", face: true, roll: rot, noBlob: true });
+      else card(out, `deb${kind}${k}`, kind === "car" ? carCard(k) : kind === "house" ? houseCard(k) : lampCard, x, y + (kind === "house" ? 1.4 : kind === "lamp" ? 1.4 : 0.6), z,
+        kind === "car" ? 2.6 : kind === "house" ? 3.2 : 0.7, kind === "car" ? 1.56 : kind === "house" ? 3.2 : 2.9, { cw: kind === "lamp" ? 120 : 400, ch: kind === "car" ? 240 : kind === "house" ? 400 : 500, rot });
+      if (u < 1.2) { const pu = q(seg(u, 0, 1.2), 20); card(out, `debDust${pu}`, (p) => fxPuff(p, pu), x - 1.6, y + 0.4, z, 2.4, 2.0, { soft: true }); }
+    });
     if (t > EAST && t < EAST + 1.5) for (let k = 0; k < 3; k++) card(out, `spd2${k}${q((t * 3 + k * 0.3) % 1, 12)}`, (p) => fxSpeed(p, (t * 3 + k * 0.3) % 1), 1 + k * 2, 1.6, 1.5 + k, 1.4, 2.8, { cw: 400, ch: 800, soft: true, rot: Math.PI / 2 });
     if (t > OCEAN) { const u = q(seg(t, OCEAN, OCEAN + 1.1), 30); card(out, `splash${u}`, (p) => fxSplash(p, u), 1.5, 2.6, -3, 14, 14, { cw: 800, ch: 800 }); }
   }
   if (id === 6) card(out, "euroSign", EUROPE, FLOOD[0] + 1.5, 1.0 + 0.05 * Math.sin(t * 1.5), FLOOD[2] - 1.9, 1.9, 3.0, { cw: 640, ch: 1000, rot: 0.08 });
-  if (id === 6) put(cam, out, { i: 1, o: { jacket: "#f2b531", pants: "#3b5b9a", boots: "#e2453c", hat: "cap", cap: "#e2453c", build: "kid" }, okey: "pip" }, t, FLOOD[0], 0.2 + 0.12 * Math.sin(t * 2.2), FLOOD[2] + 0.3,
+  if (id === 6) put(cam, out, { i: 1, o: { jacket: "#f2b531", pants: "#3b5b9a", boots: "#e2453c", hat: "cap", cap: "#e2453c", build: "kid" }, okey: "pip" }, t, FLOOD[0], 0.42 + 0.12 * Math.sin(t * 2.2), FLOOD[2],
     exprAt(t, [[0, "nervous"], [tl("L06", 2.0), "dazed"]]), { mode: "seat", scale: 1.25, noBlob: true });
   if (id === 8 || id === 9 || id === 10 || id === 13) {
     const night = id === 9 || id === 10;
