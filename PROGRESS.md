@@ -31,6 +31,20 @@ Episodes changed (re-render only these; audio unchanged unless noted):
 - [x] History 03 emu-war (wheat tufts, brass casings, painted fence, hills + mountains + trees)
 - [x] History 04 1904-marathon (corn tufts, painted fences, rocks, trees + hill ring)
 
+## Feedback #4 (FEEDBACK.md, after watching all 10 renders) — status ("re-render" = fixed, re-render that episode)
+- [ ] A1 legs never shrink (shared cast code)
+- [ ] A2 contact: no floating/sinking/clipping
+- [ ] A3 globe: FOV 25-35, no green line, water-like tide bulges
+- [ ] B What If 02 spin
+- [ ] B What If 03 ice
+- [ ] B What If 04 sun
+- [ ] B What If 05 moon
+- [ ] B History 01 shortest-war
+- [ ] B History 02 leaning-tower
+- [ ] B History 03 emu-war
+- [ ] B History 04 1904-marathon
+- [ ] B History 05 war-of-the-bucket
+
 ## Feedback #3 pass (no dark/empty > 1.5 s, visual progression, faces in frame, every shot moves, payoffs read) — DONE: ALL 10 READY TO RE-RENDER
 Engine change for all: every camera key arcs slowly around its look point (core.ts `DRIFT`), so all 10 need a re-render.
 All 10 are ticked (2026-11-04): re-render all 10 in one go (`.\scripts\render_all.ps1 -Force -Concurrency 2`).
