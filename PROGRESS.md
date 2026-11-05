@@ -36,7 +36,7 @@ Episodes changed (re-render only these; audio unchanged unless noted):
 - [ ] A2 contact: handled per episode inside the B items (seat mode fixes the seated ones); OPEN until B is done
 - [x] A3 globe — re-render What If 02, 04, 05: globe shots re-lensed to 32 deg with the camera moved back (core.ts `tele`); the green line was the far town ground seen edge-on from space: static far meshes hidden in space shots (kit.ts `farFrom`); tides = sea-blue shell with soft white rim, no ink, fades head-on (kit.ts `tideShell`); brake burst removed from the tide shot.
 - [x] B What If 02 spin — re-render: Pip planted on the globe top (follows the squash) with contact shadow, scale 0.8; 14-item debris stream flies east (cars, houses, lamp posts, tumbling people, dust); real boat (curved hull, rim, seat, foam waterline that bobs), Pip seated waist above the rim; alarm legs attached; legs + globe + tide via A1/A3.
-- [ ] B What If 03 ice
+- [x] B What If 03 ice — re-render: town sea opaque deep blue + white foam line at the tower; a slab band at every floor (20 countable floors); penguin beside the ice pile; sparkles centred above the cube; water level continuous (shot 5 rises to the drowned-town level of shot 6); Pip looks out from inside a 5th-floor window (room behind, frame + wall below the sill); shot 10 Pip on the sand in front of the boardwalk (was sunk in the planks); legs via A1. Not checked in stills: shots 6 and 10.
 - [ ] B What If 04 sun
 - [ ] B What If 05 moon
 - [ ] B History 01 shortest-war

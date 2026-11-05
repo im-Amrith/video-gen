@@ -35,6 +35,8 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   const tw = 12, td = 12, th = FLOORS * FLOORH;
   const tm = lam("towerFace", () => ({ map: facadeHD("towerFace", tw, th, { wall: "#d9c9a8", shutter: "#2f5f6a" }) }));
   b.add(boxGeo(V(TOWER[0] - tw / 2, 0.4, TOWER[2] - td / 2), V(TOWER[0] + tw / 2, 0.4 + th, TOWER[2] + td / 2)), tm);
+  // owner: floors you can count: a slab band at every floor line
+  for (let k = 1; k <= FLOORS; k++) b.add(boxGeo(V(TOWER[0] - tw / 2 - 0.12, 0.4 + k * FLOORH - 0.16, TOWER[2] - td / 2 - 0.12), V(TOWER[0] + tw / 2 + 0.12, 0.4 + k * FLOORH, TOWER[2] + td / 2 + 0.12)), lam("towerSlab", () => ({ color: "#b8ab90" })));
   b.add(boxGeo(V(TOWER[0] - tw / 2 - 0.3, th + 0.4, TOWER[2] - td / 2 - 0.3), V(TOWER[0] + tw / 2 + 0.3, th + 1.0, TOWER[2] + td / 2 + 0.3)), lam("towerCap", () => ({ color: "#9aa0aa" })));
   for (let k = 0; k < 24; k++) { const a = (k / 24) * Math.PI * 2, rx = TOWER[0] + Math.max(-1, Math.min(1, 1.25 * Math.cos(a))) * (tw / 2), rz = TOWER[2] + Math.max(-1, Math.min(1, 1.25 * Math.sin(a))) * (td / 2); b.add(new THREE.CylinderGeometry(0.05, 0.05, 1.1).translate(0, 0.55, 0), lam("rail", () => ({ color: "#e2453c" })), new THREE.Matrix4().makeTranslation(rx, th + 1.0, rz)); }
   b.add(new THREE.CylinderGeometry(1.2, 1.2, 2.4, 20).translate(0, 1.2, 0), lam("waterTank", () => ({ color: "#5d8fb8" })), new THREE.Matrix4().makeTranslation(TOWER[0] - 3.5, th + 1.0, TOWER[2] - 3.5));
@@ -94,7 +96,13 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
   b.build(root);
 
   // dynamic: seas, the melting cube in the glass, water in the glass, falls
-  const townSea = sea(root, 0, 120, 260, "#2a8fc4");
+  const townSea = sea(root, 0, 120, 260, "#1d5fa8"); // owner: opaque deep blue
+  // a white foam line where the sea meets the tower (the sea level reads at a glance)
+  const foam = new THREE.Group();
+  for (const [w, d, x, z] of [[13.2, 0.35, 0, 6.15], [13.2, 0.35, 0, -6.15], [0.35, 12.6, 6.15, 0], [0.35, 12.6, -6.15, 0]] as const) {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, 0.12, d), lam("towerFoam", () => ({ color: "#f4fbff" }))); m.position.set(x, 0, z); foam.add(m);
+  }
+  foam.position.set(TOWER[0], 0, TOWER[2]); root.add(foam);
   const floeSea = sea(root, FLOE[0], FLOE[2], 200, "#2a7fb8");
   const greenSea = sea(root, GREEN[0], GREEN[2] + 40, 200, "#2a7fb8");
   const glassWater = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.38, 1, 32), new THREE.MeshBasicMaterial({ color: new THREE.Color("#7fc8f0"), transparent: true, opacity: 0.55, depthWrite: false }));
@@ -112,7 +120,7 @@ export const buildSet = ({ root }: BuildCtx): SetHandle => {
     const town = [1, 4, 5, 6, 10, 11].includes(id);
     townSea.visible = town; floeSea.visible = id === 7; greenSea.visible = id === 9;
     townSea.position.y = seaAt(id, t);
-    const tm = townSea.material as THREE.MeshLambertMaterial; tm.transparent = id === 1; tm.opacity = id === 1 ? 0.62 : 1; tm.depthWrite = id !== 1;
+    foam.position.y = townSea.position.y + 0.03 + 0.03 * Math.sin(t * 2.4); foam.visible = town && townSea.position.y > 0.5;
     floeSea.position.y = 0.02 + 0.03 * Math.sin(t * 1.3);
     greenSea.position.y = smooth(seg(t, 41.5, 44)) * 3;
     const u = cubeAt(t);

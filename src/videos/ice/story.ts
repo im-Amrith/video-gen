@@ -15,11 +15,12 @@ const tl = (id: string, d = 0) => L[id].t0 + d;
 export const TOWER: V3 = [26, 0, -34], HILL: V3 = [-70, 0, -70], ICE: V3 = [0, 0, -3000], FLOE: V3 = [3000, 0, 0], GLASS: V3 = [-3000, 0, 0], GREEN: V3 = [0, 0, 3000];
 export const FLOORS = 20, FLOORH = 3.2;
 /** the town sea: at the tower roof in the hook, then climbing (beach → boardwalk → floors), drowned aerial, today's level later */
+export const SEA6 = 5 * FLOORH - 0.2; // drowned-town level: just under Pip's 5th-floor window sill
 export const seaAt = (id: number, t: number) => {
   if (id === 1) return FLOORS * FLOORH + 0.2;
   if (id === 4) return lerp(-0.6, 2.6, smooth(seg(t, tl("L04", 0.6), tl("L04", 3.4))));
-  if (id === 5) return lerp(2.6, 11 * FLOORH, smooth(seg(t, tl("L05", 0), tl("L05", 4.6))));
-  if (id === 6) return 18;
+  if (id === 5) return lerp(2.6, SEA6, smooth(seg(t, tl("L05", 0), tl("L05", 4.6))));
+  if (id === 6) return SEA6; // owner: same level as the end of shot 5 (continuous across the cut)
   if (id === 10) return lerp(-0.6, -0.05, smooth(seg(t, tl("L10", 3.4), tl("L10", 4.6))));
   return -0.6;
 };
@@ -63,7 +64,7 @@ export const CAMS: Record<number, Key[]> = {
   ],
   5: [
     { f: 624, s: (f) => { const y = seaAt(5, f / FPS); return dolly(C(TOWER, [9, y + 2.5, 22]), C(TOWER, [0, y + 1.5, 0]), 1, { fov: 44 }); } }, // the waterline climbs the tower
-    { f: 712, cut: true, s: (f) => dolly(C(TOWER, [1.5, 11 * FLOORH + 1.4, 12]), C(TOWER, [0, 10 * FLOORH + 1.6, 6]), pushK(f, 712, 0.004), { fov: 40, roll: -0.04 }) }, // window shopping
+    { f: 712, cut: true, s: (f) => dolly(C(TOWER, [1.5, 6 * FLOORH + 1.4, 12]), C(TOWER, [0, 5 * FLOORH + 1.6, 6]), pushK(f, 712, 0.004), { fov: 40, roll: -0.04 }) }, // window shopping
   ],
   6: [{ f: 781, s: (f) => orbit([26, 27, -34], 162 * pushK(f, 781, 0.001), -1.93 + 0.0008 * (f - 781), 23 - 0.02 * (f - 781), { fov: 50 }) }], // drowned town: the hill-top house in front, the tower rising from the sea behind (arc)
   7: [
@@ -76,8 +77,8 @@ export const CAMS: Record<number, Key[]> = {
   ],
   9: [{ f: 1245, s: (f) => zoom(C(GREEN, [10 - 0.12 * (f - 1245), 8 + 0.03 * (f - 1245), 60]), C(GREEN, [-10, 10, -60]), 46, pushK(f, 1245, 0.003, 0.007, 30), { roll: -0.04 }) }],
   10: [
-    { f: 1335, s: (f) => orbit([2, 1.0, 5.5], 4.3 * pushK(f, 1335, 0.0025), 0.36 - 0.004 * (f - 1335), 0.2, { fov: 42 }) }, // deck chair
-    { f: 1440, cut: true, s: (f) => dolly([3.6, 1.0, 9.8], [2, 0.8, 5.5], pushK(f, 1440, 0.004, 0.009, 24), { fov: 40, roll: 0.06 }) }, // the toes get wet
+    { f: 1335, s: (f) => orbit([2, 1.0, 7.4], 4.3 * pushK(f, 1335, 0.0025), 0.36 - 0.004 * (f - 1335), 0.2, { fov: 42 }) }, // deck chair
+    { f: 1440, cut: true, s: (f) => dolly([3.6, 1.0, 11.7], [2, 0.8, 7.4], pushK(f, 1440, 0.004, 0.009, 24), { fov: 40, roll: 0.06 }) }, // the toes get wet
   ],
   11: [
     { f: 1517, s: (f) => dolly(C(HILL, [24, 10, 46]), C(HILL, [6, 14, 14]), pushK(f, 1517, 0.002), { fov: 44 }) }, // up the hill
@@ -106,6 +107,15 @@ const signCard = (top: string, l1: string, l2: string, col = "#c9302c", board = 
 const S_ANT = signCard("ANTARCTICA", "91%", "OF ALL ICE"), S_GRN = signCard("GREENLAND", "8%", "OF ALL ICE");
 const S_GLA = signCard("GLACIERS", "1%", "(ALL OF THEM)"), S_NP = signCard("YOU ARE AT THE", "NORTH", "POLE", "#2a6fb5", "#eef6fb");
 const S_HILL = signCard("HILL HOUSE", "FOR SALE", "DRY FEET!", "#2f8a3a");
+/** Pip looks out from INSIDE the tower: a lit room behind him, the window frame + wall below the sill in front */
+const ROOM = (p: Pen) => { p.poly([[0, 0], [300, 0], [300, 240], [0, 240]], "#4a5070", 0); p.ell(230, 60, 26, 26, "#ffe7a6", 6); p.poly([[20, 150], [110, 150], [110, 240], [20, 240]], "#7a5a3a", 6); };
+const WINDOW = (p: Pen) => {
+  p.poly([[0, 240], [360, 240], [360, 400], [0, 400]], "#d9c9a8", 8);           // wall below the sill (hides the legs)
+  p.poly([[0, 0], [360, 0], [360, 22], [0, 22]], "#d9c9a8", 8);                   // lintel
+  p.poly([[0, 0], [30, 0], [30, 400], [0, 400]], "#f4efe6", 8); p.poly([[330, 0], [360, 0], [360, 400], [330, 400]], "#f4efe6", 8);
+  p.poly([[-6, 230], [366, 230], [366, 256], [-6, 256]], "#f4efe6", 8);         // sill
+  p.poly([[30, 22], [330, 22], [330, 34], [30, 34]], "#f4efe6", 6);
+};
 const hillY = (x: number, z: number) => 22 * Math.sqrt(Math.max(0, 1 - ((x - HILL[0]) / 42) ** 2 - ((z - HILL[2]) / 34) ** 2));
 const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   if (id === 2 || id === 3) {
@@ -122,10 +132,10 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   }
   if (id === 2 || id === 3) {
     const lid = 0;
-    out.places.push({ key: `peng|${t > tl("L02", 3.5) ? 1 : 0}|${q((t * 3) % 1, 4)}`, x: ICE[0] - 6, y: 6 * 0.7 * 0.0 + 4.2 * 0.7 + 0.1, z: ICE[2] - 2, scale: 0.55, size: [600, 1000, 1],
+    out.places.push({ key: `peng|${t > tl("L02", 3.5) ? 1 : 0}|${q((t * 3) % 1, 4)}`, x: ICE[0] - 4.6, y: 0, z: ICE[2] + 2.3, scale: 0.6, size: [600, 1000, 1],
       draw: (p) => penguin(p, t > tl("L02", 3.5), lid, Math.abs(Math.sin(t * 6)) * (t > tl("L02", 3.5) ? 1 : 0.2)) });
     pip(cam, out, t, ICE[0] + 3.6, 0, ICE[2] + 3.4, exprAt(t, [[0, "smile"], [tl("L02", 4.5), "grin"], [tl("L03", 0.5), "nervous"], [tl("L03", 2.0), "pained"]]), { mode: id === 3 ? "sit" : "stand", look: -1 });
-    if (id === 3) for (let k = 0; k < 3; k++) card(out, `spk3${k}`, (p) => fxSparkle(p), ICE[0] + 4.3 + k * 0.4, 0.9 + 0.2 * Math.sin(t * 4 + k), ICE[2] + 2.6, 0.18, 0.18, { cw: 200, ch: 200 });
+    if (id === 3) for (let k = 0; k < 3; k++) card(out, `spk3${k}`, (p) => fxSparkle(p), ICE[0] + 4.2 + (k - 1) * 0.32, 1.15 + 0.12 * (k % 2) + 0.12 * Math.sin(t * 4 + k), ICE[2] + 2.8, 0.18, 0.18, { cw: 200, ch: 200 });
   }
   if (id === 4) {
     const back = smooth(seg(t, tl("L04", 1.4), tl("L04", 3.4)));
@@ -133,8 +143,10 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
     const u = q(seg(t, tl("L04", 2.4), tl("L04", 3.4)), 30); if (u > 0 && u < 1) card(out, `spl4${u}`, (p) => fxSplash(p, u), 1.5, 1.4, 6.0, 5, 5, { cw: 800, ch: 800 });
   }
   if (id === 5) {
-    const y = 10 * FLOORH + 0.45;
+    const y = 5 * FLOORH + 0.45;
     if (t > tl("L05", 2.8)) {
+      card(out, "room5", ROOM, TOWER[0] + 0.5, y + 1.35, TOWER[2] + 6.03, 1.5, 1.2, { cw: 300, ch: 240 });
+      card(out, "win5", WINDOW, TOWER[0] + 0.5, y + 0.95, TOWER[2] + 6.32, 1.8, 2.0, { cw: 360, ch: 400 });
       pip(cam, out, t, TOWER[0] + 0.5, y, TOWER[2] + 6.15, exprAt(t, [[0, "shock"], [tl("L05", 3.9), "dazed"]]), { noBlob: true });
       for (let k = 0; k < 3; k++) { const x = TOWER[0] - 3 + ((t * 1.2 + k * 1.7) % 6); card(out, `fish5${k}${q(Math.sin(t * 8 + k), 4)}`, (p) => fish(p, ["#f08a2c", "#f2c230", "#e2453c"][k], Math.sin(t * 8 + k)), x, y - 1.6 - k * 1.1, TOWER[2] + 6.6 + k * 0.4, 0.9, 0.54, { cw: 400, ch: 240 }); }
     }
@@ -151,10 +163,10 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   }
   if (id === 10) {
     const wet = t > WET;
-    pip(cam, out, t, 2, 0, 5.5, exprAt(t, [[0, "smile_closed"], [tl("L10", 2.4), "smile"], [WET, "shock"]]), { mode: wet ? "stand" : "sit", swaps: [WET] });
-    if (!wet) card(out, `hg${q(seg(t, tl("L10", 0.4), tl("L10", 3.2)), 10)}`, (p) => hourglass(p, seg(t, tl("L10", 0.4), tl("L10", 3.2))), 3.1, 1.3, 5.6, 0.6, 0.8, { cw: 300, ch: 400 });
-    if (wet && t < WET + 0.8) card(out, "bang10", (p) => fxBang(p), 2.2, 2.9, 5.5, 0.4, 0.6, { cw: 200, ch: 300 });
-    if (wet) if (t < WET + 0.45) card(out, `imp10${q(seg(t, WET, WET + 0.4), 12)}`, (p) => fxImpact(p, seg(t, WET, WET + 0.4), "#e8f8ff", "#7fc8f0"), 2.4, 0.15, 5.6, 0.7, 0.7, { cw: 500, ch: 500, soft: true });
+    pip(cam, out, t, 2, 0, 7.4, exprAt(t, [[0, "smile_closed"], [tl("L10", 2.4), "smile"], [WET, "shock"]]), { mode: wet ? "stand" : "sit", swaps: [WET] });
+    if (!wet) card(out, `hg${q(seg(t, tl("L10", 0.4), tl("L10", 3.2)), 10)}`, (p) => hourglass(p, seg(t, tl("L10", 0.4), tl("L10", 3.2))), 3.1, 1.3, 7.5, 0.6, 0.8, { cw: 300, ch: 400 });
+    if (wet && t < WET + 0.8) card(out, "bang10", (p) => fxBang(p), 2.2, 2.9, 7.4, 0.4, 0.6, { cw: 200, ch: 300 });
+    if (wet) if (t < WET + 0.45) card(out, `imp10${q(seg(t, WET, WET + 0.4), 12)}`, (p) => fxImpact(p, seg(t, WET, WET + 0.4), "#e8f8ff", "#7fc8f0"), 2.4, 0.15, 7.5, 0.7, 0.7, { cw: 500, ch: 500, soft: true });
   }
   if (id === 11) {
     const u = seg(t, tl("L11", -0.5), tl("L11", 2.6)), x = HILL[0] + lerp(14, 6, u), z = HILL[2] + lerp(26, 18, u), y = 22 * Math.sqrt(Math.max(0, 1 - ((x - HILL[0]) / 42) ** 2 - ((z - HILL[2]) / 34) ** 2));
