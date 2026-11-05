@@ -20,7 +20,9 @@ export const BONK = tl("L08", 2.9);          // "Unluckily"
 const BACK = tl("L09", 0.2);                 // the Moon is back
 /** Moon scale: 1 = there, 0 = gone */
 export const moonOn = (t: number) => (t < POP1 ? 1 : t < tl("L02", 0) ? 0 : t < POP3 ? 1 : t < BACK ? 0 : smooth(seg(t, BACK, BACK + 0.6)));
-export const tideAt = (id: number, t: number) => (id === 1 ? lerp(0.3, -0.9, smooth(seg(t, POP1 + 0.4, POP1 + 2.5))) : id === 4 ? -0.9 : -0.4);
+export const tideAt = (id: number, t: number) => (id === 1 ? lerp(0.3, -0.9, smooth(seg(t, POP1 + 0.4, POP1 + 2.5))) : id === 4 ? -0.9
+  : id === 9 ? lerp(-0.4, 0.3, smooth(seg(t, 1417 / 30 + 0.3, 1417 / 30 + 2.6))) // owner #4: Moon back -> the sea returns to the opening level
+  : -0.4);
 export const poolAt = (id: number, t: number) => (id === 4 ? 1 - smooth(seg(t, tl("L04", 0.2), tl("L04", 2.4))) : id === 1 ? 1 : 0.3);
 /** where the Moon sits: above the Earth in the tall frame, drifting slowly along its orbit */
 export const moonPos = (t: number): V3 => { const ma = 1.25 + t * 0.03; return [SPACE[0] + 18 * Math.cos(ma) * 0.6, SPACE[1] + 18 * Math.sin(ma), SPACE[2] + 18 * Math.cos(ma) * 0.8]; };
@@ -121,7 +123,9 @@ const stage = (id: number, t: number, cam: CamInfo, out: Stage) => {
   if (id === 7 && cam) {
     // Pip clinging to the top of the axis as it swings
     const tilt = tiltAt(t), top = axisTop(t);
-    pip(cam, out, t, top[0], top[1], top[2] + 0.3, t < tl("L07", 1.6) ? "nervous" : "shock", { mode: "fall", face: true, roll: tilt * 0.8, noBlob: true, scale: 1.1 });
+    // owner #4: hangs BESIDE the rod, just under the knob, his inner hand on the rod's surface (never through it)
+    const dx = -Math.sin(tilt), dy = Math.cos(tilt), nx = Math.cos(tilt), ny = Math.sin(tilt), hang = 1.0, side = 0.46;
+    pip(cam, out, t, top[0] - dx * hang + nx * side, top[1] - dy * hang + ny * side - 1.05 * 1.1, top[2] + 0.18, t < tl("L07", 1.6) ? "nervous" : "shock", { mode: "fall", face: true, roll: tilt, noBlob: true, scale: 1.1 });
   }
   void fxStars;
 };
