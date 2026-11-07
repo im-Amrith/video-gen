@@ -1,12 +1,12 @@
 ---
 name: gemini-video-prompts
-description: Remix the owner's reference reels (AI edits like armour, space, pharaohs in the modern world) into new Google Gemini / Veo prompt packs - study each reel in gemini-refs/<series>/<reel>/ shot by shot, then write one remixed Gemini prompt per 10 s of the reel (3-4 for a 30-40 s reel) that keeps the concept, vibe and edit rhythm but changes the action, vehicle/prop or setting, plus a final prompt that combines the clips into the finished reel. Use at the approval gate in CLAUDE.md, or when asked for Gemini prompts, Veo prompts, reel remixes, or to assemble generated clips from gemini-clips/.
+description: Remix the owner's reference reels (AI edits like armour, space, pharaohs in the modern world) into new Google Gemini / Veo prompt packs - study each reel in gemini-refs/<series>/<reel>/ shot by shot, then write Nano Banana start-frame prompts and one 8 s single-shot Veo prompt per setting (4-6 for a reel) that keeps the concept, vibe and edit rhythm but changes the action, vehicle/prop or setting, plus an edit list that cuts the clips into the finished reel. Use at the approval gate in CLAUDE.md, or when asked for Gemini prompts, Veo prompts, reel remixes, or to assemble generated clips from gemini-clips/.
 ---
 
 # Gemini reel remixes
 
 The owner runs a reel-edit channel: short AI-generated edits (pharaohs in the modern world, armour, space, and similar)
-made in Gemini/Veo on a Google AI Pro plan (clips of ~10 s, joined into ~40 s reels). They upload reels they like.
+made in Gemini/Veo on a Google AI Pro plan (Veo clips of up to 8 s, cut into 15-40 s reels). They upload reels they like.
 Your job: for each reel, write a **remix pack**, a new set of prompts that **takes heavy inspiration from the reel
 but never copies a shot**.
 
@@ -29,12 +29,38 @@ usually two. The idea must stay recognisably the same kind of shot.
 Never remake the whole reel in the same order with tiny swaps. Reorder or replace about a third of the shots with
 new ideas in the same concept.
 
-## The 10-second structure
+## How Veo really works (read first: the old 10 s / multi-cut packs failed because of this)
 
-The owner's reels are **~30-40 s**. Gemini makes **~10 s clips**. So:
-- Split the reel into **10 s windows**: 0-10, 10-20, 20-30, 30-40 (3 or 4 windows; a last window under 4 s merges into the one before).
-- Write **one clip prompt per window**. It remixes everything that happens in that window, keeping its beats and its number of cuts ("cut to").
-- Finish with **one final prompt** that combines the clips into the finished reel.
+- **Veo makes 4, 6 or 8 s clips**, not 10 s. In Flow (Google AI Pro: ~1,000 credits a month) an 8 s
+  **Veo 3.1 Fast** clip costs ~20 credits (about 50 clips a month) and **Quality** costs ~100. Draft everything on Fast;
+  spend Quality only on the hook shot, if at all. The Gemini app's own Veo has a small daily cap: use it for tests.
+- **One generation = one continuous shot** (one place, one camera move). Packing 5-7 "cut to" beats into one prompt is
+  what made the old clips mushy: Veo blends the beats, morphs faces and drops half the actions. At most **one** cut per
+  prompt, and only between two angles of the same place and moment.
+- **Fast-cut reels are cut from long shots.** A reel with 1.5-2 s shots does not need one generation per shot:
+  write each 8 s shot so the action **changes over time** (start, middle, end look different), then the edit takes
+  2-3 pieces of 1-2 s from it. A 20 s reel of ~10 cuts = **4-6 generations**.
+- **Consistency comes from images, not text.** Text-only cast locks drift between clips. Each pack starts with
+  **Nano Banana image prompts** (Gemini app, image generation, 9:16): one character sheet per character and one
+  **start frame** per shot. The owner then uses Flow **Frames to Video** (start frame + motion prompt) or
+  **Ingredients to Video** (character sheet + setting image). The video prompt then only has to describe motion.
+- **Write positively.** Flow has no negative-prompt box; a long "Avoid: extra fingers, warped faces, text..." list in
+  the prompt often adds those things. Describe what is there; end with one short line: "No on-screen text."
+- **Order Veo reads best** (80-140 words): shot size + lens + camera move → subject (cast lock) → the one main action,
+  with timing ("in the first 2 seconds... then...") → setting → light → style/grade → sound. Physical detail sells
+  realism: weight, dust, cloth, water, speed ("slowly", "in one heavy second").
+- **Sound:** Veo 3 makes audio. Ask for SFX and ambience, "no music" (the owner adds the track). Dialogue goes in quotes,
+  one short line, with who says it.
+
+## The pack structure
+
+1. **Shot list** of the reference reel (as before) with the cuts measured.
+2. **Plan:** group the reel's cuts into **generations** (one per setting/moment). For each, say which 1-2 s pieces the
+   edit takes. Each generation remixes 1-3 reel shots.
+3. **Image prompts** (Nano Banana): character sheets, then one start frame per generation, 9:16, same style lock.
+4. **Video prompts:** one per generation, 8 s, written for Frames to Video (motion only, since the image holds the look)
+   plus a text-only fallback line set (style lock + cast lock) for when no start frame is used.
+5. **Edit list:** exact in/out seconds inside each generated clip, in reel order, with the transition and the beat.
 
 ## Folder layout
 
@@ -68,7 +94,7 @@ transcript and pacing numbers. Check the audio too (`ffmpeg -i "$R" -af volumede
 narration, or sound effects?
 
 Write the **shot list** at the top of the pack: `#, start-end s, what we see, camera, transition`, then group the
-shots into the 10 s windows. Make one 2 fps sheet per window to check the grouping:
+shots into generations (one per setting/moment). Make one 2 fps sheet per group to check it:
 `ffmpeg -v error -ss <start> -t 10 -i "$R" -vf "fps=2,scale=180:-2,tile=5x4" -frames:v 1 "$W/win<k>.jpg"`
 
 **Optional, if MeiGen tools are available:** run 1-3 `search_gallery` queries for the reel's concept
@@ -85,54 +111,52 @@ works, the recurring characters and how they look, and 5 do's and 5 don'ts. Add 
 ## Step 3: Write the remix pack: `prompts/<series>/<reel-name>_remix.md`
 
 ~~~markdown
-# Remix: <reel-name>  (<series>, ~40 s, 9:16)
+# Remix: <reel-name>  (<series>, ~N s, 9:16)
 
-**Concept kept:** one line.   **What changes:** one line (the remix angle, e.g. "same pharaoh luxury life, but in the air and at sea instead of on roads").
+**Concept kept:** one line.   **What changes:** one line.
 
 ## Reference shot list
 | # | Time | Reel shot | Camera | Transition |
 
-## STYLE LOCK  (paste at the top of every prompt, word for word)
-<50-80 words: realism level, palette and grade, lighting, lens/DOF, texture, frame rate feel, "vertical 9:16">
+## Plan: <k> generations of 8 s → <m> cuts
+| Gen | Remixes reel shots | Setting / moment | Pieces the edit takes |
 
-## CAST LOCK  (paste into every prompt with that character, word for word)
-<per character: 25-40 words of fixed details such as face, age, outfit colours, jewellery, signature item>
+## STYLE LOCK  (word for word in every image and text-only prompt)
+<40-70 words: realism, palette/grade, light, lens, texture, "vertical 9:16">
 
-## Clip 1 · 0-10 s  (remixes reel shots #1-#3: <what changed>)
+## CAST LOCK  (word for word wherever the character appears)
+<per character: 25-40 words of fixed details>
+
+## Images (Gemini app → Nano Banana, 9:16)
+### Character sheet: <name>
 ```text
-<STYLE LOCK>
-<CAST LOCK>
-Vertical 9:16, 10 seconds.
-0-3 s: <shot size, lens, camera move>. <Character> <does what> in <setting>, <light>.
-Cut to 3-6 s: <next beat, same detail level>.
-Cut to 6-10 s: <beat>. Ends on: <final frame: what is where>.
-Sound: <SFX/ambience on each beat>, no music, no dialogue.
-Avoid: text, captions, logos, watermarks, extra fingers, warped faces, flicker.
+<STYLE LOCK> Character reference sheet on a plain grey background: <CAST LOCK>, full body front view and a
+close-up of the face, neutral pose, even light. Vertical 9:16.
 ```
-## Clip 2 · 10-20 s  (remixes reel shots #4-#6: ...)
-## Clip 3 · 20-30 s
-## Clip 4 · 30-40 s  (only if the reel is longer than ~34 s)
-
-## FINAL REEL: combining prompt
-Gemini makes clips; it doesn't stitch uploaded clips together. Paste this into **Google Flow's scene builder**
-(or use it as the edit list in CapCut or any editor). Or put the clips in `gemini-clips/<slug>/` and the session joins them.
+### Start frame G1
 ```text
-Assemble one vertical 9:16 reel of about <N> seconds from these clips, in this order:
-1. Clip 1, 0.0-<t> s: <role, e.g. hook>. Transition: <hard cut on the beat / whip pan / flash>.
-2. Clip 2, <in>-<out> s: ...
-3. ...
-Pacing: <cuts per second from the reel>, cut on the beat of a <BPM> <genre feel> track.
-Colour: one consistent <grade> across all clips. No text overlays except <title card if the reel has one>.
-End on <payoff image>, held for <0.5-1> s.
+<STYLE LOCK> <one frozen moment: framing, lens, who is where, the prop, the setting, the light>. Vertical 9:16.
 ```
-**Music:** describe the feel and tempo (BPM) only; the owner picks the track. Don't name copyrighted songs to reuse.
+(one per generation; for Frames to Video also attach the character sheet when the tool allows it)
+
+## G1 · 8 s  (remixes reel shots #1-#2: <what changed>)
+```text
+<shot size, lens, camera move and speed>. <The one main action, in time order: what happens in 0-3 s, 3-6 s, 6-8 s>.
+<Physical detail>. Sound: <SFX/ambience>, no music. No on-screen text.
+```
+Text-only fallback: put STYLE LOCK + CAST LOCK in front of the same text.
+
+## EDIT LIST
+| # | Clip | In-out (s) | Role | Transition / beat |
+Music: feel + BPM only; the owner picks the track.
 ~~~
 
 Prompt-writing rules:
-- One clear action per beat, with concrete nouns and verbs. Keep each window's number of cuts close to the reel's (fast reels: 3-4 beats per 10 s clip). Words like "epic" or "cinematic" add nothing on their own.
-- The style lock and cast lock are identical in every clip, so the clips look like one reel.
+- One continuous shot per generation; at most one cut, inside the same place and moment.
+- The action must evolve across the 8 s so the edit can harvest several different-looking pieces.
 - Always give camera direction: shot size + lens + move + speed ("low-angle tracking shot, 24 mm, fast push-in").
-- Front-load the hook: clip 1 is the most striking remix.
+- Front-load the hook: G1 is the most striking remix; consider Quality for it only.
+- Concrete nouns and verbs; "epic" or "cinematic" alone add nothing.
 - Historical and mythic figures (Cleopatra, pharaohs, knights, gods) are fine. **Don't** use real living people,
   celebrities, named copyrighted characters, real brand logos or car badges ("a sleek Italian supercar", not the brand),
   gore, or readable text or signs.
@@ -145,7 +169,7 @@ Append a row to `prompts/README.md` (date, series, reel, file, status `ready`). 
 ## Assemble mode (when `gemini-clips/<slug>/` has clips)
 
 1. Check each clip with `ffprobe` and a 2 fps contact sheet you Read.
-2. Follow the pack's FINAL REEL prompt: trim each clip (`-ss/-t`), scale or pad to 1080x1920 at 30 fps, and join with hard cuts
+2. Follow the pack's EDIT LIST: trim each clip (`-ss/-t`), scale or pad to 1080x1920 at 30 fps, and join with hard cuts
    (or the transition the plan names). Cut on the beat if the owner added `gemini-clips/<slug>/music.*`.
 3. Add the owner's music if present. Otherwise deliver silent with a note.
 4. Deliver to `deliveries/reels/<slug>.mp4` plus `<slug>_sheet.jpg`, commit and push, and tell the owner in chat.
