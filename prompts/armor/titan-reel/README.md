@@ -100,6 +100,21 @@ about to push it down. Rain beads on the polished steel, a flickering ice-blue g
 Dark rainy background. No text.
 ```
 
+## Fix after the first render (2026-11-10): helmet continuity, shots 5 → 6
+Shot 5 had no helmet and the helmet popped on in shot 6. New shot 5: **edit the shot 6 image in ChatGPT** so the
+helmet is identical (upload `shot6.png`, then):
+```text
+Edit this image. Keep the same knight, the same steel helmet with its visor raised, the same rain, grain and
+black-and-white look. Remove his raised hand: both arms down, out of frame. He looks up and slightly to the right with
+calm eyes. His face inside the open helmet is half lit pale ice-blue from the right side, the other half in shadow.
+Same framing and lens. No text.
+```
+Save it as `shot5.png` and re-render only shot 5 (delete `outputs/shot5*.mp4` first). The motion prompt `shot05.txt`
+still fits. Shot 6 itself worked: the visor closes cleanly.
+
+Other notes from the renders: shot 2 is usable for its first ~2.5 s (later he turns toward the camera and dissolves
+into the spray); in shot 4 the blue light floods the whole titan, so cut it at the thrust (~0-3 s).
+
 ## Motion prompts (Kaggle)
 Already saved as `kaggle_jobs/shot01.txt` ... `shot06.txt`. Each is 5 s (81 frames) at the notebook default.
 
